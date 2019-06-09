@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="UjLK_8rrTkGSx2xkwFRy1mKHvlpiiRZn-EvD8IJJ7Hc">
+
+
+
+  <meta name="msvalidate.01" content="B9019CE3751A15D63E78AF8679980069">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/rocket_32px_29491_easyicon.net.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/rocket_16px_29491_easyicon.net.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习笔记,Web开发,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一个基于Web的现金流管理系统是我进入公司接触的第一个项目。两个半月做测试，两个半月做开发，将近半年，现在开发接近尾声，想好好分析一下这个“新兴工具”。  什么是WebPerformer在Google里搜索“Web Performer”（下文简称“wp”），能搜索到结果173,000,000个结果，可以看到，靠前的结果都是日文的，并且都是版本更新相关的结果。在百度中搜索同样的内容，没有发现有中文">
+<meta name="keywords" content="学习笔记,Web开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web项目可视化开发工具——WebPerformer">
+<meta property="og:url" content="https://www.youyou-2608.com/2019/01/08/Web项目可视化开发工具——WebPerformer/index.html">
+<meta property="og:site_name" content="Kanna-Makino">
+<meta property="og:description" content="一个基于Web的现金流管理系统是我进入公司接触的第一个项目。两个半月做测试，两个半月做开发，将近半年，现在开发接近尾声，想好好分析一下这个“新兴工具”。  什么是WebPerformer在Google里搜索“Web Performer”（下文简称“wp”），能搜索到结果173,000,000个结果，可以看到，靠前的结果都是日文的，并且都是版本更新相关的结果。在百度中搜索同样的内容，没有发现有中文">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://image.youyou-2608.com/blog/wp-search-result.png">
+<meta property="og:image" content="https://image.youyou-2608.com/blog/wp-simple-info.png">
+<meta property="og:updated_time" content="2019-01-09T21:38:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web项目可视化开发工具——WebPerformer">
+<meta name="twitter:description" content="一个基于Web的现金流管理系统是我进入公司接触的第一个项目。两个半月做测试，两个半月做开发，将近半年，现在开发接近尾声，想好好分析一下这个“新兴工具”。  什么是WebPerformer在Google里搜索“Web Performer”（下文简称“wp”），能搜索到结果173,000,000个结果，可以看到，靠前的结果都是日文的，并且都是版本更新相关的结果。在百度中搜索同样的内容，没有发现有中文">
+<meta name="twitter:image" content="https://image.youyou-2608.com/blog/wp-search-result.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://www.youyou-2608.com/2019/01/08/Web项目可视化开发工具——WebPerformer/">
+
+
+
+
+
+  <title>Web项目可视化开发工具——WebPerformer | Kanna-Makino</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d9eb8284d41de6fd7b9f9ad3ee618790";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kanna-Makino</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.youyou-2608.com/2019/01/08/Web项目可视化开发工具——WebPerformer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kanna Makino">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://image.youyou-2608.com/header/IMG_3320.JPG">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kanna-Makino">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web项目可视化开发工具——WebPerformer</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-08T22:29:31+08:00">
+                01-08-2019
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-10T05:38:04+08:00">
+                01-10-2019
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/01/08/Web项目可视化开发工具——WebPerformer/" class="leancloud_visitors" data-flag-title="Web项目可视化开发工具——WebPerformer">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>一个基于Web的现金流管理系统是我进入公司接触的第一个项目。两个半月做测试，两个半月做开发，将近半年，现在开发接近尾声，想好好分析一下这个“新兴工具”。</p>
+</blockquote>
+<h3 id="什么是WebPerformer"><a href="#什么是WebPerformer" class="headerlink" title="什么是WebPerformer"></a>什么是WebPerformer</h3><p>在Google里搜索“Web Performer”（下文简称“wp”），能搜索到结果173,000,000个结果，可以看到，靠前的结果都是日文的，并且都是版本更新相关的结果。在百度中搜索同样的内容，没有发现有中文结果，在国内应用几乎为0。</p>
+<p><img src="https://image.youyou-2608.com/blog/wp-search-result.png" alt="wp-google-search-result"></p>
+<p>wp是“キヤノンITソリューションズ株式会社”的产品，产品简介：<a href="https://www.canon-its.co.jp/news/detail/20180508webperformer.html" target="_blank" rel="noopener">wp-官网简介</a> 。</p>
+<p><img src="https://image.youyou-2608.com/blog/wp-simple-info.png" alt="wp-simple-info"></p>
+<p>简单来说，wp是为了降低人力成本、应对信息技术发展和技术人才不足、提高软件质量而开发的高效率自动化开发工具。</p>
+<p>目前已经在制药、贸易、建设、运输、金融保险等行业有一些成功应用的案例。</p>
+<p><strong>wp就是一个功能比较全的Eclipse插件。</strong></p>
+<h3 id="与传统Web项目开发的相同点与不同点"><a href="#与传统Web项目开发的相同点与不同点" class="headerlink" title="与传统Web项目开发的相同点与不同点"></a>与传统Web项目开发的相同点与不同点</h3><p>官网的简介几乎都是一笔带过，并且没有提到细节。应该是只有购买之后才会得到官方详细的使用文档。</p>
+<h4 id="Web-Performer相关的概念"><a href="#Web-Performer相关的概念" class="headerlink" title="Web Performer相关的概念"></a>Web Performer相关的概念</h4><ul>
+<li>work code：变量在一个模块（模块包括IO，BP，DM，EXT）的唯一名称，含义和命名规则与Java中的变量相似。</li>
+<li>IO：输入输出的意思，在wp中一个IO对应一个页面，页面上所有的项目（数据项，label）都来自在IO中定义的项目，在IO中可以给各个项目添加一些属性，这些属性包括work code（变量名），name（变量别命），长度（区别于byte，例如“name”是4位，“你好”是2位），小数位（项目为数字时且需要小数位时指定，默认-1），数据类型（见“数据类型”部分）。</li>
+<li>DM：Data Model的简称，主要功能是作为存放数据的容器。类似于Java中pojo类，兼有泛型集合的功能。</li>
+<li>BP：Business Process的简称，BP是一个功能的逻辑部分，大致的使用过程为：向BP传入参数 &gt; BP中加工处理 &gt; 将结果集放入DM  &gt; 结果集传到IO &gt; 画面显示数据。</li>
+<li>EXT：Extentsion，扩展。某些在BP中不能完成的功能，或者逻辑过于复杂超出了wp的功能范围，可以自己编写相应的Java类或者JavaScript文件，然后通过BP调用EXT，EXT调用自定义处理的方式处理数据。</li>
+</ul>
+<h4 id="与传统开发的联系"><a href="#与传统开发的联系" class="headerlink" title="与传统开发的联系"></a>与传统开发的联系</h4><ul>
+<li>从wp模块分类中很容易看出，其实wp的本质还是MVC的思想，IO对应View，BP对应Controller，DM对应Model。</li>
+<li><strong>在基于wp的开发中，除了扩展部分和自定义页面布局及样式之外，其他所有的操作都接触不到代码，开发的内容仅仅是在各个模块中添加一个个项目，然后给对应的项目指定相应的属性。</strong></li>
+</ul>
+<h3 id="开发环境（环境依赖）"><a href="#开发环境（环境依赖）" class="headerlink" title="开发环境（环境依赖）"></a>开发环境（环境依赖）</h3><p>在开发开始之前，需要搭建开发环境，总体来说wp的开发环境和正常开发时的环境几乎一致。</p>
+<p>在wp中，由于wp本质上就是一个Eclipse插件，所以Eclipse是必须的，<del>项目管理基于Maven</del>，构建基于Ant，服务器为Tomcat，自动生成的则是Java代码，所以需要Java环境，其他的与使用Eclipse正常开发几乎一致。常用的功能仅仅是编译时完成一个功能之后点击编译（Eclipse的编译）、需要自定义页面布局时使用Ant命令生成对应IO的layout.html文件然后基于layout.html文件修改页面布局。</p>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>wp中有自己的数据类型，这些数据类型应该是为了降低编程门槛而从Java数据类型中提炼出来的。</p>
+<p>数据的类型：</p>
+<ul>
+<li>CODE：介于Java的String和Numeric之间，定义只包含数字和字母的数据，例如：123，AC01。</li>
+<li>TEXT：类似于Java中的String类型，几乎任何类型都可以转换成TEXT类型，例如：’Hello world’。</li>
+<li>DATE：日期类型，有多种格式且可以互相转换，例如：20190108，2019-01-08。</li>
+<li>TIME：时间类型，有多种精度可以选择，最大精度到秒，例如：2019-01-08 21:59:01。</li>
+<li>NUM：数字类型，有多种格式且可以互相转换，例如1234，1,234。</li>
+<li>FILE：文件类型。</li>
+<li>BOOL：布尔类型，不常用。</li>
+<li>CURRENCY：货币类型。</li>
+</ul>
+<p>work code的类型：</p>
+<ul>
+<li>IO：输入输出类型，类似于html中的input类型，页面刷新后输入的值恢复成IO模块中设置的默认值。</li>
+<li>I：输入类型，与IO类型类似，页面刷新后输入的值保持不变。</li>
+<li>O：输出类型，类似于IO类型的只读模式。</li>
+<li>A：Action的简称，执行一个动作，可以调用BP逻辑以执行操作，例如”检索“，”修正“，”删除“。</li>
+<li>G：Group的简称，一个组，类似于一个没有边框的table，可以用来展示检索出的数据，在其后并且下一个G类型项目之前的所有IO属性”Level“值为”2“的项目会被组织到这个table中作为表头（一般项目的Level值为1），值会被添加到这个label下，形成完成的数据表格。</li>
+</ul>
+<p>BP中项目的常用类型：</p>
+<ul>
+<li>ARG：参数类型，表示该值是IO中传过来的变量。</li>
+<li>CALL：表示调用一个DM并执行DM中的一个操作，例如SELECT，UPDATE。</li>
+<li>PROCEDURE：表示调用一个存储过程。</li>
+<li>FOREACH：对一个集合执行for循环，类似于Java中的增强for循环。</li>
+<li>BREAK：跳出当前循环。</li>
+<li>CONTINUE：跳过本次循环进入下一次循环。</li>
+<li>DO/WHILE：类似于Java中的WHILE。</li>
+<li>IF/ELSEIF/ELSE：判断语句。</li>
+<li>END：表示一个逻辑块的结束。</li>
+<li>LOG：日志记录。</li>
+<li>WORKAREA：表示调用一个数据集合。</li>
+</ul>
+<p>DM中操作的类型：</p>
+<ul>
+<li>SELECT：表示按照指定的条件执行select语句。</li>
+<li>UPDATE：表示按照指定的条件执行update语句。</li>
+<li>DELETE：表示按照指定的条件执行delete语句（符合条件的记录不存在时报错）。</li>
+<li>ERASE：表示按照指定的条件执行delete语句（符合条件的记录不存在时不报错）。</li>
+<li>INSERT：表示按照指定的条件执行insert语句。</li>
+</ul>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="DM的定义"><a href="#DM的定义" class="headerlink" title="DM的定义"></a>DM的定义</h4><p>DM主要定义一些与数据库或者页面需要的字段，如下表：</p>
+<table>
+<thead>
+<tr>
+<th>项目CODE</th>
+<th>项目别名</th>
+<th>位数</th>
+<th>小数位</th>
+<th>字段操作</th>
+<th>页面跳转</th>
+<th>来自DM</th>
+<th>DM字段</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TRAN_ID</td>
+<td>交易编号</td>
+<td>13</td>
+<td>-1</td>
+<td></td>
+<td></td>
+<td></td>
+<td>CODE</td>
+</tr>
+<tr>
+<td>TRAN_DATE</td>
+<td>交易日期</td>
+<td>8</td>
+<td>-1</td>
+<td></td>
+<td></td>
+<td></td>
+<td>CODE</td>
+</tr>
+<tr>
+<td>TRAN_VOLUME</td>
+<td>交易额</td>
+<td>15</td>
+<td>0</td>
+<td></td>
+<td></td>
+<td></td>
+<td>NUM</td>
+</tr>
+</tbody></table>
+<p>在DM的属性中可以指定SQL语句，也可以在操作中指定数据库操作类型及条件：</p>
+<table>
+<thead>
+<tr>
+<th>项目CODE</th>
+<th>项目别名</th>
+<th>项目类型</th>
+<th>条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SELECT_DATA</td>
+<td>数据查询</td>
+<td>SELECT</td>
+<td>TRAN_DATE&gt;FORMATDATE(@1,1) AND CUSTOMER_CODE =   TEXT(‘TEST_CODE’) AND TRAN_VOLUME &gt; NUM(@2)</td>
+</tr>
+</tbody></table>
+<p>其中@1表示调用时的第一个参数，@2表示第二个参数，依此类推，但是必须保证传递过来的参数与定义时的参数顺序一致，否则会得到期待值以外的结果；另外还需要保证SQL返回的结果与DM中字段数量、字段名和顺序一致，否则无法通过编译。</p>
+<p>如果要给一个DM的对象赋值，需要在DM中定义赋值方法，分别指定字段以及对应的参数。</p>
+<h4 id="BP的定义"><a href="#BP的定义" class="headerlink" title="BP的定义"></a>BP的定义</h4><p>BP是一个功能模块的逻辑部分，一个简单的示例定义如下：</p>
+<table>
+<thead>
+<tr>
+<th>项目类型</th>
+<th>对应DM</th>
+<th>调用操作</th>
+<th>数据类型</th>
+<th>参数</th>
+<th>WORK CODE</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ARG</td>
+<td></td>
+<td></td>
+<td>CODE</td>
+<td></td>
+<td>TRAN_DATE</td>
+</tr>
+<tr>
+<td>ARG</td>
+<td></td>
+<td></td>
+<td>TEXT</td>
+<td></td>
+<td>CUSTOMER_ID</td>
+</tr>
+<tr>
+<td>ARG</td>
+<td></td>
+<td></td>
+<td>NUM</td>
+<td></td>
+<td>TRAN_VOLUME</td>
+</tr>
+<tr>
+<td>CALL</td>
+<td>TRAN_INFO</td>
+<td>SELECT_DATA</td>
+<td></td>
+<td>_ARG_.TRAN_DATE,_ARG_.CUSTOMER_ID,_ARG_.TRAN_VOLUME</td>
+<td>TRAN_INFO</td>
+</tr>
+<tr>
+<td>CALL</td>
+<td>PAGE_DATA</td>
+<td>SET_DATA</td>
+<td></td>
+<td>TRAN_INFO</td>
+<td>PAGE_TRAN_INFO</td>
+</tr>
+<tr>
+<td>WORKAREA</td>
+<td>PAGE_DATA</td>
+<td></td>
+<td></td>
+<td>APPEND,PAGE_TRAN_INFO</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>这时只要在IO中指定数据来源类型为WORKAREA并且为PAGE_DATA，这个数据集合中的数据便能在页面展示出来。</p>
+<h4 id="IO的定义"><a href="#IO的定义" class="headerlink" title="IO的定义"></a>IO的定义</h4><p>IO主要存放与页面交互的数据或者接收用户的输入，可以设定初期值：</p>
+<table>
+<thead>
+<tr>
+<th>项目类型</th>
+<th>项目CODE</th>
+<th>项目别名</th>
+<th>位数</th>
+<th>小数位</th>
+<th>加工式</th>
+<th>目标页面</th>
+<th>来自DM</th>
+<th>DM字段</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IO</td>
+<td>USER_NAME</td>
+<td>用户名输入框</td>
+<td>20</td>
+<td>-1</td>
+<td></td>
+<td></td>
+<td></td>
+<td>@TEXT</td>
+</tr>
+<tr>
+<td>O</td>
+<td>TRAN_ID</td>
+<td>交易ID</td>
+<td>15</td>
+<td>-1</td>
+<td></td>
+<td></td>
+<td>PAGE_DATA</td>
+<td>TRAN_ID</td>
+</tr>
+<tr>
+<td>O</td>
+<td>TRAN_DATE</td>
+<td>交易日期</td>
+<td>10</td>
+<td>-1</td>
+<td></td>
+<td></td>
+<td>PAGE_DATA</td>
+<td>TRAN_DATE</td>
+</tr>
+<tr>
+<td>O</td>
+<td>TRAN_VOLUME</td>
+<td>交易额</td>
+<td>15</td>
+<td>0</td>
+<td></td>
+<td></td>
+<td>PAGE_DATA</td>
+<td>TRAN_VOLUME</td>
+</tr>
+</tbody></table>
+<h4 id="更多细节"><a href="#更多细节" class="headerlink" title="更多细节"></a>更多细节</h4><p>程序运行中，数据流向为：IO &gt; BP &gt; DM &gt; BP &gt; IO，不过这个顺序不严格界定，也可以从IO项目的初期值属性中直接访问数据库取得数据，多用于取全局变量等类型的值。</p>
+<h3 id="常用内置方法"><a href="#常用内置方法" class="headerlink" title="常用内置方法"></a>常用内置方法</h3><ul>
+<li>CODE() / TEXT() / NUM() / DATE() / TIME()：基本数据类型之间的互相转换。（某些数据类型之间不能互转，转换失败会导致编译失败）。</li>
+<li>FORMATDATE(DATE,STYLE)：日期格式转换，1：yyyy-MM-dd；3：yyyyMMdd等。</li>
+<li>ADDDATE(DATE,Y,M,D)：日期DATE上加Y年M月D日后的日期，若Y/M/D为负时则执行减操作。</li>
+<li>SUBSTITUTE(TEXT,TEXT1,TEXT2)：将TEXT中的TEXT1全部置换为TEXT2。</li>
+</ul>
+<h3 id="一般开发流程（一个增-删-改-查的例子）"><a href="#一般开发流程（一个增-删-改-查的例子）" class="headerlink" title="一般开发流程（一个增/删/改/查的例子）"></a><del>一般开发流程（一个增/删/改/查的例子）</del></h3><p>原本打算遵循一般使用流程完成一个增/删/改/查的例子，但是考虑到版权问题，此处略过。大致的使用和上文描述并无太大差距。</p>
+<h3 id="页面风格与页面布局"><a href="#页面风格与页面布局" class="headerlink" title="页面风格与页面布局"></a>页面风格与页面布局</h3><h4 id="默认页面布局与页面风格"><a href="#默认页面布局与页面风格" class="headerlink" title="默认页面布局与页面风格"></a>默认页面布局与页面风格</h4><p>在软件中，内置了几种风格，对于一般对于页面美观程度要求不高的公司内部项目来说已经足够，其实这也差不多就是这个工具软件的使用范围，规模更大或者要求较多的面向用户的项目来说，这个工具显得力不从心。</p>
+<h4 id="自定义页面布局与元素样式"><a href="#自定义页面布局与元素样式" class="headerlink" title="自定义页面布局与元素样式"></a>自定义页面布局与元素样式</h4><p>每定义一个项目，wp会默认纵向排列，可以在项目属性中指定排列方向为X方向。当默认Layout满足不了需求时，就需要自己改变默认布局，在项目编译完成后，使用Ant生成默认的布局文件，然后对默认布局文件layout.html进行修改，直至满足需求。</p>
+<p>其实默认Layout就是一个整的table，每一个项目都定义在td单元格中，因此本质上就是改动一个table。</p>
+<h3 id="浅谈使用WebPerformer的利与弊"><a href="#浅谈使用WebPerformer的利与弊" class="headerlink" title="浅谈使用WebPerformer的利与弊"></a>浅谈使用WebPerformer的利与弊</h3><p>基于两个月的使用感受，总结出下面几点：</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ol>
+<li>提高开发效率：对于简单的页面（例如检索数据然后展示），可以免去编写页面的工作，可以快速实现功能，开发效率确实能提升不少。但是这仅仅限于极少数极为简单的页面。</li>
+<li>降低开发门槛：wp能极大的降低开发门槛，这是我觉得最大的优点。开发者不用去了解泛型和反射的细节、不用去了解多线程、更不需要了解设计模式的知识，全程“傻瓜式”编程，只要你会使用鼠标和触摸板、知道怎么写一个SQL语句，然后剩下的问题都是wp工具使用的问题。</li>
+<li>减小开发难度：因为所有项目的属性已经被工具限定范围，开发者能进行的操作早已被工具限制，所以开发中遇到的关于语言使用本身最严重的错误就是NPE，大大减少了编程错误。</li>
+</ol>
+<h4 id="弊端"><a href="#弊端" class="headerlink" title="弊端"></a>弊端</h4><ol>
+<li>丧失灵活性是为使用简单付出的代价。到目前为止，使用了wp将近两个月的时间，最大的感觉就是 <strong>限制太多</strong> 。比如一个页面的数据只能来自一个DM，BP内做循环等，流程繁琐。</li>
+<li>代码可读性几乎为0。由于同一模块中不能有相同变量名和逻辑段缩进不灵活的原因，导致BP部分的代码可读性几乎为零。后期维护将会是一个艰巨的任务。</li>
+<li>代码复用率低。由于工具本身的特征，很难写出通用功能，整个项目中，每个人几乎都是各自为战，花了太多时间去重复造轮子。</li>
+<li>可能存在许多性能问题。由于工具本身限制丧失了许多灵活性，很多明明两行代码就能做到的事情，在wp中却不得不另寻出路，拐弯抹角才能达到目的，由此导致许多性能上的损失。</li>
+</ol>
+<h4 id="个人使用感受"><a href="#个人使用感受" class="headerlink" title="个人使用感受"></a>个人使用感受</h4><p>因为前期没有培训，完全是自己研究文档、在开发中自己摸索，所以整个过程用得很是憋屈。</p>
+<p>现阶段离可视化自动化还过于遥远，反正我以后再也不想接触这个工具了，我无法忍受各种限制以及为了向这些限制而在代码性能以及代码可读性等方面做出的让步。</p>
+<p>在官网的介绍上赫然挂着“超高速开发”几个字，但是较为讽刺的是，目前这个为期半年的项目已经延期一个多月。</p>
+<h3 id="发展前景"><a href="#发展前景" class="headerlink" title="发展前景"></a>发展前景</h3><p>工具总是朝着简单易用和自动化的方向发展。wp应该算是在这个方向上走得比较远的工具，尽管现在还有许多功能满足不了需求，但是随着不断更新，很多问题应该会逐渐解决。包括在使用范围上应该也会逐渐扩大。但是对于一些规模较大以及性能要求高的系统来说，wp还有很长很长的路要走。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/Web开发/" rel="tag"># Web开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/05/为什么要学摄影/" rel="next" title="为什么要学摄影">
+                <i class="fa fa-chevron-left"></i> 为什么要学摄影
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/14/《百年孤独》/" rel="prev" title="《百年孤独》">
+                《百年孤独》 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://image.youyou-2608.com/header/IMG_3320.JPG" alt="Kanna Makino">
+            
+              <p class="site-author-name" itemprop="name">Kanna Makino</p>
+              <p class="site-description motion-element" itemprop="description">一爱代码，爱生活。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MakinoKanna" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zhulongkun20@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/Youyou_2608" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/youyou_26082527" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.codecademy.com/" title="CodeCademy" target="_blank">CodeCademy</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://leetcode-cn.com/" title="LeetCode中国" target="_blank">LeetCode中国</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.nhk.or.jp/radionews/" title="NHKラジオニュース" target="_blank">NHKラジオニュース</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是WebPerformer"><span class="nav-number">1.</span> <span class="nav-text">什么是WebPerformer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与传统Web项目开发的相同点与不同点"><span class="nav-number">2.</span> <span class="nav-text">与传统Web项目开发的相同点与不同点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Web-Performer相关的概念"><span class="nav-number">2.1.</span> <span class="nav-text">Web Performer相关的概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#与传统开发的联系"><span class="nav-number">2.2.</span> <span class="nav-text">与传统开发的联系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发环境（环境依赖）"><span class="nav-number">3.</span> <span class="nav-text">开发环境（环境依赖）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">4.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语法"><span class="nav-number">5.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DM的定义"><span class="nav-number">5.1.</span> <span class="nav-text">DM的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BP的定义"><span class="nav-number">5.2.</span> <span class="nav-text">BP的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IO的定义"><span class="nav-number">5.3.</span> <span class="nav-text">IO的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更多细节"><span class="nav-number">5.4.</span> <span class="nav-text">更多细节</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用内置方法"><span class="nav-number">6.</span> <span class="nav-text">常用内置方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一般开发流程（一个增-删-改-查的例子）"><span class="nav-number">7.</span> <span class="nav-text">一般开发流程（一个增/删/改/查的例子）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页面风格与页面布局"><span class="nav-number">8.</span> <span class="nav-text">页面风格与页面布局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#默认页面布局与页面风格"><span class="nav-number">8.1.</span> <span class="nav-text">默认页面布局与页面风格</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义页面布局与元素样式"><span class="nav-number">8.2.</span> <span class="nav-text">自定义页面布局与元素样式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浅谈使用WebPerformer的利与弊"><span class="nav-number">9.</span> <span class="nav-text">浅谈使用WebPerformer的利与弊</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#优点"><span class="nav-number">9.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#弊端"><span class="nav-number">9.2.</span> <span class="nav-text">弊端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#个人使用感受"><span class="nav-number">9.3.</span> <span class="nav-text">个人使用感受</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发展前景"><span class="nav-number">10.</span> <span class="nav-text">发展前景</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> | <a class="theme-link" target="_blank" href="https://www.qiniu.com">七牛云</a> 强力驱动</div>
+
+
+
+
+
+<br>
+<span id="timeDate"></span>
+<span id="times"></span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/11/2018 11:11:11");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+
+
+
+<div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+
+  <span class="post-meta-divider">|</span>
+
+  <span class="author" itemprop="copyrightHolder">Kanna Makino</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">全站字数&#58;</span>
+    
+    <span title="全站字数">50.4k</span>
+  
+</div>
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Ds6e3mV0dkbrFdi5FvnIkXiI-gzGzoHsz", "6UM1pDx95JnuFlS3ilTBvwQ8");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
