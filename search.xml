@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[给树莓派安装Ubuntu MATE系统]]></title>
+    <url>%2F2019%2F06%2F11%2F%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85Ubuntu-MATE%E7%B3%BB%E7%BB%9F%2F</url>
+    <content type="text"><![CDATA[给树莓派安装Ubantu MATE操作系统 由于平时用的是Ubuntu系统，对这个系统比较熟悉，也想给树莓派也装这个系统，Linux下做SD卡启动盘网上资料比较少，担心发生对笔记本磁盘的误操作，最后在官网上找到了教程。 下载系统Ubuntu MATE for the Raspberry Pi Model B 2, 3 and 3+ 安装工具并写入系统123sudo apt-get install gddrescue xz-utilsunxz --verbose ubuntu-mate-18.04.2-beta1-desktop-armhf+raspi-ext4.img.xzsudo ddrescue -D --force ubuntu-mate-18.04.2-beta1-desktop-armhf+raspi-ext4.img /dev/sdx /dev/sda代表笔记本的磁盘，SD卡的盘符一般/dev/sdb1。 显示屏无反应网上说可能是 config.txt 设置问题，和显示器的分辨率之类的有关，但是写入了镜像之后再将SD卡插入到PC，已经无法挂载，报错： 12sudo mount /dev/sdb1 /mnt/sdb1mount: /mnt/sdb1: wrong fs type, bad option, bad superblock on /dev/sdb1, missing codepage or helper program, or other error. 问题排查进不去SD卡，挂载错误，说是文件类型错误。 安装工具： sudo apt-get install nfs-common 仍然是无法读取。 先安装 gnome-disk-utility ，在终端执行 ./gnome-disk-utility ，选择 Restore Image... ，写入镜像。 写完之后，退出SD卡。 将写入镜像的SD卡插入树莓派，连接显示器，接通电源，成功进入系统引导界面，清新的绿色界面。]]></content>
+      <categories>
+        <category>树莓派</category>
+      </categories>
+      <tags>
+        <tag>树莓派</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[再记Hexo博客恢复]]></title>
     <url>%2F2019%2F06%2F09%2F%E5%86%8D%E8%AE%B0Hexo%E5%8D%9A%E5%AE%A2%E6%81%A2%E5%A4%8D%2F</url>
     <content type="text"><![CDATA[Hexo博客恢复 从官网下载 Nodejs 二进制 文件（.tar.xz），解压到 /opt 目录下，添加连接： sudo tar -xvf xxxx.tar.xz sudo ln -s /opt/node-linux-x64xxxx/bin/node /usr/local/bin/node sudo ln -s /opt/node..../bin/npm /usr/local/bin/npm 然后进入博客文件夹，执行 sudo npm install 即可完成恢复。 折腾了半天一直各种报错，没想到这么简单。。]]></content>
