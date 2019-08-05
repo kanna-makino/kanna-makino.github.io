@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[电影-《月球》]]></title>
+    <url>%2F2019%2F08%2F06%2F%E7%94%B5%E5%BD%B1-%E3%80%8A%E6%9C%88%E7%90%83%E3%80%8B%2F</url>
+    <content type="text"><![CDATA[不知道为什么，想在 MacOS 上恢复以前的 Hexo 博客，但是安装 Hexo 的时候总是报错，安装不成功。只能等出差之后有时间了再去想办法恢复了。Hexo 维护起来还是有点困难，尤其是在原博客的基础上加了各种插件之后，再加上国内的局域网环境，恢复起来更是费劲。 因为恢复 Hexo 博客暂时有困难，所以就先把博客放在 Blogger 上吧。 –刚才网上查了下，五分钟不到恢复了… 今天晚上回来，没什么事可做，就看了部电影打发时间。我一向喜欢看科幻片，但是比较知名的科幻片基本都看一遍了，类似于《火星救援》、《回到未来》之类的。 出于之前对月球各种现象的好奇，就从网上找了《月球》（迅雷下载地址：ed2k://|file|【电影家园www.idyjy.com下载】月球BD国英双语双字.mkv|2217685691|B8C4591F5409AD0D6BA1A6BE485FAAF4|h=FAAI4HCQIMWBHLOWJXRCQLJFXKKUIO6L|/）来看。其实看了前五六分钟才发现，以前看过，但是剧情已经全然忘记了，正好也不知道要看什么，就接着看下去了。 mkv 格式的视频直接用 VLC 和QuickTime 还不能直接播放，没有对应的解码器，安装了 IINA 就好了。 简单而有一波三折的剧情，固定的拍摄场景，还是很能吸引人。 月球旷工 Sam 与公司签订合同之后到了月球采矿，即将合同期满，返回地球与妻女团聚的时候，糟糕的精神状态让他遭遇了一起事故。事故之后从医护室醒来丧失了部分记忆，并设法离开基地前往事故地点，在事故月球车里发现了另一个自己，原来自己是从本体克隆而来。两个克隆 Sam 逐渐发现了基地中的所有秘密，两人设法赶在公司的“救援小组”到达之前利用氦传送器将干满三年的自己送回地球，但是身体状况急剧恶化的自己明白自己的生命即将终结，放弃了返回地球的机会，将机会让给了另一个健康的自己。合同期快满的 Sam 临死前通过卫星信号拨通了家里的电话，得知妻子已经去世，女儿已经 15 岁，内心无比痛苦。最终为了完成计划死在了出事故的月球车中，而新克隆的 Sam 则顺利的回到地球并将公司的恶行公布于世。 我喜欢这种简单不烧脑却又引人入胜的故事情节，而其中的关于人性、伦理、克隆技术以及人工智能的讨论更是给人以思考。 不过我印象更为深刻的是，Sam 在一个完全寂静、与世隔绝的环境中的生活状态。我自认为是一个孤独体质的人，从来不认为自己跟某个人或者某些人很亲近，并且对不认识的人更是保持着礼貌的距离。孤独，确实能改变一个人。三年的孤寂将 Sam 的正面性格全面摧毁，我甚至在想我现在的性格状态就是与世隔绝三年之后的 Sam 的生活状态吗？确实有很多相似的地方。但是他是幸福的，因为他知道虽然离家万里，但是在遥远的地球上有着深爱他的妻女，即便与世隔绝，生活始终还是有期待的，期待着回家、期待着与相爱的人团聚。而我呢？希望自己能早日走出这种状态吧。]]></content>
+      <categories>
+        <category>电影</category>
+      </categories>
+      <tags>
+        <tag>电影</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[基于 mjpg-streamer 的树莓派视频监控]]></title>
     <url>%2F2019%2F08%2F05%2F%E5%9F%BA%E4%BA%8E-mjpg-streamer-%E7%9A%84%E6%A0%91%E8%8E%93%E6%B4%BE%E8%A7%86%E9%A2%91%E7%9B%91%E6%8E%A7%2F</url>
     <content type="text"><![CDATA[基于mjpg-streamer的视频监控视频监控搭建本来想用 python 来做的，但是 VLC 串流不知道是不是设置的问题，视频采集是正常的，但是接收端接收到的视频一团糊，在无意间知道了 mjpg-streamer 这个项目，GitHub 地址：https://github.com/jacksonliam/mjpg-streamer。 安装方法参照GitHub： 1234567sudo apt-get install cmake libjpeg8-devsudo apt-get install gcc g++cd mjpg-streamer-experimentalmakesudo make install 安装完之后就可以直接启动了： 1./mjpg_streamer -o "output_http.so -w ./www" -i "input_raspicam.so" 默认使用8080端口，浏览器打开地址： 1http://192.168.0.103:8080/?action=stream 就能实时查看树莓派摄像头采集到的视频。 外网访问在局域网内，直接访问树莓派的 ip 地址就能查看视频，但是如果想从外网访问的话，还需要做点手脚。 使用 frp 反向隧道进行内网穿透。 先分别在vps 和树莓派上安装frp 服务： 1wget https://github.com/fatedier/frp/releases/download/v0.20.0/frp_0.20.0_linux_amd64.tar.gz 解压上面下载的文件。 服务器端配置文件： 12345678进去目录vi frps.ini[common]bind_port = 7000 # frp与客户端绑定进行通信的端口auto_token = frp7vhost_http_port = 9000 # http 访问端口 树莓派配置文件： 12345678910111213141516171.进去目录2.vi frpc.ini[common]server_addr = 云服务器的IP # frps所在的服务器的 IPserver_port = 7000 # frp与服务器绑定进行通信的端口[ssh]type = tcplocal_ip = 192.168.0.103 # Pi所在局域网IPlocal_port = 22 # 本地端口remote_port = 6000 # ssh远程访问端口[web]type = httplocal_port = 8080 # web 服务对应的端口——mjpg-streamer所需端口custom_domains = 云服务器IP # frps所在的服务器的 IP 依次启动服务器端的 frp，树莓派视频采集，树莓派端 frp。 12345./frps -c ./frps.ini./mjpg_streamer -o "output_http.so -w ./www" -i "input_raspicam.so"./frpc -c ./frpc.ini 然后打开浏览器访问：http://xxx.xxx.xxx.xxx:9000/stream.html ，不知道是不是因为 VPS 在国外的原因，延迟有3 s 这样子。。 注意：树莓派只能运行 arm 架构的 frp（树莓派frp）。 参考： 基于树莓派+mjpg+frp+阿里云服务器的远程监控 树莓派上MJPG-streamer安装手顺]]></content>
