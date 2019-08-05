@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Kanna-Makino">
 <meta property="og:description" content="基于mjpg-streamer的视频监控视频监控搭建本来想用 python 来做的，但是 VLC 串流不知道是不是设置的问题，视频采集是正常的，但是接收端接收到的视频一团糊，在无意间知道了 mjpg-streamer 这个项目，GitHub 地址：https://github.com/jacksonliam/mjpg-streamer。 安装方法参照GitHub： 1234567sudo apt-">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-05T15:55:43.000Z">
+<meta property="og:updated_time" content="2019-08-05T15:59:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于 mjpg-streamer 的树莓派视频监控">
 <meta name="twitter:description" content="基于mjpg-streamer的视频监控视频监控搭建本来想用 python 来做的，但是 VLC 串流不知道是不是设置的问题，视频采集是正常的，但是接收端接收到的视频一团糊，在无意间知道了 mjpg-streamer 这个项目，GitHub 地址：https://github.com/jacksonliam/mjpg-streamer。 安装方法参照GitHub： 1234567sudo apt-">
@@ -351,7 +351,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-08-05T23:55:43+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-08-05T23:59:31+08:00">
                 08-05-2019
               </time>
             
@@ -412,7 +412,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  541
+                  543
                 </span>
               
 
@@ -470,12 +470,12 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">进去目录</span><br><span class="line"></span><br><span class="line">vi  frps.ini</span><br><span class="line"></span><br><span class="line">[common]</span><br><span class="line">bind_port = 7000         # frp与客户端绑定进行通信的端口</span><br><span class="line">auto_token = frp7</span><br><span class="line">vhost_http_port = 9000   # http 访问端口</span><br></pre></td></tr></table></figure>
 
 <p>树莓派配置文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1.进去目录</span><br><span class="line">2.vi frpc.ini</span><br><span class="line"></span><br><span class="line">[common]</span><br><span class="line">server_addr = 176.122.132.48  # frps所在的服务器的 IP</span><br><span class="line">server_port = 7000                 # frp与服务器绑定进行通信的端口</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 192.168.0.103        # Pi所在局域网IP</span><br><span class="line">local_port = 22                       # 本地端口</span><br><span class="line">remote_port = 6000               # ssh远程访问端口</span><br><span class="line"></span><br><span class="line">[web]</span><br><span class="line">type = http</span><br><span class="line">local_port = 8080                   # web 服务对应的端口——mjpg-streamer所需端口</span><br><span class="line">custom_domains = 云服务器IP   # frps所在的服务器的 IP</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1.进去目录</span><br><span class="line">2.vi frpc.ini</span><br><span class="line"></span><br><span class="line">[common]</span><br><span class="line">server_addr = 云服务器的IP   # frps所在的服务器的 IP</span><br><span class="line">server_port = 7000                 # frp与服务器绑定进行通信的端口</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 192.168.0.103        # Pi所在局域网IP</span><br><span class="line">local_port = 22                       # 本地端口</span><br><span class="line">remote_port = 6000               # ssh远程访问端口</span><br><span class="line"></span><br><span class="line">[web]</span><br><span class="line">type = http</span><br><span class="line">local_port = 8080                   # web 服务对应的端口——mjpg-streamer所需端口</span><br><span class="line">custom_domains = 云服务器IP   # frps所在的服务器的 IP</span><br></pre></td></tr></table></figure>
 
 <p>依次启动服务器端的 frp，树莓派视频采集，树莓派端 frp。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./frps -c ./frps.ini</span><br><span class="line"></span><br><span class="line">./mjpg_streamer -o "output_http.so -w ./www" -i "input_raspicam.so"</span><br><span class="line"></span><br><span class="line">./frpc -c ./frpc.ini</span><br></pre></td></tr></table></figure>
 
-<p>然后打开浏览器访问：<a href="http://176.122.132.48:9000/stream.html" target="_blank" rel="noopener">http://176.122.132.48:9000/stream.html</a> ，不知道是不是因为 VPS 在国外的原因，延迟有3 s 这样子。。</p>
+<p>然后打开浏览器访问：<a href="http://xxx.xxx.xxx.xxx:9000/stream.html" target="_blank" rel="noopener">http://xxx.xxx.xxx.xxx:9000/stream.html</a> ，不知道是不是因为 VPS 在国外的原因，延迟有3 s 这样子。。</p>
 <p>注意：<strong>树莓派只能运行 arm 架构的 frp（<a href="http://diannaobos.iok.la:81/frp/frp-v0.20.0/frp_0.20.0_linux_arm.tar.gz" target="_blank" rel="noopener">树莓派frp</a>）</strong>。</p>
 <hr>
 <p>参考：</p>
