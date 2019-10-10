@@ -61,6 +61,91 @@
       
         
 
+<article id="post-LeetCode之3Sum" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/01/03/LeetCode之3Sum/">LeetCode之3Sum</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/01/03/LeetCode之3Sum/" class="article-date">
+  <time datetime="2019-01-03T13:55:22.000Z" itemprop="datePublished">01-03-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p><img src="https://image.youyou-2608.com/blog/IMG_4722.JPG" alt="轻音乐推荐"></p>
+<p>不知道身边现在还有没有用QQ音乐的人。</p>
+<h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p>输入一个数组，例如{-1 0 1 2 -1 -4}，从数组中找三个数（a,b,c），使得其和0，输出所有的（a,b,c）组合。</p>
+<p>要求abc不能重复，并且a&lt;=b&lt;=c。</p>
+<p>例：</p>
+<p>S = {-1, 0, 1, 2, -1, -4}；</p>
+<p>输出：</p>
+<p>(-1, 0 ,1)</p>
+<p>(-1, -1, 2)</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>一看到题目，不问代码行数，不问时间复杂度，便排出三个循环。。但是循环非常耗时，显然不是题目的本意。想了好长时间没有什么进展。</p>
+<p>先将给定数组排序，然后指定一个数，在数组中找出两个数并且这两个数的和是目标数值的相反数：<a href="http://www.cnblogs.com/xcr1234/p/5285727.html" target="_blank" rel="noopener">【LeetCode】3Sum 解题报告</a></p>
+<p>在网上找到了篇比较有新意的文章：[<a href="https://www.cnblogs.com/xcr1234/p/5285727.html" target="_blank" rel="noopener">3Sum algorithm - 非常容易理解的实现 （java)</a>] 。</p>
+<hr>
+<p>最后发现维基百科中就有收录：<a href="https://zh.wikipedia.org/zh-hans/3SUM" target="_blank" rel="noopener">维基百科—3SUM</a> ，还有更一般的情形 N SUM。</p>
+<figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sort(S);</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">0</span> <span class="keyword">to</span> n-<span class="number">3</span> <span class="keyword">do</span></span><br><span class="line">   a = S[i];</span><br><span class="line">   start = i+<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">end</span> = n-<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">while</span> (start &lt; <span class="keyword">end</span>) <span class="keyword">do</span></span><br><span class="line">      b = S[start]</span><br><span class="line">      c = S[<span class="keyword">end</span>];</span><br><span class="line">      <span class="keyword">if</span> (a+b+c == <span class="number">0</span>) <span class="keyword">then</span></span><br><span class="line">         output a, b, c;</span><br><span class="line">         <span class="comment">// Continue search for all triplet combinations summing to zero.</span></span><br><span class="line">          <span class="keyword">end</span> = <span class="keyword">end</span> - <span class="number">1</span></span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (a+b+c &gt; <span class="number">0</span>) <span class="keyword">then</span></span><br><span class="line">         <span class="keyword">end</span> = <span class="keyword">end</span> - <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">         start = start + <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>伪代码还挺容易理解的。</p>
+<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><p>因为知乎上有人宣称证明了哥德巴赫猜想的原因，这两天还特意了解了下猜想证明的历史，“1+2”、“1+3”之类的证明，虽然一点也没看懂。感觉数学真的很有魅力，严谨清晰的逻辑，精妙完美的结论，自然界中的一切每时每刻都在遵循着其中的规律运行，更加感慨于人类的智慧，都找不到合适的赞美的词了。</p>
+<p>“超越数”、“黄金分割”、“哥德巴赫猜想”、“黎曼猜想”…</p>
+<p>停下思绪，回到现实：<strong>当你理解它的时候你觉得进入了天堂，当你不理解它的时候你仿佛进入了地狱</strong>，看哭了…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2019/01/03/LeetCode之3Sum/" data-id="ck1kune19000iik4ngln0y2ca"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-SpringBoot基础学习笔记" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -1110,7 +1195,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/01/01/SpringBoot基础学习笔记/" data-id="ck1kthgnn00692o4nfgppxfu7"
+      <a data-url="https://www.youyou-2608.com/2019/01/01/SpringBoot基础学习笔记/" data-id="ck1kune40006bik4nf59l4htr"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -1223,7 +1308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/12/31/周末随想/" data-id="ck1kthgn5005r2o4nnsayua9u"
+      <a data-url="https://www.youyou-2608.com/2018/12/31/周末随想/" data-id="ck1kune3d005nik4n9bh6uwsa"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随便写写/">随便写写</a></li></ul>
@@ -1298,7 +1383,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/12/09/《徒步中国》/" data-id="ck1kthgln001b2o4nqpx8ws4o"
+      <a data-url="https://www.youyou-2608.com/2018/12/09/《徒步中国》/" data-id="ck1kune1l0019ik4nljmul3ut"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/《徒步中国》/">《徒步中国》</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书/">读书</a></li></ul>
@@ -1372,7 +1457,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/12/02/深田恭子的日剧跑/" data-id="ck1kthgma002s2o4np3fq8zj4"
+      <a data-url="https://www.youyou-2608.com/2018/12/02/深田恭子的日剧跑/" data-id="ck1kune28002rik4n8bwd5iie"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/V/">V</a></li></ul>
@@ -1477,7 +1562,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/12/02/dubbo学习笔记/" data-id="ck1kthglm00182o4ny0vac7u3"
+      <a data-url="https://www.youyou-2608.com/2018/12/02/dubbo学习笔记/" data-id="ck1kune1k0016ik4nk97dgf81"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dubbo/">dubbo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分布式/">分布式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -1561,271 +1646,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/12/01/愉快的周末/" data-id="ck1kthgm3002i2o4nkb8sx5vs"
+      <a data-url="https://www.youyou-2608.com/2018/12/01/愉快的周末/" data-id="ck1kune24002hik4nfhty29yy"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随便写写/">随便写写</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-Spring学习笔记-第三章-高级装配" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2018/11/24/Spring学习笔记-第三章-高级装配/">Spring学习笔记-第三章-高级装配</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2018/11/24/Spring学习笔记-第三章-高级装配/" class="article-date">
-  <time datetime="2018-11-24T04:09:31.000Z" itemprop="datePublished">11-24-2018</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-        <p>第三章：高级装配</p>
-<p>本章内容：</p>
-<ul>
-<li>Spring profile</li>
-<li>条件化的bean声明</li>
-<li>自动装配与歧义性</li>
-<li>bean的作用域</li>
-<li>Spring表达式语言</li>
-</ul>
-<hr>
-<h3 id="3-1-环境与profile"><a href="#3-1-环境与profile" class="headerlink" title="3.1 环境与profile"></a>3.1 环境与profile</h3><p>在软件开发的不同阶段需要不同的环境和配置。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span>(destroyMethod = <span class="string">"shutdown"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> EmbeddedDatabaseBuilder()</span><br><span class="line">        .addScript(<span class="string">"classpath:ch3.sql"</span>)</span><br><span class="line">        .addScript(<span class="string">"classpath:ch3.1.sql"</span>)</span><br><span class="line">        .build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>为了适应环境更换的需求，可以将所需要的所有的配置类配置到每个bean中，然后在构建阶段选择需要使用的bean，但是从开发环境切换到生产环境时可能会发生问题。</p>
-<h4 id="3-1-1-配置profile-bean"><a href="#3-1-1-配置profile-bean" class="headerlink" title="3.1.1 配置profile bean"></a>3.1.1 配置profile bean</h4><p>Spring为此种场景提供了profile功能。</p>
-<p>使用profile注解来声明在合适的阶段使用合适的bean。将所有的bean整理到一个profile中，确保在需要的时候active相应的bean。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ch3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"><span class="keyword">import</span> org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;</span><br><span class="line"><span class="keyword">import</span> org.springframework.jndi.JndiObjectFactoryBean;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.sql.DataSource;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/24 下午1:00</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataSourceConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span>(destroyMethod = <span class="string">"shutdown"</span>)</span><br><span class="line">    <span class="meta">@Profile</span>(<span class="string">"dev"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">embeddedDataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> EmbeddedDatabaseBuilder()</span><br><span class="line">                .setType(EmbeddedDatabaseType.H2)</span><br><span class="line">                .addScript(<span class="string">"classpath:test.sql"</span>)</span><br><span class="line">                .addScript(<span class="string">"classpath:test1.sql"</span>)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@Profile</span>(<span class="string">"prod"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">jndiDataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        JndiObjectFactoryBean jndiObjectFactoryBean =</span><br><span class="line">                <span class="keyword">new</span> JndiObjectFactoryBean();</span><br><span class="line">        jndiObjectFactoryBean.setJndiName(<span class="string">"jndi/myDS"</span>);</span><br><span class="line">        jndiObjectFactoryBean.setResourceRef(<span class="keyword">true</span>);</span><br><span class="line">        jndiObjectFactoryBean.setProxyInterface(javax.sql.DataSource.class);</span><br><span class="line">        <span class="keyword">return</span> (DataSource) jndiObjectFactoryBean.getObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>虽然所有的bean都被声明在一个profile里，但是只有当指定的profile被激活时，相应的bean才会被创建，没有指定profile的bean始终都会被创建，与激活的profile没有关系。</strong></p>
-<p>在XML中配置profile：</p>
-<p>可以通过beans元素的profile属性，在xml中配置profile。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xmlns:jdbc</span>=<span class="string">"http://www.springframework.org/schema/jdbc"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">profile</span>=<span class="string">"dev"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">jdbc:embedded-database</span> <span class="attr">id</span>=<span class="string">"dataSource"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdbc:script</span> <span class="attr">location</span>=<span class="string">"classpath:test.sql"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdbc:script</span> <span class="attr">location</span>=<span class="string">"classpath:test1.sql"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">jdbc:embedded-database</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>只有profile属性与当前激活的profile相匹配的配置文件才会被用到。</strong></p>
-<p>重复使用beans属性指定多个profile：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xmlns:jdbc</span>=<span class="string">"http://www.springframework.org/schema/jdbc"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:jee</span>=<span class="string">"http://www.springframework.org/schema/jee"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">beans</span> <span class="attr">profile</span>=<span class="string">"dev"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jdbc:embedded-database</span> <span class="attr">id</span>=<span class="string">"dataSource"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">jdbc:script</span> <span class="attr">location</span>=<span class="string">"classpath:test.sql"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">jdbc:script</span> <span class="attr">location</span>=<span class="string">"classpath:test1.sql"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">jdbc:embedded-database</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">beans</span> <span class="attr">profile</span>=<span class="string">"prod"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">jee:jndi-lookup</span> <span class="attr">jndi-name</span>=<span class="string">"jdbc/MyDatabase"</span> <span class="attr">id</span>=<span class="string">"dataSource"</span> <span class="attr">resource-ref</span>=<span class="string">"true"</span> <span class="attr">proxy-interface</span>=<span class="string">"javax.sql.DataSource"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>虽然id都一样，类型都是javax.sql.dataSource，但是只会创建指定profile的bean。</strong></p>
-<h4 id="3-1-2-激活profile"><a href="#3-1-2-激活profile" class="headerlink" title="3.1.2 激活profile"></a>3.1.2 激活profile</h4><p>Spring在确定处于激活状态的profile时，依赖于两个独立的属性：</p>
-<ul>
-<li>spring.profiles.active</li>
-<li>spring.profiles.default</li>
-</ul>
-<p>优先级从上到下，如果spring.profiles.active没有设置，则看spring.profiles.default，否则只会创建没有定义在profiles中的bean。</p>
-<p>有多种方式设置这两个属性：</p>
-<ul>
-<li>作为DispatcherServlet的初始化参数</li>
-<li>作为web应用的上下文参数</li>
-<li>作为JNDI条目</li>
-<li>作为环境变量</li>
-<li>作为JVM属性</li>
-<li>在集成测试类上使用@ActiveProfiles属性</li>
-</ul>
-<p>在web.xml配置文件中设置默认的profile：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>spring.profiles.default<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>dev<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>appServlet<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">param-name</span>&gt;</span>spring.profiles.default<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>dev<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>可以同时激活多个profile，以逗号分隔。</strong></p>
-<p>使用profile进行测试：</p>
-<p>Spring提供了@ActiveProfiles注解，用来指定测试时使用的profile。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(SpringJunit4ClassRunner.class)</span><br><span class="line"><span class="meta">@ContextConfiguration</span>(classes=&#123;PersistenceTestConfig.class&#125;)</span><br><span class="line"><span class="meta">@ActiveProfiles</span>(<span class="string">"dev"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersistenceTest</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="3-2-条件化的bean"><a href="#3-2-条件化的bean" class="headerlink" title="3.2 条件化的bean"></a>3.2 条件化的bean</h3><p>需求：</p>
-<ol>
-<li>希望一个或多个bean只有在类路径下包含某个特定的库时才创建</li>
-<li>希望某个bean在特定的bean声明之后再创建</li>
-</ol>
-<p>Spring 4引入了@Conditional注解，只有条件计算结果为true才会创建bean，否则不创建。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ch3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Condition;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.ConditionContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.env.Environment;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.type.AnnotatedTypeMetadata;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/24 下午2:07</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MagicExistsCondition</span> <span class="keyword">implements</span> <span class="title">Condition</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">matches</span><span class="params">(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata)</span> </span>&#123;</span><br><span class="line">        Environment environment = conditionContext.getEnvironment();</span><br><span class="line">        <span class="keyword">return</span> environment.containsProperty(<span class="string">"magic"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@Conditional</span>(MagicExistsCondition.class)   <span class="comment">//条件化创建bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> MagicBean <span class="title">magicBean</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> MagicBean();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>ConditionContext接口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ConditionContext</span> </span>&#123;</span><br><span class="line">    <span class="function">BeanDefinitionRegistry <span class="title">getRegistry</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">ConfigurableListableBeanFactory <span class="title">getBeanFactory</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Environment <span class="title">getEnvironment</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">ResourceLoader <span class="title">getResourceLoader</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">ClassLoader <span class="title">getClassLoader</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>getRegistry：根据返回值可以检查bean定义</li>
-<li>getEnvirnment：检查环境变量</li>
-<li>getResourceLoader：读取加载的资源</li>
-<li>getClassLoader：加载并检查类是否存在</li>
-</ul>
-<p>AnnotatedTypeMetadata接口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AnnotatedTypeMetadata</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isAnnotated</span><span class="params">(String var1)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Map&lt;String, Object&gt; <span class="title">getAnnotationAttributes</span><span class="params">(String var1)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">Map&lt;String, Object&gt; <span class="title">getAnnotationAttributes</span><span class="params">(String var1, <span class="keyword">boolean</span> var2)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">MultiValueMap&lt;String, Object&gt; <span class="title">getAllAnnotationAttributes</span><span class="params">(String var1)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">MultiValueMap&lt;String, Object&gt; <span class="title">getAllAnnotationAttributes</span><span class="params">(String var1, <span class="keyword">boolean</span> var2)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="3-3-处理启动装配的歧义性"><a href="#3-3-处理启动装配的歧义性" class="headerlink" title="3.3 处理启动装配的歧义性"></a>3.3 处理启动装配的歧义性</h3><p>仅有一个bean匹配所需结果时，自动装配才是有效的，如果有多个bean能够匹配结果的话，这种歧义性会阻碍Spring自动装配属性、构造器参数和方法参数。</p>
-<p>Spring提供的解决方案：</p>
-<ul>
-<li>将可选bean中的其中一个声明为首选（primary）</li>
-<li>使用限定符（qualifier）缩小可选范围</li>
-</ul>
-<h4 id="3-3-1-标示首选的bean"><a href="#3-3-1-标示首选的bean" class="headerlink" title="3.3.1 标示首选的bean"></a>3.3.1 标示首选的bean</h4><p>将其中一个可选的bean声明为首选可以避免自动装配的歧义性。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDessert</span><span class="params">(Dessert dessert)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.dessert = dessert;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Primary</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IceCream</span> <span class="keyword">implements</span> <span class="title">Dessert</span> </span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@Primary</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Dessert <span class="title">dessert</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> IceCream();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>xml配置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"iceCream"</span> <span class="attr">class</span>=<span class="string">"com.test.dessert.IceCream"</span> <span class="attr">primary</span>=<span class="string">"true"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="3-3-2-限定自动装配的bean"><a href="#3-3-2-限定自动装配的bean" class="headerlink" title="3.3.2 限定自动装配的bean"></a>3.3.2 限定自动装配的bean</h4><p>设置首选bean的局限性在于 <strong>@Primary无法将可选方案范围限定到一个无歧义性的选项中</strong> ，当首选bean的数量超过一个时，无法进一步缩小限定范围。</p>
-<p>@Qualifier注解是使用限定符的主要方式，与@Autowired协同使用，在注入时指定要注入的bean。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="meta">@Qualifier</span>(<span class="string">"iceCream"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDessert</span><span class="params">(Dessert dessert)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.dessert = dessert;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>@Qualifier注解的参数就是想要注入的bean的id，所有使用@Component注解的类都会创建为bean，且id为首字母小写的类名。</p>
-<p>基于默认id作为限定符是简单的，但是当类名被更改之后会使限定符失效。</p>
-<p>创建自定义的限定符：</p>
-<p>可以设置自己的限定符，而不依赖于bean id作为限定符。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Qualifier</span>(<span class="string">"cold"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IceCream</span> <span class="keyword">implements</span> <span class="title">Dessert</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>此时cold限定符分配给了IceCream bean，只需要在合适的地方引入cold限定符即可自动装配。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@Qualifier</span>(<span class="string">"cold"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> Dessert <span class="title">iceCream</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> IceCream();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>此时类限定名的变更不会影响到自动装配。但是当应用中出现同名的注解@Qualifier(“cold”)时，歧义性又会再次出现。</p>
-<p>这时需要多个@Qualifier注解来进一步缩小限定范围。</p>
-<hr>
-<h3 id="3-4-bean的作用域"><a href="#3-4-bean的作用域" class="headerlink" title="3.4 bean的作用域"></a>3.4 bean的作用域</h3><p><strong>默认情况下，Spring应用上下文中的所有bean都是以单例模式创建的。不管给定的bean被注入到其他bean多少次，每次注入的都是同一个实例。</strong></p>
-<p>如果一个类是可变（mutable）的，那么对其进行重用时可能会遇到意想不到的问题。</p>
-<p>Spring定义的bean作用域：</p>
-<ul>
-<li>单例（Singleton）：在整个应用中，只创建一个bean；</li>
-<li>原型（Prototype）：每次注入或者通过上下文获取bean时都创建一个新的bean；</li>
-<li>会话（Session）：在Web应用中，为每个回话创建一个bean；</li>
-<li>请求（Request）：在Web应用中，为每个请求创建一个bean。</li>
-</ul>
-<p>@Scope注解：</p>
-<p>用来指定bean的作用域：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Scope</span>(ConfigurableBeanFactory.SCOPE_PROTOTYPE)</span><br><span class="line"><span class="comment">//或者 @Scope("prototype")</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Notepad</span> </span>&#123;</span><br><span class="line">    <span class="comment">//something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>XML配置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"notepad"</span> <span class="attr">class</span>=<span class="string">"com.app.Notepad"</span> <span class="attr">scope</span>=<span class="string">"prototype"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="3-5-运行时值注入"><a href="#3-5-运行时值注入" class="headerlink" title="3.5 运行时值注入"></a>3.5 运行时值注入</h3><p>Spring提供了两种运行时求值的方式：</p>
-<ul>
-<li>属性占位符（Property placeholder）；</li>
-<li>Spring表达式语言（S片EL）。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@PropertySource</span>(<span class="string">"classpath:/com/soundsys/app.properties"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExpressiveConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    Environment env;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> BlankDisc <span class="title">disc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BlankDisc(env.getProperty(<span class="string">"disc.title"</span>), env.getProperty(<span class="string">"disc.artist"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Spring的Environment：</p>
-<p>getProperty()方法的四种重载方式：</p>
-<ul>
-<li>String getProperty(String key)；</li>
-<li>String getProperty(String key, String defaultValue)；</li>
-<li>T getProperty(String key, Class<t> type)；</t></li>
-<li>T getProperty(String key, Class<t> type, T defaultValue)；</t></li>
-</ul>
-<p>使用重载形式的getProperty()方法可以避免类型转换：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> connectionCount = env.getProperty(<span class="string">"db.connection.count"</span>, Integer.class, <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
-
-<p>Environment常见方法：</p>
-<ul>
-<li>boolean containsProperty(String property)；</li>
-<li>String[] getActiveProfiles()；</li>
-<li>String[] getDefaultProfiles()；</li>
-<li>boolean acceptsProfiles(String… profiles)。</li>
-</ul>
-<p>解析属性占位符：</p>
-<p>Spring支持将属性定义到外部的属性文件中，并使用占位符将其值插入到Spring bean中。在Spring装配中，占位符的形式为使用 “${…}” 的形式包装的属性名称。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sgtPeppers"</span> <span class="attr">class</span>=<span class="string">"soundsystem.BlankDisc"</span> <span class="attr">c:_title</span>=<span class="string">"$&#123;disc.title&#125;"</span> <span class="attr">c:_artist</span>=<span class="string">"$&#123;disc.artist&#125;"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>使用组件扫描和自动装配时：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">BlankDisc</span><span class="params">(@Value(<span class="string">"$&#123;disc.title&#125;"</span> String title, @Value(<span class="string">"$&#123;disc.artist&#125;"</span>)</span> String artist) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.title = title;</span><br><span class="line">    <span class="keyword">this</span>.artist = artist;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>SpEL表达式语言：</p>
-<p>将表达式语言放到 “#{…}” 之中。</p>
-<ul>
-<li>“#{1 + 1}”</li>
-<li>“#{T(System).currentMillis()}”</li>
-<li>“#{sgtPeppers.artist}”</li>
-<li>“#{false}”</li>
-<li>“#{artistSelector.selectArtists().toUpperCase()}”</li>
-</ul>
-<p>SpEL运算符：</p>
-<table>
-<thead>
-<tr>
-<th>运算符类型</th>
-<th>运算符</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>算术运算符</td>
-<td>+、-、*、/、%、</td>
-</tr>
-<tr>
-<td>比较运算符</td>
-<td>&lt;、&gt;、==、&lt;=、&gt;=、lt、gt、eq、le、ge</td>
-</tr>
-<tr>
-<td>逻辑运算符</td>
-<td>and、or、not、|</td>
-</tr>
-<tr>
-<td>条件运算符</td>
-<td>?:(ternary)、?:()</td>
-</tr>
-<tr>
-<td>正则表达式</td>
-<td>matches</td>
-</tr>
-</tbody></table>
-<p>计算正则表达式：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#&#123;admin.email matches '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.com'&#125;</span><br></pre></td></tr></table></figure>
-
-<p>计算集合：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#&#123;jukebox.songs[4].title&#125;</span><br><span class="line">#&#123;jukebox.songs[T(java.lang.Math).random()*jukebox.songs.size()].title&#125;</span><br><span class="line">#&#123;jukebox.songs.?[artist eq 'Aerosmith']&#125;  //.?[]得到集合的一个子集</span><br><span class="line">#&#123;jukebox.songs.^[artist eq 'Areosmith']&#125;  //.^[]查询集合中的第一个匹配项</span><br><span class="line">#&#123;jukebox.songs.$[artist eq 'Areosmith'].![title]&#125;  //.$[]查询集合中的最后一个匹配项，.![]从集合的每个成员中选择特定的属性放到另外一个集合中</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/24/Spring学习笔记-第三章-高级装配/" data-id="ck1kthgn0005h2o4nv6say5vr"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring学习笔记/">Spring学习笔记</a></li></ul>
 
     </footer>
 
