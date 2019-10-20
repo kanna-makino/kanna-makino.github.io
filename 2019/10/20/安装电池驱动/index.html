@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="一爱代码，爱生活。">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    安装电池驱动 |
+    
+    Kanna-Makino</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-安装电池驱动" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      安装电池驱动
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/10/20/安装电池驱动/" class="article-date">
+  <time datetime="2019-10-20T14:07:15.000Z" itemprop="datePublished">10-20-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/N-A/">N/A</a>
+  </div>
+
+      </div>
+    
+
+    
+      
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+        <p>通过修改 dtst 文件来驱动电池。</p>
+<p>目标替换掉值大于 16 的变量，并且消除编译错误。</p>
+<p>在dtst 文件中搜索“EmbeddedControl”，</p>
+<a id="more"></a>
+
+<p>找到变量定义的地方：</p>
+<p><img src="https://image.youyou-2608.com//blog/20191020/image.png" alt="img"></p>
+<p>先定义一个替换的正则方法，方便后面的替换，名为 B1B2：</p>
+<p>into method label B1B2 remove_entry;</p>
+<p>into definitionblock code_regex . insert</p>
+<p>begin</p>
+<p>Method (B1B2, 2, NotSerialized)\n</p>
+<p>{\n</p>
+<p>Return(Or(Arg0, ShiftLeft(Arg1, 8)))\n</p>
+<p>}\n</p>
+<p>end;</p>
+<p>例子：</p>
+<p><img src="https://image.youyou-2608.com//blog/20191020/image1.png" alt="img"></p>
+<p>用下面的正则替换将该变量替换成等值但是小于 8 的值：</p>
+<p>into device label EC0 code_regex BRC,\s+16, replace_matched begin BRC1,8,BRC2,8, end;</p>
+<p>点击 patch，然后将代码粘贴进去：</p>
+<p><img src="https://image.youyou-2608.com//blog/20191020/image2.png" alt="img"></p>
+<p>然后点击 Apply，</p>
+<p><img src="https://image.youyou-2608.com//blog/20191020/image3.png" alt="img"></p>
+<p>变量已经被替换掉了</p>
+<p>然后确认一下这个变量被替换掉之后有没有编译错误，点击“Compile”按钮编译文件：</p>
+<p><img src="https://image.youyou-2608.com//blog/20191020/image5.png" alt="img"></p>
+<p>出现了三个编译错误，接下来就是消除这些编译错误</p>
+<p>点击编译错误，定位到错误出现的地方：</p>
+<p><img src="https://image.youyou-2608.com//blog/20191020/image6.png" alt="img"></p>
+<p>原来的变量已经被替换掉了，所以引用原来变量名的地方都出错了。</p>
+<p>用下面的代码将方法里的变量替换掉（label 后面的变量名就是Mehtod的一个参数）：</p>
+<p>into method label XBTS code_regex (BRC, replaceall_matched begin (B1B2(BRC1,BRC2), end;</p>
+<p>将代码粘贴到 Patch 里，</p>
+<p><img src="https://image.youyou-2608.com//blog/20191020/image7.png" alt="img"></p>
+<p>然后点击 Apply。</p>
+<p>然后再点击 “Compile”按钮编译一下，刚才那个错误已经消失了。</p>
+<p><img src="https://image.youyou-2608.com/blog/20191020/image9.png" alt></p>
+<p>循环上面的除错处理，替换完全部的变量，并且消除所有的错误。</p>
+<p><img src="https://image.youyou-2608.com/blog/20191020/image10.png" alt="img"></p>
+<p>替换完之后将.aml 文件保存到/patched 目录下，重启即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2019/10/20/安装电池驱动/" data-id="ck1z0g8ci002fqt4nqz59mes3"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/驱动安装/">驱动安装</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2019/10/14/OpenCV——cv2-inRange-函数/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">OpenCV——cv2.inRange()函数</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>&copy; 2018-2019 Kanna-Makino</li>
+      <div class="float-right">
+      	全站共&nbsp;<span class="post-count">57.3k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/11/2018 00:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "已运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+	setInterval("createtime()",250);
+</script>
+
+	  </div>
+    </ul>
+  </div>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="https://image.youyou-2608.com/Kanna.svg" alt="Kanna-Makino"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
