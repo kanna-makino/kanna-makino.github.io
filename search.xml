@@ -5,7 +5,7 @@
     <url>%2F2019%2F10%2F20%2F%E5%AE%89%E8%A3%85%E7%94%B5%E6%B1%A0%E9%A9%B1%E5%8A%A8%2F</url>
     <content type="text"><![CDATA[通过修改 dtst 文件来驱动电池。 目标替换掉值大于 16 的变量，并且消除编译错误。 在dtst 文件中搜索“EmbeddedControl”， 找到变量定义的地方： 先定义一个替换的正则方法，方便后面的替换，名为 B1B2： into method label B1B2 remove_entry; into definitionblock code_regex . insert begin Method (B1B2, 2, NotSerialized)\n {\n Return(Or(Arg0, ShiftLeft(Arg1, 8)))\n }\n end; 例子： 用下面的正则替换将该变量替换成等值但是小于 8 的值： into device label EC0 code_regex BRC,\s+16, replace_matched begin BRC1,8,BRC2,8, end; 点击 patch，然后将代码粘贴进去： 然后点击 Apply， 变量已经被替换掉了 然后确认一下这个变量被替换掉之后有没有编译错误，点击“Compile”按钮编译文件： 出现了三个编译错误，接下来就是消除这些编译错误 点击编译错误，定位到错误出现的地方： 原来的变量已经被替换掉了，所以引用原来变量名的地方都出错了。 用下面的代码将方法里的变量替换掉（label 后面的变量名就是Mehtod的一个参数）： into method label XBTS code_regex (BRC, replaceall_matched begin (B1B2(BRC1,BRC2), end; 将代码粘贴到 Patch 里， 然后点击 Apply。 然后再点击 “Compile”按钮编译一下，刚才那个错误已经消失了。 循环上面的除错处理，替换完全部的变量，并且消除所有的错误。 替换完之后将.aml 文件保存到/patched 目录下，重启即可。]]></content>
       <categories>
-        <category>N/A</category>
+        <category>驱动</category>
       </categories>
       <tags>
         <tag>驱动安装</tag>
