@@ -1,3 +1,4 @@
+https://www.youyou-2608.com/2019/11/02/好久不见/
 https://www.youyou-2608.com/2019/10/27/硝酸甘油炸药的制作/
 https://www.youyou-2608.com/2019/10/27/结婚没有意义/
 https://www.youyou-2608.com/2019/10/20/周末小记/
@@ -6,11 +7,11 @@ https://www.youyou-2608.com/2019/10/14/OpenCV——cv2-inRange-函数/
 https://www.youyou-2608.com/2019/10/12/OpenCV-学习笔记（一）/
 https://www.youyou-2608.com/2019/10/11/给博客换了新主题/
 https://www.youyou-2608.com/2019/09/07/小记/
-https://www.youyou-2608.com/2019/08/08/失恋后的七夕/
+https://www.youyou-2608.com/2019/08/07/失恋后的七夕/
 https://www.youyou-2608.com/2019/08/06/电影-《月球》/
-https://www.youyou-2608.com/2019/08/06/基于-mjpg-streamer-的树莓派视频监控/
+https://www.youyou-2608.com/2019/08/05/基于-mjpg-streamer-的树莓派视频监控/
 https://www.youyou-2608.com/2019/06/13/工作一年的Java程序员应该会什么？/
-https://www.youyou-2608.com/2019/06/12/给树莓派安装Ubuntu-MATE系统/
+https://www.youyou-2608.com/2019/06/11/给树莓派安装Ubuntu-MATE系统/
 https://www.youyou-2608.com/2019/06/09/再记Hexo博客恢复/
 https://www.youyou-2608.com/2019/06/09/酸酸乳搭建小记/
 https://www.youyou-2608.com/2019/05/27/05-26周记/
@@ -18,13 +19,12 @@ https://www.youyou-2608.com/2019/05/19/我在JavaScript中踩过的坑/
 https://www.youyou-2608.com/2019/05/15/Java注解简单例子/
 https://www.youyou-2608.com/2019/05/12/从两次毕设题目和要求说说我的感受/
 https://www.youyou-2608.com/2019/05/12/ajax返回error可能原因分析/
-https://www.youyou-2608.com/2019/04/30/Spring-Boot中使用Swagger2构建强大的RESTful-API文档/
+https://www.youyou-2608.com/2019/04/29/Spring-Boot中使用Swagger2构建强大的RESTful-API文档/
 https://www.youyou-2608.com/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/
 https://www.youyou-2608.com/2019/04/09/IDEA-Terminal闪退/
 https://www.youyou-2608.com/2019/04/06/Git配置代理/
 https://www.youyou-2608.com/2019/04/06/清明/
 https://www.youyou-2608.com/2019/03/23/3月22日日记/
 https://www.youyou-2608.com/2019/03/03/在新机器中恢复Hexo博客/
-https://www.youyou-2608.com/2019/02/02/Java编程思想——第十四章——类型信息/
-https://www.youyou-2608.com/2019/02/02/写在新年来临之际/
-https://www.youyou-2608.com/2019/01/24/更改DNS为8-8-8-8访问cn-bing-com/
+https://www.youyou-2608.com/2019/02/01/Java编程思想——第十四章——类型信息/
+https://www.youyou-2608.com/2019/02/01/写在新年来临之际/

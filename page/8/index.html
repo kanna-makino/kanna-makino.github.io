@@ -61,6 +61,86 @@
       
         
 
+<article id="post-LeetCode子二叉树非递归前序遍历" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2018/11/17/LeetCode子二叉树非递归前序遍历/">LeetCode之二叉树非递归前序遍历</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/11/17/LeetCode子二叉树非递归前序遍历/" class="article-date">
+  <time datetime="2018-11-17T07:34:23.000Z" itemprop="datePublished">11-17-2018</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p>Given a binary tree, return the <em>preorder</em> traversal of its nodes’ values.</p>
+<p>For example:<br>Given binary tree{1,#,2,3},</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line"> \</span><br><span class="line">  2</span><br><span class="line"> /</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+
+<p>return[1,2,3].</p>
+<p><strong>Note:</strong> Recursive solution is trivial, could you do it iteratively?</p>
+<p><strong>使用非递归的方法前序遍历二叉树。</strong></p>
+<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>前序遍历就是按照中、左、右的顺序对二叉树进行遍历。</p>
+<p>思路很简单，如果当前节点不为空，不断遍历当前节点的左子树，如果当前节点有右子树的话，将其放入栈中以便后期遍历其右子树，如果当前节点为空，则取出栈顶元素按照同样的方式遍历其右子树。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.postorder.raversal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午3:16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PreOrderSolution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        TreeNode pointer = root;</span><br><span class="line">        <span class="keyword">while</span> (pointer != <span class="keyword">null</span> || !stack.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">while</span> (pointer != <span class="keyword">null</span>) &#123;</span><br><span class="line">                list.add(pointer.val);</span><br><span class="line">                <span class="keyword">if</span> (pointer.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    stack.push(pointer);</span><br><span class="line">                &#125;</span><br><span class="line">                pointer = pointer.left;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (stack.isEmpty()) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            pointer = stack.pop();</span><br><span class="line">            pointer = pointer.right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>牛客网做得还不错，就是现在还是只支持C++和Java。</p>
+<p><img src="https://image.youyou-2608.com/blog/leetcode.png" alt="代码通过测试"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode子二叉树非递归前序遍历/" data-id="ck2hdoo5d0011nr4nu3jnbrjq"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/二叉树/">二叉树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-LeetCode之二叉树非递归后续遍历" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -100,7 +180,9 @@
 
 
       
+	    
 
+	  
       
         <p>周末突然降温，哪儿也去不了，不如在家刷题。</p>
 <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Given a binary tree, return the <em>postorder</em> traversal of its nodes’ values.</p>
@@ -119,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode之二叉树非递归后续遍历/" data-id="ck28u6co7000mj04nd6yal4jk"
+      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode之二叉树非递归后续遍历/" data-id="ck2hdoo59000pnr4nlktykgy8"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/二叉树/">二叉树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构/">数据结构</a></li></ul>
@@ -147,7 +229,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2018/11/17/LeetCode之链表插入排序/">LeetCode之链表插入排序</a>
+      <a class="article-title" href="/2018/11/16/LeetCode之链表插入排序/">LeetCode之链表插入排序</a>
     </h2>
   
   
@@ -160,7 +242,7 @@
 
     
       <div class="article-meta">
-        <a href="/2018/11/17/LeetCode之链表插入排序/" class="article-date">
+        <a href="/2018/11/16/LeetCode之链表插入排序/" class="article-date">
   <time datetime="2018-11-16T15:03:55.000Z" itemprop="datePublished">11-16-2018</time>
 </a>
         
@@ -178,7 +260,9 @@
 
 
       
+	    
 
+	  
       
         <p><a href="https://www.nowcoder.com/practice/152bc6c5b14149e49bf5d8c46f53152b?tpId=46&tqId=29034&tPage=1&rp=1&ru=/ta/leetcode&qru=/ta/leetcode/question-ranking" target="_blank" rel="noopener">链表插入排序</a> 是 <a href="https://www.nowcoder.com" target="_blank" rel="noopener">牛客网</a> 上LeetCode在线编程的一道题。</p>
 <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Sort a linked list using insertion sort.</p>
@@ -196,7 +280,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode之链表插入排序/" data-id="ck28u6co9000sj04nvz6f0zbc"
+      <a data-url="https://www.youyou-2608.com/2018/11/16/LeetCode之链表插入排序/" data-id="ck2hdoo5c000xnr4nbltqajwp"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -255,7 +339,9 @@
 
 
       
+	    
 
+	  
       
         <p>第一部分：Spring的核心</p>
 <ul>
@@ -359,7 +445,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/14/Spring学习笔记-第一章-Spring之旅/" data-id="ck28u6cod0012j04nxaqj8kyy"
+      <a data-url="https://www.youyou-2608.com/2018/11/14/Spring学习笔记-第一章-Spring之旅/" data-id="ck2hdoo5g0015nr4nz56js4yt"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring学习笔记/">Spring学习笔记</a></li></ul>
@@ -418,7 +504,9 @@
 
 
       
+	    
 
+	  
       
         <h3 id="1-水仙花数"><a href="#1-水仙花数" class="headerlink" title="1. 水仙花数"></a>1. 水仙花数</h3><p>以下是摘自 <a href="https://zh.wikipedia.org/zh-hans/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0" target="_blank" rel="noopener">维基百科</a> 中的释义：</p>
 <blockquote>
@@ -432,7 +520,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/11/LeetCode之水仙花数/" data-id="ck28u6co8000oj04nw403g21y"
+      <a data-url="https://www.youyou-2608.com/2018/11/11/LeetCode之水仙花数/" data-id="ck2hdoo59000rnr4n7fp1wbjl"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -467,7 +555,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2019 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">60.2k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">61.1k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 
