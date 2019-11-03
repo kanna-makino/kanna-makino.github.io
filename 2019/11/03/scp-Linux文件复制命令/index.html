@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    OpenCV——cv2.inRange()函数 |
+    scp-Linux文件复制命令 |
     
     Kanna-Makino</title>
   
@@ -27,7 +27,7 @@
   <section class="outer">
   
 
-<article id="post-OpenCV——cv2-inRange-函数" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-scp-Linux文件复制命令" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -35,7 +35,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      OpenCV——cv2.inRange()函数
+      scp-Linux文件复制命令
     </h1>
   
   
@@ -48,19 +48,17 @@
 
     
       <div class="article-meta">
-        <a href="/2019/10/14/OpenCV——cv2-inRange-函数/" class="article-date">
-  <time datetime="2019-10-14T04:07:25.000Z" itemprop="datePublished">10-14-2019</time>
+        <a href="/2019/11/03/scp-Linux文件复制命令/" class="article-date">
+  <time datetime="2019-11-03T06:10:25.000Z" itemprop="datePublished">11-03-2019</time>
 </a>
         
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
-  </div>
-
       </div>
     
 
     
       
+    <div class="tocbot"></div>
+
 
 
 
@@ -73,29 +71,37 @@
 
       
       
-        <p>在图像中提取目标物时可以用该函数去除背景。</p>
-<p>有三个参数：</p>
-<ul>
-<li>hsv_img：颜色空间为 HSV 的图像；</li>
-<li>lower：下阈值，图像中低于此值的颜色值变为 0；</li>
-<li>uppper：上阈值，图像中高于此值的颜色值变为 0。</li>
-</ul>
+        <p>scp — Linux文件复制命令</p>
+<blockquote>
+<p>用于在Linux下进行远程拷贝文件的命令，和它类似的命令有cp，不过cp只是在本机进行拷贝不能跨服务器，而且scp传输是加密的。当你服务器硬盘变为只读 read only system时，用scp可以帮你把文件移出来。</p>
+</blockquote>
 <a id="more"></a>
 
 
 
-<p>颜色值在此范围内的全部设置为255，然后利用得到背景和原图片进行位操作，即可得到原图中目标。</p>
-<p>常用方式：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">img = cv2.imread(img_path, <span class="number">0</span>)</span><br><span class="line">img_hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)</span><br><span class="line">lower = [<span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>]</span><br><span class="line">uppper = [<span class="number">200</span>, <span class="number">255</span>, <span class="number">255</span>]</span><br><span class="line"><span class="comment"># 利用上下阈值去除背景部分</span></span><br><span class="line">mask = cv2.inRange(img_hsv, lower, upper)</span><br><span class="line"><span class="comment"># 利用位运算得到目标物体</span></span><br><span class="line">target = cv2.bitwise_and(img, img, mask=mask)</span><br><span class="line">cv2.imshow(<span class="string">"mask"</span>, mask)</span><br><span class="line">cv2.imshow(<span class="string">"target"</span>, target)</span><br></pre></td></tr></table></figure>
+<h2 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h2><ul>
+<li>-P: 端口号</li>
+<li>-r: 递归复制   </li>
+</ul>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 上传文件</span><br><span class="line">scp -r -P xxxx /home/local_user/file_path remote_user@remote_host_addr:/home/remote_user/file_path</span><br><span class="line"></span><br><span class="line"># 下载文件时将 source 和 target 调换一下</span><br><span class="line">scp -r -P xxxx remote_user@remote_host_addr:/home/remote_user/file_path /home/local_user/file_path</span><br></pre></td></tr></table></figure>
 
-<p>上下阈值的获取：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">color = np.array([[[xxx, xxx, xxx]]])</span><br><span class="line">hsv_color = cv2.cvtColor(color, cv2.COLOR_RGB2HSV)</span><br><span class="line">print(hsv_color)</span><br></pre></td></tr></table></figure>
+<h2 id="Permission-denied-问题"><a href="#Permission-denied-问题" class="headerlink" title="Permission denied 问题"></a>Permission denied 问题</h2><p>今天下午上传文件到服务器的时候一直报这个错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scp -P xxxx file.torrent test@test:/home</span><br><span class="line"></span><br><span class="line"># 输出</span><br><span class="line">test@test.com&apos;s password: </span><br><span class="line">scp: /home/25316538e6498c7645e3da963253977d.torrent: Permission deniedv</span><br></pre></td></tr></table></figure>
 
+<p>保证密码输入正确并且重试了好几次都报同样的错，才想起来以前遇到这个问题，是因为当前用户对目标目录没有操作权限导致的，只要把目标路径改到当前用户目录下就好了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -P xxxx file.torrent test@test:/home/test/Downloads</span><br></pre></td></tr></table></figure>
+
+<p>》》 <a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/scp.html" target="_blank" rel="noopener">18. scp 跨机远程拷贝</a></p>
+<p>》》<a href="https://curazy.com/archives/241713" target="_blank" rel="noopener">Twitterで大盛り上がりの「制作・著作 NHK」で締める大喜利に爆笑 11選</a></p>
+<p>終</p>
+<p>制作・著作</p>
+<p>━━━━━</p>
+<p>ⓃⒽⓀ</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/10/14/OpenCV——cv2-inRange-函数/" data-id="ck2ilrxnv0015e94ngpplsxhf"
+      <a data-url="https://www.youyou-2608.com/2019/11/03/scp-Linux文件复制命令/" data-id="ck2ilrxny001be94ngm1bd4gi"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -108,19 +114,10 @@
     
   <nav class="article-nav">
     
-      <a href="/2019/10/20/安装电池驱动/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            安装电池驱动
-          
-        </div>
-      </a>
     
-    
-      <a href="/2019/10/12/OpenCV-学习笔记（一）/" class="article-nav-link">
+      <a href="/2019/11/02/好久不见/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">OpenCV 学习笔记（一）</div>
+        <div class="article-nav-title">好久不见</div>
       </a>
     
   </nav>
