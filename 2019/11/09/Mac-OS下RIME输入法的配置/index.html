@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="一爱代码，爱生活。">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Mac OS下RIME输入法的配置 |
+    
+    Kanna-Makino</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-Mac-OS下RIME输入法的配置" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Mac OS下RIME输入法的配置
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/11/09/Mac-OS下RIME输入法的配置/" class="article-date">
+  <time datetime="2019-11-09T15:16:40.000Z" itemprop="datePublished">11-09-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/工具软件/">工具软件</a>
+  </div>
+
+      </div>
+    
+
+    
+      
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+      
+        <p>Mac OS下RIME输入法配置</p>
+<p>之前一直用的搜狗输入法，不得不说，搜狗输入法确实做得很不错，精准快速。但是毕竟是国产软件，联网之后隐私方面存在安全隐患，还没发布到网络的文本已经有人提前知道了💦。本想直接设置成单机版以避免输入法上传输入记录，但是貌似防火墙和改hosts文件对搜狗都不管用。于是在网上查了一下，知道了 <strong>RIME输入法</strong> 。</p>
+<a id="more"></a>
+
+<p>看到配置比较复杂，我也是犹豫了半天才下定决心搞一下的。还差 emoji表情的输入 没搞定，只弄好了基础的中文输入以及词库的扩展，以后真正有需要了再配置吧。</p>
+<p>比较好的参考资料：</p>
+<ul>
+<li><p><a href="https://github.com/rime/squirrel" target="_blank" rel="noopener">GitHub主页</a></p>
+</li>
+<li><p><a href="http://ju.outofmemory.cn/entry/178796" target="_blank" rel="noopener">给 Rime 添加第三方词库</a></p>
+</li>
+<li><p><a href="https://lonelygo.github.io/2015-01-28-Rime_Input/" target="_blank" rel="noopener">Rime输入法—Squirrel词库添加及配置</a> （虽然有点旧了，但是很详细，推荐）</p>
+</li>
+</ul>
+<p>安装完体验了两个小时，输入体验很不错，没遇到什么问题，以后应该会一直用下去。</p>
+<p>各种软件还是去国产化吧，对待国产软件，有替代则替代，能不用则不用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2019/11/09/Mac-OS下RIME输入法的配置/" data-id="ck2rprvow000ysm4nih3sxvl5"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具软件/">工具软件</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2019/11/03/scp-Linux文件复制命令/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">scp-Linux文件复制命令</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>&copy; 2018-2019 Kanna-Makino</li>
+      <div class="float-right">
+      	全站共&nbsp;<span class="post-count">61.8k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/11/2018 00:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "已运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+	setInterval("createtime()",250);
+</script>
+
+	  </div>
+    </ul>
+  </div>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="https://image.youyou-2608.com/Kanna.svg" alt="Kanna-Makino"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

@@ -1,3 +1,4 @@
+https://www.youyou-2608.com/2019/11/09/Mac-OS下RIME输入法的配置/
 https://www.youyou-2608.com/2019/11/03/scp-Linux文件复制命令/
 https://www.youyou-2608.com/2019/11/02/好久不见/
 https://www.youyou-2608.com/2019/10/27/硝酸甘油炸药的制作/
@@ -27,4 +28,3 @@ https://www.youyou-2608.com/2019/04/06/Git配置代理/
 https://www.youyou-2608.com/2019/04/06/清明/
 https://www.youyou-2608.com/2019/03/23/3月22日日记/
 https://www.youyou-2608.com/2019/03/03/在新机器中恢复Hexo博客/
-https://www.youyou-2608.com/2019/02/01/Java编程思想——第十四章——类型信息/
