@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    Hexo博客同时部署到github和coding并设置双线解析 |
+    博客一周年啦！ |
     
     Kanna-Makino</title>
   
@@ -27,7 +27,7 @@
   <section class="outer">
   
 
-<article id="post-Hexo博客同时部署到github和coding并设置双线解析" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-博客一周年啦！" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -35,7 +35,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hexo博客同时部署到github和coding并设置双线解析
+      博客一周年啦！
     </h1>
   
   
@@ -48,12 +48,12 @@
 
     
       <div class="article-meta">
-        <a href="/2018/11/19/Hexo博客同时部署到github和coding并设置双线解析/" class="article-date">
-  <time datetime="2018-11-19T12:52:51.000Z" itemprop="datePublished">11-19-2018</time>
+        <a href="/2019/11/10/博客一周年啦！/" class="article-date">
+  <time datetime="2019-11-10T15:51:09.000Z" itemprop="datePublished">11-10-2019</time>
 </a>
         
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Exp/">Exp</a>
+    <a class="article-category-link" href="/categories/日记周记/">日记周记</a>
   </div>
 
       </div>
@@ -61,8 +61,6 @@
 
     
       
-    <div class="tocbot"></div>
-
 
 
 
@@ -75,37 +73,75 @@
 
       
       
-        <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>因为github服务器禁止了百度爬虫，所以不能百度收录不了站点，导致访问量很低，本来不想折腾的，想了一下还是将博客也部署到了coding上，方便百度的收录。</p>
-<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><ol>
-<li><p>在coding上创建一个名为 <strong>用户名</strong> (不是昵称)的项目，并开启pages服务；</p>
-</li>
-<li><p>将本地ssh公钥文件添加到coding的SSH公钥中并测试是否能访问：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T -p 443 git@git-ssh.coding.net</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在站点配置文件中添加上coding仓库地址：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repository:</span></span><br><span class="line"><span class="attr">    github:</span> <span class="string">git@github.com:Kotobuki-Tsumugi/Kotobuki-Tsumugi.github.io.git</span></span><br><span class="line"><span class="attr">    coding:</span> <span class="string">git@git.dev.tencent.com:Kobobuki-Tsumugi/Kobobuki-Tsumugi.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在站点目录/source下创建一个名为Staticfile的空文件；</p>
-</li>
-<li><p>生成并上传静态文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在域名解析中新增两条CNAME记录，指向username.coding.me，注意区分境外线路和默认线路，指向coding的必须为默认线路，如果不能正常访问，可以先暂停github的解析，待coding的解析成功后再开启github的解析，解析反应不及时。</p>
-</li>
-<li><p>向百度提交站点sitemap文件地址。</p>
-</li>
-</ol>
-<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>其中也遇到一些玄学的问题：</p>
-<p><img src="https://image.youyou-2608.com/blog/codings_pages.png" alt="coding提示域名绑定异常"></p>
-<p>比如上图，我如果绑定youyou-2608.com 则一直提示“域名未联通”，即便我已经添加了指向username.coding.me的CNAME记录，添加<a href="http://www.youyou-2608.com">www.youyou-2608.com</a> 能绑定上，但是绑定状态一直是异常，访问username.coding.me也能正常跳转到<a href="https://youyou-2608.com" target="_blank" rel="noopener">https://youyou-2608.com</a> ，没太搞明白，既然已经能正常访问，也就作罢了。</p>
+        <p>已经是进入冬天的第四天了，</p>
+<p>这个周末的天气还是很暖和。</p>
+<a id="more"></a>
+
+
+
+<p>2018年11月11日——2019年11月11日，</p>
+<p>博客已经运行一周年了。</p>
+<p>其实严格来说，</p>
+<p>最开始的时间应该是2018年7月13日，</p>
+<p>那时候还是基于WordPress搭建的，</p>
+<p>后来熟悉了Hexo之后才改成Hexo的。</p>
+<p>周年刚好是双十一，</p>
+<p>晚上正在折腾树莓派和OpenCV，</p>
+<p>看到有人给我发双十一的分享链接才反映过来。</p>
+<p>前天和昨天有个刚入职几个月不太熟悉的女同事连续给我发了两个淘宝的分享链接，</p>
+<p>被我直接拒绝了，</p>
+<p>虽然显得很不近人情，</p>
+<p>但是我现在开始明白和别人表明自己的态度也很重要。</p>
+<p>真快呢，一年又要过去了。</p>
+<p>个人对双十一是没有什么感觉的，</p>
+<p>也不会因为便宜几块钱就争先恐后挤在双十一网购，</p>
+<p>非常不喜欢你争我抢的感觉。</p>
+<p>这让我想起了这两天在机场和火车站的经历，</p>
+<p>大爷大妈总是喜欢插队，</p>
+<p>要么就是想和我并排，</p>
+<p>恨不得跑到我前面去，</p>
+<p>差两秒钟就如丧考妣，</p>
+<p>恶心至极。</p>
+<p>出差回来，</p>
+<p>倒是非常怀念日本那种何时何地都自觉排队的氛围，</p>
+<p>谦让是对别人的尊重，</p>
+<p>更是对自己的尊重。</p>
+<p>一直没有在意的缘故，</p>
+<p>51La的访客统计貌似失效了，</p>
+<p>所有的统计项目都是0，</p>
+<p>所以也无从得知这个域名有多少人来过。</p>
+<p>虽然很久没有回黔南去看望优优了，</p>
+<p>也无从得知她的近况以及告诉她我的近况，</p>
+<p>不知道还是不是一如既往的愿意抱着我呢？</p>
+<p>就在前两天，我还是给这个域名续了5年的费，</p>
+<p>5年前的2014年发生的事情，</p>
+<p>我已经遗忘得差不多了，</p>
+<p>2024年，她都已经变成大人了吧，</p>
+<p>我们也差不多都把对方忘记了吧。</p>
+<p>出差回来一个星期的假到这里就结束了，</p>
+<p>明天开始进入一个叫PCKK的项目，</p>
+<p>老样子，还是学不到任何东西或者是学到的都是没用的东西，</p>
+<p>不多想，抓紧时间做简历找工作吧，</p>
+<p>争取在年前离开这里。</p>
+<p>今天开始自己做饭了，</p>
+<p>其实没有想象中的麻烦，</p>
+<p>反而还觉得很有意思，</p>
+<p>想一直坚持下去。</p>
+<p>今天收到了初中一个好朋友寄来的苹果，</p>
+<p>出差的时候因为水果很贵，</p>
+<p>基本没吃到什么水果。</p>
+<p>18个苹果差不多有一箱了，</p>
+<p>心里很不踏实，总有种受之有愧的感觉。</p>
+<p>不过很开心，因为很少送别人东西，所以也很少收到其他人的东西，</p>
+<p>偶尔一次，还觉得有个好朋友真的挺好。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/19/Hexo博客同时部署到github和coding并设置双线解析/" data-id="ck2t6lxpo0006c64ndm5qgl23"
+      <a data-url="https://www.youyou-2608.com/2019/11/10/博客一周年啦！/" data-id="ck2t6lxqi0022c64n1es08psm"
          class="article-share-link">分享</a>
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo博客维护/">Hexo博客维护</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日记周记/">日记周记</a></li></ul>
 
     </footer>
 
@@ -115,19 +151,10 @@
     
   <nav class="article-nav">
     
-      <a href="/2018/11/22/利用Python爬取B站数据/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            利用Python爬取B站数据
-          
-        </div>
-      </a>
     
-    
-      <a href="/2018/11/18/Hexo博客备份/" class="article-nav-link">
+      <a href="/2019/11/10/树莓派安装OpenCV-Python/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Hexo博客备份</div>
+        <div class="article-nav-title">树莓派安装OpenCV-Python</div>
       </a>
     
   </nav>

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[博客一周年啦！]]></title>
+    <url>%2F2019%2F11%2F10%2F%E5%8D%9A%E5%AE%A2%E4%B8%80%E5%91%A8%E5%B9%B4%E5%95%A6%EF%BC%81%2F</url>
+    <content type="text"><![CDATA[已经是进入冬天的第四天了， 这个周末的天气还是很暖和。 2018年11月11日——2019年11月11日， 博客已经运行一周年了。 其实严格来说， 最开始的时间应该是2018年7月13日， 那时候还是基于WordPress搭建的， 后来熟悉了Hexo之后才改成Hexo的。 周年刚好是双十一， 晚上正在折腾树莓派和OpenCV， 看到有人给我发双十一的分享链接才反映过来。 前天和昨天有个刚入职几个月不太熟悉的女同事连续给我发了两个淘宝的分享链接， 被我直接拒绝了， 虽然显得很不近人情， 但是我现在开始明白和别人表明自己的态度也很重要。 真快呢，一年又要过去了。 个人对双十一是没有什么感觉的， 也不会因为便宜几块钱就争先恐后挤在双十一网购， 非常不喜欢你争我抢的感觉。 这让我想起了这两天在机场和火车站的经历， 大爷大妈总是喜欢插队， 要么就是想和我并排， 恨不得跑到我前面去， 差两秒钟就如丧考妣， 恶心至极。 出差回来， 倒是非常怀念日本那种何时何地都自觉排队的氛围， 谦让是对别人的尊重， 更是对自己的尊重。 一直没有在意的缘故， 51La的访客统计貌似失效了， 所有的统计项目都是0， 所以也无从得知这个域名有多少人来过。 虽然很久没有回黔南去看望优优了， 也无从得知她的近况以及告诉她我的近况， 不知道还是不是一如既往的愿意抱着我呢？ 就在前两天，我还是给这个域名续了5年的费， 5年前的2014年发生的事情， 我已经遗忘得差不多了， 2024年，她都已经变成大人了吧， 我们也差不多都把对方忘记了吧。 出差回来一个星期的假到这里就结束了， 明天开始进入一个叫PCKK的项目， 老样子，还是学不到任何东西或者是学到的都是没用的东西， 不多想，抓紧时间做简历找工作吧， 争取在年前离开这里。 今天开始自己做饭了， 其实没有想象中的麻烦， 反而还觉得很有意思， 想一直坚持下去。 今天收到了初中一个好朋友寄来的苹果， 出差的时候因为水果很贵， 基本没吃到什么水果。 18个苹果差不多有一箱了， 心里很不踏实，总有种受之有愧的感觉。 不过很开心，因为很少送别人东西，所以也很少收到其他人的东西， 偶尔一次，还觉得有个好朋友真的挺好。]]></content>
+      <categories>
+        <category>日记周记</category>
+      </categories>
+      <tags>
+        <tag>日记周记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[树莓派安装OpenCV-Python]]></title>
     <url>%2F2019%2F11%2F10%2F%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85OpenCV-Python%2F</url>
     <content type="text"><![CDATA[之前在MacOS上安装OpenCV还比较顺利，直接在PyCharm里用pip安装就成功了。但是在树莓派上安装OpenCV一直依赖关系的错。最终在重新安装完Raspberry OS之后，用清华的源安装成功了。 更换清华源官方资料：Raspbian 镜像使用帮助 设置： 123456# 编辑 `/etc/apt/sources.list` 文件，删除原文件所有内容，用以下内容取代：deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contribdeb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib# 编辑 `/etc/apt/sources.list.d/raspi.list` 文件，删除原文件所有内容，用以下内容取代：deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui 安装OpenCV-Python执行命令： 12345# 安装必要软件sudo apt-get install -y libjasper-dev libqtgui4 libqt4-test# 安装OpenCVsudo apt install python-opencv 3b+更换为国内源的话大概一两分钟，就安装完成了。 测试利用OpenCV打开摄像头，并读取视频数据显示出来： 123456789101112131415161718192021# !/usr/bin/env python# _*_ coding:utf-8 _*_import cv2import numpy as npcap = cv2.VideoCapture(0)if not cap.isOpened(): print("camera is still closed.")while cap.isOpened(): ret, frame = cap.read() if ret == True: cv2.imshow('Frame', frame) if cv2.waitKey(25) &amp; 0xFF == ord('q'): break else: breakcap.release()cv2.destroyAllWindows() 如果是利用终端命令通过ssh远程执行的话，会出错：cannot open display，因为ssh无法打开窗口，在树莓派终端执行不会报错。]]></content>
