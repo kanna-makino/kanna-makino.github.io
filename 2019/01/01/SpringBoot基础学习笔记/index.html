@@ -1039,11 +1039,11 @@
 <p><strong>各个独立的容器互不干扰，独立运行。</strong></p>
 <hr>
 <h3 id="6-4-环境搭建"><a href="#6-4-环境搭建" class="headerlink" title="6.4 环境搭建"></a>6.4 环境搭建</h3><h4 id="6-4-1-安装MySQL："><a href="#6-4-1-安装MySQL：" class="headerlink" title="6.4.1 安装MySQL："></a>6.4.1 安装MySQL：</h4><p>启动一个MySQL实例(需要指定密码和<strong>端口映射</strong>)：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker run -p port --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker run -p port --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag</span></span><br></pre></td></tr></table></figure>
 
 <p>官方文档：<a href="https://hub.docker.com/_/mysql/" target="_blank" rel="noopener">MySQL文档</a></p>
 <p>几个高级操作：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用配置文件：</span><br><span class="line"><span class="meta">$</span> docker run --name some-mysql -v /my/custom:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag</span><br><span class="line"></span><br><span class="line">不适用配置文件：</span><br><span class="line"><span class="meta">$</span> docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用配置文件：</span><br><span class="line"><span class="meta">$</span><span class="bash"> docker run --name some-mysql -v /my/custom:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag</span></span><br><span class="line"></span><br><span class="line">不适用配置文件：</span><br><span class="line"><span class="meta">$</span><span class="bash"> docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="6-4-2-安装Redis"><a href="#6-4-2-安装Redis" class="headerlink" title="6.4.2 安装Redis"></a>6.4.2 安装Redis</h4><h4 id="6-4-3-安装RabbitMQ"><a href="#6-4-3-安装RabbitMQ" class="headerlink" title="6.4.3 安装RabbitMQ"></a>6.4.3 安装RabbitMQ</h4><h4 id="6-4-4-安装ElasticSearch"><a href="#6-4-4-安装ElasticSearch" class="headerlink" title="6.4.4 安装ElasticSearch"></a>6.4.4 安装ElasticSearch</h4><hr>
 <h2 id="第七章-SpringBoot与数据库访问"><a href="#第七章-SpringBoot与数据库访问" class="headerlink" title="第七章 SpringBoot与数据库访问"></a>第七章 SpringBoot与数据库访问</h2><p>SpringBoot与数据访问相关的场景启动器：</p>
@@ -1083,7 +1083,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/01/01/SpringBoot基础学习笔记/" data-id="ck2rs4egz007c324nekbza4e0"
+      <a data-url="https://www.youyou-2608.com/2019/01/01/SpringBoot基础学习笔记/" data-id="ck2sphczx007ics4nwbip1mim"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -1130,7 +1130,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2019 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">62.1k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">62.5k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 

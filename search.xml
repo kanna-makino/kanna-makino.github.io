@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[树莓派安装OpenCV-Python]]></title>
+    <url>%2F2019%2F11%2F10%2F%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85OpenCV-Python%2F</url>
+    <content type="text"><![CDATA[之前在MacOS上安装OpenCV还比较顺利，直接在PyCharm里用pip安装就成功了。但是在树莓派上安装OpenCV一直依赖关系的错。最终在重新安装完Raspberry OS之后，用清华的源安装成功了。 更换清华源官方资料：Raspbian 镜像使用帮助 设置： 123456# 编辑 `/etc/apt/sources.list` 文件，删除原文件所有内容，用以下内容取代：deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contribdeb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib# 编辑 `/etc/apt/sources.list.d/raspi.list` 文件，删除原文件所有内容，用以下内容取代：deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui 安装OpenCV-Python执行命令： 12345# 安装必要软件sudo apt-get install -y libjasper-dev libqtgui4 libqt4-test# 安装OpenCVsudo apt install python-opencv 3b+更换为国内源的话大概一两分钟，就安装完成了。 测试利用OpenCV打开摄像头，并读取视频数据显示出来： 123456789101112131415161718192021# !/usr/bin/env python# _*_ coding:utf-8 _*_import cv2import numpy as npcap = cv2.VideoCapture(0)if not cap.isOpened(): print("camera is still closed.")while cap.isOpened(): ret, frame = cap.read() if ret == True: cv2.imshow('Frame', frame) if cv2.waitKey(25) &amp; 0xFF == ord('q'): break else: breakcap.release()cv2.destroyAllWindows() 如果是利用终端命令通过ssh远程执行的话，会出错：cannot open display，因为ssh无法打开窗口，在树莓派终端执行不会报错。]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[更换七牛云过期SSL证书]]></title>
     <url>%2F2019%2F11%2F10%2F%E6%9B%B4%E6%8D%A2%E4%B8%83%E7%89%9B%E4%BA%91%E8%BF%87%E6%9C%9FSSL%E8%AF%81%E4%B9%A6%2F</url>
     <content type="text"><![CDATA[更换七牛云过期SSL证书 转眼博客已经跑了一年了，最近又是域名到期、又是SSL证书到期。 刚给域名续了5年的费，存储在七牛云的图片因为SSL证书到期加载不出来了。提示“存在隐私安全隐患”，通过图片外链访问也无法加载图片，Chrome直接拒绝连接。 一年前配置的，流程有些忘了，今天晚上又摸索了一遍。 七牛云申请证书据说七牛云不支持阿里云申请的证书，所以没在阿里云申请，直接在七牛云申请了TrustAisa的一年免费证书。 具体流程： 登录七牛云 &gt; SSL证书服务 &gt; 购买证书 &gt; 填写必要信息购买指向目标域名的证书（选择TrustAsia免费证书，验证方式选择DNS验证，个人信息可以随便填，貌似不需要验证） 添加域名验证到域名解析里添加对应的TEXT类型的记录，记录值为申请证书时指定的值。我直接将以前的值变更成了新的值。 应用SSL证书大概十分钟左右证书签发成功后，到 对象存储 &gt; 域名管理 &gt; 配置 &gt; HTTPS 配置 &gt; 强制 HTTPS &gt; 可更换证书列表里选择刚才申请的证书，然后应用。等待几分钟之后，便能通过HTTPS访问存储内容了。]]></content>
