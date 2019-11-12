@@ -61,6 +61,84 @@
       
         
 
+<article id="post-记一次Tomcat-8005端口Cannot-assign-requested-address的经历" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/">记一次Tomcat 8005端口Cannot assign requested address的经历</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/" class="article-date">
+  <time datetime="2019-04-24T14:53:39.000Z" itemprop="datePublished">04-24-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Exp/">Exp</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <p>记一次Tomcat 8005端口Cannot assign requested address : Jvm Bind的经历</p>
+<p>一个正在做毕设的老乡遇到的问题：Tomcat启动的时候，报了[8005] Jvm Bind相关的异常，大概内容是端口已被占用的意思。</p>
+<p>一. 先从运行/bin/shutdown.bat，再次关闭Tomcat，重新启动问题依然存在；</p>
+<p>二. netstat -ano查看端口使用情况，未发现8080,8009,8005相关的端口被占用；</p>
+<p>三. 打开任务管理器，确认javaw.exe未在运行，问题依然存在；</p>
+<p>四. 重启机器，问题依然存在；</p>
+<p>五. 参照：[<a href="https://www.cnblogs.com/heshan664754022/p/3807672.html" target="_blank" rel="noopener">Tomcat启动报错:严重: StandardServer.await: create[8005] java.net.BindException: Cannot assign requested address</a>](<a href="https://www.cnblogs.com/heshan664754022/p/3807672.html" target="_blank" rel="noopener">https://www.cnblogs.com/heshan664754022/p/3807672.html</a>) ， ping了localhost，发现收到的响应来自ipp[47.89.54.215]，打开C:/windows/system32/drivers/etc/hosts，发现以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">47.89.54.215       localhost</span><br><span class="line">47.89.54.215	hao.360.cn</span><br><span class="line">47.89.54.215	www.hao123.com</span><br><span class="line">47.89.54.215	www.3600.com</span><br><span class="line">47.89.54.215	www.114la.com</span><br><span class="line">47.89.54.215	www.duba.com</span><br><span class="line">47.89.54.215	www.hao360.cn</span><br><span class="line">47.89.54.215	123.sogou.com</span><br><span class="line">47.89.54.215	web.sogou.com</span><br><span class="line">47.89.54.215	www.hao123.cn</span><br><span class="line">47.89.54.215	hao.qq.com</span><br><span class="line">47.89.54.215	www.1616.net</span><br><span class="line">47.89.54.215	hao.rising.cn</span><br><span class="line">47.89.54.215	daohang.qq.com</span><br></pre></td></tr></table></figure>
+
+<p>看到daohang.qq，hao123，duba，hao360，123.sougou之类的字眼，瞬间一阵悲痛袭来，曾经那个“为什么国内流氓软件那么多？”的问题又浮现在脑海，想起了百度所谓的“中国用户愿意用隐私换效率”。</p>
+<p><img src="https://image.youyou-2608.com//hexo%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190424144325.jpg" alt="隐私换效率，生活更便利-变态辣椒"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/" data-id="ck2vxgnjb004fmj4nccqklyk4"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tomcat/">Tomcat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/端口占用/">端口占用</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-IDEA-Terminal闪退" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -116,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/09/IDEA-Terminal闪退/" data-id="ck2uib7e1000atp4nddfn4flp"
+      <a data-url="https://www.youyou-2608.com/2019/04/09/IDEA-Terminal闪退/" data-id="ck2vxgnfv000dmj4nf4ycfm0u"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Terminal/">Terminal</a></li></ul>
@@ -202,7 +280,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/06/Git配置代理/" data-id="ck2uib7dz0007tp4nalwe614h"
+      <a data-url="https://www.youyou-2608.com/2019/04/06/Git配置代理/" data-id="ck2vxgnfm0008mj4n4yj13r89"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -285,7 +363,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/06/清明/" data-id="ck2uib7fn003ttp4n9o0lje70"
+      <a data-url="https://www.youyou-2608.com/2019/04/06/清明/" data-id="ck2vxgnix003wmj4no43huv6q"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随便写写/">随便写写</a></li></ul>
@@ -378,7 +456,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/03/23/3月22日日记/" data-id="ck2uib7dr0001tp4nqesmpfi8"
+      <a data-url="https://www.youyou-2608.com/2019/03/23/3月22日日记/" data-id="ck2vxgnfa0002mj4nhheiosnd"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随便写写/">随便写写</a></li></ul>
@@ -455,7 +533,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/03/03/在新机器中恢复Hexo博客/" data-id="ck2uib7f7002etp4npkd30k7a"
+      <a data-url="https://www.youyou-2608.com/2019/03/03/在新机器中恢复Hexo博客/" data-id="ck2vxgnhl002dmj4n7m2c24qy"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo博客维护/">Hexo博客维护</a></li></ul>
@@ -732,109 +810,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/02/01/Java编程思想——第十四章——类型信息/" data-id="ck2uib7hh007ftp4n5bclsux6"
+      <a data-url="https://www.youyou-2608.com/2019/02/01/Java编程思想——第十四章——类型信息/" data-id="ck2vxgnm7007kmj4nabsbyivl"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java编程思想/">Java编程思想</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-写在新年来临之际" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/02/01/写在新年来临之际/">写在新年来临之际</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/02/01/写在新年来临之际/" class="article-date">
-  <time datetime="2019-02-01T15:09:14.000Z" itemprop="datePublished">02-01-2019</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/随便写写/">随便写写</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <p>写在新年到来之际</p>
-<p>今天是农历腊月二十七，距离新年只有三天，如果不是好多同事都忙着赶车回家、 还要走那些从来没记清的请假流程，那今天和一个平常的周五并无二样。没有特别的感觉，只是隐约中在提醒自己记得收拾行李。</p>
-<p>早上才四点不到，请了一天假提前回家的舍友就已经乒乒乓乓的客厅收拾行李了。赶凌晨五点的车这种事情我想这辈子也不会发生在我身上。舍友走了，我却一直没睡着，直到六点多天亮了才迷迷糊糊又睡了一会儿，然后去公司。</p>
-<p>相比之下，我还是更喜欢一个人上班的感觉，耳机往耳朵一塞，一路沉浸在自己的世界中，为新的一天调整心态，直到公交到站，唯一的缺憾可能就是这段路程只有短短的十分钟。</p>
-<p><img src="https://image.youyou-2608.com/blog/IMG_4778.JPG" alt="大连公交26路"></p>
-<p>今年以来，感觉时间过得越来越快，仿佛每次看日历，都会发现今天是周五。说到这里，我撇过头看了看桌上得日历，还停留在2017年12月31日，竟然已经过去这么久了。这本日历陪着我从北京到大连，竟然已经过去了这么久。</p>
-<p><img src="https://image.youyou-2608.com/blog/IMG_5049.JPG" alt="17年的日历"></p>
-<p>在每个新的时间节点到来之际，总是忍不住要回头看一看。</p>
-<p>这一年，1月到6月在学校做毕业设计，和几个在前几年都没有多少来往的同学度过了愉快的半年时间，才发现，原来身边一直有这么多有趣玩得来的人，这差不多算是大学四年最好的回忆之一了。</p>
-<p><img src="https://image.youyou-2608.com/blog/IMG_2537.JPG" alt="春天的湖"></p>
-<p><img src="https://image.youyou-2608.com/blog/IMG_2544.JPG" alt="春天的湖"></p>
-<p>4月初去了西江苗寨，南方鸟语花香的春天远比北方的凛冽寒风更吸引人。</p>
-<p><img src="https://image.youyou-2608.com/blog/IMG_2241.JPG" alt="西江千户苗寨"></p>
-<p><img src="https://image.youyou-2608.com/blog/IMG_2259.JPG" alt="西江千户苗寨"></p>
-<p>7月，毕业。社会身份的变化算是今年最大的改变，看到身边很多人对学生时代的留恋，我感到几分庆幸。相比于学生，上班族的身份更让我安心。</p>
-<p>8月，入职。尽管公司可能还达不到中等水平，但是总归是有一个暂时落脚的地方。到现在半年多过去了，事实证明了我最初的猜想：在工作中的所见所闻所得可能达不到自己的预期。这也是一直以来最令我困扰的一个问题。希望工作能在我改变之前往好的方面改变。</p>
-<p>9月，生活与两个在隔壁公司实习的学弟学妹产生了交集。也算是在学校认识最久的人了，相处了三年多的时间，而且人都很好。偶尔还能聚一聚，说说今后的打算，交流一下自己的想法。</p>
-<p><img src="https://image.youyou-2608.com/blog/IMG_4351.JPG" alt="星海广场"></p>
-<p>11月，项目进度延迟，整个项目组开始赶工期，时常加班。因为开发中需要用到新工具，所有的东西都要边做边学，工时也越来越短，加班也是常事。不过可能是因为有了实习加班的经历，我倒没有多大的感觉，甚至一开始入职的时候对于每天六点下班的作息总感觉怪怪的：这么早就下班了吗？心里总觉得每天工作到八点才是最合适的。工作时间的延长远远没有来自工作压力让人心疲力竭。一直到现在，度过了紧张的三个月。</p>
-<p>工作以后，继续学习的劲头远不如在学校的时候，基本处于三天打鱼两天晒网的状态。半年的时间，学习了”Java编程思想“，”SpringBoot基础“，”EasyUI“，”Spring“。来年要保持更高的学习积极性。</p>
-<p>读了张嘉佳的《从你的全世界路过》，《时光倒流》（学校图书馆借的一本美国小说，作者忘记了…），余华的《活着》，林徽因的《你是人间的四月天》，德·雷克的《徒步中国》，马尔克斯的《百年孤独》，青山七惠的《ひとり日和》，川端康成的《时生》，《雪国》，《湖》。</p>
-<p><img src="https://image.youyou-2608.com//blogIMG_4929%2820190201-063327%29.jpg" alt="百年孤独"></p>
-<p>来年还要加强锻炼。12月20日到今天，一共四十天的时间减掉了4kg，来年争取再减掉2kg。</p>
-<p>在这座城市生活了四年多的时间，却没有真正去了解过这座城市。希望来年能实现”走遍大连“，”走遍东北“的计划。</p>
-<p><img src="https://image.youyou-2608.com/blog/IMG_5028%2820190201-063327%29.jpg" alt="黄河路"></p>
-<p><img src="https://image.youyou-2608.com/blog/IMG_4970.JPG" alt="星海公园的日落"></p>
-<p><img src="https://image.youyou-2608.com/blog/DSC00057.JPG" alt="沙河口区"></p>
-<p>今天是今年最后一个工作日，稍微有点冷，早早的到了公司。大家今天都来得有点晚，左右两个同事也是无所事事发了一天呆，而我也因为工作没有进展，一个下午基本都在看自己以前的学习笔记。希望身边的同事来年工作积极性能高一点，不要再像今年一样，8小时中有3个小时玩手机，2个小时睡觉，发呆1小时。</p>
-<p>下班回家的路上，刚好碰到公司楼下有卖花的，买了一束花带回来，算是给自己的新年礼物吧。晚上回家洗了衣服，收拾了房间，把花给插上，一个星期没通风的房间，等我洗完衣服回到房间，竟然有股淡淡的清香。没想到在乡下看都不看一眼的野花野草，在这冬天的北方城市中竟有几分难得。</p>
-<p><img src="https://image.youyou-2608.com/blog/IMG_5050.JPG" alt="不知名的野花"></p>
-<p><img src="https://image.youyou-2608.com/blog/IMG_5051.JPG" alt="七月份开始养的绿萝"></p>
-<p>新年之际，祝大家新年快乐，新的一年，身体健康，工作顺利！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/02/01/写在新年来临之际/" data-id="ck2uib7ew001ztp4nbg86thc3"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随便写写/">随便写写</a></li></ul>
 
     </footer>
 
@@ -866,7 +845,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2019 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">63.2k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">63.4k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 
