@@ -1,3 +1,4 @@
+https://www.youyou-2608.com/2019/11/13/要么忍，要么滚/
 https://www.youyou-2608.com/2019/11/12/寿司-ｺﾄﾌﾞｷﾂｶｻライブ/
 https://www.youyou-2608.com/2019/11/10/博客一周年啦！/
 https://www.youyou-2608.com/2019/11/10/树莓派安装OpenCV-Python/
@@ -27,4 +28,3 @@ https://www.youyou-2608.com/2019/05/12/从两次毕设题目和要求说说我�
 https://www.youyou-2608.com/2019/05/12/ajax返回error可能原因分析/
 https://www.youyou-2608.com/2019/04/29/Spring-Boot中使用Swagger2构建强大的RESTful-API文档/
 https://www.youyou-2608.com/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/
-https://www.youyou-2608.com/2019/04/09/IDEA-Terminal闪退/

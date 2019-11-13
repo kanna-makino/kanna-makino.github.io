@@ -61,6 +61,85 @@
       
         
 
+<article id="post-要么忍，要么滚" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/11/13/要么忍，要么滚/">要么忍，要么滚</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/11/13/要么忍，要么滚/" class="article-date">
+  <time datetime="2019-11-13T11:54:45.000Z" itemprop="datePublished">11-13-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/无分类/">无分类</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <blockquote>
+<p>一份工作能做下去，无非就是两点：薪酬和发展。钱到位了，困难都可以克服，9106也能接受；而发展则是自身价值的提升，不论是技术或是其他方面，在将来能给你带来更满意的薪酬。一份满意的工作，二者的和应该维持在一个满意的水平，如果发展不大但是薪酬很高，目标达到了当然可以留下；如果薪酬不高但是对自身价值很有提升，也可以暂时先混着；但是如果二者都不行，那就别无选择、只能另谋出路了，让垃圾公司早点倒闭吧。</p>
+</blockquote>
+<p>出差后一个星期的假期也已经结束，才周一上午就被分配到了新的项目中，项目名为 PCKK 。进入项目已经三天，但是项目名字是什么意思还不知道。因为要接手一个即将出差的人的任务，所以这几天都在跟着他了解项目，一直在熟悉他负责的功能模块。</p>
+<p>自己写代码可能还能有点意思，读别人的代码，那真的是要死人了。而且项目从头到尾没有数据库，用的全是JavaScript实现。我自己对 JS 的了解仅限于很基础的常识性的东西，要我来做不是原生 JS 的东西，那是万万做不出来的。所以这几天虽然挂着读代码、熟悉业务的名坐在办公室，但是大多数时候确实在浏览网页或是在思考怎样才能早点离开公司。</p>
+<p>明天那位同事就要出差去了，所有的工作都要我来负责了，有时候觉得自己既不懂业务又不懂代码有点忐忑不安，但是转念又会觉得，不想干下去了，都无所谓了。</p>
+<p>整个项目开发已经就剩下现在这两个下载 Excel 文件的模块了，而且主体已经开发完，现在就是在修一些bug或者是实现之前没有实现的功能。如果使用 Java 来做的话会超级简单，几个 SQL 取一下数据，写个类加工一下数据直接往 Excel 文件里扔就行了，但是这个弱智的 Kintone ，什么都做不了，不能做表连接（甚至连他妈的数据库都没有，我做你妈呢！），每次查数据开发者能操作的部分仅仅是 where 条件，每次查询都是一个 HTTP 请求！这意味着如果这个 Excel （整个系统数据完成情况统计）用到了20个页面来的数据，那就需要用 HTTP 请求20次才能得到全部数据！真他妈傻逼东西！！这种垃圾也有人用，真是死妈废物！到底是哪些傻逼出钱养着开发这种脑残工具的傻逼公司！！要是仅仅如此，为了工资，我也能忍了，但这还不是最傻逼的，最为傻逼的是：API规定每次 HTTP 数据请求（类似于数据查询）返回的结果数量上限为500条！这两天就是卡在了这个问提上，我真的无话可说，你妈死了，Five！一个SQL 500 条以上数据不是很常见吗？这个 Excel 要统计6个月的数据，光一个月就2000多条数据，合计起来一万多条。一想到明天我还要花一天时间绞尽脑汁去解决这种弱智问题，我真的想现在就发个邮件，工资不要了，公司我也不去了，谁傻逼愿意干谁去！</p>
+<p>从头到尾都是 js 代码，所有的本该做成共通的基础都写死在代码里，而且还不能在不同功能模块间共享，甚至连 API 的版本和地址都写死在代码里，改个 API 版本所有代码都得动，后期维护还你妈呢。没有数据库没有ER图，随便删掉项目或者改名，F12调两小时也定位不到具体的错误。一个 Excel 统计文件需要等 5 分钟才能下载下来，更有甚者需要等 4 个小时，还玩你妈呢……至今没有搞懂这群弱智为什么能忍到现在。</p>
+<p>吐槽不动了，就两个字，傻逼！12月份再去上班我就是傻逼！</p>
+<p>我也不明白，为什么鬼子太君们总是对这种弱智工具情有独钟？去年第一个项目用的 WebPerformer 也是这种脑残工具，适合没有开发基础的人？我更觉得，如果有开发基础的人用了这种弱智工具也迟早会变成弱智。</p>
+<p>不要抱怨这个世界不公平，除非你能让它公平起来。因为抱怨什么也不能改变，能改变现状的只有自身的行动！</p>
+<p>五六月份在 V2EX 学到的六字真言：要么忍，要么滚！我当然是选择后者。为了还能保留点智商，我还是趁早滚吧！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2019/11/13/要么忍，要么滚/" data-id="ck2xao07z004r3i4ndgniohki"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/无分类/">无分类</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-寿司-ｺﾄﾌﾞｷﾂｶｻライブ" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -114,7 +193,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/11/12/寿司-ｺﾄﾌﾞｷﾂｶｻライブ/" data-id="ck2vxinkm002vnx4n5oxcbtty"
+      <a data-url="https://www.youyou-2608.com/2019/11/12/寿司-ｺﾄﾌﾞｷﾂｶｻライブ/" data-id="ck2xao07j00373i4nbo8mfkf7"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/地下アイドル/">地下アイドル</a></li></ul>
@@ -178,7 +257,7 @@
     <div class="article-gallery-photos">
       
         
-          <a class="article-gallery-img" href="/2019/11/10/博客一周年啦！/" rel="gallery_ck2vxink10021nx4noc89hufg">
+          <a class="article-gallery-img" href="/2019/11/10/博客一周年啦！/" rel="gallery_ck2xao07600283i4nqyfxi76g">
             <img src="https://image.youyou-2608.com/blog/20191110/bing.jpg" itemprop="image">
           </a>
         
@@ -197,7 +276,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/11/10/博客一周年啦！/" data-id="ck2vxink10021nx4noc89hufg"
+      <a data-url="https://www.youyou-2608.com/2019/11/10/博客一周年啦！/" data-id="ck2xao07600283i4nqyfxi76g"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日记周记/">日记周记</a></li></ul>
@@ -261,7 +340,7 @@
     <div class="article-gallery-photos">
       
         
-          <a class="article-gallery-img" href="/2019/11/10/树莓派安装OpenCV-Python/" rel="gallery_ck2vxinl9003qnx4n5aparri4">
+          <a class="article-gallery-img" href="/2019/11/10/树莓派安装OpenCV-Python/" rel="gallery_ck2xao07p003s3i4nw0lpbo8z">
             <img src="https://image.youyou-2608.com/blog/20191110/th.jpg" itemprop="image">
           </a>
         
@@ -279,7 +358,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/11/10/树莓派安装OpenCV-Python/" data-id="ck2vxinl9003qnx4n5aparri4"
+      <a data-url="https://www.youyou-2608.com/2019/11/10/树莓派安装OpenCV-Python/" data-id="ck2xao07p003s3i4nw0lpbo8z"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -351,7 +430,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/11/10/更换七牛云过期SSL证书/" data-id="ck2vxinl1003enx4n7v16v7z4"
+      <a data-url="https://www.youyou-2608.com/2019/11/10/更换七牛云过期SSL证书/" data-id="ck2xao07q003v3i4ntyluvpza"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -422,7 +501,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/11/09/Mac-OS下RIME输入法的配置/" data-id="ck2vxinj90011nx4nq20szz6o"
+      <a data-url="https://www.youyou-2608.com/2019/11/09/Mac-OS下RIME输入法的配置/" data-id="ck2xao06q00113i4nsa7job0z"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具软件/">工具软件</a></li></ul>
@@ -491,93 +570,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/11/03/scp-Linux文件复制命令/" data-id="ck2vxinjk001bnx4non9qydm1"
+      <a data-url="https://www.youyou-2608.com/2019/11/03/scp-Linux文件复制命令/" data-id="ck2xao06v001f3i4n7qpscxcy"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-好久不见" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/11/02/好久不见/">好久不见</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/11/02/好久不见/" class="article-date">
-  <time datetime="2019-11-02T07:54:34.000Z" itemprop="datePublished">11-02-2019</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/日记周记/">日记周记</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-  <div class="article-gallery">
-    <div class="article-gallery-photos">
-      
-        
-          <a class="article-gallery-img" href="/2019/11/02/好久不见/" rel="gallery_ck2vxinki002pnx4nwd6pwz4u">
-            <img src="https://image.youyou-2608.com/blog/20191102/QQ20191102-161839.png" itemprop="image">
-          </a>
-        
-      
-    </div>
-  </div>
-
-
-	  
-      
-        <p>我喜欢在天上飞，却不是很喜欢往中国飞。但是出生、成长都是在这片土地上，这里有我带不走的一切。所以，我难有选择的余地。国航波音737在成田机场一跃而起，时隔三月，再次回到这座城市。</p>
-<p>锦城虽云乐，不如早还家。</p>
-        
-          <a class="article-more-link" href="/2019/11/02/好久不见/">阅读全文</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/11/02/好久不见/" data-id="ck2vxinki002pnx4nwd6pwz4u"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日记周记/">日记周记</a></li></ul>
 
     </footer>
 
@@ -609,7 +605,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2019 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">63.4k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">64.6k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 
