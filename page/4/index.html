@@ -61,6 +61,91 @@
       
         
 
+<article id="post-给树莓派安装Ubuntu-MATE系统" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/06/11/给树莓派安装Ubuntu-MATE系统/">给树莓派安装Ubuntu MATE系统</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/06/11/给树莓派安装Ubuntu-MATE系统/" class="article-date">
+  <time datetime="2019-06-11T15:22:24.000Z" itemprop="datePublished">06-11-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/树莓派/">树莓派</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <p>给树莓派安装Ubantu MATE操作系统</p>
+<p>由于平时用的是Ubuntu系统，对这个系统比较熟悉，也想给树莓派也装这个系统，Linux下做SD卡启动盘网上资料比较少，担心发生对笔记本磁盘的误操作，最后在官网上找到了教程。</p>
+<h3 id="下载系统"><a href="#下载系统" class="headerlink" title="下载系统"></a>下载系统</h3><p><a href="https://ubuntu-mate.org/raspberry-pi" target="_blank" rel="noopener"><a href="https://ubuntu-mate.org/raspberry-pi/" target="_blank" rel="noopener">Ubuntu MATE for the Raspberry Pi Model B 2, 3 and 3+</a></a></p>
+<h3 id="安装工具并写入系统"><a href="#安装工具并写入系统" class="headerlink" title="安装工具并写入系统"></a>安装工具并写入系统</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gddrescue xz-utils</span><br><span class="line">unxz --verbose ubuntu-mate-18.04.2-beta1-desktop-armhf+raspi-ext4.img.xz</span><br><span class="line">sudo ddrescue -D --force ubuntu-mate-18.04.2-beta1-desktop-armhf+raspi-ext4.img /dev/sdx</span><br></pre></td></tr></table></figure>
+
+<p><code>/dev/sda</code>代表笔记本的磁盘，SD卡的盘符一般<code>/dev/sdb1</code>。</p>
+<p><img src="https://image.youyou-2608.com/blog/finished.png" alt="安装Ubuntu MATE"></p>
+<h3 id="显示屏无反应"><a href="#显示屏无反应" class="headerlink" title="显示屏无反应"></a>显示屏无反应</h3><p>网上说可能是 config.txt 设置问题，和显示器的分辨率之类的有关，但是写入了镜像之后再将SD卡插入到PC，已经无法挂载，报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mount /dev/sdb1 /mnt/sdb1</span><br><span class="line">mount: /mnt/sdb1: wrong fs type, bad option, bad superblock on /dev/sdb1, missing codepage or helper program, or other error.</span><br></pre></td></tr></table></figure>
+
+<h3 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h3><p>进不去SD卡，挂载错误，说是文件类型错误。</p>
+<p>安装工具：</p>
+<p><code>sudo apt-get install nfs-common</code></p>
+<p>仍然是无法读取。</p>
+<p>先安装 <code>gnome-disk-utility</code> ，在终端执行 <code>./gnome-disk-utility</code> ，选择 <code>Restore Image...</code> ，写入镜像。</p>
+<p><img src="https://image.youyou-2608.com/blog/finished.png" alt="Ubuntu MATE"></p>
+<p>写完之后，退出SD卡。</p>
+<p>将写入镜像的SD卡插入树莓派，连接显示器，接通电源，成功进入系统引导界面，清新的绿色界面。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2019/06/11/给树莓派安装Ubuntu-MATE系统/" data-id="ck3v4ixm30058fh5x4flnr374"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树莓派/">树莓派</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-再记Hexo博客恢复" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -118,7 +203,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/06/09/再记Hexo博客恢复/" data-id="ck2xd59d4001ue84n8oy9mlaz"
+      <a data-url="https://www.youyou-2608.com/2019/06/09/再记Hexo博客恢复/" data-id="ck3v4ixl7002qfh5x62pvunqs"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo博客维护/">Hexo博客维护</a></li></ul>
@@ -164,7 +249,7 @@
 </a>
         
   <div class="article-category">
-    <a class="article-category-link" href="/categories/工具软件/">工具软件</a>
+    <a class="article-category-link" href="/categories/推墙/">推墙</a>
   </div>
 
       </div>
@@ -209,10 +294,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/06/09/酸酸乳搭建小记/" data-id="ck2xd59e5004we84nb53mqpq2"
+      <a data-url="https://www.youyou-2608.com/2019/06/09/酸酸乳搭建小记/" data-id="ck3v4ixmc005pfh5xiiewsb1d"
          class="article-share-link">分享</a>
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/工具软件/">工具软件</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推墙/">推墙</a></li></ul>
 
     </footer>
 
@@ -292,7 +377,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/27/05-26周记/" data-id="ck2xd59c50000e84nbwxwkaj0"
+      <a data-url="https://www.youyou-2608.com/2019/05/27/05-26周记/" data-id="ck3v4ixjv0007fh5x95qfaw7w"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/无分类/">无分类</a></li></ul>
@@ -385,7 +470,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/19/我在JavaScript中踩过的坑/" data-id="ck2xd59dr003je84no8i67su3"
+      <a data-url="https://www.youyou-2608.com/2019/05/19/我在JavaScript中踩过的坑/" data-id="ck3v4ixlx004tfh5x8lllkf0v"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li></ul>
@@ -478,7 +563,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/15/Java注解简单例子/" data-id="ck2xd59ch000ce84nd3rklq9h"
+      <a data-url="https://www.youyou-2608.com/2019/05/15/Java注解简单例子/" data-id="ck3v4ixk7000mfh5xv3qy1qc4"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -567,85 +652,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/12/从两次毕设题目和要求说说我的感受/" data-id="ck2xd59d3001re84npx66xywj"
+      <a data-url="https://www.youyou-2608.com/2019/05/12/从两次毕设题目和要求说说我的感受/" data-id="ck3v4ixl8002tfh5xsgtofb6f"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/无分类/">无分类</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-ajax返回error可能原因分析" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/05/12/ajax返回error可能原因分析/">ajax返回error可能原因分析</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/05/12/ajax返回error可能原因分析/" class="article-date">
-  <time datetime="2019-05-12T06:38:35.000Z" itemprop="datePublished">05-12-2019</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Exp/">Exp</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <p>ajax总是进入error的可能原因</p>
-<p>后台返回：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Successfully completed request</span><br></pre></td></tr></table></figure>
-
-<p>前端ajax总是执行error部分的代码。</p>
-<p>原因：</p>
-<p>后台只返回了 “success” 字符串，不是规范的json格式，所以没有执行预期逻辑。</p>
-<p>最好在后台返回 <strong>严格规范</strong> 的json防止此类错误。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/12/ajax返回error可能原因分析/" data-id="ck2xd59cw0018e84n846gl9b5"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li></ul>
 
     </footer>
 
@@ -677,7 +687,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2019 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">64.6k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">65.5k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 

@@ -61,6 +61,106 @@
       
         
 
+<article id="post-LeetCode子单链表重排序" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2018/11/17/LeetCode子单链表重排序/">LeetCode之单链表重排序</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/11/17/LeetCode子单链表重排序/" class="article-date">
+  <time datetime="2018-11-17T08:23:26.000Z" itemprop="datePublished">11-17-2018</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <blockquote>
+<p> 笑恨平生，不存欢愉。</p>
+</blockquote>
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Given a singly linked list <em>L</em>: <em>L</em> 0→<em>L</em> 1→…→<em>L</em> <em>n</em>-1→<em>L</em> n,<br>reorder it to: <em>L</em> 0→<em>L</em> <em>n</em> →<em>L</em> 1→<em>L</em> <em>n</em>-1→<em>L</em> 2→<em>L</em> <em>n</em>-2→…</p>
+<p>You must do this in-place without altering the nodes’ values.</p>
+<p>For example,<br>Given{1,2,3,4}, reorder it to{1,4,2,3}.</p>
+<h3 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h3><ul>
+<li><p>时间限制：1秒</p>
+</li>
+<li><p>空间限制：32768K</p>
+</li>
+</ul>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>两个游标：一个用来指向下一次将要插入元素的位置，另一个用来遍历链表。从根结点开始遍历，如果当前节点的next节点不为空并且next的next节点不为空，则取最后一个节点插入到当前节点之后，游标一跳两个位置。直到游标一节点的next节点为空或者next的next节点为空。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.reorder.list;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.sort.linkedlist.ListNode;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午4:01</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reorderList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (head.next == <span class="keyword">null</span> || head.next.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode pt = head;</span><br><span class="line">        ListNode index = head;</span><br><span class="line">        ListNode preIndex = head;</span><br><span class="line">        <span class="keyword">while</span> (pt.next != <span class="keyword">null</span> &amp;&amp; pt.next.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (index.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">                preIndex = index;</span><br><span class="line">                index = index.next;</span><br><span class="line">            &#125;</span><br><span class="line">            preIndex.next = <span class="keyword">null</span>;</span><br><span class="line">            index.next = pt.next;</span><br><span class="line">            pt.next = index;</span><br><span class="line">            pt = pt.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种方法可行，但是每排序一个节点都需要遍历一次链表，效率比较低，可以看到下图，运行时间较长，占用内存已经 <strong><font color="red">超过空间限制</font></strong> 了。</p>
+<p><img src="https://image.youyou-2608.com/blog/leetcode1.png" alt="链表重排序"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>看了一下网上给出的方案，几乎都是一样的：</p>
+<p>这道链表重排序问题可以拆分为以下三个小问题：</p>
+<ol>
+<li><p>使用快慢指针来找到链表的中点，并将链表从中点处断开，形成两个独立的链表。</p>
+</li>
+<li><p>将第二个链翻转。</p>
+</li>
+<li><p>将第二个链表的元素间隔地插入第一个链表中。</p>
+</li>
+</ol>
+<p>都是将链表拆成两个独立的链表进行重排序。</p>
+<p>剽窃来的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;这道链表重排序问题可以拆分为以下三个小问题：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">1. 使用快慢指针来找到链表的中点，并将链表从中点处断开，形成两个独立的链表。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">2. 将第二个链翻转。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">3. 将第二个链表的元素间隔地插入第一个链表中。</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">reorderList</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!head || !head-&gt;next || !head-&gt;next-&gt;next) <span class="keyword">return</span>;</span><br><span class="line">        ListNode *fast = head;</span><br><span class="line">        ListNode *slow = head;</span><br><span class="line">        <span class="keyword">while</span> (fast-&gt;next &amp;&amp; fast-&gt;next-&gt;next) &#123;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *mid = slow-&gt;next;</span><br><span class="line">        slow-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        ListNode *last = mid;</span><br><span class="line">        ListNode *pre = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">while</span> (last) &#123;</span><br><span class="line">            ListNode *next = last-&gt;next;</span><br><span class="line">            last-&gt;next = pre;</span><br><span class="line">            pre = last;</span><br><span class="line">            last = next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (head &amp;&amp; pre) &#123;</span><br><span class="line">            ListNode *next = head-&gt;next;</span><br><span class="line">            head-&gt;next = pre;</span><br><span class="line">            pre = pre-&gt;next;</span><br><span class="line">            head-&gt;next-&gt;next = next;</span><br><span class="line">            head = next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>时间空间使用都很少，性能问题没了。</p>
+<p><img src="https://image.youyou-2608.com/blog/leetcode2.png" alt="LeetCode链表重排序"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode子单链表重排序/" data-id="ck3v4ixki0016fh5xdi7m4lz4"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-LeetCode子二叉树非递归前序遍历" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -121,7 +221,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode子二叉树非递归前序遍历/" data-id="ck2xd59cr000ue84n56v2wz0m"
+      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode子二叉树非递归前序遍历/" data-id="ck3v4ixkh0015fh5xog2vtlii"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -201,7 +301,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode之二叉树非递归后续遍历/" data-id="ck2xd59cm000me84n74urqwgy"
+      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode之二叉树非递归后续遍历/" data-id="ck3v4ixke0011fh5xu9u2z4op"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -280,7 +380,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/16/LeetCode之链表插入排序/" data-id="ck2xd59co000oe84n57wb72hx"
+      <a data-url="https://www.youyou-2608.com/2018/11/16/LeetCode之链表插入排序/" data-id="ck3v4ixka000tfh5x5idv0p38"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -445,7 +545,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/14/Spring学习笔记-第一章-Spring之旅/" data-id="ck2xd59cv0016e84nuk0hhxrz"
+      <a data-url="https://www.youyou-2608.com/2018/11/14/Spring学习笔记-第一章-Spring之旅/" data-id="ck3v4ixko001ifh5xfrubv81j"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -520,7 +620,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/11/LeetCode之水仙花数/" data-id="ck2xd59cs000ye84nrrm7nag6"
+      <a data-url="https://www.youyou-2608.com/2018/11/11/LeetCode之水仙花数/" data-id="ck3v4ixkc000xfh5xqj947kgc"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -555,7 +655,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2019 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">64.6k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">65.5k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 

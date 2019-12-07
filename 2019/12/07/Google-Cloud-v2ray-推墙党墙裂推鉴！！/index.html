@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  
+    <meta name="description" content="一爱代码，爱生活。">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Google Cloud + v2ray 墙裂推鉴！！ |
+    
+    Kanna-Makino</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  
+
+<article id="post-Google-Cloud-v2ray-推墙党墙裂推鉴！！" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Google Cloud + v2ray 墙裂推鉴！！
+    </h1>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/12/07/Google-Cloud-v2ray-推墙党墙裂推鉴！！/" class="article-date">
+  <time datetime="2019-12-07T05:08:55.000Z" itemprop="datePublished">12-07-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/推墙/">推墙</a>
+  </div>
+
+      </div>
+    
+
+    
+      
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+      
+        <p>Google Cloud + v2ray 推墙党墙裂推鉴！！</p>
+<p>参考教程：<a href="https://camo.githubusercontent.com/3b7eddf949a9d8aec9a04ae19a7bd49991817085/68747470733a2f2f692e6c6f6c692e6e65742f323031392f30312f30352f356333303532323438636133652e6a7067" target="_blank" rel="noopener">V2Ray搭建详细图文教程</a></p>
+<p>最近一个月都在计划离职以及计划离职以后的事情，好长时间没有打开笔记本折腾一下了。和一个也喜欢在国际互联网上冲浪的同事偶然聊到了网速问题，他用谷歌免费服务器能流畅1080P高清，想想我用着美国西海岸延迟300+的服务器，连Twitter刷个图片有时候都刷不出来，于是产生了想升级一下梯子的想法。</p>
+<a id="more"></a>
+
+
+
+<h2 id="申请试用谷歌云"><a href="#申请试用谷歌云" class="headerlink" title="申请试用谷歌云"></a>申请试用谷歌云</h2><p>最近这两个月才在YouTube上了解到谷歌云，新用户有一年的免费试用，配置方面对于搭个梯子来说完全足够了，并且现在有了香港数据中心，不用想，指定比美国西海岸的搬瓦工要墙太多了，哦，是“强”。</p>
+<p>墙外有很多热心网友写了很多教程，小白也能完成。前提是要有gmail邮箱和一张国际信用卡。</p>
+<p>顺利申请完成之后，创建一个VM实例，默认是动态ip，每次重启实例之后ip地址都会变，可以设置成静态ip。创建完之后先改一下root用户密码，然后改一下ssh设置允许远程登录。然后ping一下，如果ping值比较高的话，可以删除重新创建，最后选择一个ping值低一点的，我先后试了5个，最后选择了一个110ms的。因为是辽宁联通的缘故吧，在站长工具上测试，最快的是广东，才40ms左右，这速度没得说。</p>
+<h2 id="安装-v2ray"><a href="#安装-v2ray" class="headerlink" title="安装 v2ray"></a>安装 v2ray</h2><p>参考上面的链接，就一行命令就OK，选项什么的，改默认的就默认，参考教程里的。注意一下端口号，这个端口号困扰了我几个小时。</p>
+<p>我运行了v2ray，客户端也配置好了，但是连接不上，才想起来可能是端口没开放，于是去配置防火墙，配置了好多次，用站长工具端口扫描都是只开放了22端口。不停的Google，看视频教程，感觉没什么错误，但是就是不好用。最后自己新建了一个规则，指定端口和协议，tcp:port，然后在实例设置里把所有的规则都删除了，只添加这个新建的规则，然后再试就好了，对多个规则重叠时的优先级不是很了解。打开Google首页和YouTube的速度和打开国内网站几乎没有区别，视频1080P60fps也一点都不卡了，顺畅的感觉真好。虽然油管大佬们现在秀8K了，但是对于我来说，1080P不卡就已经很满足了。</p>
+<p><img src="https://image.youyou-2608.com/blog/20191207/WX20191207-125903.png" alt="YouTube速度测试"></p>
+<h2 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h2><p>有很多客户端，基本各个平台在github上都有，目前我只装了Mac端来测试连接。</p>
+<p>iOS上貌似需要外区Apple ID，我之前网速慢的时候，找到一个免费机场 <a href="yangjuan.be">羊圈网络</a>，很良心的半公益机场，甚至提供了日区Apple id供用户下载客户端，shadowrocket，很强大的一个客户端，包含了ss、ssr以及vmess等。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2019/12/07/Google-Cloud-v2ray-推墙党墙裂推鉴！！/" data-id="ck3v4ixjm0001fh5x5731kz6h"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推墙/">推墙</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+    
+      <a href="/2019/11/13/要么忍，要么滚/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">要么忍，要么滚</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>&copy; 2018-2019 Kanna-Makino</li>
+      <div class="float-right">
+      	全站共&nbsp;<span class="post-count">65.5k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("11/11/2018 00:00:00");//此处修改你的建站时间或者网站上线时间 
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "已运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+	setInterval("createtime()",250);
+</script>
+
+	  </div>
+    </ul>
+  </div>
+</footer>
+
+</main>
+
+<aside class="sidebar sidebar-specter">
+  
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="https://image.youyou-2608.com/Kanna.svg" alt="Kanna-Makino"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">主页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/gallery">相册</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/tocbot.min.js"></script>
+  <script>
+    // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+    tocbot.init({
+      tocSelector: '.tocbot',
+      contentSelector: '.article-entry',
+      headingSelector: 'h1, h2, h3, h4, h5, h6',
+      hasInnerContainers: true,
+      scrollSmooth: true,
+      positionFixedSelector: '.tocbot',
+      positionFixedClass: 'is-position-fixed',
+      fixedSidebarOffset: 'auto',
+    });
+  </script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
