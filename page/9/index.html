@@ -61,6 +61,189 @@
       
         
 
+<article id="post-Spring学习笔记-第二章-装配Bean" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2018/11/17/Spring学习笔记-第二章-装配Bean/">Spring学习笔记-第二章-装配Bean</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/11/17/Spring学习笔记-第二章-装配Bean/" class="article-date">
+  <time datetime="2018-11-17T10:50:47.000Z" itemprop="datePublished">11-17-2018</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <p>第二章：装配Bean</p>
+<p>本章内容：</p>
+<ul>
+<li>声明bean</li>
+<li>构造器注入和Setter方法注入</li>
+<li>装配bean</li>
+<li>控制bean的创建和销毁</li>
+</ul>
+<blockquote>
+<p>在Spring中，对象无需自己查找或创建与其所关联的对象，容器负责把需要相互协作的对象引用赋值给各个对象，这种协作关系成为<strong>装配</strong>。</p>
+</blockquote>
+<hr>
+<h3 id="2-1-Spring配置的可选方案"><a href="#2-1-Spring配置的可选方案" class="headerlink" title="2.1 Spring配置的可选方案"></a>2.1 Spring配置的可选方案</h3><blockquote>
+<p>Spring容器负责创建应用程序中的bean并通过DI来协调对象之间的关系。开发人员需要做的是告诉Spring需要创建哪些对象并且如何装配在一起。</p>
+</blockquote>
+<p>Spring提供了三种可选方式：</p>
+<ul>
+<li>XML配置</li>
+<li>Java显式配置</li>
+<li>隐式的bean发现机制和自动装配</li>
+</ul>
+<p>如何选择：<strong>尽可能使用自动配置机制，当必须显式配置时使用JavaConfig，当JavaConfig中没有同样实现时使用XML配置。</strong></p>
+<hr>
+<h3 id="2-2-自动化装配bean"><a href="#2-2-自动化装配bean" class="headerlink" title="2.2 自动化装配bean"></a>2.2 自动化装配bean</h3><ul>
+<li>自动扫描</li>
+<li>自动装配</li>
+</ul>
+<h4 id="2-2-1-创建可被发现的bean"><a href="#2-2-1-创建可被发现的bean" class="headerlink" title="2.2.1 创建可被发现的bean"></a>2.2.1 创建可被发现的bean</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kotobuki2.soundsys;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午7:21</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CompactDisc</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kotobuki2.soundsys;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午7:22</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SgtPeppers</span> <span class="keyword">implements</span> <span class="title">CompactDisc</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String title = <span class="string">"SgtPeppers title"</span>;</span><br><span class="line">    <span class="keyword">private</span> String artiest = <span class="string">"The Beatles"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"playing.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kotobuki2.soundsys;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.ComponentScan;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午7:24</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CDPlayerConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过XML配置开启注解扫描：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"soundsys"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>自动装配测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.kotobuki2.soundsys.CDPlayerConfig;</span><br><span class="line"><span class="keyword">import</span> com.kotobuki2.soundsys.CompactDisc;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.context.ContextConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.assertNotNull;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午7:28</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">@<span class="title">ContextConfiguration</span>(<span class="title">classes</span> </span>= CDPlayerConfig<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">CDPlayerTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> CompactDisc compactDisc;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cdTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        assertNotNull(compactDisc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-2-为组件扫描的bean命名"><a href="#2-2-2-为组件扫描的bean命名" class="headerlink" title="2.2.2 为组件扫描的bean命名"></a>2.2.2 为组件扫描的bean命名</h4><p>默认将类名第一个字母小写后的字符串作为bean的id。</p>
+<p>可以通过注解标示bean的别名：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>(<span class="string">"alias"</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-3-设置组件扫描的基础包"><a href="#2-2-3-设置组件扫描的基础包" class="headerlink" title="2.2.3 设置组件扫描的基础包"></a>2.2.3 设置组件扫描的基础包</h4><p><strong>默认以配置类所在的包为基础包进行扫描。</strong></p>
+<p>自定义扫描包：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(<span class="string">"package-name"</span>)</span><br><span class="line"><span class="comment">//扫描多个基础包</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(basePackages = &#123;<span class="string">"package1"</span>, <span class="string">"package2"</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>但是用直接指定包名会出现问题：包名被变更以后便无法扫描到所需要的类，因此，还有另一种指定扫描包的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(basePackageClasses = &#123;CDPlayer<span class="class">.<span class="keyword">class</span>, <span class="title">DVDPlayer</span>.<span class="title">class</span>&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<p>这种方式下，这些类所在的包都会作为基础包进行扫描，即便代码重构也不会受到影响。</p>
+<h4 id="2-2-4-通过为bean添加注解实现自动装配"><a href="#2-2-4-通过为bean添加注解实现自动装配" class="headerlink" title="2.2.4 通过为bean添加注解实现自动装配"></a>2.2.4 通过为bean添加注解实现自动装配</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kotobuki2.soundsys;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午8:51</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MediaPlayer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kotobuki2.soundsys;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午8:50</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CDPlayer</span> <span class="keyword">implements</span> <span class="title">MediaPlayer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> CompactDisc compactDisc;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CDPlayer</span><span class="params">(CompactDisc compactDisc)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.compactDisc = compactDisc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        compactDisc.play();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>@Autowired注解不仅能够用在构造器上，也能用在属性的Setter方法上。</p>
+<hr>
+<h3 id="2-3-通过Java装配bean"><a href="#2-3-通过Java装配bean" class="headerlink" title="2.3 通过Java装配bean"></a>2.3 通过Java装配bean</h3><blockquote>
+<p>在进行显式配置的时候，JavaConfig是更好的方案，因为其强大、类型安全并且重构友好。因为其本身就是Java代码。</p>
+</blockquote>
+<p>声明简单的bean：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span>(name=<span class="string">"alias"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> CompactDisc <span class="title">sgtPeppers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> SgtPeppers();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>借助JavaConfig实现注入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CDPlayer <span class="title">cdPlayer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> CDPlayer(<span class="keyword">new</span> sgtPeppers());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CDPlayer <span class="title">cdPlayer</span><span class="params">(CompactDisc disc)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> CDplayer(disc);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>后者不要求disc必须在JavaConfig中声明，实际上它可以通过组件扫描功能自动发现或者XML来进行配置。</p>
+<p>通过构造器注入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CDPlayer <span class="title">cdPlayer</span><span class="params">(CompactDisc disc)</span></span>&#123;</span><br><span class="line">    CDPlayer cdPlayer = <span class="keyword">new</span> CDPlayer(disc);</span><br><span class="line">    cdPlayer.setCompactDisc(disc);</span><br><span class="line">    <span class="keyword">return</span> cdPlayer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="2-4-通过XML装配Bean"><a href="#2-4-通过XML装配Bean" class="headerlink" title="2.4 通过XML装配Bean"></a>2.4 通过XML装配Bean</h3><p>在XML配置中，需要创建一个以<beans>作为根元素的XML配置文件。</beans></p>
+<p><strong>可以借助Spring Tool Suite创建和管理Spring XML配置文件</strong>。</p>
+<h4 id="2-4-1-声明一个简单的bean："><a href="#2-4-1-声明一个简单的bean：" class="headerlink" title="2.4.1 声明一个简单的bean："></a>2.4.1 声明一个简单的bean：</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bean_id"</span> <span class="attr">class</span>=<span class="string">"com.soundsys.SgtPeppers"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果没有指明id，bean将会根据类全限定名指定，为了减少XML配置的繁琐，只需要对需要按名称引用的bean进行命名。“com.soundsys.SgtPeppers#0”…</p>
+<p><constructor-arg> 元素：</constructor-arg></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"cdPlayer"</span> <span class="attr">class</span>=<span class="string">"com.soundsys.CDPlayer"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">ref</span>=<span class="string">"compactDisc"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-4-2-c命名空间"><a href="#2-4-2-c命名空间" class="headerlink" title="2.4.2 c命名空间"></a>2.4.2 c命名空间</h4><p><a href="https://blog.csdn.net/elim168/article/details/74516439" target="_blank" rel="noopener">p命名空间和c命名空间</a></p>
+<h4 id="2-4-3-将字面量注入到构造器中："><a href="#2-4-3-将字面量注入到构造器中：" class="headerlink" title="2.4.3 将字面量注入到构造器中："></a>2.4.3 将字面量注入到构造器中：</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"compactDisc"</span> <span class="attr">class</span>=<span class="string">"com.soundsys.BlackDisc"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">"title"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">"The Beatles"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用 value 属性，将给定的值注入到构造器中。</p>
+<h4 id="2-4-3-装配集合"><a href="#2-4-3-装配集合" class="headerlink" title="2.4.3 装配集合"></a>2.4.3 装配集合</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beat"</span> <span class="attr">class</span>=<span class="string">"com.soundsys.beat"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">"The Beatles"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">        	<span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"bean1"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"bean2"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"bean3"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beat"</span> <span class="attr">class</span>=<span class="string">"com.soundsys.beat"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">"The Beatles"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>SgtPeppers<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>The Beatles<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用两者的区别就是 list 和 set 会忽略重复元素。</p>
+<h4 id="2-4-4-p命名空间"><a href="#2-4-4-p命名空间" class="headerlink" title="2.4.4 p命名空间"></a>2.4.4 p命名空间</h4><p><a href="https://blog.csdn.net/elim168/article/details/74516439" target="_blank" rel="noopener">p命名空间和c命名空间</a></p>
+<h4 id="2-4-5-导入混合配置"><a href="#2-4-5-导入混合配置" class="headerlink" title="2.4.5 导入混合配置"></a>2.4.5 导入混合配置</h4><p>在 JavaConfig 中引用 JavaConfig 配置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Import</span>(CDConfig<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">CDPlayerConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CDPlayer <span class="title">cdPlayer</span><span class="params">(CompactDisc disc)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CDPlayer(disc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Import</span>(CDPlayerConfig<span class="class">.<span class="keyword">class</span>, <span class="title">CDConfig</span>.<span class="title">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">SoundSysConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>新建一个配置类，使用@Import导入两个配置类。</p>
+<p>在JavaConfig中引入XML配置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Import</span>(CDPlayerConfig<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line">@ImportResource("classpath:cd-config.xml")</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SoundSysConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在XML配置中引用XML配置：</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"cd-config.xml"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"cdPlayer"</span> <span class="attr">class</span>=<span class="string">"com.soundsys.CDPlayer"</span> <span class="attr">c:cd-ref</span>=<span class="string">"compactDisc"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在XML中引入JavaConfig配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.soundsys.CDConfig"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"cdPlayer"</span> <span class="attr">class</span>=<span class="string">"com.soundsys.CDPlayer"</span> <span class="attr">c:cd-ref</span>=<span class="string">"compactDisc"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>或者：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.soundsys.CDConfig"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"cdplayer-config.xml"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>新建一个配置文件，分别导入JavaConfig配置和XML配置。</p>
+<hr>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><blockquote>
+<p>Spring框架的核心是Spring容器，负责管理应用中组件的生命周期，它会创建这些组件并保证它们的依赖能够得到满足。</p>
+<p>尽可能使用自动配置，以避免显式配置带来的维护成本。</p>
+<p>如果确实需要显式配置，应优先选择基于Java的配置，因为其更加强大、类型安全且易于重构。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2018/11/17/Spring学习笔记-第二章-装配Bean/" data-id="ck3x5pep60029zu5xtswhu3q6"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-LeetCode子单链表重排序" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -141,7 +324,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode子单链表重排序/" data-id="ck3v4ixki0016fh5xdi7m4lz4"
+      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode子单链表重排序/" data-id="ck3x5peoo0019zu5xn2wcsk95"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -221,7 +404,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode子二叉树非递归前序遍历/" data-id="ck3v4ixkh0015fh5xog2vtlii"
+      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode子二叉树非递归前序遍历/" data-id="ck3x5peom0015zu5x1yy2h424"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -301,7 +484,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode之二叉树非递归后续遍历/" data-id="ck3v4ixke0011fh5xu9u2z4op"
+      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode之二叉树非递归后续遍历/" data-id="ck3x5peor001ezu5xmpewt5o7"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -380,7 +563,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/16/LeetCode之链表插入排序/" data-id="ck3v4ixka000tfh5x5idv0p38"
+      <a data-url="https://www.youyou-2608.com/2018/11/16/LeetCode之链表插入排序/" data-id="ck3x5peof000uzu5xsbla2w5g"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -545,7 +728,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/14/Spring学习笔记-第一章-Spring之旅/" data-id="ck3v4ixko001ifh5xfrubv81j"
+      <a data-url="https://www.youyou-2608.com/2018/11/14/Spring学习笔记-第一章-Spring之旅/" data-id="ck3x5peoy001tzu5xtakwsnk0"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -620,7 +803,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/11/LeetCode之水仙花数/" data-id="ck3v4ixkc000xfh5xqj947kgc"
+      <a data-url="https://www.youyou-2608.com/2018/11/11/LeetCode之水仙花数/" data-id="ck3x5peok0011zu5x6my8r2pt"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -655,7 +838,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2019 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">65.5k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">67k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 
