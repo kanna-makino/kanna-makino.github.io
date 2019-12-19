@@ -1,5 +1,4 @@
 https://www.youyou-2608.com/2019/12/19/肺结核-大学老师/
-https://www.youyou-2608.com/2019/12/19/肺结核 && 大学老师/
 https://www.youyou-2608.com/2019/12/18/奇文共欣赏：“梁家河大学问”课题公告/
 https://www.youyou-2608.com/2019/12/17/将YouTube直播转播到bilibili的想法及尝试/
 https://www.youyou-2608.com/2019/12/08/《彼时彼地》/
@@ -28,3 +27,4 @@ https://www.youyou-2608.com/2019/06/11/给树莓派安装Ubuntu-MATE系统/
 https://www.youyou-2608.com/2019/06/09/再记Hexo博客恢复/
 https://www.youyou-2608.com/2019/06/09/酸酸乳搭建小记/
 https://www.youyou-2608.com/2019/05/27/05-26周记/
+https://www.youyou-2608.com/2019/05/19/我在JavaScript中踩过的坑/
