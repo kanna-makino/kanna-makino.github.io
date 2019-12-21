@@ -61,6 +61,97 @@
       
         
 
+<article id="post-酸酸乳搭建小记" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/06/09/酸酸乳搭建小记/">酸酸乳搭建小记</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/06/09/酸酸乳搭建小记/" class="article-date">
+  <time datetime="2019-06-09T10:38:33.000Z" itemprop="datePublished">06-09-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/推墙/">推墙</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <p>酸酸乳搭建过程小记</p>
+<p>ss现在算是完全被识别了，去年11月在同事的推荐下用了 <a href="https://go.cloudss.org" target="_blank" rel="noopener">云影vpn</a> ，一个月3美元，15G流量，对于平时上上Twitter，stackoverflow来说，完全足够了，每月都能剩下一半多流量。但是想着自己一边花钱用着慢速网，自己的国外vps却闲着没事干，还是利用以下吧，节约资源。</p>
+<h2 id="客户端："><a href="#客户端：" class="headerlink" title="客户端："></a>客户端：</h2><p>首先，下载脚本到 /usr/local/ssr ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo git clone https://github.com/ssrbackup/shadowsocksr /usr/local/ssr</span><br></pre></td></tr></table></figure>
+
+<p>然后执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/ssr &amp;&amp; ./initcfg.sh</span><br></pre></td></tr></table></figure>
+
+<p>会看到生成了一个配置文件 <code>user-config.json</code> ，你可以将它复制到 <code>/etc/ssr-config.json</code></p>
+<p>修改配置文件 <code>sudo vi /etc/ssr-config.json</code></p>
+<p>大致前面几项需要配置一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&quot;server&quot;: &quot;******&quot;, // 代理服务地址</span><br><span class="line">&quot;server_ipv6&quot;: &quot;::&quot;,</span><br><span class="line">&quot;server_port&quot;: 11873, // 端口号</span><br><span class="line">&quot;local_address&quot;: &quot;127.0.0.1&quot;, //本地socks5监听地址 </span><br><span class="line">&quot;local_port&quot;: 1080,//本地socks5代理端口</span><br><span class="line"></span><br><span class="line">&quot;password&quot;: &quot;xxxxxx&quot;, //密码</span><br><span class="line">&quot;method&quot;: &quot;rc4-md5&quot;,//加密方式</span><br><span class="line">&quot;protocol&quot;: &quot;xxxxx&quot;,//协议</span><br><span class="line">&quot;protocol_param&quot;: &quot;xxxxxx&quot;,//协议参数</span><br><span class="line">&quot;obfs&quot;: &quot;xxxxxx&quot;,//混淆方式</span><br><span class="line">&quot;obfs_param&quot;: &quot;xxxxxxxx&quot;,//混淆参数</span><br></pre></td></tr></table></figure>
+
+<p>执行命令启动客户端：</p>
+<p> <code>sudo python shadowsocks/local.py -c /etc/ssr-config.json</code></p>
+<p>启动成功后，按 <kbd>ctrl</kbd> + <kbd>z</kbd> 切换出来，再用 <code>jobs</code> 查看任务编号，使用 <code>bg %编号</code> 后台运行；</p>
+<p>可以通过 <code>jobs</code> 看到后台任务，可以通过 <code>fg %编号</code> 切换进去。</p>
+<h2 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h2><p>执行下面的命令获取脚本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; sudo bash ssr.sh</span><br></pre></td></tr></table></figure>
+
+<p>依照提示完成服务端各个参数的配置即可监听服务。</p>
+<p>Enjoy it !</p>
+<hr>
+<p>之前搭建的ss才用了不到三天，连服务器ip都被和谐了，ssr用了一两个星期还健在，应该能支撑一段时间吧。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2019/06/09/酸酸乳搭建小记/" data-id="ck4f7alr30062hq5xt015cdky"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/推墙/">推墙</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-05-26周记" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -124,7 +215,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/27/05-26周记/" data-id="ck4cwlzwb0001pk5x1s3wazax"
+      <a data-url="https://www.youyou-2608.com/2019/05/27/05-26周记/" data-id="ck4f7aloe0008hq5xp31caap3"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活记录/">生活记录</a></li></ul>
@@ -217,7 +308,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/19/我在JavaScript中踩过的坑/" data-id="ck4cwlzz3004upk5xw5lfo6bk"
+      <a data-url="https://www.youyou-2608.com/2019/05/19/我在JavaScript中踩过的坑/" data-id="ck4f7alql0053hq5xvdkkzyzf"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -310,7 +401,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/15/Java注解简单例子/" data-id="ck4cwlzx0000kpk5x8xr01to8"
+      <a data-url="https://www.youyou-2608.com/2019/05/15/Java注解简单例子/" data-id="ck4f7alom000ghq5xsn1n6tj4"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -399,7 +490,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/12/从两次毕设题目和要求说说我的感受/" data-id="ck4cwlzy6002wpk5xlosy3dio"
+      <a data-url="https://www.youyou-2608.com/2019/05/12/从两次毕设题目和要求说说我的感受/" data-id="ck4f7alpt0032hq5xyq2uyu72"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活记录/">生活记录</a></li></ul>
@@ -474,7 +565,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/12/ajax返回error可能原因分析/" data-id="ck4cwlzxs0020pk5xahe72mr4"
+      <a data-url="https://www.youyou-2608.com/2019/05/12/ajax返回error可能原因分析/" data-id="ck4f7alpn002lhq5xgux28ddi"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li></ul>
@@ -579,88 +670,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/29/Spring-Boot中使用Swagger2构建强大的RESTful-API文档/" data-id="ck4cwlzxi001hpk5xvqv283yk"
+      <a data-url="https://www.youyou-2608.com/2019/04/29/Spring-Boot中使用Swagger2构建强大的RESTful-API文档/" data-id="ck4f7alp9001mhq5x80sj72jy"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-记一次Tomcat-8005端口Cannot-assign-requested-address的经历" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/">记一次Tomcat 8005端口Cannot assign requested address的经历</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/" class="article-date">
-  <time datetime="2019-04-24T14:53:39.000Z" itemprop="datePublished">04-24-2019</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Exp/">Exp</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <p>记一次Tomcat 8005端口Cannot assign requested address : Jvm Bind的经历</p>
-<p>一个正在做毕设的老乡遇到的问题：Tomcat启动的时候，报了[8005] Jvm Bind相关的异常，大概内容是端口已被占用的意思。</p>
-<p>一. 先从运行/bin/shutdown.bat，再次关闭Tomcat，重新启动问题依然存在；</p>
-<p>二. netstat -ano查看端口使用情况，未发现8080,8009,8005相关的端口被占用；</p>
-<p>三. 打开任务管理器，确认javaw.exe未在运行，问题依然存在；</p>
-<p>四. 重启机器，问题依然存在；</p>
-<p>五. 参照：[<a href="https://www.cnblogs.com/heshan664754022/p/3807672.html" target="_blank" rel="noopener">Tomcat启动报错:严重: StandardServer.await: create[8005] java.net.BindException: Cannot assign requested address</a>](<a href="https://www.cnblogs.com/heshan664754022/p/3807672.html" target="_blank" rel="noopener">https://www.cnblogs.com/heshan664754022/p/3807672.html</a>) ， ping了localhost，发现收到的响应来自ipp[47.89.54.215]，打开C:/windows/system32/drivers/etc/hosts，发现以下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">47.89.54.215       localhost</span><br><span class="line">47.89.54.215	hao.360.cn</span><br><span class="line">47.89.54.215	www.hao123.com</span><br><span class="line">47.89.54.215	www.3600.com</span><br><span class="line">47.89.54.215	www.114la.com</span><br><span class="line">47.89.54.215	www.duba.com</span><br><span class="line">47.89.54.215	www.hao360.cn</span><br><span class="line">47.89.54.215	123.sogou.com</span><br><span class="line">47.89.54.215	web.sogou.com</span><br><span class="line">47.89.54.215	www.hao123.cn</span><br><span class="line">47.89.54.215	hao.qq.com</span><br><span class="line">47.89.54.215	www.1616.net</span><br><span class="line">47.89.54.215	hao.rising.cn</span><br><span class="line">47.89.54.215	daohang.qq.com</span><br></pre></td></tr></table></figure>
-
-<p>看到daohang.qq，hao123，duba，hao360，123.sougou之类的字眼，瞬间一阵悲痛袭来，曾经那个“为什么国内流氓软件那么多？”的问题又浮现在脑海，想起了百度所谓的“中国用户愿意用隐私换效率”。</p>
-<p><img src="https://image.youyou-2608.com//hexo%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190424144325.jpg" alt="隐私换效率，生活更便利-变态辣椒"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/" data-id="ck4cwlzzk0060pk5xg8xc9jjh"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li></ul>
 
     </footer>
 
@@ -692,7 +705,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2019 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">71.6k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">73.2k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 
