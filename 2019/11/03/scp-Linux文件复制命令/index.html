@@ -77,31 +77,30 @@
 </blockquote>
 <a id="more"></a>
 
-
+<br>
 
 <h2 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h2><ul>
 <li>-P: 端口号</li>
 <li>-r: 递归复制   </li>
 </ul>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 上传文件</span><br><span class="line">scp -r -P xxxx /home/local_user/file_path remote_user@remote_host_addr:/home/remote_user/file_path</span><br><span class="line"></span><br><span class="line"># 下载文件时将 source 和 target 调换一下</span><br><span class="line">scp -r -P xxxx remote_user@remote_host_addr:/home/remote_user/file_path /home/local_user/file_path</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 上传文件</span></span><br><span class="line">scp -r -P xxxx /home/local_user/file_path remote_user@remote_host_addr:/home/remote_user/file_path</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载文件时将 source 和 target 调换一下</span></span><br><span class="line">scp -r -P xxxx remote_user@remote_host_addr:/home/remote_user/file_path /home/local_user/file_path</span><br></pre></td></tr></table></figure>
+
+<br>
 
 <h2 id="Permission-denied-问题"><a href="#Permission-denied-问题" class="headerlink" title="Permission denied 问题"></a>Permission denied 问题</h2><p>今天下午上传文件到服务器的时候一直报这个错：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scp -P xxxx file.torrent test@test:/home</span><br><span class="line"></span><br><span class="line"># 输出</span><br><span class="line">test@test.com&apos;s password: </span><br><span class="line">scp: /home/25316538e6498c7645e3da963253977d.torrent: Permission deniedv</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scp -P xxxx file.torrent <span class="built_in">test</span>@<span class="built_in">test</span>:/home</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="built_in">test</span>@test.com<span class="string">'s password: </span></span><br><span class="line"><span class="string">scp: /home/25316538e6498c7645e3da963253977d.torrent: Permission deniedv</span></span><br></pre></td></tr></table></figure>
 
 <p>保证密码输入正确并且重试了好几次都报同样的错，才想起来以前遇到这个问题，是因为当前用户对目标目录没有操作权限导致的，只要把目标路径改到当前用户目录下就好了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -P xxxx file.torrent test@test:/home/test/Downloads</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -P xxxx file.torrent <span class="built_in">test</span>@<span class="built_in">test</span>:/home/<span class="built_in">test</span>/Downloads</span><br></pre></td></tr></table></figure>
 
 <p>》》 <a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/scp.html" target="_blank" rel="noopener">18. scp 跨机远程拷贝</a></p>
-<p>》》<a href="https://curazy.com/archives/241713" target="_blank" rel="noopener">Twitterで大盛り上がりの「制作・著作 NHK」で締める大喜利に爆笑 11選</a></p>
-<p>終</p>
-<p>制作・著作</p>
-<p>━━━━━</p>
-<p>ⓃⒽⓀ</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/11/03/scp-Linux文件复制命令/" data-id="ck4f7alpj002ahq5xc29rd7ye"
+      <a data-url="https://www.youyou-2608.com/2019/11/03/scp-Linux文件复制命令/" data-id="ck4o5uhuj0027z55x3cd3cct1"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -148,7 +147,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2019 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">73.2k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">75k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 

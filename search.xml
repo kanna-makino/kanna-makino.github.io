@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>超高速（弱智）开发工具——Kintone</title>
+    <url>/2019/12/27/%E8%B6%85%E9%AB%98%E9%80%9F%EF%BC%88%E5%BC%B1%E6%99%BA%EF%BC%89%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E2%80%94%E2%80%94Kintone/</url>
+    <content><![CDATA[<p>11月份开始进入一个“太平洋建筑”的项目。预料之中，这个项目也用了和去年那个项目类似的开发工具，叫做“Kintone”，一个日本公司开发的工具。有个中国官网，但是网上一查，还是日本鬼子用的最多，想靠这种应对劳动力减少的弱智工具赚世界第一人口大国的钱，鬼子们真是想得太多。</p>
+<p>据说是为了降低开发门槛，让即使在技术方面一无所知只要对业务了解的人也能做开发。我翻译了一下：让不懂技术的人继续不懂技术、让懂点技术的人也变得不懂技术。</p>
+<a id="more"></a>
+
+<br>
+
+<h2 id="公司的技术趋势"><a href="#公司的技术趋势" class="headerlink" title="公司的技术趋势"></a>公司的技术趋势</h2><p>去年七月份入职，刚好赶上公司开了一个“超高速”开发的项目，从头到尾做了九个多月的时间，一直从开发到单元测试再到系统测试。从那之后，“超高速”开发就成了公司的发展方向，越来越多的引入相关工具。公司的现状以及发展方向成了我离职的最大考虑因素。如果想要在技术上更上一层楼，那仅仅停留在会使用工具这个层次，是永远达不到你的理想的。除非你打算在这个公司工作到它倒闭或者是你老死，不然留下绝对不是最好的选择。</p>
+<p>我很庆幸刚好赶上年底的这个契机。</p>
+<br>
+
+<h2 id="领导的想法"><a href="#领导的想法" class="headerlink" title="领导的想法"></a>领导的想法</h2><p>项目的领导对这个工具赞不绝口，总是会跟我们说这个工具多么高效多么便利。我一直担心是自己了解得不够深入，不敢做出自己的评价。后来想了想，一个在这个行业已经做了十多年还问我“js怎么当前时间转换成YYYY-MM-DD的字符串”这种问题的人，想必一路走来也没写过几行代码，就我近两个月的观察，他每天的工作内容不过是分配任务、改一下计划完成日以及每天和旁边的女生分享他自认为“辉煌”的过去罢了。</p>
+<p>能让毫无开发经验的人也能上手的开发工具，换句话说有开发经验的人用上一段时间也会变得没有开发经验。确实，你只需要会声明一个变量，会给变量赋值，至于那些高深的知识，你不用了解，因为你了解了也用不上。</p>
+<br>
+
+<h2 id="存取数据"><a href="#存取数据" class="headerlink" title="存取数据"></a>存取数据</h2><p>这个弱智工具最大的特点应该就是没有数据库了吧，据说是为了让公司的人在哪儿都能访问数据。我其实有点不太理解，难道用了MySQL、SQL Server的项目就无法在公司之外访问数据了？有这种疑问，大概是我了解得少的原因吧。没有数据库真的很难受，刚进入这个项目的时候，本来想找个数据库设计书看看，大概了解一下业务，结果没有。每个页面上的所有数据项大概对应一张表的样子，但是各个页面之间的关联关系，是一对一还是一对多还是多对多，并没有白字黑字的定义。那写代码了想知道这个关系怎么办，只能问了解的人，想想就觉得弱智。</p>
+<br>
+
+<h2 id="数据的安全性"><a href="#数据的安全性" class="headerlink" title="数据的安全性"></a>数据的安全性</h2><p>数据都存在这个工具的运营方的服务器上，项目的域名也是工具运营方提供的。按照我的理解，应该是所有的数据在工具提供方来看都是透明的，如果真是这样的话，那客户业务里那些机密非机密数据还有区别吗？对本公司员工分机密对其他的公司的人却全部可见？谁能保证工具开发方即将要跑路的程序员不会把这些数据也打包带走然后泄漏出去？？</p>
+<p>因为整个项目都是js实现的，根据权限不同可能会把某个详情页面某些数据项给隐藏掉，不过仅仅接收到数据之后隐藏掉HTML元素。在HTTP请求数据的时候，参数只有查询条件并没有权限验证，也就是说，只要使用这个系统的人稍微懂点JavaScript知识的话，整个项目产生的数据对他来说就是全部可见的。</p>
+<p>另外就是页面上某些项目的可编辑和只读，按钮的disabled都是js控制的，随便在控制台里加几行代码就能随心所欲、为所欲为，不过比较讽刺的是，一个项目一群级别比我高一级两级甚至三级，工作了十来年的人，竟然不会控制台调试，神仙。</p>
+<p>如果我理解没错的话，那客户花了这么多钱买这么个垃圾玩意，真替他们不值。</p>
+<br>
+
+<h2 id="严重的性能问题"><a href="#严重的性能问题" class="headerlink" title="严重的性能问题"></a>严重的性能问题</h2><p>数据存在其他公司的服务器上还会导致严重的性能问题。正常项目中的一次数据库查询操作，在这里变成了一个HTTP请求，相比于一次HTTP请求200ms~300ms，一次数据库操作所花的时间那几乎是微乎其微了，更何况数据库还有池、缓存这些技术可用。前两天做了一个Excel文件的下载，统计一个月整个公司项目的进度状况，很简单的几个操作却花了20分钟才收集完所有数据。</p>
+<p>不支持表连接。当需要多个表的数据的时候，请求量会暴增，尤其是一些比我级别高的人Developer2的人的代码里，还在for循环里请求数据，看着都觉得心疼。</p>
+<p>可能是出于吞吐量的方便的考虑，一次请求的数据量默认只有100条，最大不能超过500条。目前所有的功能数据量都按照小于500条去取，这个假设也是让我摸不着头脑，真是世界之大，无奇不有。</p>
+<br>
+
+<h2 id="同事的现状"><a href="#同事的现状" class="headerlink" title="同事的现状"></a>同事的现状</h2><p>我也不知道公司到底是缺人到了什么地步，招了一个研究生过来，连 <code>int a = 0;</code>  都不会，使用变量之前要赋值都不懂。最重要的是因为学历比我高，所以工资也比我高。每天悠闲到无聊的领导可能觉得还挺开心，终于有点事情做了，每天花上3、4个小时给女研究生从声明变量开始讲起。每次他们一开始，我就觉得心里无比痛苦，觉得自己是个废物，每次都想拔出水果刀朝自己来几刀，虽然最终还是选择去阳台缓一缓。</p>
+<br>
+
+<h2 id="久违的离职邮件"><a href="#久违的离职邮件" class="headerlink" title="久违的离职邮件"></a>久违的离职邮件</h2><p>从3月份到9月份走了很多人，几乎每周五都能收到离职邮件，但是似乎因为到了年底大家都想捞个年终奖的缘故，似乎很久没有收到离职邮件了。</p>
+<p>下周就要离职了，我终于可以发出这封已经想好很久的离职邮件了。</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>公司年会的一些感想</title>
     <url>/2019/12/21/%E5%85%AC%E5%8F%B8%E5%B9%B4%E4%BC%9A%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/</url>
     <content><![CDATA[<p>十一月份进入这个项目已经快两个月了，因为工作内容的问题，做得一点也不舒心。之所以还没有跑路，仅仅是因为年末还有年终奖和13薪，想着就剩下几天走了，岂不是太亏了吗？和谁过不去也别和钱过不去。</p>
@@ -489,26 +533,25 @@
 </blockquote>
 <a id="more"></a>
 
-
+<br>
 
 <h2 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h2><ul>
 <li>-P: 端口号</li>
 <li>-r: 递归复制   </li>
 </ul>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 上传文件</span><br><span class="line">scp -r -P xxxx /home/local_user/file_path remote_user@remote_host_addr:/home/remote_user/file_path</span><br><span class="line"></span><br><span class="line"># 下载文件时将 source 和 target 调换一下</span><br><span class="line">scp -r -P xxxx remote_user@remote_host_addr:/home/remote_user/file_path /home/local_user/file_path</span><br></pre></td></tr></table></figure>
+<br>
+
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 上传文件</span></span><br><span class="line">scp -r -P xxxx /home/local_user/file_path remote_user@remote_host_addr:/home/remote_user/file_path</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载文件时将 source 和 target 调换一下</span></span><br><span class="line">scp -r -P xxxx remote_user@remote_host_addr:/home/remote_user/file_path /home/local_user/file_path</span><br></pre></td></tr></table></figure>
+
+<br>
 
 <h2 id="Permission-denied-问题"><a href="#Permission-denied-问题" class="headerlink" title="Permission denied 问题"></a>Permission denied 问题</h2><p>今天下午上传文件到服务器的时候一直报这个错：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">scp -P xxxx file.torrent test@test:/home</span><br><span class="line"></span><br><span class="line"># 输出</span><br><span class="line">test@test.com&apos;s password: </span><br><span class="line">scp: /home/25316538e6498c7645e3da963253977d.torrent: Permission deniedv</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scp -P xxxx file.torrent <span class="built_in">test</span>@<span class="built_in">test</span>:/home</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="built_in">test</span>@test.com<span class="string">'s password: </span></span><br><span class="line"><span class="string">scp: /home/25316538e6498c7645e3da963253977d.torrent: Permission deniedv</span></span><br></pre></td></tr></table></figure>
 
 <p>保证密码输入正确并且重试了好几次都报同样的错，才想起来以前遇到这个问题，是因为当前用户对目标目录没有操作权限导致的，只要把目标路径改到当前用户目录下就好了。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">scp -P xxxx file.torrent test@test:/home/test/Downloads</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scp -P xxxx file.torrent <span class="built_in">test</span>@<span class="built_in">test</span>:/home/<span class="built_in">test</span>/Downloads</span><br></pre></td></tr></table></figure>
 
 <p>》》 <a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/scp.html" target="_blank" rel="noopener">18. scp 跨机远程拷贝</a></p>
-<p>》》<a href="https://curazy.com/archives/241713" target="_blank" rel="noopener">Twitterで大盛り上がりの「制作・著作 NHK」で締める大喜利に爆笑 11選</a></p>
-<p>終</p>
-<p>制作・著作</p>
-<p>━━━━━</p>
-<p>ⓃⒽⓀ</p>
 ]]></content>
       <tags>
         <tag>学习笔记</tag>
@@ -547,12 +590,6 @@
 <p> 今年完不成的目标，就留到明年再去完成吧。说不定运气好明年死了的话，就不用完成了。</p>
 </blockquote>
 <p><img src="https://image.youyou-2608.com/blog/20191102/QQ20191102-172611.png" alt="QQ20191102-172611"></p>
-<p><a href="https://kimu3.net/20190228/13238" target="_blank" rel="noopener">「終 制作・著作 NHK」の元ネタ・初出・流行のきっかけは？</a></p>
-<p>​                                                                                                                                                          </p>
-<p>​                                                                                                                                        <strong>終</strong></p>
-<p>​                                                                                                                                        <strong>制作・著作</strong></p>
-<p>​                                                                                                                                        <strong>—————</strong></p>
-<p>​                                                                                                                                        <strong>ⓃⒽⓀ</strong></p>
 ]]></content>
       <categories>
         <category>生活记录</category>
@@ -1460,9 +1497,9 @@
     <title>在新机器中恢复Hexo博客</title>
     <url>/2019/03/03/%E5%9C%A8%E6%96%B0%E6%9C%BA%E5%99%A8%E4%B8%AD%E6%81%A2%E5%A4%8DHexo%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h2 id="在新机器上恢复Hexo博客"><a href="#在新机器上恢复Hexo博客" class="headerlink" title="在新机器上恢复Hexo博客"></a>在新机器上恢复Hexo博客</h2><h3 id="准备源文件"><a href="#准备源文件" class="headerlink" title="准备源文件"></a>准备源文件</h3><p>可以备份到github或者coding，或者使用云盘同步（例如坚果云）。</p>
-<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span>#安装npm</span><br><span class="line">sudo apt install npm</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>#安装hexo</span><br><span class="line">sudo apt install -g hexo-cli</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>#克隆源文件</span><br><span class="line">git clone user@github.com/repo/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>#在仓库中添加SSH key</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>#安装部署插件</span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>#RSS订阅插件</span><br><span class="line">npm install hexo-generator-feed --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>#站点地图插件</span><br><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>#安装本地服务器</span><br><span class="line">npm install hexo-server --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>#生成index.html插件</span><br><span class="line"><span class="meta">$</span> npm install hexo-generator-archive --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>#搜索功能插件</span><br><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装npm</span></span></span><br><span class="line">sudo apt install npm</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装hexo</span></span></span><br><span class="line">sudo apt install -g hexo-cli</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#克隆源文件</span></span></span><br><span class="line">git clone user@github.com/repo/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#在仓库中添加SSH key</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装部署插件</span></span></span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#RSS订阅插件</span></span></span><br><span class="line">npm install hexo-generator-feed --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#站点地图插件</span></span></span><br><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装本地服务器</span></span></span><br><span class="line">npm install hexo-server --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#生成index.html插件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-generator-archive --save</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#搜索功能插件</span></span></span><br><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
 
-<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line"><span class="meta">#</span>#预览</span><br><span class="line">hexo s</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#预览</span></span></span><br><span class="line">hexo s</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
 
 <h3 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h3><p>遇到一个问题：生成后访问 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 出现白版和”Cannot GET /“，”/“是因为在public 目录下少了index.html文件，再次生成还是无效后，确认是少了组件：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-index</span><br></pre></td></tr></table></figure>
