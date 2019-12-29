@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    05-26周记 |
+    OpenCV打不开摄像头:Process finished with exit code 134 |
     
     Kanna-Makino</title>
   
@@ -27,7 +27,7 @@
   <section class="outer">
   
 
-<article id="post-05-26周记" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-OpenCV打不开摄像头-Process-finished-with-exit-code-134" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -35,7 +35,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      05-26周记
+      OpenCV打不开摄像头:Process finished with exit code 134
     </h1>
   
   
@@ -48,12 +48,12 @@
 
     
       <div class="article-meta">
-        <a href="/2019/05/27/05-26周记/" class="article-date">
-  <time datetime="2019-05-26T23:24:31.000Z" itemprop="datePublished">05-27-2019</time>
+        <a href="/2019/12/29/OpenCV打不开摄像头-Process-finished-with-exit-code-134/" class="article-date">
+  <time datetime="2019-12-29T09:07:45.000Z" itemprop="datePublished">12-29-2019</time>
 </a>
         
   <div class="article-category">
-    <a class="article-category-link" href="/categories/生活记录/">生活记录</a>
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
   </div>
 
       </div>
@@ -73,30 +73,33 @@
 
       
       
-        <p>忙碌的一周</p>
-<p>加班还在继续。尽管每天多上3个小时的班，但是一周仿佛还是一样的短，周一到周末也就是一眨眼间。</p>
-<p>冬天里穿单衣，夏天里披外套。大概是因为公司的空调温度太低，周三周四有点感冒发烧的症状，上班的时候头疼而且眼睛也特别不舒服，好在早早的睡了两天之后又恢复了正常。意外的进了这个项目打断了原本才开始几天的锻炼计划，照现在情况看，大概是要到9月份去了，想想都还要远着呢，不知道哪天是个头。</p>
-<p>似乎这两年什么事情都不顺利，总是事与愿违。在学校每天努力学习，成绩却徘徊在中等；最讨厌外包，最终却做了外包；最不想做测试，偏偏公司只有测试；想工资高点，却偏偏一个月3500。</p>
-<p>明明每天不停地学习，从语言到框架，书买了一大堆。却最终还是和 <strong>public, protected, private</strong> 都没搞明白的five们拿着分毫不差的工资。我是一个想做第一也愿意付出努力的人，但是始终没有找到这其中的原因。总之，先做到年底，然后离开这个公司吧。</p>
-<p>想着从明天开始又是连续三周的测试，真的很头疼，我宁愿写五天代码，也不想做一天测试。</p>
-<p>上周周四一下收到三封离职邮件，都是工作了5年多的人。我也想过，如果自己在这里工作5年，5年后我会是什么样？不敢想象，估计在技术上和一个用心学过技术的应届生应该不会有太大的差别。据我的观察，公司真正懂点技术的人也就三五个，其他有点工作经验人的八成都是five。</p>
-<p>又是忙碌的周末。周六学妹来我这里写了一下午一晚上的代码。有个人陪在身边确实是很好的感觉。而且她也是懂些东西的人，从她那里学到不少新的东西。</p>
-<p>晚上一起出去吃了饭，回来写代码差不多到10点才送她回的学校，希望她7月份入职后能像她说的那样住得近一些。</p>
-<p>帮她做了OpenOffice的转换，pdf文件转换，今天又忙了一天，还差弹窗显示这个功能了。看了腾讯微云是弹窗，还得仔细研究研究。</p>
-<p>晚上还给一个大四的老乡解决了 项目名更改重新发布，更改数据库名 的问题，唉，总感觉她的思路很怪，页面打不开为什么不去找页面为什么打不开而是打开微信跟别人说页面打不开，遇到问题不会去思考解决问题的办法，明明数据库连接就这么几行代码，自己不去仔细读相关代码，而是打开微信提问，提问吧还不说起因经过和现场，就一句“页面打不开”…罢了罢了。</p>
-<p>昨天晚上送学妹回学校以后在不经意间发现B站竟然买下了《轻音少女》的版权，而且第一季第二季和剧场版都买了，真的很开心，我突然想让陈睿他🐎复活了。但是还是要充会员才能看，充钱是不可能充钱的了，这辈子也不可能给Bilibili矿业充钱的。</p>
-<p>累了，思维有点混乱了，玩玩手机睡觉吧。</p>
-<hr>
-<p>一个周末就过去了。</p>
-<p>房间里又只剩下了键盘的响声。</p>
+        <p>报错信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Process finished with exit code 134 (interrupted by signal 6: SIGABRT)</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<br>
+
+<p>一个在树莓派上完全没有问题的打开摄像头的脚本，在笔记本上跑时报错，摄像头无法打开：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># _*_ coding:utf-8 _*_</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"></span><br><span class="line">camera = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    ret, frame = camera.read()</span><br><span class="line">    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line">    cv2.imshow(<span class="string">'frame'</span>, frame)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>这个问题困扰了很久，外网上查了很久也没有找到解决方案。因为树莓派上挂了摄像头，插拔不是很方便，并且公司的显示器是VGA接口，所以今天出门没带树莓派。下午打开PyCharm想继续学习一下OpenCV，但是又被这个错给拦住了。</p>
+<p><img src="https://image.youyou-2608.com/blog/20191229/WX20191229-170630@2x.png" alt="报错信息"></p>
+<p>无意间想到会不会是Python没有权限调用系统摄像头导致的，然后在终端用管理员权限跑一下这个脚本，然后系统弹出一个弹窗，大概意思是询问<strong>“是否允许Python调用摄像头”</strong>，我还想思考一会儿，然后终端就报错了：</p>
+<p><img src="https://image.youyou-2608.com/blog/20191229/WX20191229-170653@2x.png" alt="报错信息"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Process finished with exit code 134 (interrupted by signal 6: SIGABRT)</span><br></pre></td></tr></table></figure>
+
+<p>原来之前一直都是因为权限的原因，然后点了允许，之后就不报错了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/27/05-26周记/" data-id="ck4qt2awb00003w5xls2k48gy"
+      <a data-url="https://www.youyou-2608.com/2019/12/29/OpenCV打不开摄像头-Process-finished-with-exit-code-134/" data-id="ck4qt2axi001l3w5xecaiqpxh"
          class="article-share-link">分享</a>
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活记录/">生活记录</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
 
     </footer>
 
@@ -106,19 +109,10 @@
     
   <nav class="article-nav">
     
-      <a href="/2019/06/09/酸酸乳搭建小记/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            酸酸乳搭建小记
-          
-        </div>
-      </a>
     
-    
-      <a href="/2019/05/19/我在JavaScript中踩过的坑/" class="article-nav-link">
+      <a href="/2019/12/27/超高速（弱智）开发工具——Kintone/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">我在JavaScript中踩过的坑</div>
+        <div class="article-nav-title">超高速（弱智）开发工具——Kintone</div>
       </a>
     
   </nav>

@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>OpenCV打不开摄像头:Process finished with exit code 134</title>
+    <url>/2019/12/29/OpenCV%E6%89%93%E4%B8%8D%E5%BC%80%E6%91%84%E5%83%8F%E5%A4%B4-Process-finished-with-exit-code-134/</url>
+    <content><![CDATA[<p>报错信息：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Process finished with exit code 134 (interrupted by signal 6: SIGABRT)</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<br>
+
+<p>一个在树莓派上完全没有问题的打开摄像头的脚本，在笔记本上跑时报错，摄像头无法打开：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># _*_ coding:utf-8 _*_</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"></span><br><span class="line">camera = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    ret, frame = camera.read()</span><br><span class="line">    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line">    cv2.imshow(<span class="string">'frame'</span>, frame)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>这个问题困扰了很久，外网上查了很久也没有找到解决方案。因为树莓派上挂了摄像头，插拔不是很方便，并且公司的显示器是VGA接口，所以今天出门没带树莓派。下午打开PyCharm想继续学习一下OpenCV，但是又被这个错给拦住了。</p>
+<p><img src="https://image.youyou-2608.com/blog/20191229/WX20191229-170630@2x.png" alt="报错信息"></p>
+<p>无意间想到会不会是Python没有权限调用系统摄像头导致的，然后在终端用管理员权限跑一下这个脚本，然后系统弹出一个弹窗，大概意思是询问<strong>“是否允许Python调用摄像头”</strong>，我还想思考一会儿，然后终端就报错了：</p>
+<p><img src="https://image.youyou-2608.com/blog/20191229/WX20191229-170653@2x.png" alt="报错信息"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Process finished with exit code 134 (interrupted by signal 6: SIGABRT)</span><br></pre></td></tr></table></figure>
+
+<p>原来之前一直都是因为权限的原因，然后点了允许，之后就不报错了。</p>
+]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>超高速（弱智）开发工具——Kintone</title>
     <url>/2019/12/27/%E8%B6%85%E9%AB%98%E9%80%9F%EF%BC%88%E5%BC%B1%E6%99%BA%EF%BC%89%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E2%80%94%E2%80%94Kintone/</url>
     <content><![CDATA[<p>11月份开始进入一个“太平洋建筑”的项目。预料之中，这个项目也用了和去年那个项目类似的开发工具，叫做“Kintone”，一个日本公司开发的工具。有个中国官网，但是网上一查，还是日本鬼子用的最多，想靠这种应对劳动力减少的弱智工具赚世界第一人口大国的钱，鬼子们真是想得太多。</p>

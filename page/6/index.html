@@ -61,6 +61,81 @@
       
         
 
+<article id="post-ajax返回error可能原因分析" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/05/12/ajax返回error可能原因分析/">ajax返回error可能原因分析</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/05/12/ajax返回error可能原因分析/" class="article-date">
+  <time datetime="2019-05-12T06:38:35.000Z" itemprop="datePublished">05-12-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Exp/">Exp</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <p>ajax总是进入error的可能原因</p>
+<p>后台返回：</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Successfully completed request</span><br></pre></td></tr></table></figure>
+
+<p>前端ajax总是执行error部分的代码。</p>
+<p>原因：</p>
+<p>后台只返回了 “success” 字符串，不是规范的json格式，所以没有执行预期逻辑。</p>
+<p>最好在后台返回 <strong>严格规范</strong> 的json防止此类错误。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2019/05/12/ajax返回error可能原因分析/" data-id="ck4qt2axp00203w5x3pje7sw5"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-Spring-Boot中使用Swagger2构建强大的RESTful-API文档" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -146,7 +221,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/29/Spring-Boot中使用Swagger2构建强大的RESTful-API文档/" data-id="ck4o5uhu3001az55xaj75mcu3"
+      <a data-url="https://www.youyou-2608.com/2019/04/29/Spring-Boot中使用Swagger2构建强大的RESTful-API文档/" data-id="ck4qt2axg001h3w5xpwy859dh"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -224,7 +299,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/" data-id="ck4o5uhw50068z55xl5pvglcv"
+      <a data-url="https://www.youyou-2608.com/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/" data-id="ck4qt2azi00693w5xzv45p0bn"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li></ul>
@@ -299,7 +374,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/09/IDEA-Terminal闪退/" data-id="ck4o5uhtn000dz55xdlk9aknu"
+      <a data-url="https://www.youyou-2608.com/2019/04/09/IDEA-Terminal闪退/" data-id="ck4qt2aww000f3w5xyd2hgkak"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li></ul>
@@ -385,7 +460,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/06/Git配置代理/" data-id="ck4o5uhtf0006z55xev8mf0nx"
+      <a data-url="https://www.youyou-2608.com/2019/04/06/Git配置代理/" data-id="ck4qt2awl00063w5x0ukrxsll"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li></ul>
@@ -468,7 +543,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/06/清明/" data-id="ck4o5uhvo0059z55xe8mbcdbu"
+      <a data-url="https://www.youyou-2608.com/2019/04/06/清明/" data-id="ck4qt2az8005j3w5xfbek7z3y"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活记录/">生活记录</a></li></ul>
@@ -561,87 +636,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/03/23/3月22日日记/" data-id="ck4o5uht60000z55xzrgthx9c"
+      <a data-url="https://www.youyou-2608.com/2019/03/23/3月22日日记/" data-id="ck4qt2awg00023w5x4hmnmi3f"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活记录/">生活记录</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-在新机器中恢复Hexo博客" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/03/03/在新机器中恢复Hexo博客/">在新机器中恢复Hexo博客</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/03/03/在新机器中恢复Hexo博客/" class="article-date">
-  <time datetime="2019-03-03T12:39:08.000Z" itemprop="datePublished">03-03-2019</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Hexo博客维护/">Hexo博客维护</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <h2 id="在新机器上恢复Hexo博客"><a href="#在新机器上恢复Hexo博客" class="headerlink" title="在新机器上恢复Hexo博客"></a>在新机器上恢复Hexo博客</h2><h3 id="准备源文件"><a href="#准备源文件" class="headerlink" title="准备源文件"></a>准备源文件</h3><p>可以备份到github或者coding，或者使用云盘同步（例如坚果云）。</p>
-<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装npm</span></span></span><br><span class="line">sudo apt install npm</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装hexo</span></span></span><br><span class="line">sudo apt install -g hexo-cli</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#克隆源文件</span></span></span><br><span class="line">git clone user@github.com/repo/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#在仓库中添加SSH key</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装部署插件</span></span></span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#RSS订阅插件</span></span></span><br><span class="line">npm install hexo-generator-feed --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#站点地图插件</span></span></span><br><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装本地服务器</span></span></span><br><span class="line">npm install hexo-server --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#生成index.html插件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-generator-archive --save</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#搜索功能插件</span></span></span><br><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
-
-<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#预览</span></span></span><br><span class="line">hexo s</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
-
-<h3 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h3><p>遇到一个问题：生成后访问 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 出现白版和”Cannot GET /“，”/“是因为在public 目录下少了index.html文件，再次生成还是无效后，确认是少了组件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-index</span><br></pre></td></tr></table></figure>
-
-<p>参见：<a href="https://www.jianshu.com/p/af83fc73e525" target="_blank" rel="noopener">【完美解决】Hexo博客出现“Cannot GET/xxx”错误</a></p>
-<p>吐槽一下coding和腾讯云之间的账号互通问题，一阵瞎引导，竟然创建了一个新账号，以前的项目找不回来，两个网站之间来回绕了几遍，无意间又用邮箱登录上去了，之前都是能自动跳转登录的，现在还和CSDN一样开始恰烂钱，强制绑定微信和手机号，无语。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/03/03/在新机器中恢复Hexo博客/" data-id="ck4o5uhv2003jz55xbvv87z44"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo博客维护/">Hexo博客维护</a></li></ul>
 
     </footer>
 
@@ -673,7 +671,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2019 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">75k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">75.3k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 

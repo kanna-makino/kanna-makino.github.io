@@ -61,6 +61,83 @@
       
         
 
+<article id="post-在新机器中恢复Hexo博客" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/03/03/在新机器中恢复Hexo博客/">在新机器中恢复Hexo博客</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/03/03/在新机器中恢复Hexo博客/" class="article-date">
+  <time datetime="2019-03-03T12:39:08.000Z" itemprop="datePublished">03-03-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hexo博客维护/">Hexo博客维护</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <h2 id="在新机器上恢复Hexo博客"><a href="#在新机器上恢复Hexo博客" class="headerlink" title="在新机器上恢复Hexo博客"></a>在新机器上恢复Hexo博客</h2><h3 id="准备源文件"><a href="#准备源文件" class="headerlink" title="准备源文件"></a>准备源文件</h3><p>可以备份到github或者coding，或者使用云盘同步（例如坚果云）。</p>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装npm</span></span></span><br><span class="line">sudo apt install npm</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装hexo</span></span></span><br><span class="line">sudo apt install -g hexo-cli</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#克隆源文件</span></span></span><br><span class="line">git clone user@github.com/repo/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#在仓库中添加SSH key</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装部署插件</span></span></span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#RSS订阅插件</span></span></span><br><span class="line">npm install hexo-generator-feed --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#站点地图插件</span></span></span><br><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装本地服务器</span></span></span><br><span class="line">npm install hexo-server --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#生成index.html插件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-generator-archive --save</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#搜索功能插件</span></span></span><br><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#预览</span></span></span><br><span class="line">hexo s</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+
+<h3 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h3><p>遇到一个问题：生成后访问 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 出现白版和”Cannot GET /“，”/“是因为在public 目录下少了index.html文件，再次生成还是无效后，确认是少了组件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-index</span><br></pre></td></tr></table></figure>
+
+<p>参见：<a href="https://www.jianshu.com/p/af83fc73e525" target="_blank" rel="noopener">【完美解决】Hexo博客出现“Cannot GET/xxx”错误</a></p>
+<p>吐槽一下coding和腾讯云之间的账号互通问题，一阵瞎引导，竟然创建了一个新账号，以前的项目找不回来，两个网站之间来回绕了几遍，无意间又用邮箱登录上去了，之前都是能自动跳转登录的，现在还和CSDN一样开始恰烂钱，强制绑定微信和手机号，无语。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2019/03/03/在新机器中恢复Hexo博客/" data-id="ck4qt2ayf003s3w5xlnu1z8yh"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo博客维护/">Hexo博客维护</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-Java编程思想——第十四章——类型信息" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -317,7 +394,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/02/01/Java编程思想——第十四章——类型信息/" data-id="ck4o5uhts000kz55xqeanyc02"
+      <a data-url="https://www.youyou-2608.com/2019/02/01/Java编程思想——第十四章——类型信息/" data-id="ck4qt2ax4000v3w5xlzspd6tb"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -416,7 +493,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/02/01/写在新年来临之际/" data-id="ck4o5uhux0036z55xxfdzcp70"
+      <a data-url="https://www.youyou-2608.com/2019/02/01/写在新年来临之际/" data-id="ck4qt2aya003f3w5xnr85ek88"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活记录/">生活记录</a></li></ul>
@@ -493,7 +570,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/01/24/更改DNS为8-8-8-8访问cn-bing-com/" data-id="ck4o5uhvr005hz55xo2xa3iqi"
+      <a data-url="https://www.youyou-2608.com/2019/01/24/更改DNS为8-8-8-8访问cn-bing-com/" data-id="ck4qt2ayy00573w5x6jbhkjpq"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li></ul>
@@ -587,7 +664,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/01/23/川端康成《雪国》/" data-id="ck4o5uhvf004lz55xzqb686hl"
+      <a data-url="https://www.youyou-2608.com/2019/01/23/川端康成《雪国》/" data-id="ck4qt2ayq004m3w5xhkus7fzz"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书/">读书</a></li></ul>
@@ -670,7 +747,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/01/14/《百年孤独》/" data-id="ck4o5uhuo002iz55xdgpj8ak9"
+      <a data-url="https://www.youyou-2608.com/2019/01/14/《百年孤独》/" data-id="ck4qt2axz002o3w5xjud7f3qx"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书/">读书</a></li></ul>
@@ -1016,193 +1093,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/01/08/Web项目可视化开发工具——WebPerformer/" data-id="ck4o5uhud001rz55xaa98v4fe"
+      <a data-url="https://www.youyou-2608.com/2019/01/08/Web项目可视化开发工具——WebPerformer/" data-id="ck4qt2axs00283w5xc4np4j6d"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-为什么要学摄影" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/01/05/为什么要学摄影/">为什么要学摄影</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/01/05/为什么要学摄影/" class="article-date">
-  <time datetime="2019-01-05T12:48:19.000Z" itemprop="datePublished">01-05-2019</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/摄影/">摄影</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <p>为什么要学摄影？</p>
-<p><strong>原文由 <a href="https://www.jianshu.com/u/b3720ee3e557" target="_blank" rel="noopener">刘星文</a> 发布于简书 <a href="https://www.jianshu.com/p/97ea1964027a" target="_blank" rel="noopener">为什么要学摄影</a> ，未经作者本人授权，禁止转载。</strong></p>
-<p>2017.12.07 12:45* 字数 1755</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-eee1313471772e8c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>转眼，已是冬天。</p>
-<p>好像刚刚在春天的繁花下打了个盹，醒来却已是年尾。</p>
-<p>而回望过去，照片成了最好的载体，每一张都记录着当时的风，空气的温度，阳光照在身上的温暖……</p>
-<p>好像，那一刻又被激活了。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-5267b65a3a75da9b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>西湖</p>
-<p>所有图片均使用 iPhone 5 或 iPad Pro 拍摄</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-9b0c2be9fc766f9e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>过完春节那段日子，天气出奇地好，阳光和煦，一切都充满无限的生机。</p>
-<p>每一刻，我都想待在室外。</p>
-<p>拍这张照片的时候，天空无比清澈通透，傍晚的夕阳洒在江面上，美的像梦境。</p>
-<p>我用慢快门拍摄了水面，让它像镜子一样光滑。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-ec210e5e546e9115.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>那天很冷，风大雨大。</p>
-<p>一个人去了浴鹄湾，里面空空荡荡，很少看到人。</p>
-<p>虽然冻的手不听使唤，却庆幸捕捉到这样的景色。</p>
-<p>这张照片是在一个小桥上拍到的，一棵树花开得正盛，特别惹眼。</p>
-<p>有时候风雨越大，景色越美。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-8fbc4eb2f6048894.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>那天，去了九溪。</p>
-<p>美好的春日，一路上都是郊游的人。</p>
-<p>阳光很暖，我走了很远，在亭子边休息时下了这张照片。</p>
-<p>后来很多人问这是不是林芝？</p>
-<p>其实那棵树并未开花，但由于光线的神奇缘故，却呈现出了奇妙的颜色。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-bdb9a70a75d40333.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>骑行时偶遇的一个村庄。</p>
-<p>庄子的对面是富春江上的一个小岛。</p>
-<p>岸边开满了油菜花，水平如镜，真的是如诗如画，都舍不得闭眼。</p>
-<p>我在码头边睡了一个小时。</p>
-<p>后来又去了几趟，再也没碰到过第一次看到的美景。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-bf2e91d4be9e6a01.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>梅花开得盛的时候，去了植物园。</p>
-<p>早早便入园，赏梅的，遛鸟的，非常热闹。</p>
-<p>各种颜色的梅花争芳斗艳，很是壮观。</p>
-<p>在植物园逗留了半天，边想心事边拍照，出来的时候，感觉心事少了很多。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-0855f6a6fe6e8fe9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>这其实是西溪的一朵梅花，用微距拍摄了花蕊。</p>
-<p>那天很冷，出门的时候本想多穿件毛衣，犹豫了下，又放下了，结果到了西溪，手都冻僵了。</p>
-<p>这其实是我第一次去西溪里面，确实很美。</p>
-<p>坐了游船，虽说下着雨，但还是打开窗户，不停地拍沿途的风景。</p>
-<p>后来找到了一个很安静的小亭子，在那里拍到了一个极美的镜头，梅花倒映在水面，瞬间就理解了什么叫“疏影横斜水清浅”。</p>
-<p>在亭子里待了很久，不停地从各种角度拍梅花，由于亭子上的小台阶太滑了，结果摔了一跤，疼的我直咧嘴。</p>
-<p>出园的时候，看到了远山冒着氤氲的水气，美得不忍离开。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-ca7d57daf418a8f3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>那天傍晚的西湖，落日极美。</p>
-<p>天空有很厚的云层，阳光穿过，炫目且有些刺眼。</p>
-<p>头有些晕，晃晃悠悠中看到了这颗树，落日的余晖中，枝干显得特别有力。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-5cc0ecd6a07cfdac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>这天的风很大，感觉人都被吹得飘起来了，看看柳条就知道。</p>
-<p>这时候柳芽还很小，现在一晃都绿树成荫了。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-aa93fae48136eef1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>很冷的一天。</p>
-<p>还未完全抽芽的草地还是一片嫩黄，被包裹在在群山与水面之间。</p>
-<p>有时候，越是恶劣的天气，越有难得的风景。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-bb6be1f57cabcc81.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>元宵节。</p>
-<p>街上还很冷清，江边公园里行人也不多。</p>
-<p>用了 Slow Shutter 慢快门相机，效果很好。</p>
-<p>依然很冷，月亮很圆，当然，手机不可能拍到这么大的月亮，这是我在手机上用 APP 加上去的。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-8873a33f5993d7a2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>戴家山，久闻其名，终见真容。</p>
-<p>雨时大时小，山路真的是非常曲折，但风景奇美，随处可见可见大大小小的油菜花田。</p>
-<p>在山上走了好久，有时候水气弥漫真个山谷，如仙境一般。</p>
-<p>去看了山里的书店，很别致。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-ffa3f6b7bceba6b4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>那天傍晚的时候，去了江边。</p>
-<p>很多植物已经郁郁葱葱，叶片在阳光下泛着金色。</p>
-<p>逆光的时候，树叶更美。</p>
-<p>于是逆光拍摄了一片树叶。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-6552c4e8cfab43aa.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>风大雨大的一天。</p>
-<p>远山层层叠叠，用慢快门相机稍微抖动着拍了一张模糊的照片，在 VSCO 里稍微调色之后，就得到了一张诗意盎然的作品。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-35a267c4c695e601.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>被雨打落在地的一朵花。</p>
-<p>轻轻地放在一张随身携带的卡纸上。</p>
-<p>调成黑白，出奇地有质感。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-0c67a4a720a3506d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>有天，很早去了一家书店。</p>
-<p>很安静，有几个人在安静地看书。</p>
-<p>阳光透过巨大的落地窗洒进来，很是惬意。</p>
-<p>一个城市，如果有几个 24 小时书店，是件很幸福的事情。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-ef82b9742e86682c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>特别喜欢这巨大的玻璃，无比通透。</p>
-<p>桌椅很舒服，光线正好，越来越喜欢呆在这里。</p>
-<p>环境，真的是非常非常重要。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-9b94e52d68c51355.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>沿江骑行时，在一个村庄看到这辆这行车，早上的阳光照过来，光影极美。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-a37bf81e2e36e711.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>芦茨。</p>
-<p>水特别清，小鱼特别多。</p>
-<p>慢快门拍了流水，呈现出一片如诗的静谧。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-696ccb8a39be6074.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>欲把西湖比西子，淡妆浓抹总相宜。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-9d133e32c5c96f63.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>远山层层叠叠，而那只风筝，在高空中遥望着群山。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-9dbcc4a20829f914.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>江上起雾时，这座小城便犹如仙境一般。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/742794-27e70443526c901c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1000/format/webp" alt="img"></p>
-<p>桐君山上的一处老建筑。</p>
-<p>下午的光影，极美。</p>
-<p>这一张张的照片，就像一个个独立的时空，存储着那一刻的记忆。</p>
-<p>如果记忆就是人生的全部，那摄影，就是通向记忆的桥梁。</p>
-<p>这也许就是摄影的意义，从短暂的每一刻，瞥见人生的全貌。</p>
-<p><strong>如何用手机拍出电影感的画面？</strong></p>
-<hr>
-<p><a href="https://www.jianshu.com/p/01dd0bb770a0" target="_blank" rel="noopener"><strong>如何彻底摆脱低效，成就高效人生？</strong></a></p>
-<p><a href="https://www.jianshu.com/p/54da13f7c2a8" target="_blank" rel="noopener">如何用黄油相机轻松做美图？</a></p>
-<p><a href="https://www.jianshu.com/p/afc8ddec73cf" target="_blank" rel="noopener">手机都没玩好 ，还想拍出好照片？</a></p>
-<p><a href="https://www.jianshu.com/p/59c37dfb5e6b" target="_blank" rel="noopener">这些 APP，让你的照片美到飞起来</a></p>
-<p><a href="https://www.jianshu.com/p/697450fafd71" target="_blank" rel="noopener">必看，20部摄影超美的电影</a></p>
-<p><a href="https://www.jianshu.com/p/4408ae63674d" target="_blank" rel="noopener">最不起眼的习惯，就这样拉开你和别人的距离！</a></p>
-<p>© 著作权归原作者所有</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/01/05/为什么要学摄影/" data-id="ck4o5uhuq002nz55x7j5tnt9f"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/摄影/">摄影</a></li></ul>
 
     </footer>
 
@@ -1234,7 +1128,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2019 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">75k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">75.3k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 
