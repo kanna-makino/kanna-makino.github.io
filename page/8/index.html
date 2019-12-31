@@ -61,6 +61,352 @@
       
         
 
+<article id="post-Web项目可视化开发工具——WebPerformer" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/01/08/Web项目可视化开发工具——WebPerformer/">Web项目可视化开发工具——WebPerformer</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/01/08/Web项目可视化开发工具——WebPerformer/" class="article-date">
+  <time datetime="2019-01-08T14:29:31.000Z" itemprop="datePublished">01-08-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <blockquote>
+<p>一个基于Web的现金流管理系统是我进入公司接触的第一个项目。两个半月做测试，两个半月做开发，将近半年，现在开发接近尾声，想好好分析一下这个“新兴工具”。</p>
+</blockquote>
+<h3 id="什么是WebPerformer"><a href="#什么是WebPerformer" class="headerlink" title="什么是WebPerformer"></a>什么是WebPerformer</h3><p>在Google里搜索“Web Performer”（下文简称“wp”），能搜索到结果173,000,000个结果，可以看到，靠前的结果都是日文的，并且都是版本更新相关的结果。在百度中搜索同样的内容，没有发现有中文结果，在国内应用几乎为0。</p>
+<p><img src="https://image.youyou-2608.com/blog/wp-search-result.png" alt="wp-google-search-result"></p>
+<p>wp是“キヤノンITソリューションズ株式会社”的产品，产品简介：<a href="https://www.canon-its.co.jp/news/detail/20180508webperformer.html" target="_blank" rel="noopener">wp-官网简介</a> 。</p>
+<p><img src="https://image.youyou-2608.com/blog/wp-simple-info.png" alt="wp-simple-info"></p>
+<p>简单来说，wp是为了降低人力成本、应对信息技术发展和技术人才不足、提高软件质量而开发的高效率自动化开发工具。</p>
+<p>目前已经在制药、贸易、建设、运输、金融保险等行业有一些成功应用的案例。</p>
+<p><strong>wp就是一个功能比较全的Eclipse插件。</strong></p>
+<h3 id="与传统Web项目开发的相同点与不同点"><a href="#与传统Web项目开发的相同点与不同点" class="headerlink" title="与传统Web项目开发的相同点与不同点"></a>与传统Web项目开发的相同点与不同点</h3><p>官网的简介几乎都是一笔带过，并且没有提到细节。应该是只有购买之后才会得到官方详细的使用文档。</p>
+<h4 id="Web-Performer相关的概念"><a href="#Web-Performer相关的概念" class="headerlink" title="Web Performer相关的概念"></a>Web Performer相关的概念</h4><ul>
+<li>work code：变量在一个模块（模块包括IO，BP，DM，EXT）的唯一名称，含义和命名规则与Java中的变量相似。</li>
+<li>IO：输入输出的意思，在wp中一个IO对应一个页面，页面上所有的项目（数据项，label）都来自在IO中定义的项目，在IO中可以给各个项目添加一些属性，这些属性包括work code（变量名），name（变量别命），长度（区别于byte，例如“name”是4位，“你好”是2位），小数位（项目为数字时且需要小数位时指定，默认-1），数据类型（见“数据类型”部分）。</li>
+<li>DM：Data Model的简称，主要功能是作为存放数据的容器。类似于Java中pojo类，兼有泛型集合的功能。</li>
+<li>BP：Business Process的简称，BP是一个功能的逻辑部分，大致的使用过程为：向BP传入参数 &gt; BP中加工处理 &gt; 将结果集放入DM  &gt; 结果集传到IO &gt; 画面显示数据。</li>
+<li>EXT：Extentsion，扩展。某些在BP中不能完成的功能，或者逻辑过于复杂超出了wp的功能范围，可以自己编写相应的Java类或者JavaScript文件，然后通过BP调用EXT，EXT调用自定义处理的方式处理数据。</li>
+</ul>
+<h4 id="与传统开发的联系"><a href="#与传统开发的联系" class="headerlink" title="与传统开发的联系"></a>与传统开发的联系</h4><ul>
+<li>从wp模块分类中很容易看出，其实wp的本质还是MVC的思想，IO对应View，BP对应Controller，DM对应Model。</li>
+<li><strong>在基于wp的开发中，除了扩展部分和自定义页面布局及样式之外，其他所有的操作都接触不到代码，开发的内容仅仅是在各个模块中添加一个个项目，然后给对应的项目指定相应的属性。</strong></li>
+</ul>
+<h3 id="开发环境（环境依赖）"><a href="#开发环境（环境依赖）" class="headerlink" title="开发环境（环境依赖）"></a>开发环境（环境依赖）</h3><p>在开发开始之前，需要搭建开发环境，总体来说wp的开发环境和正常开发时的环境几乎一致。</p>
+<p>在wp中，由于wp本质上就是一个Eclipse插件，所以Eclipse是必须的，<del>项目管理基于Maven</del>，构建基于Ant，服务器为Tomcat，自动生成的则是Java代码，所以需要Java环境，其他的与使用Eclipse正常开发几乎一致。常用的功能仅仅是编译时完成一个功能之后点击编译（Eclipse的编译）、需要自定义页面布局时使用Ant命令生成对应IO的layout.html文件然后基于layout.html文件修改页面布局。</p>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>wp中有自己的数据类型，这些数据类型应该是为了降低编程门槛而从Java数据类型中提炼出来的。</p>
+<p>数据的类型：</p>
+<ul>
+<li>CODE：介于Java的String和Numeric之间，定义只包含数字和字母的数据，例如：123，AC01。</li>
+<li>TEXT：类似于Java中的String类型，几乎任何类型都可以转换成TEXT类型，例如：’Hello world’。</li>
+<li>DATE：日期类型，有多种格式且可以互相转换，例如：20190108，2019-01-08。</li>
+<li>TIME：时间类型，有多种精度可以选择，最大精度到秒，例如：2019-01-08 21:59:01。</li>
+<li>NUM：数字类型，有多种格式且可以互相转换，例如1234，1,234。</li>
+<li>FILE：文件类型。</li>
+<li>BOOL：布尔类型，不常用。</li>
+<li>CURRENCY：货币类型。</li>
+</ul>
+<p>work code的类型：</p>
+<ul>
+<li>IO：输入输出类型，类似于html中的input类型，页面刷新后输入的值恢复成IO模块中设置的默认值。</li>
+<li>I：输入类型，与IO类型类似，页面刷新后输入的值保持不变。</li>
+<li>O：输出类型，类似于IO类型的只读模式。</li>
+<li>A：Action的简称，执行一个动作，可以调用BP逻辑以执行操作，例如”检索“，”修正“，”删除“。</li>
+<li>G：Group的简称，一个组，类似于一个没有边框的table，可以用来展示检索出的数据，在其后并且下一个G类型项目之前的所有IO属性”Level“值为”2“的项目会被组织到这个table中作为表头（一般项目的Level值为1），值会被添加到这个label下，形成完成的数据表格。</li>
+</ul>
+<p>BP中项目的常用类型：</p>
+<ul>
+<li>ARG：参数类型，表示该值是IO中传过来的变量。</li>
+<li>CALL：表示调用一个DM并执行DM中的一个操作，例如SELECT，UPDATE。</li>
+<li>PROCEDURE：表示调用一个存储过程。</li>
+<li>FOREACH：对一个集合执行for循环，类似于Java中的增强for循环。</li>
+<li>BREAK：跳出当前循环。</li>
+<li>CONTINUE：跳过本次循环进入下一次循环。</li>
+<li>DO/WHILE：类似于Java中的WHILE。</li>
+<li>IF/ELSEIF/ELSE：判断语句。</li>
+<li>END：表示一个逻辑块的结束。</li>
+<li>LOG：日志记录。</li>
+<li>WORKAREA：表示调用一个数据集合。</li>
+</ul>
+<p>DM中操作的类型：</p>
+<ul>
+<li>SELECT：表示按照指定的条件执行select语句。</li>
+<li>UPDATE：表示按照指定的条件执行update语句。</li>
+<li>DELETE：表示按照指定的条件执行delete语句（符合条件的记录不存在时报错）。</li>
+<li>ERASE：表示按照指定的条件执行delete语句（符合条件的记录不存在时不报错）。</li>
+<li>INSERT：表示按照指定的条件执行insert语句。</li>
+</ul>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="DM的定义"><a href="#DM的定义" class="headerlink" title="DM的定义"></a>DM的定义</h4><p>DM主要定义一些与数据库或者页面需要的字段，如下表：</p>
+<table>
+<thead>
+<tr>
+<th>项目CODE</th>
+<th>项目别名</th>
+<th>位数</th>
+<th>小数位</th>
+<th>字段操作</th>
+<th>页面跳转</th>
+<th>来自DM</th>
+<th>DM字段</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TRAN_ID</td>
+<td>交易编号</td>
+<td>13</td>
+<td>-1</td>
+<td></td>
+<td></td>
+<td></td>
+<td>CODE</td>
+</tr>
+<tr>
+<td>TRAN_DATE</td>
+<td>交易日期</td>
+<td>8</td>
+<td>-1</td>
+<td></td>
+<td></td>
+<td></td>
+<td>CODE</td>
+</tr>
+<tr>
+<td>TRAN_VOLUME</td>
+<td>交易额</td>
+<td>15</td>
+<td>0</td>
+<td></td>
+<td></td>
+<td></td>
+<td>NUM</td>
+</tr>
+</tbody></table>
+<p>在DM的属性中可以指定SQL语句，也可以在操作中指定数据库操作类型及条件：</p>
+<table>
+<thead>
+<tr>
+<th>项目CODE</th>
+<th>项目别名</th>
+<th>项目类型</th>
+<th>条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SELECT_DATA</td>
+<td>数据查询</td>
+<td>SELECT</td>
+<td>TRAN_DATE&gt;FORMATDATE(@1,1) AND CUSTOMER_CODE =   TEXT(‘TEST_CODE’) AND TRAN_VOLUME &gt; NUM(@2)</td>
+</tr>
+</tbody></table>
+<p>其中@1表示调用时的第一个参数，@2表示第二个参数，依此类推，但是必须保证传递过来的参数与定义时的参数顺序一致，否则会得到期待值以外的结果；另外还需要保证SQL返回的结果与DM中字段数量、字段名和顺序一致，否则无法通过编译。</p>
+<p>如果要给一个DM的对象赋值，需要在DM中定义赋值方法，分别指定字段以及对应的参数。</p>
+<h4 id="BP的定义"><a href="#BP的定义" class="headerlink" title="BP的定义"></a>BP的定义</h4><p>BP是一个功能模块的逻辑部分，一个简单的示例定义如下：</p>
+<table>
+<thead>
+<tr>
+<th>项目类型</th>
+<th>对应DM</th>
+<th>调用操作</th>
+<th>数据类型</th>
+<th>参数</th>
+<th>WORK CODE</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ARG</td>
+<td></td>
+<td></td>
+<td>CODE</td>
+<td></td>
+<td>TRAN_DATE</td>
+</tr>
+<tr>
+<td>ARG</td>
+<td></td>
+<td></td>
+<td>TEXT</td>
+<td></td>
+<td>CUSTOMER_ID</td>
+</tr>
+<tr>
+<td>ARG</td>
+<td></td>
+<td></td>
+<td>NUM</td>
+<td></td>
+<td>TRAN_VOLUME</td>
+</tr>
+<tr>
+<td>CALL</td>
+<td>TRAN_INFO</td>
+<td>SELECT_DATA</td>
+<td></td>
+<td>_ARG_.TRAN_DATE,_ARG_.CUSTOMER_ID,_ARG_.TRAN_VOLUME</td>
+<td>TRAN_INFO</td>
+</tr>
+<tr>
+<td>CALL</td>
+<td>PAGE_DATA</td>
+<td>SET_DATA</td>
+<td></td>
+<td>TRAN_INFO</td>
+<td>PAGE_TRAN_INFO</td>
+</tr>
+<tr>
+<td>WORKAREA</td>
+<td>PAGE_DATA</td>
+<td></td>
+<td></td>
+<td>APPEND,PAGE_TRAN_INFO</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>这时只要在IO中指定数据来源类型为WORKAREA并且为PAGE_DATA，这个数据集合中的数据便能在页面展示出来。</p>
+<h4 id="IO的定义"><a href="#IO的定义" class="headerlink" title="IO的定义"></a>IO的定义</h4><p>IO主要存放与页面交互的数据或者接收用户的输入，可以设定初期值：</p>
+<table>
+<thead>
+<tr>
+<th>项目类型</th>
+<th>项目CODE</th>
+<th>项目别名</th>
+<th>位数</th>
+<th>小数位</th>
+<th>加工式</th>
+<th>目标页面</th>
+<th>来自DM</th>
+<th>DM字段</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IO</td>
+<td>USER_NAME</td>
+<td>用户名输入框</td>
+<td>20</td>
+<td>-1</td>
+<td></td>
+<td></td>
+<td></td>
+<td>@TEXT</td>
+</tr>
+<tr>
+<td>O</td>
+<td>TRAN_ID</td>
+<td>交易ID</td>
+<td>15</td>
+<td>-1</td>
+<td></td>
+<td></td>
+<td>PAGE_DATA</td>
+<td>TRAN_ID</td>
+</tr>
+<tr>
+<td>O</td>
+<td>TRAN_DATE</td>
+<td>交易日期</td>
+<td>10</td>
+<td>-1</td>
+<td></td>
+<td></td>
+<td>PAGE_DATA</td>
+<td>TRAN_DATE</td>
+</tr>
+<tr>
+<td>O</td>
+<td>TRAN_VOLUME</td>
+<td>交易额</td>
+<td>15</td>
+<td>0</td>
+<td></td>
+<td></td>
+<td>PAGE_DATA</td>
+<td>TRAN_VOLUME</td>
+</tr>
+</tbody></table>
+<h4 id="更多细节"><a href="#更多细节" class="headerlink" title="更多细节"></a>更多细节</h4><p>程序运行中，数据流向为：IO &gt; BP &gt; DM &gt; BP &gt; IO，不过这个顺序不严格界定，也可以从IO项目的初期值属性中直接访问数据库取得数据，多用于取全局变量等类型的值。</p>
+<h3 id="常用内置方法"><a href="#常用内置方法" class="headerlink" title="常用内置方法"></a>常用内置方法</h3><ul>
+<li>CODE() / TEXT() / NUM() / DATE() / TIME()：基本数据类型之间的互相转换。（某些数据类型之间不能互转，转换失败会导致编译失败）。</li>
+<li>FORMATDATE(DATE,STYLE)：日期格式转换，1：yyyy-MM-dd；3：yyyyMMdd等。</li>
+<li>ADDDATE(DATE,Y,M,D)：日期DATE上加Y年M月D日后的日期，若Y/M/D为负时则执行减操作。</li>
+<li>SUBSTITUTE(TEXT,TEXT1,TEXT2)：将TEXT中的TEXT1全部置换为TEXT2。</li>
+</ul>
+<h3 id="一般开发流程（一个增-删-改-查的例子）"><a href="#一般开发流程（一个增-删-改-查的例子）" class="headerlink" title="一般开发流程（一个增/删/改/查的例子）"></a><del>一般开发流程（一个增/删/改/查的例子）</del></h3><p>原本打算遵循一般使用流程完成一个增/删/改/查的例子，但是考虑到版权问题，此处略过。大致的使用和上文描述并无太大差距。</p>
+<h3 id="页面风格与页面布局"><a href="#页面风格与页面布局" class="headerlink" title="页面风格与页面布局"></a>页面风格与页面布局</h3><h4 id="默认页面布局与页面风格"><a href="#默认页面布局与页面风格" class="headerlink" title="默认页面布局与页面风格"></a>默认页面布局与页面风格</h4><p>在软件中，内置了几种风格，对于一般对于页面美观程度要求不高的公司内部项目来说已经足够，其实这也差不多就是这个工具软件的使用范围，规模更大或者要求较多的面向用户的项目来说，这个工具显得力不从心。</p>
+<h4 id="自定义页面布局与元素样式"><a href="#自定义页面布局与元素样式" class="headerlink" title="自定义页面布局与元素样式"></a>自定义页面布局与元素样式</h4><p>每定义一个项目，wp会默认纵向排列，可以在项目属性中指定排列方向为X方向。当默认Layout满足不了需求时，就需要自己改变默认布局，在项目编译完成后，使用Ant生成默认的布局文件，然后对默认布局文件layout.html进行修改，直至满足需求。</p>
+<p>其实默认Layout就是一个整的table，每一个项目都定义在td单元格中，因此本质上就是改动一个table。</p>
+<h3 id="浅谈使用WebPerformer的利与弊"><a href="#浅谈使用WebPerformer的利与弊" class="headerlink" title="浅谈使用WebPerformer的利与弊"></a>浅谈使用WebPerformer的利与弊</h3><p>基于两个月的使用感受，总结出下面几点：</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ol>
+<li>提高开发效率：对于简单的页面（例如检索数据然后展示），可以免去编写页面的工作，可以快速实现功能，开发效率确实能提升不少。但是这仅仅限于极少数极为简单的页面。</li>
+<li>降低开发门槛：wp能极大的降低开发门槛，这是我觉得最大的优点。开发者不用去了解泛型和反射的细节、不用去了解多线程、更不需要了解设计模式的知识，全程“傻瓜式”编程，只要你会使用鼠标和触摸板、知道怎么写一个SQL语句，然后剩下的问题都是wp工具使用的问题。</li>
+<li>减小开发难度：因为所有项目的属性已经被工具限定范围，开发者能进行的操作早已被工具限制，所以开发中遇到的关于语言使用本身最严重的错误就是NPE，大大减少了编程错误。</li>
+</ol>
+<h4 id="弊端"><a href="#弊端" class="headerlink" title="弊端"></a>弊端</h4><ol>
+<li>丧失灵活性是为使用简单付出的代价。到目前为止，使用了wp将近两个月的时间，最大的感觉就是 <strong>限制太多</strong> 。比如一个页面的数据只能来自一个DM，BP内做循环等，流程繁琐。</li>
+<li>代码可读性几乎为0。由于同一模块中不能有相同变量名和逻辑段缩进不灵活的原因，导致BP部分的代码可读性几乎为零。后期维护将会是一个艰巨的任务。</li>
+<li>代码复用率低。由于工具本身的特征，很难写出通用功能，整个项目中，每个人几乎都是各自为战，花了太多时间去重复造轮子。</li>
+<li>可能存在许多性能问题。由于工具本身限制丧失了许多灵活性，很多明明两行代码就能做到的事情，在wp中却不得不另寻出路，拐弯抹角才能达到目的，由此导致许多性能上的损失。</li>
+</ol>
+<h4 id="个人使用感受"><a href="#个人使用感受" class="headerlink" title="个人使用感受"></a>个人使用感受</h4><p>因为前期没有培训，完全是自己研究文档、在开发中自己摸索，所以整个过程用得很是憋屈。</p>
+<p>现阶段离可视化自动化还过于遥远，反正我以后再也不想接触这个工具了，我无法忍受各种限制以及为了向这些限制而在代码性能以及代码可读性等方面做出的让步。</p>
+<p>在官网的介绍上赫然挂着“超高速开发”几个字，但是较为讽刺的是，目前这个为期半年的项目已经延期一个多月。</p>
+<h3 id="发展前景"><a href="#发展前景" class="headerlink" title="发展前景"></a>发展前景</h3><p>工具总是朝着简单易用和自动化的方向发展。wp应该算是在这个方向上走得比较远的工具，尽管现在还有许多功能满足不了需求，但是随着不断更新，很多问题应该会逐渐解决。包括在使用范围上应该也会逐渐扩大。但是对于一些规模较大以及性能要求高的系统来说，wp还有很长很长的路要走。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2019/01/08/Web项目可视化开发工具——WebPerformer/" data-id="ck4tu4wth001s9u5xdde62fp7"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-为什么要学摄影" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -224,7 +570,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/01/05/为什么要学摄影/" data-id="ck4r3op9v002wkb5xqbsh80pf"
+      <a data-url="https://www.youyou-2608.com/2019/01/05/为什么要学摄影/" data-id="ck4tu4wtw002t9u5xiyc8d7wd"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/摄影/">摄影</a></li></ul>
@@ -311,7 +657,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/01/03/LeetCode之3Sum/" data-id="ck4r3op8w000pkb5x5rlmysxu"
+      <a data-url="https://www.youyou-2608.com/2019/01/03/LeetCode之3Sum/" data-id="ck4tu4wsw000m9u5xtxmsz5fv"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -1382,7 +1728,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/01/01/SpringBoot基础学习笔记/" data-id="ck4r3opbi0075kb5xqn7wt8ge"
+      <a data-url="https://www.youyou-2608.com/2019/01/01/SpringBoot基础学习笔记/" data-id="ck4tu4wvv00769u5xr4wwkk4d"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -1497,7 +1843,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/12/31/周末随想/" data-id="ck4r3opa7003skb5xphkprgo4"
+      <a data-url="https://www.youyou-2608.com/2018/12/31/周末随想/" data-id="ck4tu4wu8003p9u5xotopfhzv"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活记录/">生活记录</a></li></ul>
@@ -1574,7 +1920,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/12/09/《徒步中国》/" data-id="ck4r3op9q002jkb5xpstk1d68"
+      <a data-url="https://www.youyou-2608.com/2018/12/09/《徒步中国》/" data-id="ck4tu4wtm00259u5xxhh996s1"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/读书/">读书</a></li></ul>
@@ -1648,117 +1994,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/12/02/深田恭子的日剧跑/" data-id="ck4r3opax005gkb5xdk16a6fh"
+      <a data-url="https://www.youyou-2608.com/2018/12/02/深田恭子的日剧跑/" data-id="ck4tu4wuw005d9u5xvo48ps83"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/无分类/">无分类</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-dubbo学习笔记" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2018/12/02/dubbo学习笔记/">dubbo学习笔记</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2018/12/02/dubbo学习笔记/" class="article-date">
-  <time datetime="2018-12-02T13:17:18.000Z" itemprop="datePublished">12-02-2018</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <p>dubbo学习笔记</p>
-<p><a href="http://dubbo.apache.org/zh-cn/index.html" target="_blank" rel="noopener">dubbo中文官方网站</a></p>
-<p><a href="http://dubbo.apache.org/zh-cn/docs/user/quick-start.html" target="_blank" rel="noopener">dubbo官方文档</a></p>
-<h3 id="分布式系统及其演变历程"><a href="#分布式系统及其演变历程" class="headerlink" title="分布式系统及其演变历程"></a>分布式系统及其演变历程</h3><p><img src="http://dubbo.apache.org/docs/zh-cn/user/sources/images/dubbo-architecture-roadmap.jpg" alt="dubbo"></p>
-<p>单一应用架构：</p>
-<p>当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。此时，用于简化增删改查工作量的数据访问框架(ORM)是关键。</p>
-<p>垂直应用架构：</p>
-<p>当访问量逐渐增大，单一应用增加机器带来的加速度越来越小，将应用拆成互不相干的几个应用，以提升效率。此时，用于加速前端页面开发的Web框架(MVC)是关键。</p>
-<p>分布式服务架构：</p>
-<p>当垂直应用越来越多，应用之间交互不可避免，将核心业务抽取出来，作为独立的服务，逐渐形成稳定的服务中心，使前端应用能更快速的响应多变的市场需求。此时，用于提高业务复用及整合的分布式服务框架(RPC)是关键。</p>
-<p>流动计算架构：</p>
-<p>当服务越来越多，容量的评估，小服务资源的浪费等问题逐渐显现，此时需增加一个调度中心基于访问压力实时管理集群容量，提高集群利用率。此时，用于提高机器利用率的资源调度和治理中心(SOA)是关键。</p>
-<h3 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h3><p>RPC（Remote Procedure Call）—<a href="https://baike.baidu.com/item/%E8%BF%9C%E7%A8%8B%E8%BF%87%E7%A8%8B%E8%B0%83%E7%94%A8/7854346" target="_blank" rel="noopener">远程过程调用</a>，它是一种通过<a href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C/143243" target="_blank" rel="noopener">网络</a>从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。<a href="https://baike.baidu.com/item/RPC%E5%8D%8F%E8%AE%AE" target="_blank" rel="noopener">RPC协议</a>假定某些<a href="https://baike.baidu.com/item/%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE/8048821" target="_blank" rel="noopener">传输协议</a>的存在，如TCP或UDP，为通信程序之间携带信息数据。在OSI<a href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1/9636548" target="_blank" rel="noopener">网络通信</a>模型中，RPC跨越了<a href="https://baike.baidu.com/item/%E4%BC%A0%E8%BE%93%E5%B1%82/4329536" target="_blank" rel="noopener">传输层</a>和<a href="https://baike.baidu.com/item/%E5%BA%94%E7%94%A8%E5%B1%82/4329788" target="_blank" rel="noopener">应用层</a>。RPC使得开发包括网络<a href="https://baike.baidu.com/item/%E5%88%86%E5%B8%83%E5%BC%8F" target="_blank" rel="noopener">分布式</a>多程序在内的应用程序更加容易。</p>
-<p>远程过程调用：序列化和网络通信。</p>
-<h3 id="特性一览"><a href="#特性一览" class="headerlink" title="特性一览"></a>特性一览</h3><ul>
-<li>面向接口代理的高性能RPC调用</li>
-<li>智能负载均衡</li>
-<li>服务自动注册与发现</li>
-<li>高度可扩展能力</li>
-<li>运行期流量调度</li>
-<li>可视化的服务治理与运维</li>
-</ul>
-<h3 id="dubbo应用架构"><a href="#dubbo应用架构" class="headerlink" title="dubbo应用架构"></a>dubbo应用架构</h3><p><img src="http://dubbo.apache.org/img/architecture.png" alt="高性能Java RPC框架"></p>
-<h3 id="dubbo快速启动"><a href="#dubbo快速启动" class="headerlink" title="dubbo快速启动"></a>dubbo快速启动</h3><p><a href="http://dubbo.apache.org/zh-cn/docs/user/quick-start.html" target="_blank" rel="noopener">dubbo快速启动</a></p>
-<h3 id="dubbo实例"><a href="#dubbo实例" class="headerlink" title="dubbo实例"></a>dubbo实例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> bean;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/12/2 下午7:45</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserAddress</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String userId;</span><br><span class="line">    <span class="keyword">private</span> String userAddress;</span><br><span class="line">    <span class="keyword">private</span> String consignee;</span><br><span class="line">    <span class="keyword">private</span> String phoneNum;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isDefault;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserAddress</span><span class="params">(Integer id, String userId, String userAddress, String consignee, String phoneNum,</span></span></span><br><span class="line"><span class="function"><span class="params">                       <span class="keyword">boolean</span> isDefault)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id = id;</span><br><span class="line">        <span class="keyword">this</span>.userId = userId;</span><br><span class="line">        <span class="keyword">this</span>.userAddress = userAddress;</span><br><span class="line">        <span class="keyword">this</span>.consignee = consignee;</span><br><span class="line">        <span class="keyword">this</span>.phoneNum = phoneNum;</span><br><span class="line">        <span class="keyword">this</span>.isDefault = isDefault;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"UserAddress&#123;"</span> +</span><br><span class="line">                <span class="string">"id="</span> + id +</span><br><span class="line">                <span class="string">", userId='"</span> + userId + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", userAddress='"</span> + userAddress + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", consignee='"</span> + consignee + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", phoneNum='"</span> + phoneNum + <span class="string">'\''</span> +</span><br><span class="line">                <span class="string">", isDefault="</span> + isDefault +</span><br><span class="line">                <span class="string">'&#125;'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> service;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/12/2 下午7:46</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OrderService</span> </span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">initOrder</span><span class="params">(String userId)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> bean.UserAddress;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/12/2 下午7:46</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="function">List&lt;UserAddress&gt; <span class="title">getUserAddressList</span><span class="params">(String userId)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> bean.UserAddress;</span><br><span class="line"><span class="keyword">import</span> com.alibaba.dubbo.config.annotation.Service;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> service.UserService;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/12/2 下午7:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;UserAddress&gt; <span class="title">getUserAddressList</span><span class="params">(String userId)</span> </span>&#123;</span><br><span class="line">        UserAddress userAddress1 = <span class="keyword">new</span> UserAddress(<span class="number">1</span>, <span class="string">"001"</span>, <span class="string">"人民广场"</span>, <span class="string">"100"</span>, <span class="string">"230189"</span>, <span class="keyword">true</span>);</span><br><span class="line">        UserAddress userAddress2 = <span class="keyword">new</span> UserAddress(<span class="number">2</span>, <span class="string">"002"</span>, <span class="string">"文化公园"</span>, <span class="string">"101"</span>, <span class="string">"230190"</span>, <span class="keyword">false</span>);</span><br><span class="line">        <span class="keyword">return</span> Arrays.asList(userAddress1, userAddress2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dubbo.service.consumer.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/12/2 下午8:43</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderServiceImpl</span> <span class="keyword">implements</span> <span class="title">OrderService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">initOrder</span><span class="params">(String userId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> userService.getUserAddressList(userId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dubbo.service.consumer.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestParam;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/12/2 下午9:00</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OrderService orderService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/initOrder.do"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">initOrder</span><span class="params">(@RequestParam(<span class="string">"userId"</span>)</span> String userId) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> orderService.initOrder(userId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.dubbo.service.consumer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="meta">@EnableDubbo</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DubboDemoApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(DubboDemoApplication<span class="class">.<span class="keyword">class</span>, <span class="title">args</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># Spring boot application</span><br><span class="line">spring.application.name = dubbo-provider-demo</span><br><span class="line">server.port = 9090</span><br><span class="line">management.port = 9091</span><br><span class="line"></span><br><span class="line"># Base packages to scan Dubbo Components (e.g., @Service, @Reference)</span><br><span class="line">dubbo.scan.basePackages  = com.alibaba.boot.dubbo.demo.provider.service</span><br><span class="line"></span><br><span class="line"># Dubbo Config properties</span><br><span class="line">## ApplicationConfig Bean</span><br><span class="line">dubbo.application.id = dubbo-provider-demo</span><br><span class="line">dubbo.application.name = dubbo-provider-demo</span><br><span class="line"></span><br><span class="line">## ProtocolConfig Bean</span><br><span class="line">dubbo.protocol.id = dubbo</span><br><span class="line">dubbo.protocol.name = dubbo</span><br><span class="line">dubbo.protocol.port = 12345</span><br><span class="line"></span><br><span class="line">## RegistryConfig Bean</span><br><span class="line">dubbo.registry.id = my-registry</span><br><span class="line">dubbo.registry.address = N/A</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/12/02/dubbo学习笔记/" data-id="ck4r3op9m0028kb5xn17hxrcd"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
 
     </footer>
 
@@ -1790,7 +2029,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2019 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">75.3k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">76.3k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 
