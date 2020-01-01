@@ -1,3 +1,4 @@
+https://www.youyou-2608.com/2020/01/01/Thymeleaf分页模板/
 https://www.youyou-2608.com/2019/12/31/Mac更改MySQL字符集/
 https://www.youyou-2608.com/2019/12/29/OpenCV打不开摄像头-Process-finished-with-exit-code-134/
 https://www.youyou-2608.com/2019/12/27/超高速（弱智）开发工具——Kintone/
@@ -27,4 +28,3 @@ https://www.youyou-2608.com/2019/08/07/七夕/
 https://www.youyou-2608.com/2019/08/06/电影-《月球》/
 https://www.youyou-2608.com/2019/08/05/基于-mjpg-streamer-的树莓派视频监控/
 https://www.youyou-2608.com/2019/06/13/工作一年的Java程序员应该会什么？/
-https://www.youyou-2608.com/2019/06/11/给树莓派安装Ubuntu-MATE系统/

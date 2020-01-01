@@ -61,6 +61,102 @@
       
         
 
+<article id="post-Hexo博客备份" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2018/11/18/Hexo博客备份/">Hexo博客备份</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/11/18/Hexo博客备份/" class="article-date">
+  <time datetime="2018-11-18T05:08:28.000Z" itemprop="datePublished">11-18-2018</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hexo博客维护/">Hexo博客维护</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <h3 id="养成备份的好习惯"><a href="#养成备份的好习惯" class="headerlink" title="养成备份的好习惯"></a>养成备份的好习惯</h3><p>花了好长时间总算是把博客搭建起来了，之前自己买的服务器用Wordpress搭建博客，但是因为服务器经常需要使用，安装一些其他软件什么的，导致Wordpress运行不是很稳定，还很容易被墙。</p>
+<p>因为Hexo每次执行hexo g -d之后发布的都是生成的静态文件，站点以及主题的配置文件不会一同发布到github上，最重要的是，如果在另一个机器上要更新博客，根本做不到。所以就想着把源文件备份一下。</p>
+<hr>
+<h3 id="使用github备份轻松备份"><a href="#使用github备份轻松备份" class="headerlink" title="使用github备份轻松备份"></a>使用github备份轻松备份</h3><p>github本来就是一个仓库，用它来备份最合适不过了。</p>
+<ol>
+<li>建立本地文件夹，将需要备份的文件存拷贝到该文件夹中；</li>
+<li>在username.github.io仓库下新建一个分支；</li>
+<li>建立本地备份文件夹与远程仓库的关联；</li>
+<li>将本地文件夹push到仓库；</li>
+<li>每次博客更新，先发布静态文件，然后在提交源文件。</li>
+</ol>
+<hr>
+<h3 id="需要备份的文件"><a href="#需要备份的文件" class="headerlink" title="需要备份的文件"></a>需要备份的文件</h3><ol>
+<li>_config.yml</li>
+<li>package.json</li>
+<li>/scaffolds</li>
+<li>/source</li>
+<li>/themes</li>
+</ol>
+<hr>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>感觉每次更新博客之后都需要拷贝一下上面这几个文件，感觉还是比较麻烦，没想到什么好办法。</p>
+<p><strong>git第一次commit之后才能查看到本地分支，push之后能显示远程分支。</strong></p>
+<hr>
+<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p>用python脚本来复制文件，并且将执行命令添加到终端命令中，这样只需要多执行一个自定义命令来运行脚本，更方便。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!user/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">source_path = <span class="string">"/Users/youyou2608/Kotobuki"</span></span><br><span class="line">target_path = <span class="string">"/Users/youyou2608/BlogBack"</span></span><br><span class="line">filter_files = [<span class="string">"db.json"</span>, <span class="string">"public"</span>, <span class="string">"package-lock.json"</span>, <span class="string">"node_modules"</span>, <span class="string">".deploy_git"</span>]</span><br><span class="line">file_updated = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">copy_files</span><span class="params">(source_dir, target_dir)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> os.listdir(source_dir):</span><br><span class="line">        <span class="keyword">if</span> f <span class="keyword">in</span> filter_files:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        source_file = os.path.join(source_dir, f)</span><br><span class="line">        target_file = os.path.join(target_dir, f)</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(source_file):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(target_dir):</span><br><span class="line">                os.makedirs(target_dir)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(target_file) <span class="keyword">or</span> (</span><br><span class="line">                    os.path.exists(target_file) <span class="keyword">and</span> os.path.getsize(target_file) != os.path.getsize(source_file)):</span><br><span class="line">                open(target_file, <span class="string">"wb"</span>).write(open(source_file, <span class="string">"rb"</span>).read())</span><br><span class="line">                file_updated.append(source_file)</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(source_file):</span><br><span class="line">            copy_files(source_file, target_file)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    print(<span class="string">"开始Hexo站点源文件复制.."</span>)</span><br><span class="line">    copy_files(source_path, target_path)</span><br><span class="line">    print(<span class="string">"站点源文件复制完毕.."</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在 /etc/profile 中添加一行：alias ‘copy_hexo_source’=’python copy_hexo_source.py’ ，这样终端运行 copy_hexo_source 就可以复制文件了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2018/11/18/Hexo博客备份/" data-id="ck4v0xtox000b8m5xfoyyal6v"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo博客维护/">Hexo博客维护</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-Spring学习笔记-第二章-装配Bean" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -224,7 +320,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/17/Spring学习笔记-第二章-装配Bean/" data-id="ck4tu4wtx002w9u5x7q6jmcjb"
+      <a data-url="https://www.youyou-2608.com/2018/11/17/Spring学习笔记-第二章-装配Bean/" data-id="ck4v0xtq700308m5xj6naytw8"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -324,7 +420,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode子单链表重排序/" data-id="ck4tu4wt400149u5xr1129ja0"
+      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode子单链表重排序/" data-id="ck4v0xtpd00158m5xjawuwltk"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -404,7 +500,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode子二叉树非递归前序遍历/" data-id="ck4tu4wt0000u9u5xjj0ane3u"
+      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode子二叉树非递归前序遍历/" data-id="ck4v0xtpa000z8m5x4y8jibb3"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -484,7 +580,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode之二叉树非递归后续遍历/" data-id="ck4tu4wt200109u5xw5fjvusg"
+      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode之二叉树非递归后续遍历/" data-id="ck4v0xtp7000t8m5xsk7k082y"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -563,7 +659,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/16/LeetCode之链表插入排序/" data-id="ck4tu4wt1000y9u5x98zdbncc"
+      <a data-url="https://www.youyou-2608.com/2018/11/16/LeetCode之链表插入排序/" data-id="ck4v0xtp9000x8m5xo5e9bucb"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -728,85 +824,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/14/Spring学习笔记-第一章-Spring之旅/" data-id="ck4tu4wtg001p9u5x88rxk8qe"
+      <a data-url="https://www.youyou-2608.com/2018/11/14/Spring学习笔记-第一章-Spring之旅/" data-id="ck4v0xtpn001o8m5xgpbbwwaz"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-LeetCode之水仙花数" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2018/11/11/LeetCode之水仙花数/">LeetCode之水仙花数</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2018/11/11/LeetCode之水仙花数/" class="article-date">
-  <time datetime="2018-11-11T10:18:46.000Z" itemprop="datePublished">11-11-2018</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <h3 id="1-水仙花数"><a href="#1-水仙花数" class="headerlink" title="1. 水仙花数"></a>1. 水仙花数</h3><p>以下是摘自 <a href="https://zh.wikipedia.org/zh-hans/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0" target="_blank" rel="noopener">维基百科</a> 中的释义：</p>
-<blockquote>
-<p>在<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E8%AE%BA" title="数论" target="_blank" rel="noopener">数论</a>中，<strong><a href="https://zh.wikipedia.org/wiki/%E6%B0%B4%E4%BB%99%E8%8A%B1" title="水仙花" target="_blank" rel="noopener">水仙花</a>数</strong>（<strong>Narcissistic number</strong>）<sup><a href="https://zh.wikipedia.org/zh-hans/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0#cite_note-mw-1" target="_blank" rel="noopener">[1]</a></sup><sup><a href="https://zh.wikipedia.org/zh-hans/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0#cite_note-moore-2" target="_blank" rel="noopener">[2]</a></sup>，也被称为<strong>超完全数字不变数</strong>（<strong>pluperfect digital invariant, PPDI</strong>）<sup><a href="https://zh.wikipedia.org/zh-hans/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0#cite_note-3" target="_blank" rel="noopener">[3]</a>/sup&gt;、<strong><a href="https://zh.wikipedia.org/wiki/%E8%87%AA%E6%88%80" title="自恋" target="_blank" rel="noopener">自恋</a>数</strong>、<strong>自幂数</strong>、<strong><a href="https://zh.wikipedia.org/wiki/%E9%98%BF%E5%A7%86%E6%96%AF%E5%A3%AF" title="阿姆斯壮" target="_blank" rel="noopener">阿姆斯壮</a>数</strong>或<strong>阿姆斯特朗数</strong>（<strong>Armstrong number</strong>）<sup><a href="https://zh.wikipedia.org/zh-hans/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0#cite_note-4" target="_blank" rel="noopener">[4]</a></sup> ，用来描述一个<strong>N</strong>位非负整数，其各位数字的<strong>N</strong>次方和等于该数本身。</sup></p>
-</blockquote>
-<p>这里定义的N=3。</p>
-<h3 id="2-问题描述"><a href="#2-问题描述" class="headerlink" title="2. 问题描述"></a>2. 问题描述</h3><p>春天是鲜花的季节，水仙花就是其中最迷人的代表，数学上有个水仙花数，他是这样定义的： “水仙花数”是指一个三位数，它的各位数字的立方和等于其本身，比如：153=1^3+5^3+3^3。 现在要求输出所有在m和n范围内的水仙花数。</p>
-        
-          <a class="article-more-link" href="/2018/11/11/LeetCode之水仙花数/">阅读全文</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/11/LeetCode之水仙花数/" data-id="ck4tu4wsz000s9u5x3dv7z4ls"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
 
     </footer>
 
@@ -827,7 +848,7 @@
   
     <nav class="page-nav">
       
-      <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span>
+      <a class="extend prev" rel="prev" href="/page/9/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/">下一页</a>
     </nav>
   
 </section>
@@ -836,9 +857,9 @@
   <footer class="footer">
   <div class="outer">
     <ul class="list-inline">
-      <li>&copy; 2018-2019 Kanna-Makino</li>
+      <li>&copy; 2018-2020 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">76.3k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">76.9k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 
