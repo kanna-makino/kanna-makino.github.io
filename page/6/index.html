@@ -61,6 +61,99 @@
       
         
 
+<article id="post-我在JavaScript中踩过的坑" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/05/19/我在JavaScript中踩过的坑/">我在JavaScript中踩过的坑</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/05/19/我在JavaScript中踩过的坑/" class="article-date">
+  <time datetime="2019-05-19T10:38:49.000Z" itemprop="datePublished">05-19-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <p>我在Javascript中踩过的坑！</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>时至今日也没有系统深入的学习过JavaScript，虽然常用，但是也只停留在最基础的使用上。没有系统深入的了解，必然要踩一些前端众所周知，却让小白绞尽脑汁地大坑！</p>
+<p>今天又在坑里摸了一天，记录一下，权当是写日记了。</p>
+<p>最近连续加班，确实有些身心俱疲；加上昨天下午的“午后小睡”导致晚上失眠，到快四点钟才睡着，今天早上快十点钟还躺在床上。</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>正在逛Twitter，做毕设地学妹给我提了两个需求：</p>
+<ul>
+<li>登陆页面的表单检验；</li>
+<li>注册页面的重复用户名检测。</li>
+</ul>
+<h2 id="问题：从Ajax中返回值"><a href="#问题：从Ajax中返回值" class="headerlink" title="问题：从Ajax中返回值"></a>问题：从Ajax中返回值</h2><p>用JQuery.validate插件给登陆表单加了校验，挺简单，同样的方法给注册界面加个校验，唯一不同的是需要使用ajax从后台请求到用户名是否已经存在，也挺简单。</p>
+<p>于是乎，有了下面这段代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// do something</span></span><br><span class="line">$.validator.addMethod(<span class="string">"checkUniqueUsername"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">value, element, params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || checkUniqueUsername(value);</span><br><span class="line">&#125;, <span class="string">"用户名已被占用！"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkUniqueUsername</span>(<span class="params">username</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (username !== <span class="literal">null</span> &amp;&amp; username !== <span class="literal">undefined</span> &amp;&amp; username !== <span class="string">''</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> data = &#123;<span class="string">'loginname'</span>: username&#125;;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            type: <span class="string">'post'</span>,</span><br><span class="line">            url: <span class="string">'/checkloginname'</span>,</span><br><span class="line">            data: <span class="built_in">JSON</span>.stringify(data),</span><br><span class="line">            dataType: <span class="string">'json'</span>,</span><br><span class="line">            contentType: <span class="string">'application/json'</span>,</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> (<span class="built_in">parseInt</span>(res.tip) === <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>三五分钟，就写完了代码，跑一跑测一下准备验收了。诡异的事情出现了，<code>checkUniqueUsername()</code>总是返回false。</p>
+<h2 id="Ajax中return的结果"><a href="#Ajax中return的结果" class="headerlink" title="Ajax中return的结果"></a>Ajax中return的结果</h2><p>没事，静下心来慢慢调，就这几行代码，怎么说也要给你调得明明白白的。调试后发现<code>parseInt(res.tip)===0</code>是true，可是return 之后函数的返回值是false，这没道理啊！</p>
+<p>网上查了一下，原来是在<strong>ajax中直接return并不是return到外层函数中</strong>，不深究，改个写法，于是有了v2版本：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// do something</span></span><br><span class="line">$.validator.addMethod(<span class="string">"checkUniqueUsername"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">value, element, params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || checkUniqueUsername(value);</span><br><span class="line">&#125;, <span class="string">"用户名已被占用！"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkUniqueUsername</span>(<span class="params">username</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (username !== <span class="literal">null</span> &amp;&amp; username !== <span class="literal">undefined</span> &amp;&amp; username !== <span class="string">''</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> result = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">var</span> data = &#123;<span class="string">'loginname'</span>: username&#125;;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            type: <span class="string">'post'</span>,</span><br><span class="line">            url: <span class="string">'/checkloginname'</span>,</span><br><span class="line">            data: <span class="built_in">JSON</span>.stringify(data),</span><br><span class="line">            dataType: <span class="string">'json'</span>,</span><br><span class="line">            contentType: <span class="string">'application/json'</span>,</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">                result = (<span class="built_in">parseInt</span>(res.tip) === <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>检查了一下，再也想不出还能有什么问题了，那就跑一下吧。诡异的结果又出现了，函数返回值依旧是false，心态崩了，这就好比 <code>var count = 1; console.log(count);</code>却输出了2一样，难以置信！</p>
+<h2 id="Ajax同步和异步"><a href="#Ajax同步和异步" class="headerlink" title="Ajax同步和异步"></a>Ajax同步和异步</h2><p>查了半天，终于看到一个答案：<strong>ajax的同步和异步。</strong>可谓是一语惊醒梦中人，我责备自己为什么调试了这么久，却没有想到这个方向，而且同步异步的坑已经不是第一次踩了。v3版本终于解决了这个问题，失之毫厘，差之千里。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// do something</span></span><br><span class="line">$.validator.addMethod(<span class="string">"checkUniqueUsername"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">value, element, params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || checkUniqueUsername(value);</span><br><span class="line">&#125;, <span class="string">"用户名已被占用！"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkUniqueUsername</span>(<span class="params">username</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (username !== <span class="literal">null</span> &amp;&amp; username !== <span class="literal">undefined</span> &amp;&amp; username !== <span class="string">''</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> result = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">var</span> data = &#123;<span class="string">'loginname'</span>: username&#125;;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            type: <span class="string">'post'</span>,</span><br><span class="line">            url: <span class="string">'/checkloginname'</span>,</span><br><span class="line">            data: <span class="built_in">JSON</span>.stringify(data),</span><br><span class="line">            dataType: <span class="string">'json'</span>,</span><br><span class="line">            contentType: <span class="string">'application/json'</span>,</span><br><span class="line">            <span class="keyword">async</span>: <span class="literal">false</span>,</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">                result = (<span class="built_in">parseInt</span>(res.tip) === <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是每次运行控制台都会出现JQuery的提示：<strong>使用同步会降低用户体验</strong>，总归是有个解决办法，有时间再深究一下吧。</p>
+<h2 id="JavaScript浮点运算"><a href="#JavaScript浮点运算" class="headerlink" title="JavaScript浮点运算"></a>JavaScript浮点运算</h2><p>今天的经历让我回想起了去年遇到的一个JavaScript的问题，当时在做一个现金流管理系统，遇到一个需求是根据固定利息和浮动利息自动计算出最终利息，随便输了几组数据测试，没有出现异样，但是最后一组数据的时候出现了诡异的结果！<code>4.1 + 4.3 = 8.399999999999999</code>，这真是见了鬼了。。很久之前学过的知识这分钟哪里回想得起来。上网查了才发现原来是JavaScript的设计缺陷导致的问题，也都提出了几种解决方案。</p>
+<h2 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h2><p>平时用Java习惯了，思维方式有些不灵活，从对Python的理解中也能看出来。</p>
+<p>总之，遇到问题，要发散思维，尽量快速的去确定调查的方向，最终尽快的解决问题。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2019/05/19/我在JavaScript中踩过的坑/" data-id="ck4zooapu005ppf5xq1m3k4h2"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-Java注解简单例子" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -134,7 +227,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/15/Java注解简单例子/" data-id="ck4v0xtp0000h8m5xb7mlcmdo"
+      <a data-url="https://www.youyou-2608.com/2019/05/15/Java注解简单例子/" data-id="ck4zooamo000fpf5xtyo4bci1"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -223,7 +316,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/12/从两次毕设题目和要求说说我的感受/" data-id="ck4v0xtqa00388m5x5z3jea91"
+      <a data-url="https://www.youyou-2608.com/2019/05/12/从两次毕设题目和要求说说我的感受/" data-id="ck4zooao30037pf5x29atr14y"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活记录/">生活记录</a></li></ul>
@@ -298,7 +391,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/12/ajax返回error可能原因分析/" data-id="ck4v0xtpu00248m5x5oeqs9q6"
+      <a data-url="https://www.youyou-2608.com/2019/05/12/ajax返回error可能原因分析/" data-id="ck4zooanw002rpf5xkb3ss6bi"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li></ul>
@@ -403,7 +496,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/29/Spring-Boot中使用Swagger2构建强大的RESTful-API文档/" data-id="ck4v0xtpl001j8m5x5c5ut9q1"
+      <a data-url="https://www.youyou-2608.com/2019/04/29/Spring-Boot中使用Swagger2构建强大的RESTful-API文档/" data-id="ck4zooana001kpf5x63xl3zcz"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -481,7 +574,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/" data-id="ck4v0xtrk006b8m5xjho470un"
+      <a data-url="https://www.youyou-2608.com/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/" data-id="ck4zooaqa006npf5xr3sn0860"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li></ul>
@@ -556,93 +649,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/09/IDEA-Terminal闪退/" data-id="ck4v0xtos00068m5x81mvhi35"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-Git配置代理" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/04/06/Git配置代理/">Git配置代理</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/04/06/Git配置代理/" class="article-date">
-  <time datetime="2019-04-05T16:47:50.000Z" itemprop="datePublished">04-06-2019</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Exp/">Exp</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <p>git的代理配置</p>
-<p>给sublime安装插件的时候又碰到git clone速度过慢的问题，记录一哈！</p>
-<ol>
-<li><p>打开ss全局代理；</p>
-</li>
-<li><p>到 <a href="https://www.ipaddress.com/" target="_blank" rel="noopener">IPAddress.com</a> 根据 github.global.ssl.fastly.net 获取github服务器地址；</p>
-</li>
-<li><p>在 /etc/hosts 或者C:/windows/system32/driver/etc/hosts 文件中添加对应的记录：</p>
-<p>ip github.global.ssl.fastly.net</p>
-</li>
-<li><p>设置git代理：</p>
-</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> http和https协议代理：</span><br><span class="line">git config --global http.proxy http://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy http://127.0.0.1:1080</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> sock5的情况</span><br><span class="line">git config --global http.proxy socks5://127.0.0.1:1080</span><br><span class="line">git config --global https.proxy socks5://127.0.0.1:1080</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 取消代理</span><br><span class="line">git config --global unset http.proxy</span><br><span class="line">git config --global unset https.proxy</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> ssh协议代理：在用户目录下建立如下文件 ~/.ssh/config，对 GitHub 的域名做单独的处理</span><br><span class="line"><span class="meta">#</span> 这里必须是 github.com，因为这个跟我们 clone 代码时的链接有关</span><br><span class="line">Host github.com</span><br><span class="line"><span class="meta">   #</span> 如果用默认端口，这里是 github.com，如果想用443端口，这里就是 ssh.github.com 详见 https://help.github.com/articles/using-ssh-over-the-https-port/</span><br><span class="line">   HostName github.com</span><br><span class="line">   User git</span><br><span class="line"><span class="meta">   #</span> 如果是 HTTP 代理，把下面这行取消注释，并把 proxyport 改成自己的 http 代理的端口</span><br><span class="line">     ProxyCommand socat - PROXY:127.0.0.1:%h:%p,proxyport=6667</span><br><span class="line"><span class="meta">   #</span> 如果是 socks5 代理，则把下面这行取消注释，并把 6666 改成自己 socks5 代理的端口</span><br><span class="line">     ProxyCommand nc -v -x 127.0.0.1:6666 %h %p</span><br></pre></td></tr></table></figure>
-
-
-
-<p>==&gt;&gt; <a href="https://imciel.com/2016/06/28/git-proxy/" target="_blank" rel="noopener">设置 git 代理</a> </p>
-<p>在Ubantu下需要在网络设置里打开网络代理设置代理主机：socks5://127.0.0.1:1080</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/06/Git配置代理/" data-id="ck4v0xtop00048m5xn9fq0yuf"
+      <a data-url="https://www.youyou-2608.com/2019/04/09/IDEA-Terminal闪退/" data-id="ck4zooaml000bpf5xxnlfacbh"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li></ul>
@@ -677,7 +684,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2020 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">76.9k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">78.1k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 
