@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    硝酸甘油炸药的制作 |
+    树莓派通过无刷电调驱动无刷电机 |
     
     Kanna-Makino</title>
   
@@ -27,7 +27,7 @@
   <section class="outer">
   
 
-<article id="post-硝酸甘油炸药的制作" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-树莓派通过无刷电调驱动无刷电机" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -35,7 +35,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      硝酸甘油炸药的制作
+      树莓派通过无刷电调驱动无刷电机
     </h1>
   
   
@@ -48,8 +48,8 @@
 
     
       <div class="article-meta">
-        <a href="/2019/10/27/硝酸甘油炸药的制作/" class="article-date">
-  <time datetime="2019-10-27T11:00:45.000Z" itemprop="datePublished">10-27-2019</time>
+        <a href="/2020/01/05/树莓派通过无刷电调驱动无刷电机/" class="article-date">
+  <time datetime="2020-01-05T11:21:03.000Z" itemprop="datePublished">01-05-2020</time>
 </a>
         
   <div class="article-category">
@@ -75,44 +75,29 @@
 
       
       
-        <p>炸弹​ 💣 制作从入门到入土 👻</p>
-<blockquote>
-<p>在 YouTube 上看到了“回形针📎”的“原子弹制作教程”，感觉是一个提高动手能力的项目，尽管原理和流程都很简单，但是材料和设备不易得。于是想先从普通的硝酸甘油炸药开始学习吧，原料易得，危险性也不是那么高。</p>
-</blockquote>
-<p>学习资料：<a href="https://blog.boxun.com/hero/201208/haozhonghua2012/29_1.shtml" target="_blank" rel="noopener">自制炸药制作方法</a></p>
+        <p>今天尝试了使用无刷电调来驱动无刷电机，但是刚开始遇到点问题，没理解网上的博文，还好板子没被烧掉💦</p>
+<p><a href="https://blog.csdn.net/qf0129/article/details/70769054" target="_blank" rel="noopener">树莓派pwm控制无刷电机</a></p>
 <a id="more"></a>
 
+<br>
 
+<p>##连线</p>
+<p>刚开始了卡在了连线这里，电调有两根电源线，连接12V电源，其中三根线连接树莓派，<strong>如果树莓派独立供电的话，电调只需要将信号控制线和地线连接到树莓派的GPIO口和GND口</strong>。</p>
+<p>我刚开始连错了，树莓派独立供电的同时，将电调的5V输出端和GND线都连接到了树莓派上，板子突然自己开机了，才意识到接错了。后来想着不需要电调输出的电压，所以只接了信号控制线，5V输出和GND都没接，程序跑了但是电机没转动，也没信号声音。看了 <a href="https://www.cnblogs.com/raffeale/p/5585757.html" target="_blank" rel="noopener">折腾了2个晚上无刷电调(ESC)，电机终于转起来了，特此记录一下</a> 才意识到电调的GND线是一定要接到树莓派的GND口的，然后电机就动了。</p>
+<p>连接图：</p>
+<p><img src="https://image.youyou-2608.com/blog/2020/0105/QQ20200105-194539@2x.png" alt="连接图"></p>
+<p><em>上面的图中电调的输入电压应该是12V，可以用4节5号电池串联。</em></p>
+<br>
 
-<h2 id="方式一：鞭炮"><a href="#方式一：鞭炮" class="headerlink" title="方式一：鞭炮"></a>方式一：鞭炮</h2><p>最简单易得的方式是选择黑火药。</p>
-<ol>
-<li>从售卖烟花爆竹的地方购买1000响左右的鞭炮</li>
-<li>将鞭炮一个个拆开，将火药聚集起来</li>
-</ol>
-<p>一个个拆可能会比较麻烦，工作量比较大。作为简便途径，可以先将鞭炮在煤油中浸泡一段时间，然后放入绞肉馅的机器里，粉碎然后晾干可直接使用。（千万不能产生火花）</p>
-<p>这种方式的成本在100块钱以内。</p>
-<h2 id="方式二：自制硝酸甘油炸药"><a href="#方式二：自制硝酸甘油炸药" class="headerlink" title="方式二：自制硝酸甘油炸药"></a>方式二：自制硝酸甘油炸药</h2><h3 id="原料及材料"><a href="#原料及材料" class="headerlink" title="原料及材料"></a>原料及材料</h3><p>滴管，玻璃杯杯（2个），碳酸钠（苏打），浓硝酸，浓硫酸，甘油，水（一盆），一个茶缸，温度计（量程大一些），酸碱指示剂或者PH试纸。</p>
-<h3 id="流程及步骤"><a href="#流程及步骤" class="headerlink" title="流程及步骤"></a>流程及步骤</h3><ol>
-<li>取一个玻璃杯并向其中加入80ml左右的水。</li>
-<li>取另一个玻璃杯加入80ml左右的水，再加入一平勺碳酸钠，配成碳酸钠溶液。</li>
-<li>将茶缸放入水盆中，向茶缸中 <strong>缓慢滴入</strong>⚠️ 8~10ml左右的浓硝酸，保持温度在20℃以下。如果是夏天的话，可能需要准备一些冰块。</li>
-<li>向茶缸中 <strong>缓慢滴入</strong>⚠️ 22~28ml浓硫酸，注意保持温度在20℃以下，必要时向盆中加入冰块。</li>
-<li>保持4~5滴/分钟的速率将甘油 <strong>滴入</strong> 上述混合物中，一直滴到甘油在混合物表面形成甘油层为止。注意保持温度在20℃以下！</li>
-<li>低温下搅拌混合物15分钟以后，将混合物倒入已经加入蒸馏水的杯子中。硝酸甘油会沉底。</li>
-<li>把下层的硝酸甘油滴入碳酸钠溶液中（为了去除多余的酸），知道PH值为中性。（​⚠️​ 千万不能振荡或晃动​！）</li>
-</ol>
-<h3 id="填充剂"><a href="#填充剂" class="headerlink" title="填充剂"></a>填充剂</h3><p>将玻璃瓶刻蚀，形成小块，把头部瓶口用胶带之类的东西密封起来，以保证爆炸时玻璃瓶体能形成弹片。为了加大弹片的威力，可以考虑 <strong>将填充剂换成铝热剂</strong> （铝粉和氧化铁粉），发生爆炸的时候，高温会使其剧烈反应，产生更大的杀伤力。</p>
-<h3 id="引爆"><a href="#引爆" class="headerlink" title="引爆"></a>引爆</h3><p>接下来是引爆系统部分。</p>
-<h4 id="短路电路引爆"><a href="#短路电路引爆" class="headerlink" title="短路电路引爆"></a>短路电路引爆</h4><p>拆解无线电系统，得到一个共频系统，将其中一个短路的情况安装到炸弹上，然后用其他一些电火花即可引燃的物质与炸药放在一起，可实现 通话 &gt; 短路 &gt; 火花 &gt; 爆炸 的遥控效果。 （待研究）</p>
-<h4 id="定时系统引爆"><a href="#定时系统引爆" class="headerlink" title="定时系统引爆"></a>定时系统引爆</h4><p>定时系统比较简单，普通的电子闹钟就可以胜任。</p>
-<blockquote>
-<p>最后向各位说明的是，制作炸弹也好，燃烧弹也好，既不是高精尖科技，也不是一个你捻子一个雷式的土法生产。需要化学，物理，结构力学，材料力学甚至日常生活方面各种的知识。</p>
-</blockquote>
+<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><p>连接好之后，给树莓派通电，接通电调连接的电源，然后用RPi.GPIO.PWM()控制电机的转速。</p>
+<p>测试代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># _*_ coding:utf-8 _*_</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pin = <span class="number">18</span></span><br><span class="line"></span><br><span class="line">GPIO.setmode(GPIO.BCM)</span><br><span class="line">GPIO.setup(pin, GPIO.OUT)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 频率400Hz</span></span><br><span class="line">p = GPIO.PWM(pin, <span class="number">400</span>)</span><br><span class="line">p.start(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">dc = <span class="number">10</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">40</span>):</span><br><span class="line">        dc += <span class="number">2</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'dc:'</span>, dc</span><br><span class="line">        p.ChangeDutyCycle(dc)</span><br><span class="line">        time.sleep(<span class="number">0.3</span>);</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    p.stop()</span><br><span class="line">    GPIO.cleanup()</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/10/27/硝酸甘油炸药的制作/" data-id="ck50yinc30063ys5xcatzs8b5"
+      <a data-url="https://www.youyou-2608.com/2020/01/05/树莓派通过无刷电调驱动无刷电机/" data-id="ck50yinbt005gys5xvnfko9v2"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -125,19 +110,10 @@
     
   <nav class="article-nav">
     
-      <a href="/2019/11/02/好久不见/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            好久不见
-          
-        </div>
-      </a>
     
-    
-      <a href="/2019/10/27/结婚没有意义/" class="article-nav-link">
+      <a href="/2020/01/04/树莓派驱动4位数码管/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">结婚没有意义</div>
+        <div class="article-nav-title">树莓派驱动4位数码管</div>
       </a>
     
   </nav>

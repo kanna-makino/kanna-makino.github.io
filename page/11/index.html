@@ -61,6 +61,85 @@
       
         
 
+<article id="post-LeetCode之链表插入排序" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2018/11/16/LeetCode之链表插入排序/">LeetCode之链表插入排序</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/11/16/LeetCode之链表插入排序/" class="article-date">
+  <time datetime="2018-11-16T15:03:55.000Z" itemprop="datePublished">11-16-2018</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <p><a href="https://www.nowcoder.com/practice/152bc6c5b14149e49bf5d8c46f53152b?tpId=46&tqId=29034&tPage=1&rp=1&ru=/ta/leetcode&qru=/ta/leetcode/question-ranking" target="_blank" rel="noopener">链表插入排序</a> 是 <a href="https://www.nowcoder.com" target="_blank" rel="noopener">牛客网</a> 上LeetCode在线编程的一道题。</p>
+<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Sort a linked list using insertion sort.</p>
+<p>使用插入排序对链表排序，此处为单链表。</p>
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p><strong>插入排序</strong>就是依次将未排序部分的第一个元素插入到已排序部分合适的位置，使得已排序部分仍然有序。</p>
+<p>列表可以直接根据位置索引元素，但是链表不可以直接取得指定位置的元素。</p>
+<p>根据插入排序的思路：将整个链表按照已排序和未排序分为两部分，未排序部分的首个元素即为将要被排序的元素，问题变为将一个元素插入到一个有序链表中使得该链表仍然有序。分为两种情况：一种是合适位置在有序链表的非末尾，另一种是在有序链表的末尾，然后其他的问题就是注意插入时的赋值顺序。</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">insertionSortList1</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    ListNode root = <span class="keyword">new</span> ListNode(-<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">while</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">        ListNode temp = root;</span><br><span class="line">        <span class="keyword">while</span> (temp.next != <span class="keyword">null</span> &amp;&amp; head.val &gt;= temp.next.val)</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        <span class="keyword">if</span> (temp.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">            temp.next = head;</span><br><span class="line">            head = head.next;</span><br><span class="line">            temp.next.next = <span class="keyword">null</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ListNode temp2 = temp.next;</span><br><span class="line">            temp.next = head;</span><br><span class="line">            head = head.next;</span><br><span class="line">            temp.next.next = temp2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>参考：<a href="http://www.cnblogs.com/tonyluis/p/4579295.html" target="_blank" rel="noopener">http://www.cnblogs.com/tonyluis/p/4579295.html</a></p>
+<hr>
+<p>最近将博客从WordPress搬到了GitHub，WordPress比较灵活，但是价格昂贵的服务器是为此付出的代价。后来看到 <a href="https://www.jianshu.com/" target="_blank" rel="noopener">简书</a> 页面比较简洁，尝试了一下简书，MarkDown编辑器有实时预览，比博客园那不知道要高到哪里去了， <a href="https://www.cnblogs.com/" target="_blank" rel="noopener">博客园</a> 从16年就在开发的MarkDown编辑器，快2019年了还没投入使用。用了两周简书发现简书的阅读量几乎为0。还尝试了 <a href="https://juejin.im/" target="_blank" rel="noopener">掘金</a>、<a href="https://segmentfault.com/" target="_blank" rel="noopener">SegmentFault</a> 最近考虑博客搬迁才知道还有 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 存在，于是喜出望外的转移了平台，花了点时间配置了 <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">Next</a> 主题以及域名之类的，<a href="https://github.com/" target="_blank" rel="noopener">GitHub</a> 真的良心，不得不让我再恶心一下吃相难看想钱想疯的 CSDN。</p>
+<p>博客地址：<a href="https://kotobuki-tsumugi.github.io" target="_blank" rel="noopener">https://kotobuki-tsumugi.github.io</a>，<a href="https://youyou-2608.com" target="_blank" rel="noopener">https://youyou-2608.com</a>，欢迎访问。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2018/11/16/LeetCode之链表插入排序/" data-id="ck50yin9v000xys5xast90s9i"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-Spring学习笔记-第一章-Spring之旅" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -206,7 +285,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/14/Spring学习笔记-第一章-Spring之旅/" data-id="ck4zormx0001srd5xuyjulr6s"
+      <a data-url="https://www.youyou-2608.com/2018/11/14/Spring学习笔记-第一章-Spring之旅/" data-id="ck50yina9001nys5xj1sqiu8c"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
@@ -281,7 +360,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/11/LeetCode之水仙花数/" data-id="ck4zormwm000xrd5xo47ck80v"
+      <a data-url="https://www.youyou-2608.com/2018/11/11/LeetCode之水仙花数/" data-id="ck50yin9s000rys5xd9fqabio"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -316,7 +395,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2020 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">78.1k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">78.5k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 
