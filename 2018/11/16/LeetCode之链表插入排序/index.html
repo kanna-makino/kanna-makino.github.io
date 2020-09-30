@@ -88,14 +88,11 @@
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">insertionSortList1</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    ListNode root = <span class="keyword">new</span> ListNode(-<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">while</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">        ListNode temp = root;</span><br><span class="line">        <span class="keyword">while</span> (temp.next != <span class="keyword">null</span> &amp;&amp; head.val &gt;= temp.next.val)</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        <span class="keyword">if</span> (temp.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">            temp.next = head;</span><br><span class="line">            head = head.next;</span><br><span class="line">            temp.next.next = <span class="keyword">null</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ListNode temp2 = temp.next;</span><br><span class="line">            temp.next = head;</span><br><span class="line">            head = head.next;</span><br><span class="line">            temp.next.next = temp2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>参考：<a href="http://www.cnblogs.com/tonyluis/p/4579295.html" target="_blank" rel="noopener">http://www.cnblogs.com/tonyluis/p/4579295.html</a></p>
-<hr>
-<p>最近将博客从WordPress搬到了GitHub，WordPress比较灵活，但是价格昂贵的服务器是为此付出的代价。后来看到 <a href="https://www.jianshu.com/" target="_blank" rel="noopener">简书</a> 页面比较简洁，尝试了一下简书，MarkDown编辑器有实时预览，比博客园那不知道要高到哪里去了， <a href="https://www.cnblogs.com/" target="_blank" rel="noopener">博客园</a> 从16年就在开发的MarkDown编辑器，快2019年了还没投入使用。用了两周简书发现简书的阅读量几乎为0。还尝试了 <a href="https://juejin.im/" target="_blank" rel="noopener">掘金</a>、<a href="https://segmentfault.com/" target="_blank" rel="noopener">SegmentFault</a> 最近考虑博客搬迁才知道还有 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 存在，于是喜出望外的转移了平台，花了点时间配置了 <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">Next</a> 主题以及域名之类的，<a href="https://github.com/" target="_blank" rel="noopener">GitHub</a> 真的良心，不得不让我再恶心一下吃相难看想钱想疯的 CSDN。</p>
-<p>博客地址：<a href="https://kotobuki-tsumugi.github.io" target="_blank" rel="noopener">https://kotobuki-tsumugi.github.io</a>，<a href="https://youyou-2608.com" target="_blank" rel="noopener">https://youyou-2608.com</a>，欢迎访问。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/16/LeetCode之链表插入排序/" data-id="ckfmrllsv000tazci6zzmqgui"
+      <a data-url="https://www.youyou-2608.com/2018/11/16/LeetCode之链表插入排序/" data-id="ckfp12zax000q6x5xps9jpnf9"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -142,7 +139,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2020 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">56.2k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">44.7k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 

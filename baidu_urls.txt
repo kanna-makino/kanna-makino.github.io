@@ -5,19 +5,15 @@ https://www.youyou-2608.com/2020/01/04/树莓派驱动4位数码管/
 https://www.youyou-2608.com/2020/01/01/Thymeleaf分页模板/
 https://www.youyou-2608.com/2019/12/31/Mac更改MySQL字符集/
 https://www.youyou-2608.com/2019/12/29/OpenCV打不开摄像头-Process-finished-with-exit-code-134/
-https://www.youyou-2608.com/2019/12/27/超高速（弱智）开发工具——Kintone/
 https://www.youyou-2608.com/2019/12/17/将YouTube直播转播到bilibili的想法及尝试/
-https://www.youyou-2608.com/2019/11/10/博客一周年啦！/
 https://www.youyou-2608.com/2019/11/10/树莓派安装OpenCV-Python/
 https://www.youyou-2608.com/2019/11/10/更换七牛云过期SSL证书/
 https://www.youyou-2608.com/2019/11/09/Mac-OS下RIME输入法的配置/
 https://www.youyou-2608.com/2019/11/03/scp-Linux文件复制命令/
 https://www.youyou-2608.com/2019/10/27/硝酸甘油炸药的制作/
-https://www.youyou-2608.com/2019/10/20/安装电池驱动/
 https://www.youyou-2608.com/2019/10/14/OpenCV——cv2-inRange-函数/
 https://www.youyou-2608.com/2019/10/12/OpenCV-学习笔记（一）/
 https://www.youyou-2608.com/2019/08/05/基于-mjpg-streamer-的树莓派视频监控/
-https://www.youyou-2608.com/2019/06/13/工作一年的Java程序员应该会什么？/
 https://www.youyou-2608.com/2019/06/11/给树莓派安装Ubuntu-MATE系统/
 https://www.youyou-2608.com/2019/06/09/再记Hexo博客恢复/
 https://www.youyou-2608.com/2019/05/19/我在JavaScript中踩过的坑/
@@ -28,3 +24,7 @@ https://www.youyou-2608.com/2019/04/24/记一次Tomcat-8005端口Cannot-assign-r
 https://www.youyou-2608.com/2019/04/09/IDEA-Terminal闪退/
 https://www.youyou-2608.com/2019/04/06/Git配置代理/
 https://www.youyou-2608.com/2019/03/03/在新机器中恢复Hexo博客/
+https://www.youyou-2608.com/2019/02/01/Java编程思想——第十四章——类型信息/
+https://www.youyou-2608.com/2019/01/24/更改DNS为8-8-8-8访问cn-bing-com/
+https://www.youyou-2608.com/2019/01/03/LeetCode之3Sum/
+https://www.youyou-2608.com/2019/01/01/SpringBoot基础学习笔记/

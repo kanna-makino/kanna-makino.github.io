@@ -21,10 +21,10 @@
 <p>決まり：お母さん、か。<br>日向：まあ、落ち込むなよ、これでダメと決まってわけじゃない。<br>報せ：後一息で、もう少しこのお金を受けたりそうだった、後少しで絶対にうまく行って、、<br>日向：こいつ、ポッじてうちゃんだ。<br>決まり：だね〜<br>日向：まあ、そうじゃなきゃこんなことできないか。<br>決まり：だね！<br>日向：ただし、緊急動議、小淵沢報せのリーダー担任を解任を要求しまーす、賛成の人？<br>決まり：はい！<br>日向：賛成多数！よってた今よりリーダーを解任します！<br>報せ：え？！<br>日向：と言うわけで、南極いくぞ！<br>日向、決まり：おぉ！<br>報せ：え？！！</p>
 ]]></content>
       <categories>
-        <category>宇宙よりも遠い場所</category>
+        <category>日语</category>
       </categories>
       <tags>
-        <tag>宇宙よりも遠い場所</tag>
+        <tag>日语</tag>
       </tags>
   </entry>
   <entry>
@@ -85,10 +85,10 @@
 <p>路人：三宅さん、こっち！<br>日向：はい！</p>
 ]]></content>
       <categories>
-        <category>宇宙よりも遠い場所</category>
+        <category>日语</category>
       </categories>
       <tags>
-        <tag>宇宙よりも遠い場所</tag>
+        <tag>日语</tag>
       </tags>
   </entry>
   <entry>
@@ -98,25 +98,21 @@
 <p><a href="https://blog.csdn.net/qf0129/article/details/70769054" target="_blank" rel="noopener">树莓派pwm控制无刷电机</a></p>
 <a id="more"></a>
 
-<br>
-
 <h2 id="连线"><a href="#连线" class="headerlink" title="连线"></a>连线</h2><p>刚开始了卡在了连线这里，电调有两根电源线，连接12V电源，其中三根线连接树莓派，<strong>如果树莓派独立供电的话，电调只需要将信号控制线和地线连接到树莓派的GPIO口和GND口</strong>。</p>
 <p>我刚开始连错了，树莓派独立供电的同时，将电调的5V输出端和GND线都连接到了树莓派上，板子突然自己开机了，才意识到接错了。后来想着不需要电调输出的电压，所以只接了信号控制线，5V输出和GND都没接，程序跑了但是电机没转动，也没信号声音。看了 <a href="https://www.cnblogs.com/raffeale/p/5585757.html" target="_blank" rel="noopener">折腾了2个晚上无刷电调(ESC)，电机终于转起来了，特此记录一下</a> 才意识到电调的GND线是一定要接到树莓派的GND口的，然后电机就动了。</p>
 <p>连接图：</p>
-<p><img src="https://image.youyou-2608.com/blog/2020/0105/QQ20200105-194539@2x.png" alt="连接图"></p>
+<p><img src="https://images2.imgbox.com/ae/6d/bJjjdFRf_o.png" alt="连接图"></p>
 <p><em>上面的图中电调的输入电压应该是12V，可以用4节5号电池串联。</em></p>
-<br>
-
 <h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><p>连接好之后，给树莓派通电，接通电调连接的电源，然后用RPi.GPIO.PWM()控制电机的转速。</p>
 <p>测试代码：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># _*_ coding:utf-8 _*_</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pin = <span class="number">18</span></span><br><span class="line"></span><br><span class="line">GPIO.setmode(GPIO.BCM)</span><br><span class="line">GPIO.setup(pin, GPIO.OUT)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 频率400Hz</span></span><br><span class="line">p = GPIO.PWM(pin, <span class="number">400</span>)</span><br><span class="line">p.start(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">dc = <span class="number">10</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">40</span>):</span><br><span class="line">        dc += <span class="number">2</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'dc:'</span>, dc</span><br><span class="line">        p.ChangeDutyCycle(dc)</span><br><span class="line">        time.sleep(<span class="number">0.3</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    p.stop()</span><br><span class="line">    GPIO.cleanup()</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>树莓派</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>树莓派</tag>
       </tags>
   </entry>
   <entry>
@@ -206,14 +202,14 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/bin/env python</span></span><br><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># mapping LED to GPIO</span></span><br><span class="line">LED_A = <span class="number">18</span> <span class="comment"># 11</span></span><br><span class="line">LED_B = <span class="number">19</span> <span class="comment"># 7</span></span><br><span class="line">LED_C = <span class="number">20</span> <span class="comment"># 4</span></span><br><span class="line">LED_D = <span class="number">21</span> <span class="comment"># 2</span></span><br><span class="line">LED_E = <span class="number">22</span> <span class="comment"># 1</span></span><br><span class="line">LED_F = <span class="number">23</span> <span class="comment"># 10</span></span><br><span class="line">LED_G = <span class="number">24</span> <span class="comment"># 5</span></span><br><span class="line">LED_DP = <span class="number">25</span> <span class="comment"># 3</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># mapping public GPIO</span></span><br><span class="line">DIGIT1 = <span class="number">13</span> <span class="comment"># 12</span></span><br><span class="line">DIGIT2 = <span class="number">16</span> <span class="comment"># 9</span></span><br><span class="line">DIGIT3 = <span class="number">17</span> <span class="comment"># 8</span></span><br><span class="line">DIGIT4 = <span class="number">26</span> <span class="comment"># 6</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#sleep time - loop displey</span></span><br><span class="line">t=<span class="number">0.001</span></span><br><span class="line"> </span><br><span class="line">GPIO.setmode(GPIO.BCM)</span><br><span class="line"> </span><br><span class="line">GPIO.setup(LED_A, GPIO.OUT)</span><br><span class="line">GPIO.setup(LED_B, GPIO.OUT)</span><br><span class="line">GPIO.setup(LED_C, GPIO.OUT)</span><br><span class="line">GPIO.setup(LED_D, GPIO.OUT)</span><br><span class="line">GPIO.setup(LED_E, GPIO.OUT)</span><br><span class="line">GPIO.setup(LED_F, GPIO.OUT)</span><br><span class="line">GPIO.setup(LED_G, GPIO.OUT)</span><br><span class="line">GPIO.setup(LED_DP, GPIO.OUT)</span><br><span class="line">GPIO.setup(DIGIT1, GPIO.OUT)</span><br><span class="line">GPIO.setup(DIGIT2, GPIO.OUT)</span><br><span class="line">GPIO.setup(DIGIT3, GPIO.OUT)</span><br><span class="line">GPIO.setup(DIGIT4, GPIO.OUT)</span><br><span class="line"> </span><br><span class="line">GPIO.output(DIGIT1, <span class="literal">True</span>)</span><br><span class="line">GPIO.output(DIGIT2, <span class="literal">True</span>)</span><br><span class="line">GPIO.output(DIGIT3, <span class="literal">True</span>)</span><br><span class="line">GPIO.output(DIGIT4, <span class="literal">True</span>)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">showDigit</span><span class="params">(no, num, showDotPoint=False)</span>:</span></span><br><span class="line"></span><br><span class="line">    GPIO.setup(LED_A, <span class="literal">False</span>)</span><br><span class="line">    GPIO.setup(LED_B, <span class="literal">False</span>)</span><br><span class="line">    GPIO.setup(LED_C, <span class="literal">False</span>)</span><br><span class="line">    GPIO.setup(LED_D, <span class="literal">False</span>)</span><br><span class="line">    GPIO.setup(LED_E, <span class="literal">False</span>)</span><br><span class="line">    GPIO.setup(LED_F, <span class="literal">False</span>)</span><br><span class="line">    GPIO.setup(LED_G, <span class="literal">False</span>)</span><br><span class="line">    GPIO.setup(LED_DP, <span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    GPIO.output(DIGIT1, <span class="literal">False</span>)</span><br><span class="line">    GPIO.output(DIGIT2, <span class="literal">False</span>)</span><br><span class="line">    GPIO.output(DIGIT3, <span class="literal">False</span>)</span><br><span class="line">    GPIO.output(DIGIT4, <span class="literal">False</span>)</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> (num == <span class="number">0</span>) :</span><br><span class="line">        GPIO.output(LED_A, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_B, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_C, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_D, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_E, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_F, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_G, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_DP, showDotPoint)</span><br><span class="line">    <span class="keyword">elif</span> (num == <span class="number">1</span>) :</span><br><span class="line">        GPIO.output(LED_A, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_B, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_C, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_D, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_E, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_F, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_G, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_DP, showDotPoint)</span><br><span class="line">    <span class="keyword">elif</span> (num == <span class="number">2</span>) :</span><br><span class="line">        GPIO.output(LED_A, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_B, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_C, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_D, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_E, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_F, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_G, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_DP, showDotPoint)</span><br><span class="line">    <span class="keyword">elif</span> (num == <span class="number">3</span>) :</span><br><span class="line">        GPIO.output(LED_A, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_B, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_C, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_D, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_E, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_F, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_G, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_DP, showDotPoint)</span><br><span class="line">    <span class="keyword">elif</span> (num == <span class="number">4</span>) :</span><br><span class="line">        GPIO.output(LED_A, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_B, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_C, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_D, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_E, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_F, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_G, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_DP, showDotPoint)</span><br><span class="line">    <span class="keyword">elif</span> (num == <span class="number">5</span>) :</span><br><span class="line">        GPIO.output(LED_A, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_B, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_C, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_D, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_E, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_F, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_G, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_DP, showDotPoint)</span><br><span class="line">    <span class="keyword">elif</span> (num == <span class="number">6</span>) :</span><br><span class="line">        GPIO.output(LED_A, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_B, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_C, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_D, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_E, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_F, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_G, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_DP, showDotPoint)</span><br><span class="line">    <span class="keyword">elif</span> (num == <span class="number">7</span>) :</span><br><span class="line">        GPIO.output(LED_A, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_B, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_C, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_D, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_E, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_F, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_G, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_DP, showDotPoint)</span><br><span class="line">    <span class="keyword">elif</span> (num == <span class="number">8</span>) :</span><br><span class="line">        GPIO.output(LED_A, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_B, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_C, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_D, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_E, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_F, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_G, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_DP, showDotPoint)</span><br><span class="line">    <span class="keyword">elif</span> (num == <span class="number">9</span>) :</span><br><span class="line">        GPIO.output(LED_A, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_B, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_C, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_D, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_E, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(LED_F, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_G, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(LED_DP, showDotPoint)</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> (no == <span class="number">1</span>) :</span><br><span class="line">        GPIO.output(DIGIT1, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(DIGIT2, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(DIGIT3, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(DIGIT4, <span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">elif</span> (no == <span class="number">2</span>) :</span><br><span class="line">        GPIO.output(DIGIT1, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(DIGIT2, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(DIGIT3, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(DIGIT4, <span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">elif</span> (no == <span class="number">3</span>) :</span><br><span class="line">        GPIO.output(DIGIT1, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(DIGIT2, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(DIGIT3, <span class="literal">False</span>)</span><br><span class="line">        GPIO.output(DIGIT4, <span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">else</span> :</span><br><span class="line">        GPIO.output(DIGIT1, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(DIGIT2, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(DIGIT3, <span class="literal">True</span>)</span><br><span class="line">        GPIO.output(DIGIT4, <span class="literal">False</span>)</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">display_time</span><span class="params">()</span>:</span></span><br><span class="line">	<span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">	    now = time.localtime(time.time())</span><br><span class="line">        time.sleep(t)</span><br><span class="line">        showDigit(<span class="number">1</span>, int(time.strftime(<span class="string">"%H"</span>, now)) / <span class="number">10</span>, <span class="literal">False</span>)</span><br><span class="line">        time.sleep(t)</span><br><span class="line">        showDigit(<span class="number">2</span>, int(time.strftime(<span class="string">"%H"</span>, now)) % <span class="number">10</span>, <span class="literal">True</span>)</span><br><span class="line">        time.sleep(t)</span><br><span class="line">        showDigit(<span class="number">3</span>, int(time.strftime(<span class="string">"%M"</span>, now)) / <span class="number">10</span>, <span class="literal">False</span>)</span><br><span class="line">        time.sleep(t)</span><br><span class="line">        showDigit(<span class="number">4</span>, int(time.strftime(<span class="string">"%M"</span>, now)) % <span class="number">10</span>, <span class="literal">False</span>)</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	display_time()</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">	GPIO.cleanup()</span><br></pre></td></tr></table></figure>
 
 <h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><p>效果如下：</p>
-<p><img src="https://image.youyou-2608.com/blog/2020/0105/3F68D203-1CE3-4A22-B2AF-EEEF78F83D39.png" alt></p>
+<p><img src="https://images2.imgbox.com/d8/19/mHf8LGzs_o.png" alt></p>
 <p>可能是二极管余辉的原因？每个数字显示得都很不纯净，暂时先这样吧。</p>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>树莓派</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>树莓派</tag>
       </tags>
   </entry>
   <entry>
@@ -232,10 +228,10 @@
 
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>Thymeleaf</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>Thymeleaf</tag>
       </tags>
   </entry>
   <entry>
@@ -264,10 +260,10 @@
 
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>其他</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>其他</tag>
       </tags>
   </entry>
   <entry>
@@ -286,62 +282,18 @@
 <br>
 
 <p>这个问题困扰了很久，外网上查了很久也没有找到解决方案。因为树莓派上挂了摄像头，插拔不是很方便，并且公司的显示器是VGA接口，所以今天出门没带树莓派。下午打开PyCharm想继续学习一下OpenCV，但是又被这个错给拦住了。</p>
-<p><img src="https://image.youyou-2608.com/blog/20191229/WX20191229-170630@2x.png" alt="报错信息"></p>
+<p><img src="https://images2.imgbox.com/cc/da/H0fN8Zqp_o.png" alt="报错信息"></p>
 <p>无意间想到会不会是Python没有权限调用系统摄像头导致的，然后在终端用管理员权限跑一下这个脚本，然后系统弹出一个弹窗，大概意思是询问<strong>“是否允许Python调用摄像头”</strong>，我还想思考一会儿，然后终端就报错了：</p>
-<p><img src="https://image.youyou-2608.com/blog/20191229/WX20191229-170653@2x.png" alt="报错信息"></p>
+<p><img src="https://images2.imgbox.com/7b/ae/F5xewqqb_o.png" alt="报错信息"></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Process finished with exit code 134 (interrupted by signal 6: SIGABRT)</span><br></pre></td></tr></table></figure>
 
 <p>原来之前一直都是因为权限的原因，然后点了允许，之后就不报错了。</p>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>OpenCV</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>超高速（弱智）开发工具——Kintone</title>
-    <url>/2019/12/27/%E8%B6%85%E9%AB%98%E9%80%9F%EF%BC%88%E5%BC%B1%E6%99%BA%EF%BC%89%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E2%80%94%E2%80%94Kintone/</url>
-    <content><![CDATA[<p>11月份开始进入一个“太平洋建筑”的项目。预料之中，这个项目也用了和去年那个项目类似的开发工具，叫做“Kintone”，一个日本公司开发的工具。有个中国官网，但是网上一查，还是日本鬼子用的最多，想靠这种应对劳动力减少的弱智工具赚世界第一人口大国的钱，鬼子们真是想得太多。</p>
-<p>据说是为了降低开发门槛，让即使在技术方面一无所知只要对业务了解的人也能做开发。我翻译了一下：让不懂技术的人继续不懂技术、让懂点技术的人也变得不懂技术。</p>
-<a id="more"></a>
-
-<br>
-
-<h2 id="公司的技术趋势"><a href="#公司的技术趋势" class="headerlink" title="公司的技术趋势"></a>公司的技术趋势</h2><p>去年七月份入职，刚好赶上公司开了一个“超高速”开发的项目，从头到尾做了九个多月的时间，一直从开发到单元测试再到系统测试。从那之后，“超高速”开发就成了公司的发展方向，越来越多的引入相关工具。公司的现状以及发展方向成了我离职的最大考虑因素。如果想要在技术上更上一层楼，那仅仅停留在会使用工具这个层次，是永远达不到你的理想的。除非你打算在这个公司工作到它倒闭或者是你老死，不然留下绝对不是最好的选择。</p>
-<p>我很庆幸刚好赶上年底的这个契机。</p>
-<br>
-
-<h2 id="领导的想法"><a href="#领导的想法" class="headerlink" title="领导的想法"></a>领导的想法</h2><p>项目的领导对这个工具赞不绝口，总是会跟我们说这个工具多么高效多么便利。我一直担心是自己了解得不够深入，不敢做出自己的评价。后来想了想，一个在这个行业已经做了十多年还问我“js怎么当前时间转换成YYYY-MM-DD的字符串”这种问题的人，想必一路走来也没写过几行代码，就我近两个月的观察，他每天的工作内容不过是分配任务、改一下计划完成日以及每天和旁边的女生分享他自认为“辉煌”的过去罢了。</p>
-<p>能让毫无开发经验的人也能上手的开发工具，换句话说有开发经验的人用上一段时间也会变得没有开发经验。确实，你只需要会声明一个变量，会给变量赋值，至于那些高深的知识，你不用了解，因为你了解了也用不上。</p>
-<br>
-
-<h2 id="存取数据"><a href="#存取数据" class="headerlink" title="存取数据"></a>存取数据</h2><p>这个弱智工具最大的特点应该就是没有数据库了吧，据说是为了让公司的人在哪儿都能访问数据。我其实有点不太理解，难道用了MySQL、SQL Server的项目就无法在公司之外访问数据了？有这种疑问，大概是我了解得少的原因吧。没有数据库真的很难受，刚进入这个项目的时候，本来想找个数据库设计书看看，大概了解一下业务，结果没有。每个页面上的所有数据项大概对应一张表的样子，但是各个页面之间的关联关系，是一对一还是一对多还是多对多，并没有白字黑字的定义。那写代码了想知道这个关系怎么办，只能问了解的人，想想就觉得弱智。</p>
-<br>
-
-<h2 id="数据的安全性"><a href="#数据的安全性" class="headerlink" title="数据的安全性"></a>数据的安全性</h2><p>数据都存在这个工具的运营方的服务器上，项目的域名也是工具运营方提供的。按照我的理解，应该是所有的数据在工具提供方来看都是透明的，如果真是这样的话，那客户业务里那些机密非机密数据还有区别吗？对本公司员工分机密对其他的公司的人却全部可见？谁能保证工具开发方即将要跑路的程序员不会把这些数据也打包带走然后泄漏出去？？</p>
-<p>因为整个项目都是js实现的，根据权限不同可能会把某个详情页面某些数据项给隐藏掉，不过仅仅接收到数据之后隐藏掉HTML元素。在HTTP请求数据的时候，参数只有查询条件并没有权限验证，也就是说，只要使用这个系统的人稍微懂点JavaScript知识的话，整个项目产生的数据对他来说就是全部可见的。</p>
-<p>另外就是页面上某些项目的可编辑和只读，按钮的disabled都是js控制的，随便在控制台里加几行代码就能随心所欲、为所欲为，不过比较讽刺的是，一个项目一群级别比我高一级两级甚至三级，工作了十来年的人，竟然不会控制台调试，神仙。</p>
-<p>如果我理解没错的话，那客户花了这么多钱买这么个垃圾玩意，真替他们不值。</p>
-<br>
-
-<h2 id="严重的性能问题"><a href="#严重的性能问题" class="headerlink" title="严重的性能问题"></a>严重的性能问题</h2><p>数据存在其他公司的服务器上还会导致严重的性能问题。正常项目中的一次数据库查询操作，在这里变成了一个HTTP请求，相比于一次HTTP请求200ms~300ms，一次数据库操作所花的时间那几乎是微乎其微了，更何况数据库还有池、缓存这些技术可用。前两天做了一个Excel文件的下载，统计一个月整个公司项目的进度状况，很简单的几个操作却花了20分钟才收集完所有数据。</p>
-<p>不支持表连接。当需要多个表的数据的时候，请求量会暴增，尤其是一些比我级别高的人Developer2的人的代码里，还在for循环里请求数据，看着都觉得心疼。</p>
-<p>可能是出于吞吐量的方便的考虑，一次请求的数据量默认只有100条，最大不能超过500条。目前所有的功能数据量都按照小于500条去取，这个假设也是让我摸不着头脑，真是世界之大，无奇不有。</p>
-<br>
-
-<h2 id="同事的现状"><a href="#同事的现状" class="headerlink" title="同事的现状"></a>同事的现状</h2><p>我也不知道公司到底是缺人到了什么地步，招了一个研究生过来，连 <code>int a = 0;</code>  都不会，使用变量之前要赋值都不懂。最重要的是因为学历比我高，所以工资也比我高。每天悠闲到无聊的领导可能觉得还挺开心，终于有点事情做了，每天花上3、4个小时给女研究生从声明变量开始讲起。每次他们一开始，我就觉得心里无比痛苦，觉得自己是个废物，每次都想拔出水果刀朝自己来几刀，虽然最终还是选择去阳台缓一缓。</p>
-<br>
-
-<h2 id="久违的离职邮件"><a href="#久违的离职邮件" class="headerlink" title="久违的离职邮件"></a>久违的离职邮件</h2><p>从3月份到9月份走了很多人，几乎每周五都能收到离职邮件，但是似乎因为到了年底大家都想捞个年终奖的缘故，似乎很久没有收到离职邮件了。</p>
-<p>下周就要离职了，我终于可以发出这封已经想好很久的离职邮件了。</p>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>学习笔记</tag>
+        <tag>OpenCV</tag>
       </tags>
   </entry>
   <entry>
@@ -352,8 +304,10 @@
 <a id="more"></a>
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/pV2RaaoxyF8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<大阪国际机场live camera含陆空对话>(需要梯子)
 
-<p>&lt;大阪国际机场live camera含陆空对话&gt;(需要梯子)</p>
+
+
 <p>在往上搜了一些资料，发现已经有很多人实现了我的想法，而且做法也超级简单：</p>
 <ul>
 <li>YouTube 直播地址</li>
@@ -385,93 +339,12 @@
 </blockquote>
 <p>原来上面的报错是因为bilibili掐断了连接导致的。不过这也打消了我最初的疑虑：侵权问题。</p>
 <p>这个想法可能要先放一段时间了，目前的想法是想尝试一下用 OpenCV 和 ffmpeg 能不能实现，不知道什么时候才能重新捡起来（逃）。</p>
-]]></content>
+</大阪国际机场live>]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>折腾</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博客一周年啦！</title>
-    <url>/2019/11/10/%E5%8D%9A%E5%AE%A2%E4%B8%80%E5%91%A8%E5%B9%B4%E5%95%A6%EF%BC%81/</url>
-    <content><![CDATA[<p>已经是进入冬天的第四天了，</p>
-<p>这个周末的天气还是很暖和。</p>
-<a id="more"></a>
-
-
-
-<hr>
-<p>2018年11月11日——2019年11月11日，</p>
-<p>博客已经运行一周年了。</p>
-<p>其实严格来说，</p>
-<p>最开始的时间应该是2018年7月13日，</p>
-<p>那时候还是基于WordPress搭建的，</p>
-<p>后来熟悉了Hexo之后才改成Hexo的。</p>
-<hr>
-<p>周年刚好是双十一，</p>
-<p>晚上正在折腾树莓派和OpenCV，</p>
-<p>看到有人给我发双十一的分享链接才反映过来。</p>
-<p>前天和昨天有个刚入职几个月不太熟悉的女同事连续给我发了两个淘宝的分享链接，</p>
-<p>被我直接拒绝了，</p>
-<p>虽然显得很不近人情，</p>
-<p>但是我现在开始明白和别人表明自己的态度也很重要。</p>
-<hr>
-<p>真快呢，一年又要过去了。</p>
-<hr>
-<p>个人对双十一是没有什么感觉的，</p>
-<p>也不会因为便宜几块钱就争先恐后挤在双十一网购，</p>
-<p>非常不喜欢你争我抢的感觉。</p>
-<p>这让我想起了这两天在机场和火车站的经历，</p>
-<p>大爷大妈总是喜欢插队，</p>
-<p>要么就是想和我并排，</p>
-<p>恨不得跑到我前面去，</p>
-<p>差两秒钟就如丧考妣，</p>
-<p>恶心至极。</p>
-<p>出差回来，</p>
-<p>倒是非常怀念日本那种何时何地都自觉排队的氛围，</p>
-<p>谦让是对别人的尊重，</p>
-<p>更是对自己的尊重。</p>
-<hr>
-<p>一直没有在意的缘故，</p>
-<p>51La的访客统计貌似失效了，</p>
-<p>所有的统计项目都是0，</p>
-<p>所以也无从得知这个域名有多少人来过。</p>
-<hr>
-<p>虽然很久没有回黔南去看望优优了，</p>
-<p>也无从得知她的近况以及告诉她我的近况，</p>
-<p>不知道还是不是一如既往的愿意抱着我呢？</p>
-<p>就在前两天，我还是给这个域名续了5年的费，</p>
-<p>5年前的2014年发生的事情，</p>
-<p>我已经遗忘得差不多了，</p>
-<p>2024年，她都已经变成大人了吧，</p>
-<p>我们也差不多都把对方忘记了吧。</p>
-<hr>
-<p>出差回来一个星期的假到这里就结束了，</p>
-<p>明天开始进入一个叫PCKK的项目，</p>
-<p>老样子，还是学不到任何东西或者是学到的都是没用的东西，</p>
-<p>不多想，抓紧时间做简历找工作吧，</p>
-<p>争取在年前离开这里。</p>
-<hr>
-<p>今天开始自己做饭了，</p>
-<p>其实没有想象中的麻烦，</p>
-<p>反而还觉得很有意思，</p>
-<p>想一直坚持下去。</p>
-<hr>
-<p>今天收到了初中一个好朋友寄来的苹果，</p>
-<p>出差的时候因为水果很贵，</p>
-<p>基本没吃到什么水果。</p>
-<p>18个苹果差不多有一箱了，</p>
-<p>心里很不踏实，总有种受之有愧的感觉。</p>
-<p>不过很开心，因为很少送别人东西，所以也很少收到其他人的东西，</p>
-<p>偶尔一次，还觉得有个好朋友真的挺好。</p>
-]]></content>
-      <categories>
-        <category>生活记录</category>
-      </categories>
-      <tags>
-        <tag>生活记录</tag>
+        <tag>折腾</tag>
       </tags>
   </entry>
   <entry>
@@ -496,10 +369,10 @@
 <p>如果是利用终端命令通过ssh远程执行的话，会出错：cannot open display，因为ssh无法打开窗口，在树莓派终端执行不会报错。</p>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>OpenCV</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>OpenCV</tag>
       </tags>
   </entry>
   <entry>
@@ -508,9 +381,11 @@
     <content><![CDATA[<p>更换七牛云过期SSL证书</p>
 <p>转眼博客已经跑了一年了，最近又是域名到期、又是SSL证书到期。</p>
 <p>刚给域名续了5年的费，存储在七牛云的图片因为SSL证书到期加载不出来了。提示“存在隐私安全隐患”，通过图片外链访问也无法加载图片，Chrome直接拒绝连接。</p>
+<p>一年前配置的，流程有些忘了，今天晚上又摸索了一遍。</p>
 <a id="more"></a>
 
-<p>一年前配置的，流程有些忘了，今天晚上又摸索了一遍。</p>
+
+
 <h2 id="七牛云申请证书"><a href="#七牛云申请证书" class="headerlink" title="七牛云申请证书"></a>七牛云申请证书</h2><p>据说七牛云不支持阿里云申请的证书，所以没在阿里云申请，直接在七牛云申请了TrustAisa的一年免费证书。</p>
 <p>具体流程：</p>
 <p>登录七牛云 &gt; SSL证书服务 &gt; 购买证书 &gt; 填写必要信息购买指向目标域名的证书（选择TrustAsia免费证书，验证方式选择DNS验证，个人信息可以随便填，貌似不需要验证）</p>
@@ -518,10 +393,10 @@
 <h2 id="应用SSL证书"><a href="#应用SSL证书" class="headerlink" title="应用SSL证书"></a>应用SSL证书</h2><p>大概十分钟左右证书签发成功后，到 对象存储 &gt; 域名管理 &gt; 配置 &gt; HTTPS 配置 &gt; 强制 HTTPS &gt; 可更换证书列表里选择刚才申请的证书，然后应用。等待几分钟之后，便能通过HTTPS访问存储内容了。</p>
 ]]></content>
       <categories>
-        <category>Hexo博客维护</category>
+        <category>博客维护</category>
       </categories>
       <tags>
-        <tag>Hexo博客维护</tag>
+        <tag>博客维护</tag>
       </tags>
   </entry>
   <entry>
@@ -545,10 +420,10 @@
 <p>各种软件还是去国产化吧，对待国产软件，有替代则替代，能不用则不用。</p>
 ]]></content>
       <categories>
-        <category>工具软件</category>
+        <category>其他</category>
       </categories>
       <tags>
-        <tag>工具软件</tag>
+        <tag>其他</tag>
       </tags>
   </entry>
   <entry>
@@ -578,10 +453,14 @@
 <p>保证密码输入正确并且重试了好几次都报同样的错，才想起来以前遇到这个问题，是因为当前用户对目标目录没有操作权限导致的，只要把目标路径改到当前用户目录下就好了。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">scp -P xxxx file.torrent <span class="built_in">test</span>@<span class="built_in">test</span>:/home/<span class="built_in">test</span>/Downloads</span><br></pre></td></tr></table></figure>
 
-<p>》》 <a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/scp.html" target="_blank" rel="noopener">18. scp 跨机远程拷贝</a></p>
+<blockquote>
+<blockquote>
+<p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/scp.html" target="_blank" rel="noopener">18. scp 跨机远程拷贝</a></p>
+</blockquote>
+</blockquote>
 ]]></content>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -622,62 +501,10 @@
 </blockquote>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>折腾</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>安装电池驱动</title>
-    <url>/2019/10/20/%E5%AE%89%E8%A3%85%E7%94%B5%E6%B1%A0%E9%A9%B1%E5%8A%A8/</url>
-    <content><![CDATA[<p>通过修改 dtst 文件来驱动电池。</p>
-<p>目标替换掉值大于 16 的变量，并且消除编译错误。</p>
-<p>在dtst 文件中搜索“EmbeddedControl”，</p>
-<a id="more"></a>
-
-<p>找到变量定义的地方：</p>
-<p><img src="https://image.youyou-2608.com//blog/20191020/image.png" alt="img"></p>
-<p>先定义一个替换的正则方法，方便后面的替换，名为 B1B2：</p>
-<p>into method label B1B2 remove_entry;</p>
-<p>into definitionblock code_regex . insert</p>
-<p>begin</p>
-<p>Method (B1B2, 2, NotSerialized)\n</p>
-<p>{\n</p>
-<p>Return(Or(Arg0, ShiftLeft(Arg1, 8)))\n</p>
-<p>}\n</p>
-<p>end;</p>
-<p>例子：</p>
-<p><img src="https://image.youyou-2608.com//blog/20191020/image1.png" alt="img"></p>
-<p>用下面的正则替换将该变量替换成等值但是小于 8 的值：</p>
-<p>into device label EC0 code_regex BRC,\s+16, replace_matched begin BRC1,8,BRC2,8, end;</p>
-<p>点击 patch，然后将代码粘贴进去：</p>
-<p><img src="https://image.youyou-2608.com//blog/20191020/image2.png" alt="img"></p>
-<p>然后点击 Apply，</p>
-<p><img src="https://image.youyou-2608.com//blog/20191020/image3.png" alt="img"></p>
-<p>变量已经被替换掉了</p>
-<p>然后确认一下这个变量被替换掉之后有没有编译错误，点击“Compile”按钮编译文件：</p>
-<p><img src="https://image.youyou-2608.com//blog/20191020/image5.png" alt="img"></p>
-<p>出现了三个编译错误，接下来就是消除这些编译错误</p>
-<p>点击编译错误，定位到错误出现的地方：</p>
-<p><img src="https://image.youyou-2608.com//blog/20191020/image6.png" alt="img"></p>
-<p>原来的变量已经被替换掉了，所以引用原来变量名的地方都出错了。</p>
-<p>用下面的代码将方法里的变量替换掉（label 后面的变量名就是Mehtod的一个参数）：</p>
-<p>into method label XBTS code_regex (BRC, replaceall_matched begin (B1B2(BRC1,BRC2), end;</p>
-<p>将代码粘贴到 Patch 里，</p>
-<p><img src="https://image.youyou-2608.com//blog/20191020/image7.png" alt="img"></p>
-<p>然后点击 Apply。</p>
-<p>然后再点击 “Compile”按钮编译一下，刚才那个错误已经消失了。</p>
-<p><img src="https://image.youyou-2608.com/blog/20191020/image9.png" alt></p>
-<p>循环上面的除错处理，替换完全部的变量，并且消除所有的错误。</p>
-<p><img src="https://image.youyou-2608.com/blog/20191020/image10.png" alt="img"></p>
-<p>替换完之后将.aml 文件保存到/patched 目录下，重启即可。</p>
-]]></content>
-      <categories>
-        <category>系统</category>
-      </categories>
-      <tags>
-        <tag>系统</tag>
+        <tag>折腾</tag>
       </tags>
   </entry>
   <entry>
@@ -703,10 +530,10 @@
 
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>OpenCV</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>OpenCV</tag>
       </tags>
   </entry>
   <entry>
@@ -836,16 +663,20 @@
 <p>后续…</p>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>OpenCV</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>OpenCV</tag>
       </tags>
   </entry>
   <entry>
     <title>基于 mjpg-streamer 的树莓派视频监控</title>
     <url>/2019/08/05/%E5%9F%BA%E4%BA%8E-mjpg-streamer-%E7%9A%84%E6%A0%91%E8%8E%93%E6%B4%BE%E8%A7%86%E9%A2%91%E7%9B%91%E6%8E%A7/</url>
     <content><![CDATA[<h2 id="基于mjpg-streamer的视频监控"><a href="#基于mjpg-streamer的视频监控" class="headerlink" title="基于mjpg-streamer的视频监控"></a>基于<strong>mjpg-streamer</strong>的视频监控</h2><h3 id="视频监控搭建"><a href="#视频监控搭建" class="headerlink" title="视频监控搭建"></a>视频监控搭建</h3><p>本来想用 python 来做的，但是 VLC 串流不知道是不是设置的问题，视频采集是正常的，但是接收端接收到的视频一团糊，在无意间知道了 <strong>mjpg-streamer</strong> 这个项目，GitHub 地址：<a href="https://github.com/jacksonliam/mjpg-streamer。" target="_blank" rel="noopener">https://github.com/jacksonliam/mjpg-streamer。</a></p>
+<a id="more"></a>
+
+
+
 <p>安装方法参照GitHub：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt-get install cmake libjpeg8-dev</span><br><span class="line"></span><br><span class="line">sudo apt-get install gcc g++</span><br><span class="line"></span><br><span class="line">cd mjpg-streamer-experimental</span><br><span class="line">make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
 
@@ -886,33 +717,14 @@
       </tags>
   </entry>
   <entry>
-    <title>工作一年的Java程序员应该会什么？</title>
-    <url>/2019/06/13/%E5%B7%A5%E4%BD%9C%E4%B8%80%E5%B9%B4%E7%9A%84Java%E7%A8%8B%E5%BA%8F%E5%91%98%E5%BA%94%E8%AF%A5%E4%BC%9A%E4%BB%80%E4%B9%88%EF%BC%9F/</url>
-    <content><![CDATA[<p>工作一年的Java程序员应该会什么？</p>
-<p>从5月27日开始计算，今天是测试第14天，每天打开页面点点点，截图贴数据，你努力贴图证明自己没有伪造数据的样子真的很可怜，你因为该用红色框而你却所用了蓝色而被要求从头到尾改一遍，因为两张图不太连贯而被要求重新测一遍的样子真可怜。当然了，这里的“你”就是我，一个在对日外包公司工作的我，也是和我一起贴图的同事们。</p>
-<p>昨天下午改了一下午，今天早上改了一上午。我已经忍无可忍，但是我努力告诉自己要冷静，事实是我也做到了冷静，心态平和的修改evidence和重新做evidence。</p>
-<p>下午五点钟，旁边review的其他公司外派过来的同事让我把evidence的数据改一改。这是一个测试数据库里insert_user和update_user有没有如期更新的case，她让我将操作前数据的insert_user改成和操作后的数据一致，我就说了我的想法，前后一致的话就看不出来到底有没有被更新了，我稍微解释了一下，我没有和她辩论或者想说服她的意思，我只是阐述了我的想法，我就说了一句“请告诉我我该做什么？”，然后她好像生气了。我也没再多说，直接重新测试。</p>
-<p>可能因为这两天review我的evidence有很多需要改的地方她也不太高兴，而我三个星期以来因为测试积压在心里的情绪也朝着大脑汹涌而来，我目不转睛地盯着那为了测试而调整分辨率后变得模糊不清的21寸廉价惠普瞎眼屏幕，手里拿着不知道因为多少人握过而变得光滑发亮的垃圾鼠标，我的大脑里只有两个字：离职。</p>
-<p>一转眼，入职已经一年了。前两天，公司还在热火朝天搞评价，公司对你的评价，leader对你的评价，我真希望，以后能增加一个员工对公司的评价。我是达到了公司的预期，可是公司达到了我的预期吗？答案是令人遗憾的，其实在入职之前我就知道结果不会令人太满意，但是却没想到会这么不满意。</p>
-<p>每隔一段时间我就会问自己：从入职到今天，我写了几行代码？答案让我感到难堪。也是这段经历，让我知道，不是所有做软件的人都是技术大牛，工作经验十年，照样有人不知道public、private的含义和用途；工作七年、仍然有人不知道Github是什么，不知道vpn是什么；入职两年，不知道怎么新建一个Java类。只能说大千世界，无奇不有。</p>
-<p>我没记错的话，软件工程里说过测试的目的是尽可能多的找出程序缺陷，而不是验证程序的正确性。我能理解也愿意遵守为了更好的协作和保证产品质量而订下的条条框框，但是如果一个公司将过多的精力放在表面工作、过分执着于线条尺寸和颜色、截图大小和位置上，伪造数据以满足case预期，而不去关心程序本身性能和运行状况的话，不去思考如何提高员工技术能力的话，那它是不会有什么长远发展的。</p>
-<p>逛了两天v2ex，大家每天都能在工作中提高自己的技术能力，增加新的见闻，而我，不过是日复一日的截图再截图，对当前的处境感到万分焦虑，每天再听听同事们不停的 瓦您古、饿拉、努鲁、佛玛托，心态更是崩溃。每天即使没事，也要为了团队和谐在工位上坐到九点半，真的该死。</p>
-<p>因为工作中几乎没有需要写代码的地方，身边同事的技术能力也是不敢恭维，没有技术氛围，办公室话题永远是吃。</p>
-<p>以前还想着在这个城市有以两个熟悉的人，可以待一段时间，目前看来，也没有什么值得留恋的了。还是尽快开始找工作，希望离开这个地方吧。</p>
-<p>墙内还想丝毫没有香港游行的消息。想起Twitter上的一个问题：二十年来，是中国变得像香港了还是香港变得像中国了？真为圈养的中国人感到悲哀。如果有来生，千万别再投胎到中国了，做中国人真累。倒行逆施，开历史的倒车，终将被钉在历史的耻辱柱上。</p>
-]]></content>
-      <categories>
-        <category>生活记录</category>
-      </categories>
-      <tags>
-        <tag>生活记录</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>给树莓派安装Ubuntu MATE系统</title>
     <url>/2019/06/11/%E7%BB%99%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85Ubuntu-MATE%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<p>给树莓派安装Ubantu MATE操作系统</p>
 <p>由于平时用的是Ubuntu系统，对这个系统比较熟悉，也想给树莓派也装这个系统，Linux下做SD卡启动盘网上资料比较少，担心发生对笔记本磁盘的误操作，最后在官网上找到了教程。</p>
+<a id="more"></a>
+
+
+
 <h3 id="下载系统"><a href="#下载系统" class="headerlink" title="下载系统"></a>下载系统</h3><p><a href="https://ubuntu-mate.org/raspberry-pi" target="_blank" rel="noopener"><a href="https://ubuntu-mate.org/raspberry-pi/" target="_blank" rel="noopener">Ubuntu MATE for the Raspberry Pi Model B 2, 3 and 3+</a></a></p>
 <h3 id="安装工具并写入系统"><a href="#安装工具并写入系统" class="headerlink" title="安装工具并写入系统"></a>安装工具并写入系统</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get install gddrescue xz-utils</span><br><span class="line">unxz --verbose ubuntu-mate-18.04.2-beta1-desktop-armhf+raspi-ext4.img.xz</span><br><span class="line">sudo ddrescue -D --force ubuntu-mate-18.04.2-beta1-desktop-armhf+raspi-ext4.img /dev/sdx</span><br></pre></td></tr></table></figure>
 
@@ -952,10 +764,10 @@
 <p>折腾了半天一直各种报错，没想到这么简单。。</p>
 ]]></content>
       <categories>
-        <category>Hexo博客维护</category>
+        <category>博客维护</category>
       </categories>
       <tags>
-        <tag>Hexo博客维护</tag>
+        <tag>博客维护</tag>
       </tags>
   </entry>
   <entry>
@@ -965,6 +777,10 @@
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>时至今日也没有系统深入的学习过JavaScript，虽然常用，但是也只停留在最基础的使用上。没有系统深入的了解，必然要踩一些前端众所周知，却让小白绞尽脑汁地大坑！</p>
 <p>今天又在坑里摸了一天，记录一下，权当是写日记了。</p>
 <p>最近连续加班，确实有些身心俱疲；加上昨天下午的“午后小睡”导致晚上失眠，到快四点钟才睡着，今天早上快十点钟还躺在床上。</p>
+<a id="more"></a>
+
+
+
 <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>正在逛Twitter，做毕设地学妹给我提了两个需求：</p>
 <ul>
 <li>登陆页面的表单检验；</li>
@@ -989,10 +805,10 @@
 <p>总之，遇到问题，要发散思维，尽量快速的去确定调查的方向，最终尽快的解决问题。</p>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>JavaScript</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -1003,6 +819,10 @@
 <p>为什么突然想起来注解呢？今天上午同事遇到一个和注解相关的问题，JSP页面传值到后台后（其实前后端并不分离），但是在POJO类上的校验注解值不满足的条件下也通过了，让我给帮忙看看。因为其他组的同事相同的通用代码并没有这个问题，而且对注解的处理是封装在框架中的，所以一开始便排除了问题在后台思路，转向页面传值去调查。虽然最后找到原因是因为没有清空Eclipse的.class文件重新编译，但是感觉已经对之前学过的注解部分的知识生疏了。刚好今天没加班，就赶紧复习一下。</p>
 </blockquote>
 <p>本想在网上找两篇文章回忆一下，但是好像例子写得都不完整。刚好前段时间刚买了一本《Java编程思想》，就赶紧翻开看了一下，一直记得书里给出的例子也是数据库字段注解相关的。</p>
+<a id="more"></a>
+
+
+
 <h2 id="相关概念及原理"><a href="#相关概念及原理" class="headerlink" title="相关概念及原理"></a>相关概念及原理</h2><p>参见 ==&gt; 《Java编程思想》第二十章&lt;注解&gt;。</p>
 <p>四个元注解：</p>
 <ul>
@@ -1026,10 +846,10 @@
 
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>Java</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -1045,10 +865,10 @@
 <p>最好在后台返回 <strong>严格规范</strong> 的json防止此类错误。</p>
 ]]></content>
       <categories>
-        <category>Exp</category>
+        <category>ajax</category>
       </categories>
       <tags>
-        <tag>Exp</tag>
+        <tag>ajax</tag>
       </tags>
   </entry>
   <entry>
@@ -1094,10 +914,10 @@
 <p>无作者本人授权请勿转载。</p>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>SpringBoot</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>SpringBoot</tag>
       </tags>
   </entry>
   <entry>
@@ -1112,14 +932,13 @@
 <p>五. 参照：[<a href="https://www.cnblogs.com/heshan664754022/p/3807672.html" target="_blank" rel="noopener">Tomcat启动报错:严重: StandardServer.await: create[8005] java.net.BindException: Cannot assign requested address</a>](<a href="https://www.cnblogs.com/heshan664754022/p/3807672.html" target="_blank" rel="noopener">https://www.cnblogs.com/heshan664754022/p/3807672.html</a>) ， ping了localhost，发现收到的响应来自ipp[47.89.54.215]，打开C:/windows/system32/drivers/etc/hosts，发现以下内容：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">47.89.54.215       localhost</span><br><span class="line">47.89.54.215	hao.360.cn</span><br><span class="line">47.89.54.215	www.hao123.com</span><br><span class="line">47.89.54.215	www.3600.com</span><br><span class="line">47.89.54.215	www.114la.com</span><br><span class="line">47.89.54.215	www.duba.com</span><br><span class="line">47.89.54.215	www.hao360.cn</span><br><span class="line">47.89.54.215	123.sogou.com</span><br><span class="line">47.89.54.215	web.sogou.com</span><br><span class="line">47.89.54.215	www.hao123.cn</span><br><span class="line">47.89.54.215	hao.qq.com</span><br><span class="line">47.89.54.215	www.1616.net</span><br><span class="line">47.89.54.215	hao.rising.cn</span><br><span class="line">47.89.54.215	daohang.qq.com</span><br></pre></td></tr></table></figure>
 
-<p>看到daohang.qq，hao123，duba，hao360，123.sougou之类的字眼，瞬间一阵悲痛袭来，曾经那个“为什么国内流氓软件那么多？”的问题又浮现在脑海，想起了百度所谓的“中国用户愿意用隐私换效率”。</p>
-<p><img src="https://image.youyou-2608.com//hexo%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190424144325.jpg" alt="隐私换效率，生活更便利-变态辣椒"></p>
+<p>看到daohang.qq，hao123，duba，hao360，123.sougou之类的字眼，国内流氓软件那么多？”的问题又浮现在脑海。</p>
 ]]></content>
       <categories>
-        <category>Exp</category>
+        <category>Tomcat</category>
       </categories>
       <tags>
-        <tag>Exp</tag>
+        <tag>Tomcat</tag>
       </tags>
   </entry>
   <entry>
@@ -1135,10 +954,10 @@
 <p> <a href="https://youtrack.jetbrains.com/issue/IDEA-202821" target="_blank" rel="noopener">Black Terminal or Terminal doesnot work</a> </p>
 ]]></content>
       <categories>
-        <category>Exp</category>
+        <category>IDEA</category>
       </categories>
       <tags>
-        <tag>Exp</tag>
+        <tag>IDEA</tag>
       </tags>
   </entry>
   <entry>
@@ -1146,6 +965,10 @@
     <url>/2019/04/06/Git%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86/</url>
     <content><![CDATA[<p>git的代理配置</p>
 <p>给sublime安装插件的时候又碰到git clone速度过慢的问题，记录一哈！</p>
+<a id="more"></a>
+
+
+
 <ol>
 <li><p>打开ss全局代理；</p>
 </li>
@@ -1162,13 +985,13 @@
 
 
 <p>==&gt;&gt; <a href="https://imciel.com/2016/06/28/git-proxy/" target="_blank" rel="noopener">设置 git 代理</a> </p>
-<p>在Ubantu下需要在网络设置里打开网络代理设置代理主机：socks5://127.0.0.1:1080</p>
+<p>在Ubuntu下需要在网络设置里打开网络代理设置代理主机：socks5://127.0.0.1:1080</p>
 ]]></content>
       <categories>
-        <category>Exp</category>
+        <category>git</category>
       </categories>
       <tags>
-        <tag>Exp</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
@@ -1186,10 +1009,10 @@
 <p>吐槽一下coding和腾讯云之间的账号互通问题，一阵瞎引导，竟然创建了一个新账号，以前的项目找不回来，两个网站之间来回绕了几遍，无意间又用邮箱登录上去了，之前都是能自动跳转登录的，现在还和CSDN一样开始恰烂钱，强制绑定微信和手机号，无语。</p>
 ]]></content>
       <categories>
-        <category>Hexo博客维护</category>
+        <category>博客维护</category>
       </categories>
       <tags>
-        <tag>Hexo博客维护</tag>
+        <tag>博客维护</tag>
       </tags>
   </entry>
   <entry>
@@ -1205,6 +1028,11 @@
 <li>“传统的RTTI”，假定我们在编译时已经知道了所有的类型；</li>
 <li>“反射机制”，允许在运行时发现和使用类的信息。</li>
 </ol>
+<a id="more"></a>
+
+
+
+
 <h2 id="14-1-为什么需要RTTI-Run-Time-Type-Identification"><a href="#14-1-为什么需要RTTI-Run-Time-Type-Identification" class="headerlink" title="14.1 为什么需要RTTI(Run-Time Type Identification)"></a>14.1 为什么需要RTTI(Run-Time Type Identification)</h2><p>RTTI提供类型维护的信息，为多态机制提供实现基础。多态的实现主要是通过向上转型，通过泛化父类来引用子类对象。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.typeinfo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018-06-06 14:52</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Shapes</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List&lt;Shape&gt; shapeList = Arrays.asList(<span class="keyword">new</span> Circle(), <span class="keyword">new</span> Square(), <span class="keyword">new</span> Triangle());</span><br><span class="line">        shapeList.forEach(Shape::draw);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">draw</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span> + <span class="string">".draw."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> String <span class="title">toString</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span> <span class="keyword">extends</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Circle"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Triangle</span> <span class="keyword">extends</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Triangle"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Square</span> <span class="keyword">extends</span> <span class="title">Shape</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Square"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -1406,17 +1234,16 @@
 <p>output:</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> c.f()</span><br><span class="line">com.typeinfo.AnonymousA$<span class="number">1</span></span><br><span class="line"><span class="keyword">public</span> c.g()</span><br><span class="line"><span class="function"><span class="keyword">package</span> <span class="title">u</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="title">v</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">w</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">Process finished with exit code 0</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>Java</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
     <title>更改DNS为8.8.8.8访问cn.bing.com</title>
     <url>/2019/01/24/%E6%9B%B4%E6%94%B9DNS%E4%B8%BA8-8-8-8%E8%AE%BF%E9%97%AEcn-bing-com/</url>
     <content><![CDATA[<p>昨天早上开始 <a href="https://cn.bing.com" target="_blank" rel="noopener">https://cn.bing.com</a> 就无法访问：</p>
-<p><img src="https://image.youyou-2608.com/blog/%29$55G64S97695C%5BKLD9_QEV.png" alt="Bing官网无法访问"></p>
 <p>今天晚上想去 <a href="https://weibo.com/bingisfordoing" target="_blank" rel="noopener">Bing搜索微博</a> 了解一下情况，ping了一下，DNS都是127.0.0.1，将DNS改为8.8.8.8还能正常访问。据说当年Google开始也是出现DNS污染，后来才离开大陆的，想想Bing也没有了，每天只能在百度看百家号那些劣质内容就觉得可怕。</p>
 <a id="more"></a>
 
@@ -1431,373 +1258,10 @@
 <p>引用原文中得一句话：<strong>写到这里，很是悲哀：偌大的中文互联网竟已堕落到如此境地，连一个搜索引擎都没有了。</strong></p>
 ]]></content>
       <categories>
-        <category>Exp</category>
+        <category>其他</category>
       </categories>
       <tags>
-        <tag>Exp</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《雪国》——川端康成</title>
-    <url>/2019/01/23/%E5%B7%9D%E7%AB%AF%E5%BA%B7%E6%88%90%E3%80%8A%E9%9B%AA%E5%9B%BD%E3%80%8B/</url>
-    <content><![CDATA[<blockquote>
-<p>穿过县界长长的隧道，便是雪国。夜空下一片白茫茫。火车在信号所前停了下来。</p>
-<p>一位姑娘从对面座位上站起身子，把岛村座位前的玻璃窗打开。一股冷空气袭卷进来。姑娘将身子探出窗外，仿佛向远方呼唤似的喊道……</p>
-</blockquote>
-<blockquote>
-<p>随着秋凉，每天都有昆虫在他房间里的榻榻米上死去。硬翅的昆虫，一翻过身就再也飞不起来。蜜蜂还可以爬爬跌跌一番，再倒下去爬不起来。由于季节转换而自然死亡，乍看好像是静静地死去，可是走近看，只见它们抽搐着腿脚和触角，痛苦地拼命挣扎着。这八叠大的榻榻米作为它们死亡的地方，未免显得太宽广了。</p>
-</blockquote>
-<a id="more"></a>
-
-
-
-<blockquote>
-<p>比头发丝还细的麻纱，若缺少雪天天然的潮湿，就很难办了。阴冷的季节对它似乎合适。古时有这样一种说法：三九寒天织出来的麻纱，三伏天穿上会令人觉得特别凉爽，这是由于阴阳自然的关系。</p>
-<p>倾心于岛村的驹子，似乎在根性上也有某种内在的凉爽。因此，在驹子身上迸发出的奔放的热情，是岛村觉得格外可怜。</p>
-<p>但是，这种挚爱之情，不像一件绉纱那样能留下实在的痕迹。纵然穿衣用的绉纱在工艺品中算是寿命最短的，但只要保管得当，五十年或更早的绉纱，穿在身上照样也不褪色。而人的这种依依之情，却没有绉纱寿命长。岛村茫然的这么想着，突然又浮现出为别的男人生了孩子、当了母亲的驹子的形象。他心中一惊，扫视了一下周围，觉得大概是自己太劳累了吧。</p>
-</blockquote>
-<blockquote>
-<p>岛村无法相信呈弧状横跨太空的明亮光带竟会如此昏暗。大概是星空比朦胧的月夜更加黯淡的缘故吧。可是，银河比任何满月的时候都要澄澈明亮。地面却没什么投影，奇怪的是，驹子的脸活像一副旧面具，淡淡的浮现出来，散发出一股女人的芳香。</p>
-<p>岛村抬头仰望，觉得银河仿佛要把这个大地拥抱过去。</p>
-<p>犹如一条大光带的银河，使人觉得好像浸泡着岛村的身体，飘飘浮浮，然后伫立在天涯海角上。这虽是一种冷寂，但也给人某种神奇的魅惑之旅。</p>
-</blockquote>
-<blockquote>
-<p>“这孩子疯了，她疯了！”</p>
-<p>驹子发出疯狂的叫喊，岛村试图接近她，不料被一群汉子连推带搡撞到一边去。这些汉子是想从驹子手里接过叶子抱走。待岛村站稳了脚跟，抬头望去，银河好像哗啦一声，向他的心坎上倾泻了下来。</p>
-</blockquote>
-<p>读了一遍，除了驹子与岛村之间的关系、叶子的出场和去世之外，什么也没留下。没有体会到其中要表达的情感，只是从头到尾蕴含着一股无奈和哀伤。</p>
-<p>驹子为了给未婚夫治病而沦为艺伎，倾心于岛村，在岛村看来却是一段徒劳的感情；叶子内心向往大城市的生活，希望离开乡下却未能如愿，牵挂自己在铁路工作的弟弟却无法相见，最终因火灾不幸去世。原本出身大城市衣食无忧想要改革日本舞蹈的岛村，在与驹子的相处以及叶子的去世中从自己的世界中解放了出来，改变了自己一直以来对事物的“徒劳”的看法。</p>
-<blockquote>
-<p>一直以来，困扰岛村的虚无背后的原因，是死亡带来的生命时长的局限，所导致的的人生一切事情的无意义。在叶子死亡的那一刻，岛村看到的，是失去了生命反而显得自由，生命通过变形得到了延续，生和死之间不再那么泾渭分明。如果生死界线真的变得模糊，那困扰岛村的虚无，或许将不复存在。</p>
-</blockquote>
-<p><a href="https://www.jianshu.com/p/f2f73e0a44d4" target="_blank" rel="noopener">《雪国》：理解虚无主义，才能读懂川端康成 </a></p>
-]]></content>
-      <categories>
-        <category>读书</category>
-      </categories>
-      <tags>
-        <tag>读书</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《百年孤独》</title>
-    <url>/2019/01/14/%E3%80%8A%E7%99%BE%E5%B9%B4%E5%AD%A4%E7%8B%AC%E3%80%8B/</url>
-    <content><![CDATA[<p>人生百年，百年孤独。</p>
-<p>第一次听到这个书名，还是初中的时候，这么多年，一直觉得这是个令人敬而远之的名字。</p>
-<p>花了三周的时间读完了这本书。书中那些长、拗口还夹杂循环的人名以及人物之间错综复杂的关系，严重影响阅读，最后从网上找了任务关系图，读起来轻松不少。</p>
-<p>字里行间充满着孤独，每个人都奋力挣扎一生，却从未逃出孤独。</p>
-<p>小城从荒芜走向繁荣，然后逐渐走向衰落。布恩迪亚家族七代人，从出生到死亡不过是剧本中的一场演出，在孤独中出场，最后在孤独中落幕，被飓风抹去，从世人记忆中根除，自永远至永远不会被重复。</p>
-<a id="more"></a>
-
-
-
-<p>“过去都是假的，回忆是一条没有归途的路，以往的一切春天都无法复原，即使最狂乱且坚韧的爱情，归根结底也不过是一种瞬息即逝的现实，唯有孤独永恒。”</p>
-<p>“你那么憎恨军人，跟他们斗了那么久，琢磨了他们那么久，最终却变得和他们一样。人世间没有任何理想值得以这样的沉沦最为代价。”</p>
-<p>“世界不过是身外之物，她的内心不再为任何苦痛而波动。她深深遗憾没能在多年前获得这样的领悟，那时还来得及净化记忆，在崭新的光芒下重建世界，平静地唤回傍晚时皮特罗•克雷斯皮身上的薰衣草味道，并将丽贝卡救出悲惨的境地，而这不是出于爱，也不是出于恨，而是出于对孤独的深切理解。”</p>
-<p>“岁月流逝，她却永远停留在天真烂漫的童年，对各样人情世故越发排斥，对一切恶意与猜疑越发无动于衷，幸福的生活在自己单纯的现实世界里。”</p>
-<p>“她意识到奥雷里亚诺·布恩迪亚上校并非像她想的那样，由于战争的摧残而丧失对家人的情感，实际上他从未爱过任何人，包括妻子蕾梅黛斯和一夜风流后随即从他生命里消失的无数女人，更不必提他的儿子们。她猜到他并非像所有人想的那样为着某种理想发动那些战争，也并非像所有人想的那样因为疲倦而放弃了近在眼前的胜利，实际上他成功和失败都因为同一个原因，即纯粹、罪恶的自大。她最终得出结论，自己不惜为他付出生命的这个儿子，不过是个无力去爱的人。”</p>
-<p>“那个漫无尽头的夜里，赫里内勒多•马尔克斯上校追忆在阿玛兰妲缝纫间里度过的那一去不复返的午后时光，奥雷里亚诺•布恩迪亚上校则苦苦挣扎了数小时，试图抓裂自己孤独的硬壳。自从那个遥远的午后父亲带他去见识冰块，他唯一的快乐时光就是在金银器作坊里打造小金鱼的时刻。他被迫发动三十二场战争，打破与死亡之间的所有协定，并像猪一样在荣誉的猪圈里打滚，最后耽搁了将近四十年才发现纯真的可贵。”</p>
-<p>“在生命的最后两个小时里，他无法理解为什么自童年时代起一直折磨他的恐惧感消失了。他无动于衷地听着冗长的指控，甚至没想去展现自己刚刚获得的勇气。其实他在意的不是死亡，而是生命，因此听到死刑判决时他心中没有恐惧只有留恋。”</p>
-<p>可能鸡汤文说的对，孤独才是人生的本质。</p>
-<p>信息社会，人人都能随时随地冲浪上网的时代，这种孤独的感觉来得更加容易。我看到身边的人无时无刻在看着手机屏幕，在回复着各种社交软件的消息，看着不计其数的自媒体的图文信息。我没有体验到其中的乐趣，我从很久以前，就努力做一个和快文化保持距离的人。几乎不网络聊天，几乎不玩游戏。也正因为如此，我经常感到和周围的人格格不入，在学校的时候，周围的同学上学放学路上无时无刻不在聊游戏，久而久之，我便习惯一个人上课下课。</p>
-<p>曾经有过一段孤独感很强烈的时期。总是会在一些细枝末节的事物影响下产生强烈的孤独，我甚至常常在过马路的时候想，假如此时此刻我发生车祸，我该向谁求助。仔细想来，大概是工作以后，潜意识里多了一种梦想破灭不得不向现实屈服的失落，自己却未曾察觉；毕业之后，便是独自一人生活，几乎断了所有与周围事物的联系，不曾与人搭话，甚至曾经一个月未曾出门，哪怕是下楼去趟超市。庆幸的是，这种感觉持续了一段时间便消失了，可能是习惯了现在的生活状态。</p>
-<p>努力地去摆脱孤独。看一部纪录片、单曲循环一首歌、坐一小时公交去机场和车站看看繁忙的世界，坐48小时的绿皮车去接触更底层的劳苦大众…渐渐的在孤独中忘记孤独，当你去回想昨天，发现不是一片空白的时候，你已经战胜了孤独。</p>
-]]></content>
-      <categories>
-        <category>读书</category>
-      </categories>
-      <tags>
-        <tag>读书</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web项目可视化开发工具——WebPerformer</title>
-    <url>/2019/01/08/Web%E9%A1%B9%E7%9B%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E2%80%94%E2%80%94WebPerformer/</url>
-    <content><![CDATA[<blockquote>
-<p>一个基于Web的现金流管理系统是我进入公司接触的第一个项目。两个半月做测试，两个半月做开发，将近半年，现在开发接近尾声，想好好分析一下这个“新兴工具”。</p>
-</blockquote>
-<h3 id="什么是WebPerformer"><a href="#什么是WebPerformer" class="headerlink" title="什么是WebPerformer"></a>什么是WebPerformer</h3><p>在Google里搜索“Web Performer”（下文简称“wp”），能搜索到结果173,000,000个结果，可以看到，靠前的结果都是日文的，并且都是版本更新相关的结果。在百度中搜索同样的内容，没有发现有中文结果，在国内应用几乎为0。</p>
-<p><img src="https://image.youyou-2608.com/blog/wp-search-result.png" alt="wp-google-search-result"></p>
-<p>wp是“キヤノンITソリューションズ株式会社”的产品，产品简介：<a href="https://www.canon-its.co.jp/news/detail/20180508webperformer.html" target="_blank" rel="noopener">wp-官网简介</a> 。</p>
-<p><img src="https://image.youyou-2608.com/blog/wp-simple-info.png" alt="wp-simple-info"></p>
-<p>简单来说，wp是为了降低人力成本、应对信息技术发展和技术人才不足、提高软件质量而开发的高效率自动化开发工具。</p>
-<p>目前已经在制药、贸易、建设、运输、金融保险等行业有一些成功应用的案例。</p>
-<p><strong>wp就是一个功能比较全的Eclipse插件。</strong></p>
-<h3 id="与传统Web项目开发的相同点与不同点"><a href="#与传统Web项目开发的相同点与不同点" class="headerlink" title="与传统Web项目开发的相同点与不同点"></a>与传统Web项目开发的相同点与不同点</h3><p>官网的简介几乎都是一笔带过，并且没有提到细节。应该是只有购买之后才会得到官方详细的使用文档。</p>
-<h4 id="Web-Performer相关的概念"><a href="#Web-Performer相关的概念" class="headerlink" title="Web Performer相关的概念"></a>Web Performer相关的概念</h4><ul>
-<li>work code：变量在一个模块（模块包括IO，BP，DM，EXT）的唯一名称，含义和命名规则与Java中的变量相似。</li>
-<li>IO：输入输出的意思，在wp中一个IO对应一个页面，页面上所有的项目（数据项，label）都来自在IO中定义的项目，在IO中可以给各个项目添加一些属性，这些属性包括work code（变量名），name（变量别命），长度（区别于byte，例如“name”是4位，“你好”是2位），小数位（项目为数字时且需要小数位时指定，默认-1），数据类型（见“数据类型”部分）。</li>
-<li>DM：Data Model的简称，主要功能是作为存放数据的容器。类似于Java中pojo类，兼有泛型集合的功能。</li>
-<li>BP：Business Process的简称，BP是一个功能的逻辑部分，大致的使用过程为：向BP传入参数 &gt; BP中加工处理 &gt; 将结果集放入DM  &gt; 结果集传到IO &gt; 画面显示数据。</li>
-<li>EXT：Extentsion，扩展。某些在BP中不能完成的功能，或者逻辑过于复杂超出了wp的功能范围，可以自己编写相应的Java类或者JavaScript文件，然后通过BP调用EXT，EXT调用自定义处理的方式处理数据。</li>
-</ul>
-<h4 id="与传统开发的联系"><a href="#与传统开发的联系" class="headerlink" title="与传统开发的联系"></a>与传统开发的联系</h4><ul>
-<li>从wp模块分类中很容易看出，其实wp的本质还是MVC的思想，IO对应View，BP对应Controller，DM对应Model。</li>
-<li><strong>在基于wp的开发中，除了扩展部分和自定义页面布局及样式之外，其他所有的操作都接触不到代码，开发的内容仅仅是在各个模块中添加一个个项目，然后给对应的项目指定相应的属性。</strong></li>
-</ul>
-<h3 id="开发环境（环境依赖）"><a href="#开发环境（环境依赖）" class="headerlink" title="开发环境（环境依赖）"></a>开发环境（环境依赖）</h3><p>在开发开始之前，需要搭建开发环境，总体来说wp的开发环境和正常开发时的环境几乎一致。</p>
-<p>在wp中，由于wp本质上就是一个Eclipse插件，所以Eclipse是必须的，<del>项目管理基于Maven</del>，构建基于Ant，服务器为Tomcat，自动生成的则是Java代码，所以需要Java环境，其他的与使用Eclipse正常开发几乎一致。常用的功能仅仅是编译时完成一个功能之后点击编译（Eclipse的编译）、需要自定义页面布局时使用Ant命令生成对应IO的layout.html文件然后基于layout.html文件修改页面布局。</p>
-<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>wp中有自己的数据类型，这些数据类型应该是为了降低编程门槛而从Java数据类型中提炼出来的。</p>
-<p>数据的类型：</p>
-<ul>
-<li>CODE：介于Java的String和Numeric之间，定义只包含数字和字母的数据，例如：123，AC01。</li>
-<li>TEXT：类似于Java中的String类型，几乎任何类型都可以转换成TEXT类型，例如：’Hello world’。</li>
-<li>DATE：日期类型，有多种格式且可以互相转换，例如：20190108，2019-01-08。</li>
-<li>TIME：时间类型，有多种精度可以选择，最大精度到秒，例如：2019-01-08 21:59:01。</li>
-<li>NUM：数字类型，有多种格式且可以互相转换，例如1234，1,234。</li>
-<li>FILE：文件类型。</li>
-<li>BOOL：布尔类型，不常用。</li>
-<li>CURRENCY：货币类型。</li>
-</ul>
-<p>work code的类型：</p>
-<ul>
-<li>IO：输入输出类型，类似于html中的input类型，页面刷新后输入的值恢复成IO模块中设置的默认值。</li>
-<li>I：输入类型，与IO类型类似，页面刷新后输入的值保持不变。</li>
-<li>O：输出类型，类似于IO类型的只读模式。</li>
-<li>A：Action的简称，执行一个动作，可以调用BP逻辑以执行操作，例如”检索“，”修正“，”删除“。</li>
-<li>G：Group的简称，一个组，类似于一个没有边框的table，可以用来展示检索出的数据，在其后并且下一个G类型项目之前的所有IO属性”Level“值为”2“的项目会被组织到这个table中作为表头（一般项目的Level值为1），值会被添加到这个label下，形成完成的数据表格。</li>
-</ul>
-<p>BP中项目的常用类型：</p>
-<ul>
-<li>ARG：参数类型，表示该值是IO中传过来的变量。</li>
-<li>CALL：表示调用一个DM并执行DM中的一个操作，例如SELECT，UPDATE。</li>
-<li>PROCEDURE：表示调用一个存储过程。</li>
-<li>FOREACH：对一个集合执行for循环，类似于Java中的增强for循环。</li>
-<li>BREAK：跳出当前循环。</li>
-<li>CONTINUE：跳过本次循环进入下一次循环。</li>
-<li>DO/WHILE：类似于Java中的WHILE。</li>
-<li>IF/ELSEIF/ELSE：判断语句。</li>
-<li>END：表示一个逻辑块的结束。</li>
-<li>LOG：日志记录。</li>
-<li>WORKAREA：表示调用一个数据集合。</li>
-</ul>
-<p>DM中操作的类型：</p>
-<ul>
-<li>SELECT：表示按照指定的条件执行select语句。</li>
-<li>UPDATE：表示按照指定的条件执行update语句。</li>
-<li>DELETE：表示按照指定的条件执行delete语句（符合条件的记录不存在时报错）。</li>
-<li>ERASE：表示按照指定的条件执行delete语句（符合条件的记录不存在时不报错）。</li>
-<li>INSERT：表示按照指定的条件执行insert语句。</li>
-</ul>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="DM的定义"><a href="#DM的定义" class="headerlink" title="DM的定义"></a>DM的定义</h4><p>DM主要定义一些与数据库或者页面需要的字段，如下表：</p>
-<table>
-<thead>
-<tr>
-<th>项目CODE</th>
-<th>项目别名</th>
-<th>位数</th>
-<th>小数位</th>
-<th>字段操作</th>
-<th>页面跳转</th>
-<th>来自DM</th>
-<th>DM字段</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>TRAN_ID</td>
-<td>交易编号</td>
-<td>13</td>
-<td>-1</td>
-<td></td>
-<td></td>
-<td></td>
-<td>CODE</td>
-</tr>
-<tr>
-<td>TRAN_DATE</td>
-<td>交易日期</td>
-<td>8</td>
-<td>-1</td>
-<td></td>
-<td></td>
-<td></td>
-<td>CODE</td>
-</tr>
-<tr>
-<td>TRAN_VOLUME</td>
-<td>交易额</td>
-<td>15</td>
-<td>0</td>
-<td></td>
-<td></td>
-<td></td>
-<td>NUM</td>
-</tr>
-</tbody></table>
-<p>在DM的属性中可以指定SQL语句，也可以在操作中指定数据库操作类型及条件：</p>
-<table>
-<thead>
-<tr>
-<th>项目CODE</th>
-<th>项目别名</th>
-<th>项目类型</th>
-<th>条件</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>SELECT_DATA</td>
-<td>数据查询</td>
-<td>SELECT</td>
-<td>TRAN_DATE&gt;FORMATDATE(@1,1) AND CUSTOMER_CODE =   TEXT(‘TEST_CODE’) AND TRAN_VOLUME &gt; NUM(@2)</td>
-</tr>
-</tbody></table>
-<p>其中@1表示调用时的第一个参数，@2表示第二个参数，依此类推，但是必须保证传递过来的参数与定义时的参数顺序一致，否则会得到期待值以外的结果；另外还需要保证SQL返回的结果与DM中字段数量、字段名和顺序一致，否则无法通过编译。</p>
-<p>如果要给一个DM的对象赋值，需要在DM中定义赋值方法，分别指定字段以及对应的参数。</p>
-<h4 id="BP的定义"><a href="#BP的定义" class="headerlink" title="BP的定义"></a>BP的定义</h4><p>BP是一个功能模块的逻辑部分，一个简单的示例定义如下：</p>
-<table>
-<thead>
-<tr>
-<th>项目类型</th>
-<th>对应DM</th>
-<th>调用操作</th>
-<th>数据类型</th>
-<th>参数</th>
-<th>WORK CODE</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ARG</td>
-<td></td>
-<td></td>
-<td>CODE</td>
-<td></td>
-<td>TRAN_DATE</td>
-</tr>
-<tr>
-<td>ARG</td>
-<td></td>
-<td></td>
-<td>TEXT</td>
-<td></td>
-<td>CUSTOMER_ID</td>
-</tr>
-<tr>
-<td>ARG</td>
-<td></td>
-<td></td>
-<td>NUM</td>
-<td></td>
-<td>TRAN_VOLUME</td>
-</tr>
-<tr>
-<td>CALL</td>
-<td>TRAN_INFO</td>
-<td>SELECT_DATA</td>
-<td></td>
-<td>_ARG_.TRAN_DATE,_ARG_.CUSTOMER_ID,_ARG_.TRAN_VOLUME</td>
-<td>TRAN_INFO</td>
-</tr>
-<tr>
-<td>CALL</td>
-<td>PAGE_DATA</td>
-<td>SET_DATA</td>
-<td></td>
-<td>TRAN_INFO</td>
-<td>PAGE_TRAN_INFO</td>
-</tr>
-<tr>
-<td>WORKAREA</td>
-<td>PAGE_DATA</td>
-<td></td>
-<td></td>
-<td>APPEND,PAGE_TRAN_INFO</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>这时只要在IO中指定数据来源类型为WORKAREA并且为PAGE_DATA，这个数据集合中的数据便能在页面展示出来。</p>
-<h4 id="IO的定义"><a href="#IO的定义" class="headerlink" title="IO的定义"></a>IO的定义</h4><p>IO主要存放与页面交互的数据或者接收用户的输入，可以设定初期值：</p>
-<table>
-<thead>
-<tr>
-<th>项目类型</th>
-<th>项目CODE</th>
-<th>项目别名</th>
-<th>位数</th>
-<th>小数位</th>
-<th>加工式</th>
-<th>目标页面</th>
-<th>来自DM</th>
-<th>DM字段</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>IO</td>
-<td>USER_NAME</td>
-<td>用户名输入框</td>
-<td>20</td>
-<td>-1</td>
-<td></td>
-<td></td>
-<td></td>
-<td>@TEXT</td>
-</tr>
-<tr>
-<td>O</td>
-<td>TRAN_ID</td>
-<td>交易ID</td>
-<td>15</td>
-<td>-1</td>
-<td></td>
-<td></td>
-<td>PAGE_DATA</td>
-<td>TRAN_ID</td>
-</tr>
-<tr>
-<td>O</td>
-<td>TRAN_DATE</td>
-<td>交易日期</td>
-<td>10</td>
-<td>-1</td>
-<td></td>
-<td></td>
-<td>PAGE_DATA</td>
-<td>TRAN_DATE</td>
-</tr>
-<tr>
-<td>O</td>
-<td>TRAN_VOLUME</td>
-<td>交易额</td>
-<td>15</td>
-<td>0</td>
-<td></td>
-<td></td>
-<td>PAGE_DATA</td>
-<td>TRAN_VOLUME</td>
-</tr>
-</tbody></table>
-<h4 id="更多细节"><a href="#更多细节" class="headerlink" title="更多细节"></a>更多细节</h4><p>程序运行中，数据流向为：IO &gt; BP &gt; DM &gt; BP &gt; IO，不过这个顺序不严格界定，也可以从IO项目的初期值属性中直接访问数据库取得数据，多用于取全局变量等类型的值。</p>
-<h3 id="常用内置方法"><a href="#常用内置方法" class="headerlink" title="常用内置方法"></a>常用内置方法</h3><ul>
-<li>CODE() / TEXT() / NUM() / DATE() / TIME()：基本数据类型之间的互相转换。（某些数据类型之间不能互转，转换失败会导致编译失败）。</li>
-<li>FORMATDATE(DATE,STYLE)：日期格式转换，1：yyyy-MM-dd；3：yyyyMMdd等。</li>
-<li>ADDDATE(DATE,Y,M,D)：日期DATE上加Y年M月D日后的日期，若Y/M/D为负时则执行减操作。</li>
-<li>SUBSTITUTE(TEXT,TEXT1,TEXT2)：将TEXT中的TEXT1全部置换为TEXT2。</li>
-</ul>
-<h3 id="一般开发流程（一个增-删-改-查的例子）"><a href="#一般开发流程（一个增-删-改-查的例子）" class="headerlink" title="一般开发流程（一个增/删/改/查的例子）"></a><del>一般开发流程（一个增/删/改/查的例子）</del></h3><p>原本打算遵循一般使用流程完成一个增/删/改/查的例子，但是考虑到版权问题，此处略过。大致的使用和上文描述并无太大差距。</p>
-<h3 id="页面风格与页面布局"><a href="#页面风格与页面布局" class="headerlink" title="页面风格与页面布局"></a>页面风格与页面布局</h3><h4 id="默认页面布局与页面风格"><a href="#默认页面布局与页面风格" class="headerlink" title="默认页面布局与页面风格"></a>默认页面布局与页面风格</h4><p>在软件中，内置了几种风格，对于一般对于页面美观程度要求不高的公司内部项目来说已经足够，其实这也差不多就是这个工具软件的使用范围，规模更大或者要求较多的面向用户的项目来说，这个工具显得力不从心。</p>
-<h4 id="自定义页面布局与元素样式"><a href="#自定义页面布局与元素样式" class="headerlink" title="自定义页面布局与元素样式"></a>自定义页面布局与元素样式</h4><p>每定义一个项目，wp会默认纵向排列，可以在项目属性中指定排列方向为X方向。当默认Layout满足不了需求时，就需要自己改变默认布局，在项目编译完成后，使用Ant生成默认的布局文件，然后对默认布局文件layout.html进行修改，直至满足需求。</p>
-<p>其实默认Layout就是一个整的table，每一个项目都定义在td单元格中，因此本质上就是改动一个table。</p>
-<h3 id="浅谈使用WebPerformer的利与弊"><a href="#浅谈使用WebPerformer的利与弊" class="headerlink" title="浅谈使用WebPerformer的利与弊"></a>浅谈使用WebPerformer的利与弊</h3><p>基于两个月的使用感受，总结出下面几点：</p>
-<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ol>
-<li>提高开发效率：对于简单的页面（例如检索数据然后展示），可以免去编写页面的工作，可以快速实现功能，开发效率确实能提升不少。但是这仅仅限于极少数极为简单的页面。</li>
-<li>降低开发门槛：wp能极大的降低开发门槛，这是我觉得最大的优点。开发者不用去了解泛型和反射的细节、不用去了解多线程、更不需要了解设计模式的知识，全程“傻瓜式”编程，只要你会使用鼠标和触摸板、知道怎么写一个SQL语句，然后剩下的问题都是wp工具使用的问题。</li>
-<li>减小开发难度：因为所有项目的属性已经被工具限定范围，开发者能进行的操作早已被工具限制，所以开发中遇到的关于语言使用本身最严重的错误就是NPE，大大减少了编程错误。</li>
-</ol>
-<h4 id="弊端"><a href="#弊端" class="headerlink" title="弊端"></a>弊端</h4><ol>
-<li>丧失灵活性是为使用简单付出的代价。到目前为止，使用了wp将近两个月的时间，最大的感觉就是 <strong>限制太多</strong> 。比如一个页面的数据只能来自一个DM，BP内做循环等，流程繁琐。</li>
-<li>代码可读性几乎为0。由于同一模块中不能有相同变量名和逻辑段缩进不灵活的原因，导致BP部分的代码可读性几乎为零。后期维护将会是一个艰巨的任务。</li>
-<li>代码复用率低。由于工具本身的特征，很难写出通用功能，整个项目中，每个人几乎都是各自为战，花了太多时间去重复造轮子。</li>
-<li>可能存在许多性能问题。由于工具本身限制丧失了许多灵活性，很多明明两行代码就能做到的事情，在wp中却不得不另寻出路，拐弯抹角才能达到目的，由此导致许多性能上的损失。</li>
-</ol>
-<h4 id="个人使用感受"><a href="#个人使用感受" class="headerlink" title="个人使用感受"></a>个人使用感受</h4><p>因为前期没有培训，完全是自己研究文档、在开发中自己摸索，所以整个过程用得很是憋屈。</p>
-<p>现阶段离可视化自动化还过于遥远，反正我以后再也不想接触这个工具了，我无法忍受各种限制以及为了向这些限制而在代码性能以及代码可读性等方面做出的让步。</p>
-<p>在官网的介绍上赫然挂着“超高速开发”几个字，但是较为讽刺的是，目前这个为期半年的项目已经延期一个多月。</p>
-<h3 id="发展前景"><a href="#发展前景" class="headerlink" title="发展前景"></a>发展前景</h3><p>工具总是朝着简单易用和自动化的方向发展。wp应该算是在这个方向上走得比较远的工具，尽管现在还有许多功能满足不了需求，但是随着不断更新，很多问题应该会逐渐解决。包括在使用范围上应该也会逐渐扩大。但是对于一些规模较大以及性能要求高的系统来说，wp还有很长很长的路要走。</p>
-]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>学习笔记</tag>
+        <tag>其他</tag>
       </tags>
   </entry>
   <entry>
@@ -1855,6 +1319,10 @@
 <li>SpringBoot与监控管理</li>
 </ol>
 <h2 id="第一章-SpringBoot入门"><a href="#第一章-SpringBoot入门" class="headerlink" title="第一章 SpringBoot入门"></a>第一章 SpringBoot入门</h2><h3 id="1-1-SpringBoot简介"><a href="#1-1-SpringBoot简介" class="headerlink" title="1.1 SpringBoot简介"></a>1.1 SpringBoot简介</h3><p>特点：约定大于配置；去繁从简；</p>
+<a id="more"></a>
+
+
+
 <p>背景： </p>
 <p>J2EE笨重的开发；</p>
 <p>繁多的配置；</p>
@@ -2842,31 +2310,10 @@
 <hr>
 <h3 id="7-4-SpringData数据访问JPA"><a href="#7-4-SpringData数据访问JPA" class="headerlink" title="7.4 SpringData数据访问JPA"></a>7.4 SpringData数据访问JPA</h3>]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>SpringBoot</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《徒步中国》</title>
-    <url>/2018/12/09/%E3%80%8A%E5%BE%92%E6%AD%A5%E4%B8%AD%E5%9B%BD%E3%80%8B/</url>
-    <content><![CDATA[<p>一年半以后，我终于读完了这本书。</p>
-<p>最初是去年的五月份在图书馆寻找旅行和摄影相关的书时，看到了这本书，书的名字——徒步中国，一下就吸引了我。960万平方公里辽阔的土地，我想许多热爱旅行的人都想走遍她的每一个角落，从江南水乡到青藏高原、从西沙群岛再到冰天雪地的黑龙江。</p>
-<p>一直对这种第一人称出场人数少流水账式的书很有好感，可以快读，可以慢读，甚至能跳着读，不需要过多的去思考这句话背后的其他含义，不需要记住太多的设定，只要知道什么时间在什么地方遇到了什么事就足够了。</p>
-<p>4646KM，我对这个数字已经没有过于清晰的概念了，只记得初中地理书上“中国的最东边在乌苏里江与黑龙江交汇处，最西边帕米尔高原，东西相距5200KM。”这样的类似的描述了；不过较为清晰的是107国道从北京广安门外到深圳北环大道有2700KM，如果哪一天我突然也想出去走走，那107国道将会是我第一个目标。</p>
-<p>一个留学生能在中国徒步这么长的距离，每次拿起书本我的心中满是钦佩之情，一年的时间，几乎都在路上，一个人，不停的走路，还需要带着行李，几乎没有可以说话的地方，这需要相当的经济支撑，也需要相当大的勇气和毅力。但是每到达一个城市、每经过一千公里时的喜悦，却是容易体会的，在到达一个个小终点的喜悦面前，所有的一切都是值得的。</p>
-<p>很多人问：你不觉得孤独吗？其实他也回答不上来，但是他觉得去经历这个过程很好。</p>
-<p>到达每一座城市都是一个全新的开始，可以去亲身感受每一座城市独特之处，和这座城市的人交流，品尝这座城市的美食，游览这座城市的景点，用相机记录下这座城市的美，这就是旅行的意义吧。如果一生中能多有几次这样的经历，也算是美好的回忆了。</p>
-<p>我又想起自己那份已经落满厚厚一层灰的107计划，我的内心也是一个喜欢四处游走、不停的记录的人，从广安门外到深圳北环大道，我无数次在地图上标注起点终点，然后放大缩小，甚至已经计划好了每一天的行程，整整30天，但是众所周知走出第一步总是最困难的。随着年龄的增长，只会越来越困难，我甚至做好了放弃的准备。</p>
-<p>每每看到其他人博客里贴出来的林间小道，骑行头盔和公路车，心里总有无尽的羡慕，能说走就走的人，才是真正热爱生活的人。他们的才叫生活，而我经历的，叫生存或许来得更贴切一些。</p>
-<p>一直从贯穿全书的还有作者和女朋友的分分合合。一个是在中国徒步的德国人，一个是在德国留学的中国人，总给人冥冥之中早已注定的感觉。全书的结尾，两人还是分手了。我不是一个相信爱情的人，更别提异地恋和异国恋了。女生终究需要的是陪伴，是看得见摸得着的安全感，千里相隔，即便千言万语也无济于事。一边是深爱的人，一边是自己的原则和理想，仿佛就是一般爱情电影里狗血剧情。书中还有一句话：<strong>每一个人在世界上都有20万个适合做伴侣的人。</strong>虽然我一直认为感情的事情绝大多数时候都是自寻烦恼，但是我的内心对于爱情还是期待的，尽管我不相信世界上会有所谓的知己存在。</p>
-]]></content>
-      <categories>
-        <category>读书</category>
-      </categories>
-      <tags>
-        <tag>读书</tag>
+        <tag>SpringBoot</tag>
       </tags>
   </entry>
   <entry>
@@ -2877,14 +2324,13 @@
 
 
 
-
 <iframe src="//player.bilibili.com/player.html?aid=9921445&cid=16402294&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height="470px" width="700px"> </iframe>
 ]]></content>
       <categories>
-        <category>无分类</category>
+        <category>其他</category>
       </categories>
       <tags>
-        <tag>无分类</tag>
+        <tag>其他</tag>
       </tags>
   </entry>
   <entry>
@@ -2893,6 +2339,10 @@
     <content><![CDATA[<p>dubbo学习笔记</p>
 <p><a href="http://dubbo.apache.org/zh-cn/index.html" target="_blank" rel="noopener">dubbo中文官方网站</a></p>
 <p><a href="http://dubbo.apache.org/zh-cn/docs/user/quick-start.html" target="_blank" rel="noopener">dubbo官方文档</a></p>
+<a id="more"></a>
+
+
+
 <h3 id="分布式系统及其演变历程"><a href="#分布式系统及其演变历程" class="headerlink" title="分布式系统及其演变历程"></a>分布式系统及其演变历程</h3><p><img src="http://dubbo.apache.org/docs/zh-cn/user/sources/images/dubbo-architecture-roadmap.jpg" alt="dubbo"></p>
 <p>单一应用架构：</p>
 <p>当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。此时，用于简化增删改查工作量的数据访问框架(ORM)是关键。</p>
@@ -2932,10 +2382,10 @@
 
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>dubbo</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>dubbo</tag>
       </tags>
   </entry>
   <entry>
@@ -2953,6 +2403,10 @@
 <hr>
 <h3 id="3-1-环境与profile"><a href="#3-1-环境与profile" class="headerlink" title="3.1 环境与profile"></a>3.1 环境与profile</h3><p>在软件开发的不同阶段需要不同的环境和配置。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span>(destroyMethod = <span class="string">"shutdown"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> EmbeddedDatabaseBuilder()</span><br><span class="line">        .addScript(<span class="string">"classpath:ch3.sql"</span>)</span><br><span class="line">        .addScript(<span class="string">"classpath:ch3.1.sql"</span>)</span><br><span class="line">        .build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+
 
 <p>为了适应环境更换的需求，可以将所需要的所有的配置类配置到每个bean中，然后在构建阶段选择需要使用的bean，但是从开发环境切换到生产环境时可能会发生问题。</p>
 <h4 id="3-1-1-配置profile-bean"><a href="#3-1-1-配置profile-bean" class="headerlink" title="3.1.1 配置profile bean"></a>3.1.1 配置profile bean</h4><p>Spring为此种场景提供了profile功能。</p>
@@ -3139,10 +2593,10 @@
 
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>Spring</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>Spring</tag>
       </tags>
   </entry>
   <entry>
@@ -3152,6 +2606,10 @@
 <blockquote>
 <p><strong>逆波兰表示法</strong>（<strong>Reverse Polish notation</strong>，<strong>RPN</strong>，或<strong>逆波兰记法</strong>），是一种是由<a href="https://zh.wikipedia.org/wiki/%E6%B3%A2%E5%85%B0" title="波兰" target="_blank" rel="noopener">波兰</a><a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E5%AD%A6%E5%AE%B6" title="数学家" target="_blank" rel="noopener">数学家</a><a href="https://zh.wikipedia.org/wiki/%E6%89%AC%C2%B7%E6%AD%A6%E5%8D%A1%E8%B0%A2%E7%BB%B4%E5%A5%87" title="扬·武卡谢维奇" target="_blank" rel="noopener">扬·武卡谢维奇</a>1920年引入的数学表达式方式，在逆波兰记法中，所有<a href="https://zh.wikipedia.org/w/index.php?title=%E6%93%8D%E4%BD%9C%E7%AC%A6&action=edit&redlink=1" title="操作符（页面不存在）" target="_blank" rel="noopener">操作符</a>置于<a href="https://zh.wikipedia.org/wiki/%E6%93%8D%E4%BD%9C%E6%95%B0" title="操作数" target="_blank" rel="noopener">操作数</a>的后面，因此也被称为<strong>后缀表示法</strong>。逆波兰记法不需要括号来标识操作符的优先级。</p>
 </blockquote>
+<a id="more"></a>
+
+
+
 <h3 id="2-题目内容"><a href="#2-题目内容" class="headerlink" title="2. 题目内容"></a>2. 题目内容</h3><p>Evaluate the value of an arithmetic expression in <a href="http://en.wikipedia.org/wiki/Reverse_Polish_notation" target="_blank" rel="noopener">Reverse Polish Notation</a>.</p>
 <p>Valid operators are+,-,*,/. Each operand may be an integer or another expression.<br>Some examples:</p>
 <p> [“2”, “1”, “+”, “3”, “*”] -&gt; ((2 + 1) * 3) -&gt; 9<br> [“4”, “13”, “5”, “/“, “+”] -&gt; (4 + (13 / 5)) -&gt; 6</p>
@@ -3199,6 +2657,10 @@
     <title>Hexo博客同时部署到github和coding并设置双线解析</title>
     <url>/2018/11/19/Hexo%E5%8D%9A%E5%AE%A2%E5%90%8C%E6%97%B6%E9%83%A8%E7%BD%B2%E5%88%B0github%E5%92%8Ccoding%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%8F%8C%E7%BA%BF%E8%A7%A3%E6%9E%90/</url>
     <content><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>因为github服务器禁止了百度爬虫，所以不能百度收录不了站点，导致访问量很低，本来不想折腾的，想了一下还是将博客也部署到了coding上，方便百度的收录。</p>
+<a id="more"></a>
+
+
+
 <h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><ol>
 <li><p>在coding上创建一个名为 <strong>用户名</strong> (不是昵称)的项目，并开启pages服务；</p>
 </li>
@@ -3219,14 +2681,14 @@
 </li>
 </ol>
 <h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>其中也遇到一些玄学的问题：</p>
-<p><img src="https://image.youyou-2608.com/blog/codings_pages.png" alt="coding提示域名绑定异常"></p>
+<p><img src="https://images2.imgbox.com/0e/48/c6Y1zWYh_o.png" alt="coding提示域名绑定异常"></p>
 <p>比如上图，我如果绑定youyou-2608.com 则一直提示“域名未联通”，即便我已经添加了指向username.coding.me的CNAME记录，添加<a href="http://www.youyou-2608.com">www.youyou-2608.com</a> 能绑定上，但是绑定状态一直是异常，访问username.coding.me也能正常跳转到<a href="https://youyou-2608.com" target="_blank" rel="noopener">https://youyou-2608.com</a> ，没太搞明白，既然已经能正常访问，也就作罢了。</p>
 ]]></content>
       <categories>
-        <category>Hexo博客维护</category>
+        <category>博客维护</category>
       </categories>
       <tags>
-        <tag>Hexo博客维护</tag>
+        <tag>博客维护</tag>
       </tags>
   </entry>
   <entry>
@@ -3234,6 +2696,10 @@
     <url>/2018/11/18/Hexo%E5%8D%9A%E5%AE%A2%E5%A4%87%E4%BB%BD/</url>
     <content><![CDATA[<h3 id="养成备份的好习惯"><a href="#养成备份的好习惯" class="headerlink" title="养成备份的好习惯"></a>养成备份的好习惯</h3><p>花了好长时间总算是把博客搭建起来了，之前自己买的服务器用Wordpress搭建博客，但是因为服务器经常需要使用，安装一些其他软件什么的，导致Wordpress运行不是很稳定，还很容易被墙。</p>
 <p>因为Hexo每次执行hexo g -d之后发布的都是生成的静态文件，站点以及主题的配置文件不会一同发布到github上，最重要的是，如果在另一个机器上要更新博客，根本做不到。所以就想着把源文件备份一下。</p>
+<a id="more"></a>
+
+
+
 <hr>
 <h3 id="使用github备份轻松备份"><a href="#使用github备份轻松备份" class="headerlink" title="使用github备份轻松备份"></a>使用github备份轻松备份</h3><p>github本来就是一个仓库，用它来备份最合适不过了。</p>
 <ol>
@@ -3263,10 +2729,10 @@
 <p>在 /etc/profile 中添加一行：alias ‘copy_hexo_source’=’python copy_hexo_source.py’ ，这样终端运行 copy_hexo_source 就可以复制文件了。</p>
 ]]></content>
       <categories>
-        <category>Hexo博客维护</category>
+        <category>博客维护</category>
       </categories>
       <tags>
-        <tag>Hexo博客维护</tag>
+        <tag>博客维护</tag>
       </tags>
   </entry>
   <entry>
@@ -3287,6 +2753,10 @@
 <h3 id="2-1-Spring配置的可选方案"><a href="#2-1-Spring配置的可选方案" class="headerlink" title="2.1 Spring配置的可选方案"></a>2.1 Spring配置的可选方案</h3><blockquote>
 <p>Spring容器负责创建应用程序中的bean并通过DI来协调对象之间的关系。开发人员需要做的是告诉Spring需要创建哪些对象并且如何装配在一起。</p>
 </blockquote>
+<a id="more"></a>
+
+
+
 <p>Spring提供了三种可选方式：</p>
 <ul>
 <li>XML配置</li>
@@ -3390,21 +2860,22 @@
 </blockquote>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>Spring</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>Spring</tag>
       </tags>
   </entry>
   <entry>
     <title>LeetCode之单链表重排序</title>
     <url>/2018/11/17/LeetCode%E5%AD%90%E5%8D%95%E9%93%BE%E8%A1%A8%E9%87%8D%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<blockquote>
-<p> 笑恨平生，不存欢愉。</p>
-</blockquote>
-<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Given a singly linked list <em>L</em>: <em>L</em> 0→<em>L</em> 1→…→<em>L</em> <em>n</em>-1→<em>L</em> n,<br>reorder it to: <em>L</em> 0→<em>L</em> <em>n</em> →<em>L</em> 1→<em>L</em> <em>n</em>-1→<em>L</em> 2→<em>L</em> <em>n</em>-2→…</p>
+    <content><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Given a singly linked list <em>L</em>: <em>L</em> 0→<em>L</em> 1→…→<em>L</em> <em>n</em>-1→<em>L</em> n,<br>reorder it to: <em>L</em> 0→<em>L</em> <em>n</em> →<em>L</em> 1→<em>L</em> <em>n</em>-1→<em>L</em> 2→<em>L</em> <em>n</em>-2→…</p>
 <p>You must do this in-place without altering the nodes’ values.</p>
 <p>For example,<br>Given{1,2,3,4}, reorder it to{1,4,2,3}.</p>
+<a id="more"></a>
+
+
+
 <h3 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h3><ul>
 <li><p>时间限制：1秒</p>
 </li>
@@ -3431,7 +2902,6 @@
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;这道链表重排序问题可以拆分为以下三个小问题：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">1. 使用快慢指针来找到链表的中点，并将链表从中点处断开，形成两个独立的链表。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">2. 将第二个链翻转。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">3. 将第二个链表的元素间隔地插入第一个链表中。</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">reorderList</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!head || !head-&gt;next || !head-&gt;next-&gt;next) <span class="keyword">return</span>;</span><br><span class="line">        ListNode *fast = head;</span><br><span class="line">        ListNode *slow = head;</span><br><span class="line">        <span class="keyword">while</span> (fast-&gt;next &amp;&amp; fast-&gt;next-&gt;next) &#123;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *mid = slow-&gt;next;</span><br><span class="line">        slow-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        ListNode *last = mid;</span><br><span class="line">        ListNode *pre = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">while</span> (last) &#123;</span><br><span class="line">            ListNode *next = last-&gt;next;</span><br><span class="line">            last-&gt;next = pre;</span><br><span class="line">            pre = last;</span><br><span class="line">            last = next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (head &amp;&amp; pre) &#123;</span><br><span class="line">            ListNode *next = head-&gt;next;</span><br><span class="line">            head-&gt;next = pre;</span><br><span class="line">            pre = pre-&gt;next;</span><br><span class="line">            head-&gt;next-&gt;next = next;</span><br><span class="line">            head = next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>时间空间使用都很少，性能问题没了。</p>
-<p><img src="https://image.youyou-2608.com/blog/leetcode2.png" alt="LeetCode链表重排序"></p>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -3450,12 +2920,15 @@
 <p>return[1,2,3].</p>
 <p><strong>Note:</strong> Recursive solution is trivial, could you do it iteratively?</p>
 <p><strong>使用非递归的方法前序遍历二叉树。</strong></p>
+<a id="more"></a>
+
+
+
 <h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>前序遍历就是按照中、左、右的顺序对二叉树进行遍历。</p>
 <p>思路很简单，如果当前节点不为空，不断遍历当前节点的左子树，如果当前节点有右子树的话，将其放入栈中以便后期遍历其右子树，如果当前节点为空，则取出栈顶元素按照同样的方式遍历其右子树。</p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.postorder.raversal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午3:16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PreOrderSolution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        TreeNode pointer = root;</span><br><span class="line">        <span class="keyword">while</span> (pointer != <span class="keyword">null</span> || !stack.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">while</span> (pointer != <span class="keyword">null</span>) &#123;</span><br><span class="line">                list.add(pointer.val);</span><br><span class="line">                <span class="keyword">if</span> (pointer.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    stack.push(pointer);</span><br><span class="line">                &#125;</span><br><span class="line">                pointer = pointer.left;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (stack.isEmpty()) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            pointer = stack.pop();</span><br><span class="line">            pointer = pointer.right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>牛客网做得还不错，就是现在还是只支持C++和Java。</p>
-<p><img src="https://image.youyou-2608.com/blog/leetcode.png" alt="代码通过测试"></p>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -3475,6 +2948,10 @@
 <p>return[3,2,1].</p>
 <p><strong>Note:</strong> Recursive solution is trivial, could you do it iteratively？</p>
 <p><strong>使用非递归方法后序遍历二叉树。</strong></p>
+<a id="more"></a>
+
+
+
 <h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>二叉树后序遍历就是对每个节点按照左、右、中的顺序进行遍历。</p>
 <p>详细的解析参见：<a href="https://www.jianshu.com/p/456af5480cee" target="_blank" rel="noopener">二叉树遍历(先序、中序、后序)</a> ，讲得非常详细易懂。</p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.postorder.raversal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午1:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        TreeNode pointer = root;</span><br><span class="line">        TreeNode lastVisit = root;</span><br><span class="line">        <span class="keyword">while</span> (!stack.isEmpty() || pointer != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (pointer != <span class="keyword">null</span>) &#123;</span><br><span class="line">                stack.push(pointer);</span><br><span class="line">                pointer = pointer.left;</span><br><span class="line">            &#125;</span><br><span class="line">            pointer = stack.peek();</span><br><span class="line">            <span class="keyword">if</span> (pointer.right == <span class="keyword">null</span> || pointer.right == lastVisit) &#123;</span><br><span class="line">                list.add(pointer.val);</span><br><span class="line">                lastVisit = pointer;</span><br><span class="line">                stack.pop();</span><br><span class="line">                pointer = <span class="keyword">null</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                pointer = pointer.right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -3504,9 +2981,6 @@
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3> <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">insertionSortList1</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    ListNode root = <span class="keyword">new</span> ListNode(-<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">while</span> (head != <span class="keyword">null</span>) &#123;</span><br><span class="line">        ListNode temp = root;</span><br><span class="line">        <span class="keyword">while</span> (temp.next != <span class="keyword">null</span> &amp;&amp; head.val &gt;= temp.next.val)</span><br><span class="line">            temp = temp.next;</span><br><span class="line">        <span class="keyword">if</span> (temp.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">            temp.next = head;</span><br><span class="line">            head = head.next;</span><br><span class="line">            temp.next.next = <span class="keyword">null</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ListNode temp2 = temp.next;</span><br><span class="line">            temp.next = head;</span><br><span class="line">            head = head.next;</span><br><span class="line">            temp.next.next = temp2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>参考：<a href="http://www.cnblogs.com/tonyluis/p/4579295.html" target="_blank" rel="noopener">http://www.cnblogs.com/tonyluis/p/4579295.html</a></p>
-<hr>
-<p>最近将博客从WordPress搬到了GitHub，WordPress比较灵活，但是价格昂贵的服务器是为此付出的代价。后来看到 <a href="https://www.jianshu.com/" target="_blank" rel="noopener">简书</a> 页面比较简洁，尝试了一下简书，MarkDown编辑器有实时预览，比博客园那不知道要高到哪里去了， <a href="https://www.cnblogs.com/" target="_blank" rel="noopener">博客园</a> 从16年就在开发的MarkDown编辑器，快2019年了还没投入使用。用了两周简书发现简书的阅读量几乎为0。还尝试了 <a href="https://juejin.im/" target="_blank" rel="noopener">掘金</a>、<a href="https://segmentfault.com/" target="_blank" rel="noopener">SegmentFault</a> 最近考虑博客搬迁才知道还有 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 存在，于是喜出望外的转移了平台，花了点时间配置了 <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">Next</a> 主题以及域名之类的，<a href="https://github.com/" target="_blank" rel="noopener">GitHub</a> 真的良心，不得不让我再恶心一下吃相难看想钱想疯的 CSDN。</p>
-<p>博客地址：<a href="https://kotobuki-tsumugi.github.io" target="_blank" rel="noopener">https://kotobuki-tsumugi.github.io</a>，<a href="https://youyou-2608.com" target="_blank" rel="noopener">https://youyou-2608.com</a>，欢迎访问。</p>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -3533,6 +3007,12 @@
 <p>展示如何使用Spring的AOP特性把系统级服务从它们所服务的对象中解耦出来。</p>
 </li>
 </ul>
+<a id="more"></a>
+
+
+
+
+
 <hr>
 <p>第一章 Spring之旅</p>
 <p>本章内容：</p>
@@ -3618,10 +3098,10 @@
 </tbody></table>
 ]]></content>
       <categories>
-        <category>学习笔记</category>
+        <category>Spring</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>Spring</tag>
       </tags>
   </entry>
   <entry>
@@ -3632,9 +3112,11 @@
 <p>在<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E8%AE%BA" title="数论" target="_blank" rel="noopener">数论</a>中，<strong><a href="https://zh.wikipedia.org/wiki/%E6%B0%B4%E4%BB%99%E8%8A%B1" title="水仙花" target="_blank" rel="noopener">水仙花</a>数</strong>（<strong>Narcissistic number</strong>）<sup><a href="https://zh.wikipedia.org/zh-hans/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0#cite_note-mw-1" target="_blank" rel="noopener">[1]</a></sup><sup><a href="https://zh.wikipedia.org/zh-hans/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0#cite_note-moore-2" target="_blank" rel="noopener">[2]</a></sup>，也被称为<strong>超完全数字不变数</strong>（<strong>pluperfect digital invariant, PPDI</strong>）<sup><a href="https://zh.wikipedia.org/zh-hans/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0#cite_note-3" target="_blank" rel="noopener">[3]</a>/sup&gt;、<strong><a href="https://zh.wikipedia.org/wiki/%E8%87%AA%E6%88%80" title="自恋" target="_blank" rel="noopener">自恋</a>数</strong>、<strong>自幂数</strong>、<strong><a href="https://zh.wikipedia.org/wiki/%E9%98%BF%E5%A7%86%E6%96%AF%E5%A3%AF" title="阿姆斯壮" target="_blank" rel="noopener">阿姆斯壮</a>数</strong>或<strong>阿姆斯特朗数</strong>（<strong>Armstrong number</strong>）<sup><a href="https://zh.wikipedia.org/zh-hans/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0#cite_note-4" target="_blank" rel="noopener">[4]</a></sup> ，用来描述一个<strong>N</strong>位非负整数，其各位数字的<strong>N</strong>次方和等于该数本身。</sup></p>
 </blockquote>
 <p>这里定义的N=3。</p>
-<h3 id="2-问题描述"><a href="#2-问题描述" class="headerlink" title="2. 问题描述"></a>2. 问题描述</h3><p>春天是鲜花的季节，水仙花就是其中最迷人的代表，数学上有个水仙花数，他是这样定义的： “水仙花数”是指一个三位数，它的各位数字的立方和等于其本身，比如：153=1^3+5^3+3^3。 现在要求输出所有在m和n范围内的水仙花数。</p>
 <a id="more"></a>
 
+
+
+<h3 id="2-问题描述"><a href="#2-问题描述" class="headerlink" title="2. 问题描述"></a>2. 问题描述</h3><p>春天是鲜花的季节，水仙花就是其中最迷人的代表，数学上有个水仙花数，他是这样定义的： “水仙花数”是指一个三位数，它的各位数字的立方和等于其本身，比如：153=1^3+5^3+3^3。 现在要求输出所有在m和n范围内的水仙花数。</p>
 <p>对于每个测试实例，要求输出所有在给定范围内的水仙花数，就是说，输出的水仙花数必须大于等于m,并且小于等于n，如果有多个，则要求从小到大排列在一行内输出，之间用一个空格隔开;<br>如果给定的范围内不存在水仙花数，则输出no;<br>每个测试实例的输出占一行。</p>
 <p>输入：<br>100 120<br>300 380</p>
 <p>输出：<br>no<br>370 371</p>

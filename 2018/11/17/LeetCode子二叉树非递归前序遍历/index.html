@@ -82,17 +82,20 @@
 <p>return[1,2,3].</p>
 <p><strong>Note:</strong> Recursive solution is trivial, could you do it iteratively?</p>
 <p><strong>使用非递归的方法前序遍历二叉树。</strong></p>
+<a id="more"></a>
+
+
+
 <h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>前序遍历就是按照中、左、右的顺序对二叉树进行遍历。</p>
 <p>思路很简单，如果当前节点不为空，不断遍历当前节点的左子树，如果当前节点有右子树的话，将其放入栈中以便后期遍历其右子树，如果当前节点为空，则取出栈顶元素按照同样的方式遍历其右子树。</p>
 <h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.postorder.raversal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午3:16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PreOrderSolution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        TreeNode pointer = root;</span><br><span class="line">        <span class="keyword">while</span> (pointer != <span class="keyword">null</span> || !stack.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">while</span> (pointer != <span class="keyword">null</span>) &#123;</span><br><span class="line">                list.add(pointer.val);</span><br><span class="line">                <span class="keyword">if</span> (pointer.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    stack.push(pointer);</span><br><span class="line">                &#125;</span><br><span class="line">                pointer = pointer.left;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (stack.isEmpty()) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            pointer = stack.pop();</span><br><span class="line">            pointer = pointer.right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>牛客网做得还不错，就是现在还是只支持C++和Java。</p>
-<p><img src="https://image.youyou-2608.com/blog/leetcode.png" alt="代码通过测试"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode子二叉树非递归前序遍历/" data-id="ckfmrllsw000xazci1003idqe"
+      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode子二叉树非递归前序遍历/" data-id="ckfp12zay000u6x5xebuadylk"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -139,7 +142,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2020 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">56.2k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">44.7k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 

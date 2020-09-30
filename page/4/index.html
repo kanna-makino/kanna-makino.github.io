@@ -43,7 +43,7 @@
     <div class="video-inner text-center text-white">
       <h1><a href="/">Kanna-Makino</a></h1>
       <p></p>
-      <div><img src="" class="brand" alt="Kanna-Makino"></div>
+      <div><img src="https://i.loli.net/2020/09/22/6GyOQSFkMW3pnjP.jpg" class="brand" alt="Kanna-Makino"></div>
     </div>
     <div class="video-learn-more">
       <a class="anchor" href="#landingpage"><i class="fe fe-mouse"></i></a>
@@ -58,344 +58,6 @@
     <h1 class="page-type-title"></h1>
 
     
-      
-        
-
-<article id="post-再记Hexo博客恢复" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/06/09/再记Hexo博客恢复/">再记Hexo博客恢复</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/06/09/再记Hexo博客恢复/" class="article-date">
-  <time datetime="2019-06-09T10:46:48.000Z" itemprop="datePublished">06-09-2019</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Hexo博客维护/">Hexo博客维护</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <p>Hexo博客恢复</p>
-<p>从官网下载 Nodejs <strong>二进制</strong> 文件（.tar.xz），解压到 /opt 目录下，添加连接：</p>
-<p><code>sudo tar -xvf xxxx.tar.xz</code></p>
-<p><code>sudo ln -s /opt/node-linux-x64xxxx/bin/node /usr/local/bin/node</code></p>
-<p><code>sudo ln -s /opt/node..../bin/npm /usr/local/bin/npm</code></p>
-<p>然后进入博客文件夹，执行</p>
-<p><code>sudo npm install</code></p>
-<p>即可完成恢复。</p>
-<hr>
-<p>折腾了半天一直各种报错，没想到这么简单。。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/06/09/再记Hexo博客恢复/" data-id="ckfmrlltp002yazcijlp6p6kl"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo博客维护/">Hexo博客维护</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-我在JavaScript中踩过的坑" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/05/19/我在JavaScript中踩过的坑/">我在JavaScript中踩过的坑</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/05/19/我在JavaScript中踩过的坑/" class="article-date">
-  <time datetime="2019-05-19T10:38:49.000Z" itemprop="datePublished">05-19-2019</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <p>我在Javascript中踩过的坑！</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>时至今日也没有系统深入的学习过JavaScript，虽然常用，但是也只停留在最基础的使用上。没有系统深入的了解，必然要踩一些前端众所周知，却让小白绞尽脑汁地大坑！</p>
-<p>今天又在坑里摸了一天，记录一下，权当是写日记了。</p>
-<p>最近连续加班，确实有些身心俱疲；加上昨天下午的“午后小睡”导致晚上失眠，到快四点钟才睡着，今天早上快十点钟还躺在床上。</p>
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>正在逛Twitter，做毕设地学妹给我提了两个需求：</p>
-<ul>
-<li>登陆页面的表单检验；</li>
-<li>注册页面的重复用户名检测。</li>
-</ul>
-<h2 id="问题：从Ajax中返回值"><a href="#问题：从Ajax中返回值" class="headerlink" title="问题：从Ajax中返回值"></a>问题：从Ajax中返回值</h2><p>用JQuery.validate插件给登陆表单加了校验，挺简单，同样的方法给注册界面加个校验，唯一不同的是需要使用ajax从后台请求到用户名是否已经存在，也挺简单。</p>
-<p>于是乎，有了下面这段代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// do something</span></span><br><span class="line">$.validator.addMethod(<span class="string">"checkUniqueUsername"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">value, element, params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || checkUniqueUsername(value);</span><br><span class="line">&#125;, <span class="string">"用户名已被占用！"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkUniqueUsername</span>(<span class="params">username</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (username !== <span class="literal">null</span> &amp;&amp; username !== <span class="literal">undefined</span> &amp;&amp; username !== <span class="string">''</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> data = &#123;<span class="string">'loginname'</span>: username&#125;;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            type: <span class="string">'post'</span>,</span><br><span class="line">            url: <span class="string">'/checkloginname'</span>,</span><br><span class="line">            data: <span class="built_in">JSON</span>.stringify(data),</span><br><span class="line">            dataType: <span class="string">'json'</span>,</span><br><span class="line">            contentType: <span class="string">'application/json'</span>,</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> (<span class="built_in">parseInt</span>(res.tip) === <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>三五分钟，就写完了代码，跑一跑测一下准备验收了。诡异的事情出现了，<code>checkUniqueUsername()</code>总是返回false。</p>
-<h2 id="Ajax中return的结果"><a href="#Ajax中return的结果" class="headerlink" title="Ajax中return的结果"></a>Ajax中return的结果</h2><p>没事，静下心来慢慢调，就这几行代码，怎么说也要给你调得明明白白的。调试后发现<code>parseInt(res.tip)===0</code>是true，可是return 之后函数的返回值是false，这没道理啊！</p>
-<p>网上查了一下，原来是在<strong>ajax中直接return并不是return到外层函数中</strong>，不深究，改个写法，于是有了v2版本：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// do something</span></span><br><span class="line">$.validator.addMethod(<span class="string">"checkUniqueUsername"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">value, element, params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || checkUniqueUsername(value);</span><br><span class="line">&#125;, <span class="string">"用户名已被占用！"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkUniqueUsername</span>(<span class="params">username</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (username !== <span class="literal">null</span> &amp;&amp; username !== <span class="literal">undefined</span> &amp;&amp; username !== <span class="string">''</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> result = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">var</span> data = &#123;<span class="string">'loginname'</span>: username&#125;;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            type: <span class="string">'post'</span>,</span><br><span class="line">            url: <span class="string">'/checkloginname'</span>,</span><br><span class="line">            data: <span class="built_in">JSON</span>.stringify(data),</span><br><span class="line">            dataType: <span class="string">'json'</span>,</span><br><span class="line">            contentType: <span class="string">'application/json'</span>,</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">                result = (<span class="built_in">parseInt</span>(res.tip) === <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>检查了一下，再也想不出还能有什么问题了，那就跑一下吧。诡异的结果又出现了，函数返回值依旧是false，心态崩了，这就好比 <code>var count = 1; console.log(count);</code>却输出了2一样，难以置信！</p>
-<h2 id="Ajax同步和异步"><a href="#Ajax同步和异步" class="headerlink" title="Ajax同步和异步"></a>Ajax同步和异步</h2><p>查了半天，终于看到一个答案：<strong>ajax的同步和异步。</strong>可谓是一语惊醒梦中人，我责备自己为什么调试了这么久，却没有想到这个方向，而且同步异步的坑已经不是第一次踩了。v3版本终于解决了这个问题，失之毫厘，差之千里。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// do something</span></span><br><span class="line">$.validator.addMethod(<span class="string">"checkUniqueUsername"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">value, element, params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.optional(element) || checkUniqueUsername(value);</span><br><span class="line">&#125;, <span class="string">"用户名已被占用！"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkUniqueUsername</span>(<span class="params">username</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (username !== <span class="literal">null</span> &amp;&amp; username !== <span class="literal">undefined</span> &amp;&amp; username !== <span class="string">''</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> result = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">var</span> data = &#123;<span class="string">'loginname'</span>: username&#125;;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            type: <span class="string">'post'</span>,</span><br><span class="line">            url: <span class="string">'/checkloginname'</span>,</span><br><span class="line">            data: <span class="built_in">JSON</span>.stringify(data),</span><br><span class="line">            dataType: <span class="string">'json'</span>,</span><br><span class="line">            contentType: <span class="string">'application/json'</span>,</span><br><span class="line">            <span class="keyword">async</span>: <span class="literal">false</span>,</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">                result = (<span class="built_in">parseInt</span>(res.tip) === <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>但是每次运行控制台都会出现JQuery的提示：<strong>使用同步会降低用户体验</strong>，总归是有个解决办法，有时间再深究一下吧。</p>
-<h2 id="JavaScript浮点运算"><a href="#JavaScript浮点运算" class="headerlink" title="JavaScript浮点运算"></a>JavaScript浮点运算</h2><p>今天的经历让我回想起了去年遇到的一个JavaScript的问题，当时在做一个现金流管理系统，遇到一个需求是根据固定利息和浮动利息自动计算出最终利息，随便输了几组数据测试，没有出现异样，但是最后一组数据的时候出现了诡异的结果！<code>4.1 + 4.3 = 8.399999999999999</code>，这真是见了鬼了。。很久之前学过的知识这分钟哪里回想得起来。上网查了才发现原来是JavaScript的设计缺陷导致的问题，也都提出了几种解决方案。</p>
-<h2 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h2><p>平时用Java习惯了，思维方式有些不灵活，从对Python的理解中也能看出来。</p>
-<p>总之，遇到问题，要发散思维，尽量快速的去确定调查的方向，最终尽快的解决问题。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/19/我在JavaScript中踩过的坑/" data-id="ckfmrllu0003uazciza125a91"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-Java注解简单例子" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/05/15/Java注解简单例子/">Java注解简单例子</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/05/15/Java注解简单例子/" class="article-date">
-  <time datetime="2019-05-14T23:35:56.000Z" itemprop="datePublished">05-15-2019</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <p>了解Java注解（@Annotation）</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>为什么突然想起来注解呢？今天上午同事遇到一个和注解相关的问题，JSP页面传值到后台后（其实前后端并不分离），但是在POJO类上的校验注解值不满足的条件下也通过了，让我给帮忙看看。因为其他组的同事相同的通用代码并没有这个问题，而且对注解的处理是封装在框架中的，所以一开始便排除了问题在后台思路，转向页面传值去调查。虽然最后找到原因是因为没有清空Eclipse的.class文件重新编译，但是感觉已经对之前学过的注解部分的知识生疏了。刚好今天没加班，就赶紧复习一下。</p>
-</blockquote>
-<p>本想在网上找两篇文章回忆一下，但是好像例子写得都不完整。刚好前段时间刚买了一本《Java编程思想》，就赶紧翻开看了一下，一直记得书里给出的例子也是数据库字段注解相关的。</p>
-<h2 id="相关概念及原理"><a href="#相关概念及原理" class="headerlink" title="相关概念及原理"></a>相关概念及原理</h2><p>参见 ==&gt; 《Java编程思想》第二十章&lt;注解&gt;。</p>
-<p>四个元注解：</p>
-<ul>
-<li>@Target</li>
-<li>@Retention</li>
-<li>@Document</li>
-<li>Inherited</li>
-</ul>
-<p>注解主要是用户按自己的需求来实现。</p>
-<h2 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h2><p>先创建两个注解，@Digits和@NotEmpty，用来注解属性是否满足给定条件。</p>
-<p>代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段只能为数字，且最大长度为maxLength，最大小数位为fraction</span></span><br><span class="line"><span class="comment"> * 默认没有小数位</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:42</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target</span>(ElementType.FIELD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Digits &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxLength</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">fraction</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.ElementType;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Target;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 标注一个字段不能为空</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:47</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target</span>(ElementType.FIELD)</span><br><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> NotEmpty &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>定义一个处理类处理自定义注解：（主要利用反射机制）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Annotation;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 处理自定义注解</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationProcesser</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(Table table)</span> <span class="keyword">throws</span> ClassNotFoundException, IllegalAccessException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Class clazz = table.getClass();</span><br><span class="line">        <span class="keyword">if</span> (clazz == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException(<span class="string">"class not found!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        Field[] fields = clazz.getDeclaredFields();</span><br><span class="line">        String fieldName;</span><br><span class="line">        <span class="keyword">for</span> (Field field : fields) &#123;</span><br><span class="line">            System.out.println(<span class="string">"--------------------------"</span>);</span><br><span class="line">            field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">            Annotation[] annotations = field.getDeclaredAnnotations();</span><br><span class="line">            fieldName = field.getName();</span><br><span class="line">            System.out.println(<span class="string">"--&gt; info: into "</span> + fieldName);</span><br><span class="line">            <span class="keyword">for</span> (Annotation annotation : annotations) &#123;</span><br><span class="line">                System.out.println(<span class="string">"--&gt; info: "</span> + annotation.annotationType());</span><br><span class="line">                <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> Digits) &#123;</span><br><span class="line">                    System.out.println(<span class="string">"--&gt; info: get @Digits annotation on "</span> + fieldName);</span><br><span class="line">                    <span class="keyword">int</span> maxLength = ((Digits) annotation).maxLength();</span><br><span class="line">                    <span class="keyword">int</span> annotatedFraction = ((Digits) annotation).fraction();</span><br><span class="line">                    String[] fraction = String.valueOf(table.getCount()).split(<span class="string">"\\."</span>);</span><br><span class="line">                    <span class="keyword">if</span> (String.valueOf(table.getCount()).length() &gt; maxLength) &#123;</span><br><span class="line">                        System.out.println(<span class="string">"--&gt; error: maxLength exceed!"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (fraction.length &gt; <span class="number">1</span> &amp;&amp; fraction[<span class="number">1</span>].length() &gt; annotatedFraction) &#123;</span><br><span class="line">                        System.out.println(<span class="string">"--&gt; error：fraction length exceed!"</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">"--&gt; info: "</span> + fieldName + <span class="string">" validate success!"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (annotation <span class="keyword">instanceof</span> NotEmpty) &#123;</span><br><span class="line">                    System.out.println(<span class="string">"--&gt; info: get @NotEmpty annotation on "</span> + fieldName);</span><br><span class="line">                    <span class="keyword">if</span> (table.getDescription() == <span class="keyword">null</span> || <span class="string">""</span>.equals(table.getDescription())) &#123;</span><br><span class="line">                        System.out.println(<span class="string">"--&gt; error: empty is not allowed!"</span>);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        System.out.println(<span class="string">"--&gt; info: "</span> + fieldName + <span class="string">" validate success!"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>主测试类：（<strong>省略getter和setter</strong>）</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 自定义注解测试类</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Table</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Digits</span>(maxLength = <span class="number">6</span>, fraction = <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotEmpty</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Table</span><span class="params">(<span class="keyword">double</span> count, String description)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">        <span class="keyword">this</span>.description = description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalAccessException, ClassNotFoundException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Table testTable1 = <span class="keyword">new</span> Table(<span class="number">1234567</span>, <span class="string">"description1"</span>);</span><br><span class="line">        Table testTable2 = <span class="keyword">new</span> Table(<span class="number">12.001</span>, <span class="string">"description2"</span>);</span><br><span class="line">        Table testTable3 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">"description3"</span>);</span><br><span class="line">        Table testTable4 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="keyword">null</span>);</span><br><span class="line">        Table testTable5 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">"description5"</span>);</span><br><span class="line"></span><br><span class="line">        AnnotationProcesser processer = <span class="keyword">new</span> AnnotationProcesser();</span><br><span class="line">        processer.process(testTable1);</span><br><span class="line">        processer.process(testTable2);</span><br><span class="line">        processer.process(testTable3);</span><br><span class="line">        processer.process(testTable4);</span><br><span class="line">        processer.process(testTable5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/15/Java注解简单例子/" data-id="ckfmrllsj000aazci82seq49w"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-ajax返回error可能原因分析" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2019/05/12/ajax返回error可能原因分析/">ajax返回error可能原因分析</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2019/05/12/ajax返回error可能原因分析/" class="article-date">
-  <time datetime="2019-05-12T06:38:35.000Z" itemprop="datePublished">05-12-2019</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Exp/">Exp</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <p>ajax总是进入error的可能原因</p>
-<p>后台返回：</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Successfully completed request</span><br></pre></td></tr></table></figure>
-
-<p>前端ajax总是执行error部分的代码。</p>
-<p>原因：</p>
-<p>后台只返回了 “success” 字符串，不是规范的json格式，所以没有执行预期逻辑。</p>
-<p>最好在后台返回 <strong>严格规范</strong> 的json防止此类错误。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/05/12/ajax返回error可能原因分析/" data-id="ckfmrlltg0027azciaiqfocwd"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
       
         
 
@@ -425,7 +87,7 @@
 </a>
         
   <div class="article-category">
-    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
   </div>
 
       </div>
@@ -484,10 +146,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/29/Spring-Boot中使用Swagger2构建强大的RESTful-API文档/" data-id="ckfmrllt5001gazci1609xuw8"
+      <a data-url="https://www.youyou-2608.com/2019/04/29/Spring-Boot中使用Swagger2构建强大的RESTful-API文档/" data-id="ckfp12zbb001e6x5xu18m9iyd"
          class="article-share-link">分享</a>
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/">SpringBoot</a></li></ul>
 
     </footer>
 
@@ -530,7 +192,7 @@
 </a>
         
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Exp/">Exp</a>
+    <a class="article-category-link" href="/categories/Tomcat/">Tomcat</a>
   </div>
 
       </div>
@@ -556,16 +218,15 @@
 <p>五. 参照：[<a href="https://www.cnblogs.com/heshan664754022/p/3807672.html" target="_blank" rel="noopener">Tomcat启动报错:严重: StandardServer.await: create[8005] java.net.BindException: Cannot assign requested address</a>](<a href="https://www.cnblogs.com/heshan664754022/p/3807672.html" target="_blank" rel="noopener">https://www.cnblogs.com/heshan664754022/p/3807672.html</a>) ， ping了localhost，发现收到的响应来自ipp[47.89.54.215]，打开C:/windows/system32/drivers/etc/hosts，发现以下内容：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">47.89.54.215       localhost</span><br><span class="line">47.89.54.215	hao.360.cn</span><br><span class="line">47.89.54.215	www.hao123.com</span><br><span class="line">47.89.54.215	www.3600.com</span><br><span class="line">47.89.54.215	www.114la.com</span><br><span class="line">47.89.54.215	www.duba.com</span><br><span class="line">47.89.54.215	www.hao360.cn</span><br><span class="line">47.89.54.215	123.sogou.com</span><br><span class="line">47.89.54.215	web.sogou.com</span><br><span class="line">47.89.54.215	www.hao123.cn</span><br><span class="line">47.89.54.215	hao.qq.com</span><br><span class="line">47.89.54.215	www.1616.net</span><br><span class="line">47.89.54.215	hao.rising.cn</span><br><span class="line">47.89.54.215	daohang.qq.com</span><br></pre></td></tr></table></figure>
 
-<p>看到daohang.qq，hao123，duba，hao360，123.sougou之类的字眼，瞬间一阵悲痛袭来，曾经那个“为什么国内流氓软件那么多？”的问题又浮现在脑海，想起了百度所谓的“中国用户愿意用隐私换效率”。</p>
-<p><img src="https://image.youyou-2608.com//hexo%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190424144325.jpg" alt="隐私换效率，生活更便利-变态辣椒"></p>
+<p>看到daohang.qq，hao123，duba，hao360，123.sougou之类的字眼，国内流氓软件那么多？”的问题又浮现在脑海。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/" data-id="ckfmrllue004yazcias95rysl"
+      <a data-url="https://www.youyou-2608.com/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/" data-id="ckfp12zc9003o6x5x9p97axyi"
          class="article-share-link">分享</a>
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tomcat/">Tomcat</a></li></ul>
 
     </footer>
 
@@ -608,7 +269,7 @@
 </a>
         
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Exp/">Exp</a>
+    <a class="article-category-link" href="/categories/IDEA/">IDEA</a>
   </div>
 
       </div>
@@ -637,10 +298,308 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2019/04/09/IDEA-Terminal闪退/" data-id="ckfmrllsi0009azci9imatdyl"
+      <a data-url="https://www.youyou-2608.com/2019/04/09/IDEA-Terminal闪退/" data-id="ckfp12zag00066x5xstpl6x8s"
          class="article-share-link">分享</a>
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Exp/">Exp</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDEA/">IDEA</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
+<article id="post-Git配置代理" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/04/06/Git配置代理/">Git配置代理</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/04/06/Git配置代理/" class="article-date">
+  <time datetime="2019-04-05T16:47:50.000Z" itemprop="datePublished">04-06-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/git/">git</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <p>git的代理配置</p>
+<p>给sublime安装插件的时候又碰到git clone速度过慢的问题，记录一哈！</p>
+        
+          <a class="article-more-link" href="/2019/04/06/Git配置代理/">阅读全文</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2019/04/06/Git配置代理/" data-id="ckfp12zaj00086x5xby6kqi2m"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
+<article id="post-在新机器中恢复Hexo博客" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/03/03/在新机器中恢复Hexo博客/">在新机器中恢复Hexo博客</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/03/03/在新机器中恢复Hexo博客/" class="article-date">
+  <time datetime="2019-03-03T12:39:08.000Z" itemprop="datePublished">03-03-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/博客维护/">博客维护</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <h2 id="在新机器上恢复Hexo博客"><a href="#在新机器上恢复Hexo博客" class="headerlink" title="在新机器上恢复Hexo博客"></a>在新机器上恢复Hexo博客</h2><h3 id="准备源文件"><a href="#准备源文件" class="headerlink" title="准备源文件"></a>准备源文件</h3><p>可以备份到github或者coding，或者使用云盘同步（例如坚果云）。</p>
+<h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装npm</span></span></span><br><span class="line">sudo apt install npm</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装hexo</span></span></span><br><span class="line">sudo apt install -g hexo-cli</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#克隆源文件</span></span></span><br><span class="line">git clone user@github.com/repo/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#在仓库中添加SSH key</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装部署插件</span></span></span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#RSS订阅插件</span></span></span><br><span class="line">npm install hexo-generator-feed --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#站点地图插件</span></span></span><br><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装本地服务器</span></span></span><br><span class="line">npm install hexo-server --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#生成index.html插件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-generator-archive --save</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#搜索功能插件</span></span></span><br><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#预览</span></span></span><br><span class="line">hexo s</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+
+<h3 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h3><p>遇到一个问题：生成后访问 <a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 出现白版和”Cannot GET /“，”/“是因为在public 目录下少了index.html文件，再次生成还是无效后，确认是少了组件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-index</span><br></pre></td></tr></table></figure>
+
+<p>参见：<a href="https://www.jianshu.com/p/af83fc73e525" target="_blank" rel="noopener">【完美解决】Hexo博客出现“Cannot GET/xxx”错误</a></p>
+<p>吐槽一下coding和腾讯云之间的账号互通问题，一阵瞎引导，竟然创建了一个新账号，以前的项目找不回来，两个网站之间来回绕了几遍，无意间又用邮箱登录上去了，之前都是能自动跳转登录的，现在还和CSDN一样开始恰烂钱，强制绑定微信和手机号，无语。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2019/03/03/在新机器中恢复Hexo博客/" data-id="ckfp12zbt002e6x5xtlz5usq4"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客维护/">博客维护</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
+<article id="post-Java编程思想——第十四章——类型信息" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/02/01/Java编程思想——第十四章——类型信息/">Java编程思想——第十四章——类型信息</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/02/01/Java编程思想——第十四章——类型信息/" class="article-date">
+  <time datetime="2019-02-01T15:16:43.000Z" itemprop="datePublished">02-01-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <h1 id="第十四章-类型信息"><a href="#第十四章-类型信息" class="headerlink" title="第十四章 类型信息"></a>第十四章 类型信息</h1><p>标签（空格分隔）： Java编程思想</p>
+<hr>
+<blockquote>
+<p>运行时类型信息可以使得你可以在程序运行时发现和使用类型信息。</p>
+</blockquote>
+<p>本章主要讨论Java如何让我们在运行时识别对象和类的信息，主要有两种方式：</p>
+<ol>
+<li>“传统的RTTI”，假定我们在编译时已经知道了所有的类型；</li>
+<li>“反射机制”，允许在运行时发现和使用类的信息。</li>
+</ol>
+        
+          <a class="article-more-link" href="/2019/02/01/Java编程思想——第十四章——类型信息/">阅读全文</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2019/02/01/Java编程思想——第十四章——类型信息/" data-id="ckfp12zan000d6x5xeajflalz"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
+<article id="post-更改DNS为8-8-8-8访问cn-bing-com" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/01/24/更改DNS为8-8-8-8访问cn-bing-com/">更改DNS为8.8.8.8访问cn.bing.com</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/01/24/更改DNS为8-8-8-8访问cn-bing-com/" class="article-date">
+  <time datetime="2019-01-24T12:27:39.000Z" itemprop="datePublished">01-24-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/其他/">其他</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <p>昨天早上开始 <a href="https://cn.bing.com" target="_blank" rel="noopener">https://cn.bing.com</a> 就无法访问：</p>
+<p>今天晚上想去 <a href="https://weibo.com/bingisfordoing" target="_blank" rel="noopener">Bing搜索微博</a> 了解一下情况，ping了一下，DNS都是127.0.0.1，将DNS改为8.8.8.8还能正常访问。据说当年Google开始也是出现DNS污染，后来才离开大陆的，想想Bing也没有了，每天只能在百度看百家号那些劣质内容就觉得可怕。</p>
+        
+          <a class="article-more-link" href="/2019/01/24/更改DNS为8-8-8-8访问cn-bing-com/">阅读全文</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2019/01/24/更改DNS为8-8-8-8访问cn-bing-com/" data-id="ckfp12zbw002o6x5xujzwmn5c"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/其他/">其他</a></li></ul>
 
     </footer>
 
@@ -661,7 +620,7 @@
   
     <nav class="page-nav">
       
-      <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
     </nav>
   
 </section>
@@ -672,7 +631,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2020 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">56.2k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">44.7k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 

@@ -43,7 +43,7 @@
     <div class="video-inner text-center text-white">
       <h1><a href="/">Kanna-Makino</a></h1>
       <p></p>
-      <div><img src="" class="brand" alt="Kanna-Makino"></div>
+      <div><img src="https://i.loli.net/2020/09/22/6GyOQSFkMW3pnjP.jpg" class="brand" alt="Kanna-Makino"></div>
     </div>
     <div class="video-learn-more">
       <a class="anchor" href="#landingpage"><i class="fe fe-mouse"></i></a>
@@ -61,7 +61,7 @@
       
         
 
-<article id="post-利用Python爬取B站数据" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-Spring学习笔记-第一章-Spring之旅" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -69,7 +69,7 @@
         
   
     <h2 itemprop="name">
-      <a class="article-title" href="/2018/11/22/利用Python爬取B站数据/">利用Python爬取B站数据</a>
+      <a class="article-title" href="/2018/11/14/Spring学习笔记-第一章-Spring之旅/">Spring学习笔记-第一章-Spring之旅</a>
     </h2>
   
   
@@ -82,12 +82,12 @@
 
     
       <div class="article-meta">
-        <a href="/2018/11/22/利用Python爬取B站数据/" class="article-date">
-  <time datetime="2018-11-22T13:35:57.000Z" itemprop="datePublished">11-22-2018</time>
+        <a href="/2018/11/14/Spring学习笔记-第一章-Spring之旅/" class="article-date">
+  <time datetime="2018-11-14T12:49:29.000Z" itemprop="datePublished">11-14-2018</time>
 </a>
         
   <div class="article-category">
-    <a class="article-category-link" href="/categories/折腾/">折腾</a>
+    <a class="article-category-link" href="/categories/Spring/">Spring</a>
   </div>
 
       </div>
@@ -104,655 +104,102 @@
 
 	  
       
-        <h3 id="最初的想法"><a href="#最初的想法" class="headerlink" title="最初的想法"></a>最初的想法</h3><p>最近在想起能不能爬一下B站的用户信息，看看能不能统计一下B站的年龄信息。但是很遗憾，在个人主页里只能看到注册日期和生日，而不能看到完整的生日信息。</p>
-<p>还是换个目标吧，好久没用python了，就当是复习一下基础知识。于是找了一下B站的API，官方没有开放的API可供调用，意料之中，已经有大佬准备好了：<a href="https://github.com/Kotobuki-Tsumugi/Bilibili_Views_spider" target="_blank" rel="noopener">GitHub-B站野生接口</a> 。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BilibiliSpider</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.online_api = <span class="string">"https://api.bilibili.com/x/web-interface/online"</span>  <span class="comment"># 在线人数</span></span><br><span class="line">        self.video_api = <span class="string">"https://api.bilibili.com/x/web-interface/archive/stat?&amp;aid=%s"</span>  <span class="comment"># 视频信息</span></span><br><span class="line">        self.newlist_api = <span class="string">"https://api.bilibili.com/x/web-interface/newlist?&amp;rid=%s&amp;pn=%s&amp;ps=%s"</span>  <span class="comment"># 最新视频信息</span></span><br><span class="line">        self.region_api = <span class="string">"https://api.bilibili.com/x/web-interface/dynamic/region?&amp;rid=%s&amp;pn=%s&amp;ps=%s"</span>  <span class="comment"># 最新动态信息</span></span><br><span class="line">        self.member_api = <span class="string">"http://space.bilibili.com/ajax/member/GetInfo"</span>  <span class="comment"># 用户信息</span></span><br><span class="line">        self.stat_api = <span class="string">"https://api.bilibili.com/x/relation/stat?vmid=%s"</span>  <span class="comment"># 用户关注数和粉丝总数</span></span><br><span class="line">        self.upstat_api = <span class="string">"https://api.bilibili.com/x/space/upstat?mid=%s"</span>  <span class="comment"># 用户总播放量和总阅读量</span></span><br><span class="line">        self.follower_api = <span class="string">"https://api.bilibili.com/x/relation/followings?vmid=%s&amp;pn=%s&amp;ps=%s"</span>  <span class="comment"># 用户关注信息</span></span><br><span class="line">        self.fans_api = <span class="string">"https://api.bilibili.com/x/relation/followers?vmid=%s&amp;pn=%s&amp;ps=%s"</span>  <span class="comment"># 用户粉丝信息</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="抓取在线人数"><a href="#抓取在线人数" class="headerlink" title="抓取在线人数"></a>抓取在线人数</h3><p>最简单的例子，在 StuPeter 的例子里有现成的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">member_online_count</span><span class="params">(self)</span>:</span></span><br><span class="line">    ret_val = requests.get(self.online_api)</span><br><span class="line">    <span class="keyword">if</span> ret_val.status_code != <span class="number">200</span> <span class="keyword">or</span> ret_val.content <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        print(<span class="string">"获取当前在线人数失败"</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    ret_content = json.loads(ret_val.content)</span><br><span class="line">    <span class="keyword">return</span> ret_content[<span class="string">"data"</span>][<span class="string">"web_online"</span>]</span><br></pre></td></tr></table></figure>
-
-<h3 id="将返回数据写入文件"><a href="#将返回数据写入文件" class="headerlink" title="将返回数据写入文件"></a>将返回数据写入文件</h3><p>每次执行脚本都记录下当前时间：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_to_file</span><span class="params">(self, cnt)</span>:</span></span><br><span class="line">    now = datetime.datetime.now().strftime(<span class="string">"%Y-%m-%d %H:%M:%S"</span>)</span><br><span class="line">    f = open(self.file, <span class="string">"a"</span>)</span><br><span class="line">    content_to_write = <span class="string">"["</span> + now + <span class="string">"] : ["</span> + str(cnt) + <span class="string">"]"</span></span><br><span class="line">    f.write(content_to_write + <span class="string">"\n"</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置定时任务"><a href="#配置定时任务" class="headerlink" title="配置定时任务"></a>配置定时任务</h3><p>配置定时任务(Ubantu18.04)每十分钟执行一次：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0,10,20,30,40,50 * * * * python /home/username/python/bilibili_spider.py</span><br></pre></td></tr></table></figure>
-
-<h3 id="matplotlib折线图展示"><a href="#matplotlib折线图展示" class="headerlink" title="matplotlib折线图展示"></a>matplotlib折线图展示</h3><p>爬完数据之后数据数据都在文件里，直接数据文件中读取记录下的 时间 和 人数值，做成折线图：</p>
-<p>还需要再研究研究，to be updated…</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/22/利用Python爬取B站数据/" data-id="ckfmrlltr0033azci8y8vtyao"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/折腾/">折腾</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-Hexo博客同时部署到github和coding并设置双线解析" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2018/11/19/Hexo博客同时部署到github和coding并设置双线解析/">Hexo博客同时部署到github和coding并设置双线解析</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2018/11/19/Hexo博客同时部署到github和coding并设置双线解析/" class="article-date">
-  <time datetime="2018-11-19T12:52:51.000Z" itemprop="datePublished">11-19-2018</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Hexo博客维护/">Hexo博客维护</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>因为github服务器禁止了百度爬虫，所以不能百度收录不了站点，导致访问量很低，本来不想折腾的，想了一下还是将博客也部署到了coding上，方便百度的收录。</p>
-<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><ol>
-<li><p>在coding上创建一个名为 <strong>用户名</strong> (不是昵称)的项目，并开启pages服务；</p>
-</li>
-<li><p>将本地ssh公钥文件添加到coding的SSH公钥中并测试是否能访问：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T -p 443 git@git-ssh.coding.net</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在站点配置文件中添加上coding仓库地址：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span></span><br><span class="line">    <span class="attr">github:</span> <span class="string">git@github.com:Kotobuki-Tsumugi/Kotobuki-Tsumugi.github.io.git</span></span><br><span class="line">    <span class="attr">coding:</span> <span class="string">git@git.dev.tencent.com:Kobobuki-Tsumugi/Kobobuki-Tsumugi.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在站点目录/source下创建一个名为Staticfile的空文件；</p>
-</li>
-<li><p>生成并上传静态文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在域名解析中新增两条CNAME记录，指向username.coding.me，注意区分境外线路和默认线路，指向coding的必须为默认线路，如果不能正常访问，可以先暂停github的解析，待coding的解析成功后再开启github的解析，解析反应不及时。</p>
-</li>
-<li><p>向百度提交站点sitemap文件地址。</p>
-</li>
-</ol>
-<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>其中也遇到一些玄学的问题：</p>
-<p><img src="https://image.youyou-2608.com/blog/codings_pages.png" alt="coding提示域名绑定异常"></p>
-<p>比如上图，我如果绑定youyou-2608.com 则一直提示“域名未联通”，即便我已经添加了指向username.coding.me的CNAME记录，添加<a href="http://www.youyou-2608.com">www.youyou-2608.com</a> 能绑定上，但是绑定状态一直是异常，访问username.coding.me也能正常跳转到<a href="https://youyou-2608.com" target="_blank" rel="noopener">https://youyou-2608.com</a> ，没太搞明白，既然已经能正常访问，也就作罢了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/19/Hexo博客同时部署到github和coding并设置双线解析/" data-id="ckfmrllsb0003azcie5pjyyko"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo博客维护/">Hexo博客维护</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-Hexo博客备份" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2018/11/18/Hexo博客备份/">Hexo博客备份</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2018/11/18/Hexo博客备份/" class="article-date">
-  <time datetime="2018-11-18T05:08:28.000Z" itemprop="datePublished">11-18-2018</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Hexo博客维护/">Hexo博客维护</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <h3 id="养成备份的好习惯"><a href="#养成备份的好习惯" class="headerlink" title="养成备份的好习惯"></a>养成备份的好习惯</h3><p>花了好长时间总算是把博客搭建起来了，之前自己买的服务器用Wordpress搭建博客，但是因为服务器经常需要使用，安装一些其他软件什么的，导致Wordpress运行不是很稳定，还很容易被墙。</p>
-<p>因为Hexo每次执行hexo g -d之后发布的都是生成的静态文件，站点以及主题的配置文件不会一同发布到github上，最重要的是，如果在另一个机器上要更新博客，根本做不到。所以就想着把源文件备份一下。</p>
-<hr>
-<h3 id="使用github备份轻松备份"><a href="#使用github备份轻松备份" class="headerlink" title="使用github备份轻松备份"></a>使用github备份轻松备份</h3><p>github本来就是一个仓库，用它来备份最合适不过了。</p>
-<ol>
-<li>建立本地文件夹，将需要备份的文件存拷贝到该文件夹中；</li>
-<li>在username.github.io仓库下新建一个分支；</li>
-<li>建立本地备份文件夹与远程仓库的关联；</li>
-<li>将本地文件夹push到仓库；</li>
-<li>每次博客更新，先发布静态文件，然后在提交源文件。</li>
-</ol>
-<hr>
-<h3 id="需要备份的文件"><a href="#需要备份的文件" class="headerlink" title="需要备份的文件"></a>需要备份的文件</h3><ol>
-<li>_config.yml</li>
-<li>package.json</li>
-<li>/scaffolds</li>
-<li>/source</li>
-<li>/themes</li>
-</ol>
-<hr>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>感觉每次更新博客之后都需要拷贝一下上面这几个文件，感觉还是比较麻烦，没想到什么好办法。</p>
-<p><strong>git第一次commit之后才能查看到本地分支，push之后能显示远程分支。</strong></p>
-<hr>
-<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p>用python脚本来复制文件，并且将执行命令添加到终端命令中，这样只需要多执行一个自定义命令来运行脚本，更方便。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!user/bin/env python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">source_path = <span class="string">"/Users/youyou2608/Kotobuki"</span></span><br><span class="line">target_path = <span class="string">"/Users/youyou2608/BlogBack"</span></span><br><span class="line">filter_files = [<span class="string">"db.json"</span>, <span class="string">"public"</span>, <span class="string">"package-lock.json"</span>, <span class="string">"node_modules"</span>, <span class="string">".deploy_git"</span>]</span><br><span class="line">file_updated = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">copy_files</span><span class="params">(source_dir, target_dir)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> os.listdir(source_dir):</span><br><span class="line">        <span class="keyword">if</span> f <span class="keyword">in</span> filter_files:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        source_file = os.path.join(source_dir, f)</span><br><span class="line">        target_file = os.path.join(target_dir, f)</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(source_file):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(target_dir):</span><br><span class="line">                os.makedirs(target_dir)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(target_file) <span class="keyword">or</span> (</span><br><span class="line">                    os.path.exists(target_file) <span class="keyword">and</span> os.path.getsize(target_file) != os.path.getsize(source_file)):</span><br><span class="line">                open(target_file, <span class="string">"wb"</span>).write(open(source_file, <span class="string">"rb"</span>).read())</span><br><span class="line">                file_updated.append(source_file)</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(source_file):</span><br><span class="line">            copy_files(source_file, target_file)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    print(<span class="string">"开始Hexo站点源文件复制.."</span>)</span><br><span class="line">    copy_files(source_path, target_path)</span><br><span class="line">    print(<span class="string">"站点源文件复制完毕.."</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>在 /etc/profile 中添加一行：alias ‘copy_hexo_source’=’python copy_hexo_source.py’ ，这样终端运行 copy_hexo_source 就可以复制文件了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/18/Hexo博客备份/" data-id="ckfmrllsg0007azciksypwmdy"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo博客维护/">Hexo博客维护</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-Spring学习笔记-第二章-装配Bean" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2018/11/17/Spring学习笔记-第二章-装配Bean/">Spring学习笔记-第二章-装配Bean</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2018/11/17/Spring学习笔记-第二章-装配Bean/" class="article-date">
-  <time datetime="2018-11-17T10:50:47.000Z" itemprop="datePublished">11-17-2018</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <p>第二章：装配Bean</p>
-<p>本章内容：</p>
+        <p>第一部分：Spring的核心</p>
 <ul>
-<li>声明bean</li>
-<li>构造器注入和Setter方法注入</li>
-<li>装配bean</li>
-<li>控制bean的创建和销毁</li>
+<li><p>第一章：Spring之旅</p>
+<p>介绍Spring框架，包括Spring DI和AOP。</p>
+</li>
+<li><p>第二章：装配Bean</p>
+<p>Spring的自动配置、基于Java的配置和XML配置。</p>
+</li>
+<li><p>第三章：高级装配</p>
+<p>Spring的条件化配置，处理自动装配时的歧义性，作用域以及Spring表达式语言。</p>
+</li>
+<li><p>第四章：面向切面的Spring</p>
+<p>展示如何使用Spring的AOP特性把系统级服务从它们所服务的对象中解耦出来。</p>
+</li>
 </ul>
+        
+          <a class="article-more-link" href="/2018/11/14/Spring学习笔记-第一章-Spring之旅/">阅读全文</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.youyou-2608.com/2018/11/14/Spring学习笔记-第一章-Spring之旅/" data-id="ckfp12zbc001f6x5x0nxgtf1h"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
+<article id="post-LeetCode之水仙花数" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2018/11/11/LeetCode之水仙花数/">LeetCode之水仙花数</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/11/11/LeetCode之水仙花数/" class="article-date">
+  <time datetime="2018-11-11T10:18:46.000Z" itemprop="datePublished">11-11-2018</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
+  </div>
+
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <h3 id="1-水仙花数"><a href="#1-水仙花数" class="headerlink" title="1. 水仙花数"></a>1. 水仙花数</h3><p>以下是摘自 <a href="https://zh.wikipedia.org/zh-hans/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0" target="_blank" rel="noopener">维基百科</a> 中的释义：</p>
 <blockquote>
-<p>在Spring中，对象无需自己查找或创建与其所关联的对象，容器负责把需要相互协作的对象引用赋值给各个对象，这种协作关系成为<strong>装配</strong>。</p>
+<p>在<a href="https://zh.wikipedia.org/wiki/%E6%95%B0%E8%AE%BA" title="数论" target="_blank" rel="noopener">数论</a>中，<strong><a href="https://zh.wikipedia.org/wiki/%E6%B0%B4%E4%BB%99%E8%8A%B1" title="水仙花" target="_blank" rel="noopener">水仙花</a>数</strong>（<strong>Narcissistic number</strong>）<sup><a href="https://zh.wikipedia.org/zh-hans/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0#cite_note-mw-1" target="_blank" rel="noopener">[1]</a></sup><sup><a href="https://zh.wikipedia.org/zh-hans/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0#cite_note-moore-2" target="_blank" rel="noopener">[2]</a></sup>，也被称为<strong>超完全数字不变数</strong>（<strong>pluperfect digital invariant, PPDI</strong>）<sup><a href="https://zh.wikipedia.org/zh-hans/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0#cite_note-3" target="_blank" rel="noopener">[3]</a>/sup&gt;、<strong><a href="https://zh.wikipedia.org/wiki/%E8%87%AA%E6%88%80" title="自恋" target="_blank" rel="noopener">自恋</a>数</strong>、<strong>自幂数</strong>、<strong><a href="https://zh.wikipedia.org/wiki/%E9%98%BF%E5%A7%86%E6%96%AF%E5%A3%AF" title="阿姆斯壮" target="_blank" rel="noopener">阿姆斯壮</a>数</strong>或<strong>阿姆斯特朗数</strong>（<strong>Armstrong number</strong>）<sup><a href="https://zh.wikipedia.org/zh-hans/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0#cite_note-4" target="_blank" rel="noopener">[4]</a></sup> ，用来描述一个<strong>N</strong>位非负整数，其各位数字的<strong>N</strong>次方和等于该数本身。</sup></p>
 </blockquote>
-<hr>
-<h3 id="2-1-Spring配置的可选方案"><a href="#2-1-Spring配置的可选方案" class="headerlink" title="2.1 Spring配置的可选方案"></a>2.1 Spring配置的可选方案</h3><blockquote>
-<p>Spring容器负责创建应用程序中的bean并通过DI来协调对象之间的关系。开发人员需要做的是告诉Spring需要创建哪些对象并且如何装配在一起。</p>
-</blockquote>
-<p>Spring提供了三种可选方式：</p>
-<ul>
-<li>XML配置</li>
-<li>Java显式配置</li>
-<li>隐式的bean发现机制和自动装配</li>
-</ul>
-<p>如何选择：<strong>尽可能使用自动配置机制，当必须显式配置时使用JavaConfig，当JavaConfig中没有同样实现时使用XML配置。</strong></p>
-<hr>
-<h3 id="2-2-自动化装配bean"><a href="#2-2-自动化装配bean" class="headerlink" title="2.2 自动化装配bean"></a>2.2 自动化装配bean</h3><ul>
-<li>自动扫描</li>
-<li>自动装配</li>
-</ul>
-<h4 id="2-2-1-创建可被发现的bean"><a href="#2-2-1-创建可被发现的bean" class="headerlink" title="2.2.1 创建可被发现的bean"></a>2.2.1 创建可被发现的bean</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kotobuki2.soundsys;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午7:21</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CompactDisc</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kotobuki2.soundsys;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午7:22</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SgtPeppers</span> <span class="keyword">implements</span> <span class="title">CompactDisc</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String title = <span class="string">"SgtPeppers title"</span>;</span><br><span class="line">    <span class="keyword">private</span> String artiest = <span class="string">"The Beatles"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"playing.."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kotobuki2.soundsys;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.ComponentScan;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午7:24</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CDPlayerConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>通过XML配置开启注解扫描：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"soundsys"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>自动装配测试：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.kotobuki2.soundsys.CDPlayerConfig;</span><br><span class="line"><span class="keyword">import</span> com.kotobuki2.soundsys.CompactDisc;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.context.ContextConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringJUnit4ClassRunner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.assertNotNull;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午7:28</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">@<span class="title">ContextConfiguration</span>(<span class="title">classes</span> </span>= CDPlayerConfig<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">CDPlayerTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> CompactDisc compactDisc;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cdTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        assertNotNull(compactDisc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-2-2-为组件扫描的bean命名"><a href="#2-2-2-为组件扫描的bean命名" class="headerlink" title="2.2.2 为组件扫描的bean命名"></a>2.2.2 为组件扫描的bean命名</h4><p>默认将类名第一个字母小写后的字符串作为bean的id。</p>
-<p>可以通过注解标示bean的别名：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span>(<span class="string">"alias"</span>)</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-2-3-设置组件扫描的基础包"><a href="#2-2-3-设置组件扫描的基础包" class="headerlink" title="2.2.3 设置组件扫描的基础包"></a>2.2.3 设置组件扫描的基础包</h4><p><strong>默认以配置类所在的包为基础包进行扫描。</strong></p>
-<p>自定义扫描包：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(<span class="string">"package-name"</span>)</span><br><span class="line"><span class="comment">//扫描多个基础包</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(basePackages = &#123;<span class="string">"package1"</span>, <span class="string">"package2"</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>但是用直接指定包名会出现问题：包名被变更以后便无法扫描到所需要的类，因此，还有另一种指定扫描包的方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan</span>(basePackageClasses = &#123;CDPlayer<span class="class">.<span class="keyword">class</span>, <span class="title">DVDPlayer</span>.<span class="title">class</span>&#125;)</span></span><br></pre></td></tr></table></figure>
-
-<p>这种方式下，这些类所在的包都会作为基础包进行扫描，即便代码重构也不会受到影响。</p>
-<h4 id="2-2-4-通过为bean添加注解实现自动装配"><a href="#2-2-4-通过为bean添加注解实现自动装配" class="headerlink" title="2.2.4 通过为bean添加注解实现自动装配"></a>2.2.4 通过为bean添加注解实现自动装配</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kotobuki2.soundsys;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午8:51</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MediaPlayer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.kotobuki2.soundsys;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午8:50</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CDPlayer</span> <span class="keyword">implements</span> <span class="title">MediaPlayer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> CompactDisc compactDisc;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CDPlayer</span><span class="params">(CompactDisc compactDisc)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.compactDisc = compactDisc;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        compactDisc.play();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>@Autowired注解不仅能够用在构造器上，也能用在属性的Setter方法上。</p>
-<hr>
-<h3 id="2-3-通过Java装配bean"><a href="#2-3-通过Java装配bean" class="headerlink" title="2.3 通过Java装配bean"></a>2.3 通过Java装配bean</h3><blockquote>
-<p>在进行显式配置的时候，JavaConfig是更好的方案，因为其强大、类型安全并且重构友好。因为其本身就是Java代码。</p>
-</blockquote>
-<p>声明简单的bean：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span>(name=<span class="string">"alias"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> CompactDisc <span class="title">sgtPeppers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> SgtPeppers();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>借助JavaConfig实现注入：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CDPlayer <span class="title">cdPlayer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> CDPlayer(<span class="keyword">new</span> sgtPeppers());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CDPlayer <span class="title">cdPlayer</span><span class="params">(CompactDisc disc)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> CDplayer(disc);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>后者不要求disc必须在JavaConfig中声明，实际上它可以通过组件扫描功能自动发现或者XML来进行配置。</p>
-<p>通过构造器注入：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> CDPlayer <span class="title">cdPlayer</span><span class="params">(CompactDisc disc)</span></span>&#123;</span><br><span class="line">    CDPlayer cdPlayer = <span class="keyword">new</span> CDPlayer(disc);</span><br><span class="line">    cdPlayer.setCompactDisc(disc);</span><br><span class="line">    <span class="keyword">return</span> cdPlayer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="2-4-通过XML装配Bean"><a href="#2-4-通过XML装配Bean" class="headerlink" title="2.4 通过XML装配Bean"></a>2.4 通过XML装配Bean</h3><p>在XML配置中，需要创建一个以<beans>作为根元素的XML配置文件。</beans></p>
-<p><strong>可以借助Spring Tool Suite创建和管理Spring XML配置文件</strong>。</p>
-<h4 id="2-4-1-声明一个简单的bean："><a href="#2-4-1-声明一个简单的bean：" class="headerlink" title="2.4.1 声明一个简单的bean："></a>2.4.1 声明一个简单的bean：</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"bean_id"</span> <span class="attr">class</span>=<span class="string">"com.soundsys.SgtPeppers"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>如果没有指明id，bean将会根据类全限定名指定，为了减少XML配置的繁琐，只需要对需要按名称引用的bean进行命名。“com.soundsys.SgtPeppers#0”…</p>
-<p><constructor-arg> 元素：</constructor-arg></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"cdPlayer"</span> <span class="attr">class</span>=<span class="string">"com.soundsys.CDPlayer"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">ref</span>=<span class="string">"compactDisc"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-4-2-c命名空间"><a href="#2-4-2-c命名空间" class="headerlink" title="2.4.2 c命名空间"></a>2.4.2 c命名空间</h4><p><a href="https://blog.csdn.net/elim168/article/details/74516439" target="_blank" rel="noopener">p命名空间和c命名空间</a></p>
-<h4 id="2-4-3-将字面量注入到构造器中："><a href="#2-4-3-将字面量注入到构造器中：" class="headerlink" title="2.4.3 将字面量注入到构造器中："></a>2.4.3 将字面量注入到构造器中：</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"compactDisc"</span> <span class="attr">class</span>=<span class="string">"com.soundsys.BlackDisc"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">"title"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">"The Beatles"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>使用 value 属性，将给定的值注入到构造器中。</p>
-<h4 id="2-4-3-装配集合"><a href="#2-4-3-装配集合" class="headerlink" title="2.4.3 装配集合"></a>2.4.3 装配集合</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beat"</span> <span class="attr">class</span>=<span class="string">"com.soundsys.beat"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">"The Beatles"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">        	<span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"bean1"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"bean2"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"bean3"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>或者</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beat"</span> <span class="attr">class</span>=<span class="string">"com.soundsys.beat"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">"The Beatles"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line">    	<span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>SgtPeppers<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span>The Beatles<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">constructor-arg</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>使用两者的区别就是 list 和 set 会忽略重复元素。</p>
-<h4 id="2-4-4-p命名空间"><a href="#2-4-4-p命名空间" class="headerlink" title="2.4.4 p命名空间"></a>2.4.4 p命名空间</h4><p><a href="https://blog.csdn.net/elim168/article/details/74516439" target="_blank" rel="noopener">p命名空间和c命名空间</a></p>
-<h4 id="2-4-5-导入混合配置"><a href="#2-4-5-导入混合配置" class="headerlink" title="2.4.5 导入混合配置"></a>2.4.5 导入混合配置</h4><p>在 JavaConfig 中引用 JavaConfig 配置：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Import</span>(CDConfig<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">CDPlayerConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CDPlayer <span class="title">cdPlayer</span><span class="params">(CompactDisc disc)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CDPlayer(disc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>或者：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Import</span>(CDPlayerConfig<span class="class">.<span class="keyword">class</span>, <span class="title">CDConfig</span>.<span class="title">class</span>)</span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">SoundSysConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>新建一个配置类，使用@Import导入两个配置类。</p>
-<p>在JavaConfig中引入XML配置：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Import</span>(CDPlayerConfig<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line">@ImportResource("classpath:cd-config.xml")</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SoundSysConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在XML配置中引用XML配置：</p>
- <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"cd-config.xml"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"cdPlayer"</span> <span class="attr">class</span>=<span class="string">"com.soundsys.CDPlayer"</span> <span class="attr">c:cd-ref</span>=<span class="string">"compactDisc"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>在XML中引入JavaConfig配置：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.soundsys.CDConfig"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"cdPlayer"</span> <span class="attr">class</span>=<span class="string">"com.soundsys.CDPlayer"</span> <span class="attr">c:cd-ref</span>=<span class="string">"compactDisc"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>或者：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.soundsys.CDConfig"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"cdplayer-config.xml"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>新建一个配置文件，分别导入JavaConfig配置和XML配置。</p>
-<hr>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><blockquote>
-<p>Spring框架的核心是Spring容器，负责管理应用中组件的生命周期，它会创建这些组件并保证它们的依赖能够得到满足。</p>
-<p>尽可能使用自动配置，以避免显式配置带来的维护成本。</p>
-<p>如果确实需要显式配置，应优先选择基于Java的配置，因为其更加强大、类型安全且易于重构。</p>
-</blockquote>
-
+<p>这里定义的N=3。</p>
+        
+          <a class="article-more-link" href="/2018/11/11/LeetCode之水仙花数/">阅读全文</a>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/17/Spring学习笔记-第二章-装配Bean/" data-id="ckfmrlltd001zazcinc2ix67w"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-LeetCode子单链表重排序" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2018/11/17/LeetCode子单链表重排序/">LeetCode之单链表重排序</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2018/11/17/LeetCode子单链表重排序/" class="article-date">
-  <time datetime="2018-11-17T08:23:26.000Z" itemprop="datePublished">11-17-2018</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <blockquote>
-<p> 笑恨平生，不存欢愉。</p>
-</blockquote>
-<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Given a singly linked list <em>L</em>: <em>L</em> 0→<em>L</em> 1→…→<em>L</em> <em>n</em>-1→<em>L</em> n,<br>reorder it to: <em>L</em> 0→<em>L</em> <em>n</em> →<em>L</em> 1→<em>L</em> <em>n</em>-1→<em>L</em> 2→<em>L</em> <em>n</em>-2→…</p>
-<p>You must do this in-place without altering the nodes’ values.</p>
-<p>For example,<br>Given{1,2,3,4}, reorder it to{1,4,2,3}.</p>
-<h3 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h3><ul>
-<li><p>时间限制：1秒</p>
-</li>
-<li><p>空间限制：32768K</p>
-</li>
-</ul>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>两个游标：一个用来指向下一次将要插入元素的位置，另一个用来遍历链表。从根结点开始遍历，如果当前节点的next节点不为空并且next的next节点不为空，则取最后一个节点插入到当前节点之后，游标一跳两个位置。直到游标一节点的next节点为空或者next的next节点为空。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.reorder.list;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.sort.linkedlist.ListNode;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午4:01</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reorderList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (head.next == <span class="keyword">null</span> || head.next.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode pt = head;</span><br><span class="line">        ListNode index = head;</span><br><span class="line">        ListNode preIndex = head;</span><br><span class="line">        <span class="keyword">while</span> (pt.next != <span class="keyword">null</span> &amp;&amp; pt.next.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (index.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">                preIndex = index;</span><br><span class="line">                index = index.next;</span><br><span class="line">            &#125;</span><br><span class="line">            preIndex.next = <span class="keyword">null</span>;</span><br><span class="line">            index.next = pt.next;</span><br><span class="line">            pt.next = index;</span><br><span class="line">            pt = pt.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这种方法可行，但是每排序一个节点都需要遍历一次链表，效率比较低，可以看到下图，运行时间较长，占用内存已经 <strong><font color="red">超过空间限制</font></strong> 了。</p>
-<p><img src="https://image.youyou-2608.com/blog/leetcode1.png" alt="链表重排序"></p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>看了一下网上给出的方案，几乎都是一样的：</p>
-<p>这道链表重排序问题可以拆分为以下三个小问题：</p>
-<ol>
-<li><p>使用快慢指针来找到链表的中点，并将链表从中点处断开，形成两个独立的链表。</p>
-</li>
-<li><p>将第二个链翻转。</p>
-</li>
-<li><p>将第二个链表的元素间隔地插入第一个链表中。</p>
-</li>
-</ol>
-<p>都是将链表拆成两个独立的链表进行重排序。</p>
-<p>剽窃来的代码：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;这道链表重排序问题可以拆分为以下三个小问题：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">1. 使用快慢指针来找到链表的中点，并将链表从中点处断开，形成两个独立的链表。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">2. 将第二个链翻转。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">3. 将第二个链表的元素间隔地插入第一个链表中。</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">reorderList</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!head || !head-&gt;next || !head-&gt;next-&gt;next) <span class="keyword">return</span>;</span><br><span class="line">        ListNode *fast = head;</span><br><span class="line">        ListNode *slow = head;</span><br><span class="line">        <span class="keyword">while</span> (fast-&gt;next &amp;&amp; fast-&gt;next-&gt;next) &#123;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *mid = slow-&gt;next;</span><br><span class="line">        slow-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        ListNode *last = mid;</span><br><span class="line">        ListNode *pre = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">while</span> (last) &#123;</span><br><span class="line">            ListNode *next = last-&gt;next;</span><br><span class="line">            last-&gt;next = pre;</span><br><span class="line">            pre = last;</span><br><span class="line">            last = next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (head &amp;&amp; pre) &#123;</span><br><span class="line">            ListNode *next = head-&gt;next;</span><br><span class="line">            head-&gt;next = pre;</span><br><span class="line">            pre = pre-&gt;next;</span><br><span class="line">            head-&gt;next-&gt;next = next;</span><br><span class="line">            head = next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>时间空间使用都很少，性能问题没了。</p>
-<p><img src="https://image.youyou-2608.com/blog/leetcode2.png" alt="LeetCode链表重排序"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode子单链表重排序/" data-id="ckfmrllsx000zazcifq0scuor"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-LeetCode子二叉树非递归前序遍历" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2018/11/17/LeetCode子二叉树非递归前序遍历/">LeetCode之二叉树非递归前序遍历</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2018/11/17/LeetCode子二叉树非递归前序遍历/" class="article-date">
-  <time datetime="2018-11-17T07:34:23.000Z" itemprop="datePublished">11-17-2018</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <h3 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h3><p>Given a binary tree, return the <em>preorder</em> traversal of its nodes’ values.</p>
-<p>For example:<br>Given binary tree{1,#,2,3},</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line"> \</span><br><span class="line">  2</span><br><span class="line"> /</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
-
-<p>return[1,2,3].</p>
-<p><strong>Note:</strong> Recursive solution is trivial, could you do it iteratively?</p>
-<p><strong>使用非递归的方法前序遍历二叉树。</strong></p>
-<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>前序遍历就是按照中、左、右的顺序对二叉树进行遍历。</p>
-<p>思路很简单，如果当前节点不为空，不断遍历当前节点的左子树，如果当前节点有右子树的话，将其放入栈中以便后期遍历其右子树，如果当前节点为空，则取出栈顶元素按照同样的方式遍历其右子树。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.postorder.raversal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午3:16</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PreOrderSolution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">preorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        TreeNode pointer = root;</span><br><span class="line">        <span class="keyword">while</span> (pointer != <span class="keyword">null</span> || !stack.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">while</span> (pointer != <span class="keyword">null</span>) &#123;</span><br><span class="line">                list.add(pointer.val);</span><br><span class="line">                <span class="keyword">if</span> (pointer.right != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    stack.push(pointer);</span><br><span class="line">                &#125;</span><br><span class="line">                pointer = pointer.left;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (stack.isEmpty()) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            pointer = stack.pop();</span><br><span class="line">            pointer = pointer.right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>牛客网做得还不错，就是现在还是只支持C++和Java。</p>
-<p><img src="https://image.youyou-2608.com/blog/leetcode.png" alt="代码通过测试"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode子二叉树非递归前序遍历/" data-id="ckfmrllsw000xazci1003idqe"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-LeetCode之二叉树非递归后续遍历" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2018/11/17/LeetCode之二叉树非递归后续遍历/">LeetCode之二叉树非递归后续遍历</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2018/11/17/LeetCode之二叉树非递归后续遍历/" class="article-date">
-  <time datetime="2018-11-17T06:45:43.000Z" itemprop="datePublished">11-17-2018</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/LeetCode/">LeetCode</a>
-  </div>
-
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <p>周末突然降温，哪儿也去不了，不如在家刷题。</p>
-<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>Given a binary tree, return the <em>postorder</em> traversal of its nodes’ values.</p>
-<p>For example:<br>Given binary tree{1,#,2,3},</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line"> \</span><br><span class="line">  2</span><br><span class="line"> /</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
-
-<p>return[3,2,1].</p>
-<p><strong>Note:</strong> Recursive solution is trivial, could you do it iteratively？</p>
-<p><strong>使用非递归方法后序遍历二叉树。</strong></p>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>二叉树后序遍历就是对每个节点按照左、右、中的顺序进行遍历。</p>
-<p>详细的解析参见：<a href="https://www.jianshu.com/p/456af5480cee" target="_blank" rel="noopener">二叉树遍历(先序、中序、后序)</a> ，讲得非常详细易懂。</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.postorder.raversal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/17 下午1:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">postorderTraversal</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">        Stack&lt;TreeNode&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        ArrayList&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        TreeNode pointer = root;</span><br><span class="line">        TreeNode lastVisit = root;</span><br><span class="line">        <span class="keyword">while</span> (!stack.isEmpty() || pointer != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">while</span> (pointer != <span class="keyword">null</span>) &#123;</span><br><span class="line">                stack.push(pointer);</span><br><span class="line">                pointer = pointer.left;</span><br><span class="line">            &#125;</span><br><span class="line">            pointer = stack.peek();</span><br><span class="line">            <span class="keyword">if</span> (pointer.right == <span class="keyword">null</span> || pointer.right == lastVisit) &#123;</span><br><span class="line">                list.add(pointer.val);</span><br><span class="line">                lastVisit = pointer;</span><br><span class="line">                stack.pop();</span><br><span class="line">                pointer = <span class="keyword">null</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                pointer = pointer.right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>是时候好好重修一下数据结构了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.youyou-2608.com/2018/11/17/LeetCode之二叉树非递归后续遍历/" data-id="ckfmrllss000nazciom3agcq5"
+      <a data-url="https://www.youyou-2608.com/2018/11/11/LeetCode之水仙花数/" data-id="ckfp12zaw000o6x5xhfjobmxt"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -776,7 +223,7 @@
   
     <nav class="page-nav">
       
-      <a class="extend prev" rel="prev" href="/page/6/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/">下一页</a>
+      <a class="extend prev" rel="prev" href="/page/6/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
     </nav>
   
 </section>
@@ -787,7 +234,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2020 Kanna-Makino</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">56.2k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">44.7k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 
