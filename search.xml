@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>七牛云备案域名过期导致图片无法查看和下载</title>
+    <url>/2020/09/30/%E4%B8%83%E7%89%9B%E4%BA%91%E5%A4%87%E6%A1%88%E5%9F%9F%E5%90%8D%E8%BF%87%E6%9C%9F%E5%AF%BC%E8%87%B4%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E6%9F%A5%E7%9C%8B%E5%92%8C%E4%B8%8B%E8%BD%BD/</url>
+    <content><![CDATA[<p>之前一直用七牛云做博客图床，七牛云做得还是挺不错的，速度快、稳定并且还有免费空间和流量。但是前段时间备案的域名除了点问题，导致域名被七牛云删除了。</p>
+<a id="more"></a>
+
+<p><img src="https://images2.imgbox.com/15/5f/zAPOVGJv_o.png" alt="截图"></p>
+<p>域名删除影响非常大，之前在博客里引用的图片无法查看，并且登录到七牛云后台也无法预览、下载图片，整个服务完全不可用了。于是在网上查了许多资料找到了解决方法。</p>
+<p>官方开发了工具来管理存储的文件，其中一个命令行工具叫“qrsctl”。可以通过命令行来做一些上传下载、移动复制和空间管理等操作。</p>
+<p>安装及使用方法 &gt;&gt;  <a href="https://developer.qiniu.com/kodo/tools/1300/qrsctl" target="_blank" rel="noopener">命令行辅助工具(qrsctl)</a></p>
+<p>使用下面的shell脚本：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将存储空间名称换为自己的空间名称</span></span><br><span class="line">imgs=`./qrsctl listprefix youyou-2608 ''`</span><br><span class="line"></span><br><span class="line">i=0 </span><br><span class="line">echo $imgs | tr " " "\n" | while read line</span><br><span class="line">do</span><br><span class="line">    if(($i&gt;0))</span><br><span class="line">    then</span><br><span class="line">        echo $line</span><br><span class="line">        ./qrsctl get youyou-2608 $line ./$line</span><br><span class="line">    fi</span><br><span class="line">    i=$(($i+1))</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>给脚本添加执行权限，然后运行即可。</p>
+<p>但是用脚本下载图片时遇到一个问题：名称中带有“/”这种在Linux系统被用作目录分隔符的图片无法下载，会报“找不到该文件”的错误，因为它把“/”前的部分当作目录、而把后半部分当作文件名，当然找不到文件了。</p>
+<p>在七牛云提了工单之后，七牛云的工程师说是这个工具本身有问题。没办法，最后只能一个一个去改文件名（域名被删除后还能改文件名），然后再下载。不得不说，工作量不是一般的大。</p>
+<p>最后就是图床的问题了，看了许多网上推荐的图床感觉都不太靠谱，倒下一个图床又需要重新折腾一遍。想着后面有时间自己搭建一个图床，这样比较安心一些。</p>
+]]></content>
+      <categories>
+        <category>博客维护</category>
+      </categories>
+      <tags>
+        <tag>博客维护</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《宇宙よりも遠い場所》台词-第二话</title>
     <url>/2020/09/22/%E3%80%8A%E5%AE%87%E5%AE%99%E3%82%88%E3%82%8A%E3%82%82%E9%81%A0%E3%81%84%E5%A0%B4%E6%89%80%E3%80%8B%E5%8F%B0%E8%AF%8D-%E7%AC%AC%E4%BA%8C%E8%AF%9D/</url>
     <content><![CDATA[<p>第二話：歌舞伎町のフリマントル</p>
@@ -459,6 +484,9 @@
 </blockquote>
 </blockquote>
 ]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
       <tags>
         <tag>Linux</tag>
       </tags>
@@ -876,6 +904,8 @@
     <url>/2019/04/29/Spring-Boot%E4%B8%AD%E4%BD%BF%E7%94%A8Swagger2%E6%9E%84%E5%BB%BA%E5%BC%BA%E5%A4%A7%E7%9A%84RESTful-API%E6%96%87%E6%A1%A3/</url>
     <content><![CDATA[<p>Spring Boot中使用Swagger2构建强大的RESTful API文档</p>
 <p>由于Spring Boot能够快速开发、便捷部署等特性，相信有很大一部分Spring Boot的用户会用来构建RESTful API。而我们构建RESTful API的目的通常都是由于多终端的原因，这些终端会共用很多底层业务逻辑，因此我们会抽象出这样一层来同时服务于多个移动端或者Web前端。</p>
+<a id="more"></a>
+
 <p>这样一来，我们的RESTful API就有可能要面对多个开发人员或多个开发团队：IOS开发、Android开发或是Web开发等。为了减少与其他团队平时开发期间的频繁沟通成本，传统做法我们会创建一份RESTful API文档来记录所有接口细节，然而这样的做法有以下几个问题：</p>
 <ul>
 <li>由于接口众多，并且细节复杂（需要考虑不同的HTTP请求类型、HTTP头部信息、HTTP请求内容等），高质量地创建这份文档本身就是件非常吃力的事，下游的抱怨声不绝于耳。</li>
@@ -998,6 +1028,10 @@
     <title>在新机器中恢复Hexo博客</title>
     <url>/2019/03/03/%E5%9C%A8%E6%96%B0%E6%9C%BA%E5%99%A8%E4%B8%AD%E6%81%A2%E5%A4%8DHexo%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h2 id="在新机器上恢复Hexo博客"><a href="#在新机器上恢复Hexo博客" class="headerlink" title="在新机器上恢复Hexo博客"></a>在新机器上恢复Hexo博客</h2><h3 id="准备源文件"><a href="#准备源文件" class="headerlink" title="准备源文件"></a>准备源文件</h3><p>可以备份到github或者coding，或者使用云盘同步（例如坚果云）。</p>
+<a id="more"></a>
+
+
+
 <h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装npm</span></span></span><br><span class="line">sudo apt install npm</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装hexo</span></span></span><br><span class="line">sudo apt install -g hexo-cli</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#克隆源文件</span></span></span><br><span class="line">git clone user@github.com/repo/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#在仓库中添加SSH key</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装部署插件</span></span></span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#RSS订阅插件</span></span></span><br><span class="line">npm install hexo-generator-feed --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#站点地图插件</span></span></span><br><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#安装本地服务器</span></span></span><br><span class="line">npm install hexo-server --save</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#生成index.html插件</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-generator-archive --save</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#搜索功能插件</span></span></span><br><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
 
 <h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">#预览</span></span></span><br><span class="line">hexo s</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
@@ -1018,8 +1052,7 @@
   <entry>
     <title>Java编程思想——第十四章——类型信息</title>
     <url>/2019/02/01/Java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3%E2%80%94%E2%80%94%E7%AC%AC%E5%8D%81%E5%9B%9B%E7%AB%A0%E2%80%94%E2%80%94%E7%B1%BB%E5%9E%8B%E4%BF%A1%E6%81%AF/</url>
-    <content><![CDATA[<h1 id="第十四章-类型信息"><a href="#第十四章-类型信息" class="headerlink" title="第十四章 类型信息"></a>第十四章 类型信息</h1><p>标签（空格分隔）： Java编程思想</p>
-<hr>
+    <content><![CDATA[<h1 id="第十四章-类型信息"><a href="#第十四章-类型信息" class="headerlink" title="第十四章 类型信息"></a>第十四章 类型信息</h1><hr>
 <blockquote>
 <p>运行时类型信息可以使得你可以在程序运行时发现和使用类型信息。</p>
 </blockquote>
@@ -2632,6 +2665,8 @@
     <url>/2018/11/22/%E5%88%A9%E7%94%A8Python%E7%88%AC%E5%8F%96B%E7%AB%99%E6%95%B0%E6%8D%AE/</url>
     <content><![CDATA[<h3 id="最初的想法"><a href="#最初的想法" class="headerlink" title="最初的想法"></a>最初的想法</h3><p>最近在想起能不能爬一下B站的用户信息，看看能不能统计一下B站的年龄信息。但是很遗憾，在个人主页里只能看到注册日期和生日，而不能看到完整的生日信息。</p>
 <p>还是换个目标吧，好久没用python了，就当是复习一下基础知识。于是找了一下B站的API，官方没有开放的API可供调用，意料之中，已经有大佬准备好了：<a href="https://github.com/Kotobuki-Tsumugi/Bilibili_Views_spider" target="_blank" rel="noopener">GitHub-B站野生接口</a> 。</p>
+<a id="more"></a>
+
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BilibiliSpider</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.online_api = <span class="string">"https://api.bilibili.com/x/web-interface/online"</span>  <span class="comment"># 在线人数</span></span><br><span class="line">        self.video_api = <span class="string">"https://api.bilibili.com/x/web-interface/archive/stat?&amp;aid=%s"</span>  <span class="comment"># 视频信息</span></span><br><span class="line">        self.newlist_api = <span class="string">"https://api.bilibili.com/x/web-interface/newlist?&amp;rid=%s&amp;pn=%s&amp;ps=%s"</span>  <span class="comment"># 最新视频信息</span></span><br><span class="line">        self.region_api = <span class="string">"https://api.bilibili.com/x/web-interface/dynamic/region?&amp;rid=%s&amp;pn=%s&amp;ps=%s"</span>  <span class="comment"># 最新动态信息</span></span><br><span class="line">        self.member_api = <span class="string">"http://space.bilibili.com/ajax/member/GetInfo"</span>  <span class="comment"># 用户信息</span></span><br><span class="line">        self.stat_api = <span class="string">"https://api.bilibili.com/x/relation/stat?vmid=%s"</span>  <span class="comment"># 用户关注数和粉丝总数</span></span><br><span class="line">        self.upstat_api = <span class="string">"https://api.bilibili.com/x/space/upstat?mid=%s"</span>  <span class="comment"># 用户总播放量和总阅读量</span></span><br><span class="line">        self.follower_api = <span class="string">"https://api.bilibili.com/x/relation/followings?vmid=%s&amp;pn=%s&amp;ps=%s"</span>  <span class="comment"># 用户关注信息</span></span><br><span class="line">        self.fans_api = <span class="string">"https://api.bilibili.com/x/relation/followers?vmid=%s&amp;pn=%s&amp;ps=%s"</span>  <span class="comment"># 用户粉丝信息</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="抓取在线人数"><a href="#抓取在线人数" class="headerlink" title="抓取在线人数"></a>抓取在线人数</h3><p>最简单的例子，在 StuPeter 的例子里有现成的代码：</p>
