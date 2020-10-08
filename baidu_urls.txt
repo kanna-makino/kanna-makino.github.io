@@ -1,3 +1,4 @@
+https://www.youyou-2608.com/2020/10/08/Java多线程/
 https://www.youyou-2608.com/2020/09/30/25岁的最后一天/
 https://www.youyou-2608.com/2020/09/30/七牛云备案域名过期导致图片无法查看和下载/
 https://www.youyou-2608.com/2020/09/22/《宇宙よりも遠い場所》台词-第二话/
@@ -27,4 +28,3 @@ https://www.youyou-2608.com/2019/04/09/IDEA-Terminal闪退/
 https://www.youyou-2608.com/2019/04/06/Git配置代理/
 https://www.youyou-2608.com/2019/03/03/在新机器中恢复Hexo博客/
 https://www.youyou-2608.com/2019/02/01/Java编程思想——第十四章——类型信息/
-https://www.youyou-2608.com/2019/01/24/更改DNS为8-8-8-8访问cn-bing-com/
