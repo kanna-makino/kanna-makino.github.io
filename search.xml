@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>设置git初始化默认分支为main</title>
+    <url>/2020/10/09/%E8%AE%BE%E7%BD%AEgit%E5%88%9D%E5%A7%8B%E5%8C%96%E9%BB%98%E8%AE%A4%E5%88%86%E6%94%AF%E4%B8%BAmain/</url>
+    <content><![CDATA[<p>好久没上传代码到 GitHub 了，前两天新建了一个仓库，然后习惯性的执行 <code>git push origin master </code> , 过了好一会儿才在 GitHub 页面上看到两个分支：main 和 master。</p>
+<p>这两天陆陆续续出现好几次，网上查了一下才知道从10月份起，GitHub 的默认分支名不再是master，而是main。据说是因为master这个词和种族主义有关系，现在的人真是玻璃心啊。</p>
+<p>git 初始化默认分支名是master，每次新建仓库都要改默认分支名很麻烦，就查了一下设置 git 初始化分支名的方法，找到两种解决办法：</p>
+<a id="more"></a>
+
+<ul>
+<li><p><strong>初始化后切换分支</strong> &gt;&gt; <a href="https://stackoverflow.com/a/42871621" target="_blank" rel="noopener">https://stackoverflow.com/a/42871621</a></p>
+<p>As you noticed, there is no parameter for <code>git init</code> for the branch name, so two commands will have to do.</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line">git checkout -b trunk</span><br></pre></td></tr></table></figure>
+
+<p>This creates a new repository with <code>trunk</code> as the current branch instead of <code>master</code>. The branch <code>master</code> does not actually exist–the branches don’t get created until they have at least one commit. Until the branch gets created, the branch only exists in <code>.git/HEAD</code>, which explains why the <code>master</code> branch will disappear when you switch to <code>trunk</code>.</p>
+<p>If you’ve already committed, you can run <code>git branch -m</code> instead:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git init</span><br><span class="line">touch file.txt</span><br><span class="line">git add file.txt</span><br><span class="line">git commit -m &apos;commit 1&apos;</span><br><span class="line">git branch -m trunk</span><br></pre></td></tr></table></figure>
+
+<p>This renames the branch from <code>master</code> to <code>trunk</code> once it’s created.</p>
+<p>This does seem a bit clunky since the mechanism is different depending on whether the repository is empty, but it works.</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>升级 git 使用 git 全局配置</strong> &gt;&gt; <a href="https://stackoverflow.com/a/63136920" target="_blank" rel="noopener">https://stackoverflow.com/a/63136920</a></p>
+<p>Since <strong>Git 2.28</strong> (released July 27, 2020) a new configuration option, <code>init.defaultBranch</code> is being introduced to replace the hard-coded term <code>master</code>.</p>
+<p>Default remains to <code>master</code>!</p>
+<p>The user can override the default value of the configuration variable with:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git config --global init.defaultBranch main</span><br></pre></td></tr></table></figure>
+
+<p>Read the git doc chapter for further details <a href="https://github.blog/2020-07-27-highlights-from-git-2-28/#introducing-init-defaultbranch" target="_blank" rel="noopener">Introducing init.defaultBranch</a></p>
+<p>升级 git 还要配置 zsh，太麻烦了，没试。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java多线程</title>
     <url>/2020/10/08/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
     <content><![CDATA[<p>创建线程的两种方式：</p>

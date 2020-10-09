@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    IDEA Terminal闪退 |
+    设置git初始化默认分支为main |
     
     iced-cola</title>
   
@@ -27,7 +27,7 @@
   <section class="outer">
   
 
-<article id="post-IDEA-Terminal闪退" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+<article id="post-设置git初始化默认分支为main" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
     
@@ -35,7 +35,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      IDEA Terminal闪退
+      设置git初始化默认分支为main
     </h1>
   
   
@@ -48,12 +48,12 @@
 
     
       <div class="article-meta">
-        <a href="/2019/04/09/IDEA-Terminal闪退/" class="article-date">
-  <time datetime="2019-04-09T14:56:12.000Z" itemprop="datePublished">04-09-2019</time>
+        <a href="/2020/10/09/设置git初始化默认分支为main/" class="article-date">
+  <time datetime="2020-10-09T14:53:05.000Z" itemprop="datePublished">10-09-2020</time>
 </a>
         
   <div class="article-category">
-    <a class="article-category-link" href="/categories/IDEA/">IDEA</a>
+    <a class="article-category-link" href="/categories/git/">git</a>
   </div>
 
       </div>
@@ -73,22 +73,43 @@
 
       
       
-        <p>IDEA Terminal闪退</p>
-<ol>
-<li>查看help &gt; Show Log in File，查看日志；</li>
-</ol>
-<ol>
-<li>查看File &gt; Settings &gt; Terminal &gt; shell path，=&gt; /bin/bash，重启终端。</li>
-</ol>
-<p> <a href="https://youtrack.jetbrains.com/issue/IDEA-202821" target="_blank" rel="noopener">Black Terminal or Terminal doesnot work</a> </p>
+        <p>好久没上传代码到 GitHub 了，前两天新建了一个仓库，然后习惯性的执行 <code>git push origin master </code> , 过了好一会儿才在 GitHub 页面上看到两个分支：main 和 master。</p>
+<p>这两天陆陆续续出现好几次，网上查了一下才知道从10月份起，GitHub 的默认分支名不再是master，而是main。据说是因为master这个词和种族主义有关系，现在的人真是玻璃心啊。</p>
+<p>git 初始化默认分支名是master，每次新建仓库都要改默认分支名很麻烦，就查了一下设置 git 初始化分支名的方法，找到两种解决办法：</p>
+<a id="more"></a>
+
+<ul>
+<li><p><strong>初始化后切换分支</strong> &gt;&gt; <a href="https://stackoverflow.com/a/42871621" target="_blank" rel="noopener">https://stackoverflow.com/a/42871621</a></p>
+<p>As you noticed, there is no parameter for <code>git init</code> for the branch name, so two commands will have to do.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git checkout -b trunk</span><br></pre></td></tr></table></figure>
+
+<p>This creates a new repository with <code>trunk</code> as the current branch instead of <code>master</code>. The branch <code>master</code> does not actually exist–the branches don’t get created until they have at least one commit. Until the branch gets created, the branch only exists in <code>.git/HEAD</code>, which explains why the <code>master</code> branch will disappear when you switch to <code>trunk</code>.</p>
+<p>If you’ve already committed, you can run <code>git branch -m</code> instead:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">touch file.txt</span><br><span class="line">git add file.txt</span><br><span class="line">git commit -m &apos;commit 1&apos;</span><br><span class="line">git branch -m trunk</span><br></pre></td></tr></table></figure>
+
+<p>This renames the branch from <code>master</code> to <code>trunk</code> once it’s created.</p>
+<p>This does seem a bit clunky since the mechanism is different depending on whether the repository is empty, but it works.</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>升级 git 使用 git 全局配置</strong> &gt;&gt; <a href="https://stackoverflow.com/a/63136920" target="_blank" rel="noopener">https://stackoverflow.com/a/63136920</a></p>
+<p>Since <strong>Git 2.28</strong> (released July 27, 2020) a new configuration option, <code>init.defaultBranch</code> is being introduced to replace the hard-coded term <code>master</code>.</p>
+<p>Default remains to <code>master</code>!</p>
+<p>The user can override the default value of the configuration variable with:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global init.defaultBranch main</span><br></pre></td></tr></table></figure>
+
+<p>Read the git doc chapter for further details <a href="https://github.blog/2020-07-27-highlights-from-git-2-28/#introducing-init-defaultbranch" target="_blank" rel="noopener">Introducing init.defaultBranch</a></p>
+<p>升级 git 还要配置 zsh，太麻烦了，没试。</p>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/04/09/IDEA-Terminal闪退/" data-id="ckg2eppih000aps7papt4n1ir"
+      <a data-url="https://iced-cola.com/2020/10/09/设置git初始化默认分支为main/" data-id="ckg2eppk8003qps7p4dzhx3y3"
          class="article-share-link">分享</a>
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDEA/">IDEA</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
 
     </footer>
 
@@ -98,19 +119,10 @@
     
   <nav class="article-nav">
     
-      <a href="/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            记一次Tomcat 8005端口Cannot assign requested address的经历
-          
-        </div>
-      </a>
     
-    
-      <a href="/2019/04/06/Git配置代理/" class="article-nav-link">
+      <a href="/2020/10/08/Java多线程/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Git配置代理</div>
+        <div class="article-nav-title">Java多线程</div>
       </a>
     
   </nav>
