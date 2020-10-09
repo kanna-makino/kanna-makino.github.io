@@ -2867,7 +2867,7 @@
 </ol>
 <h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>其中也遇到一些玄学的问题：</p>
 <p><img src="https://images2.imgbox.com/0e/48/c6Y1zWYh_o.png" alt="coding提示域名绑定异常"></p>
-<p>比如上图，我如果绑定youyou-2608.com 则一直提示“域名未联通”，即便我已经添加了指向username.coding.me的CNAME记录，添加<a href="http://www.youyou-2608.com">www.youyou-2608.com</a> 能绑定上，但是绑定状态一直是异常，访问username.coding.me也能正常跳转到<a href="https://youyou-2608.com" target="_blank" rel="noopener">https://youyou-2608.com</a> ，没太搞明白，既然已经能正常访问，也就作罢了。</p>
+<p>比如上图，我如果绑定youyou-2608.com 则一直提示“域名未联通”，即便我已经添加了指向username.coding.me的CNAME记录，添加<a href="http://www.youyou-2608.com" target="_blank" rel="noopener">www.youyou-2608.com</a> 能绑定上，但是绑定状态一直是异常，访问username.coding.me也能正常跳转到<a href="https://youyou-2608.com" target="_blank" rel="noopener">https://youyou-2608.com</a> ，没太搞明白，既然已经能正常访问，也就作罢了。</p>
 ]]></content>
       <categories>
         <category>博客维护</category>
