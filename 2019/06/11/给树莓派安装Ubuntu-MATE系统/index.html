@@ -75,13 +75,9 @@
 
       
       
-        <p>给树莓派安装Ubantu MATE操作系统</p>
-<p>由于平时用的是Ubuntu系统，对这个系统比较熟悉，也想给树莓派也装这个系统，Linux下做SD卡启动盘网上资料比较少，担心发生对笔记本磁盘的误操作，最后在官网上找到了教程。</p>
-<a id="more"></a>
-
-
-
-<h3 id="下载系统"><a href="#下载系统" class="headerlink" title="下载系统"></a>下载系统</h3><p><a href="https://ubuntu-mate.org/raspberry-pi" target="_blank" rel="noopener"><a href="https://ubuntu-mate.org/raspberry-pi/" target="_blank" rel="noopener">Ubuntu MATE for the Raspberry Pi Model B 2, 3 and 3+</a></a></p>
+        
+        
+          <h3 id="下载系统"><a href="#下载系统" class="headerlink" title="下载系统"></a>下载系统</h3><p><a href="https://ubuntu-mate.org/raspberry-pi" target="_blank" rel="noopener"><a href="https://ubuntu-mate.org/raspberry-pi/" target="_blank" rel="noopener">Ubuntu MATE for the Raspberry Pi Model B 2, 3 and 3+</a></a></p>
 <h3 id="安装工具并写入系统"><a href="#安装工具并写入系统" class="headerlink" title="安装工具并写入系统"></a>安装工具并写入系统</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gddrescue xz-utils</span><br><span class="line">unxz --verbose ubuntu-mate-18.04.2-beta1-desktop-armhf+raspi-ext4.img.xz</span><br><span class="line">sudo ddrescue -D --force ubuntu-mate-18.04.2-beta1-desktop-armhf+raspi-ext4.img /dev/sdx</span><br></pre></td></tr></table></figure>
 
 <p><code>/dev/sda</code>代表笔记本的磁盘，SD卡的盘符一般<code>/dev/sdb1</code>。</p>
@@ -97,11 +93,11 @@
 <p><img src="https://image.youyou-2608.com/blog/finished.png" alt="Ubuntu MATE"></p>
 <p>写完之后，退出SD卡。</p>
 <p>将写入镜像的SD卡插入树莓派，连接显示器，接通电源，成功进入系统引导界面，清新的绿色界面。</p>
-
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/06/11/给树莓派安装Ubuntu-MATE系统/" data-id="ckg45of7k003yjf7pnkvxfd9l"
+      <a data-url="https://iced-cola.com/2019/06/11/给树莓派安装Ubuntu-MATE系统/" data-id="ckg9cwatn004j8o7p1z5xvg26"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树莓派/">树莓派</a></li></ul>

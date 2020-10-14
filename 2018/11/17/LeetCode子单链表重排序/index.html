@@ -75,14 +75,9 @@
 
       
       
-        <h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>Given a singly linked list <em>L</em>: <em>L</em> 0→<em>L</em> 1→…→<em>L</em> <em>n</em>-1→<em>L</em> n,<br>reorder it to: <em>L</em> 0→<em>L</em> <em>n</em> →<em>L</em> 1→<em>L</em> <em>n</em>-1→<em>L</em> 2→<em>L</em> <em>n</em>-2→…</p>
-<p>You must do this in-place without altering the nodes’ values.</p>
-<p>For example,<br>Given{1,2,3,4}, reorder it to{1,4,2,3}.</p>
-<a id="more"></a>
-
-
-
-<h3 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h3><ul>
+        
+        
+          <h3 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h3><ul>
 <li><p>时间限制：1秒</p>
 </li>
 <li><p>空间限制：32768K</p>
@@ -108,11 +103,11 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;这道链表重排序问题可以拆分为以下三个小问题：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">1. 使用快慢指针来找到链表的中点，并将链表从中点处断开，形成两个独立的链表。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">2. 将第二个链翻转。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">3. 将第二个链表的元素间隔地插入第一个链表中。</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">reorderList</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!head || !head-&gt;next || !head-&gt;next-&gt;next) <span class="keyword">return</span>;</span><br><span class="line">        ListNode *fast = head;</span><br><span class="line">        ListNode *slow = head;</span><br><span class="line">        <span class="keyword">while</span> (fast-&gt;next &amp;&amp; fast-&gt;next-&gt;next) &#123;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *mid = slow-&gt;next;</span><br><span class="line">        slow-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        ListNode *last = mid;</span><br><span class="line">        ListNode *pre = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">while</span> (last) &#123;</span><br><span class="line">            ListNode *next = last-&gt;next;</span><br><span class="line">            last-&gt;next = pre;</span><br><span class="line">            pre = last;</span><br><span class="line">            last = next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (head &amp;&amp; pre) &#123;</span><br><span class="line">            ListNode *next = head-&gt;next;</span><br><span class="line">            head-&gt;next = pre;</span><br><span class="line">            pre = pre-&gt;next;</span><br><span class="line">            head-&gt;next-&gt;next = next;</span><br><span class="line">            head = next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>时间空间使用都很少，性能问题没了。</p>
-
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2018/11/17/LeetCode子单链表重排序/" data-id="ckg45of690011jf7phprlibib"
+      <a data-url="https://iced-cola.com/2018/11/17/LeetCode子单链表重排序/" data-id="ckg9cwas4001a8o7pfwc5x2b3"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>

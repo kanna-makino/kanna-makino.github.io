@@ -75,16 +75,9 @@
 
       
       
-        <p>了解Java注解（@Annotation）</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>为什么突然想起来注解呢？今天上午同事遇到一个和注解相关的问题，JSP页面传值到后台后（其实前后端并不分离），但是在POJO类上的校验注解值不满足的条件下也通过了，让我给帮忙看看。因为其他组的同事相同的通用代码并没有这个问题，而且对注解的处理是封装在框架中的，所以一开始便排除了问题在后台思路，转向页面传值去调查。虽然最后找到原因是因为没有清空Eclipse的.class文件重新编译，但是感觉已经对之前学过的注解部分的知识生疏了。刚好今天没加班，就赶紧复习一下。</p>
-</blockquote>
-<p>本想在网上找两篇文章回忆一下，但是好像例子写得都不完整。刚好前段时间刚买了一本《Java编程思想》，就赶紧翻开看了一下，一直记得书里给出的例子也是数据库字段注解相关的。</p>
-<a id="more"></a>
-
-
-
-<h2 id="相关概念及原理"><a href="#相关概念及原理" class="headerlink" title="相关概念及原理"></a>相关概念及原理</h2><p>参见 ==&gt; 《Java编程思想》第二十章&lt;注解&gt;。</p>
+        
+        
+          <h2 id="相关概念及原理"><a href="#相关概念及原理" class="headerlink" title="相关概念及原理"></a>相关概念及原理</h2><p>参见 ==&gt; 《Java编程思想》第二十章&lt;注解&gt;。</p>
 <p>四个元注解：</p>
 <ul>
 <li>@Target</li>
@@ -104,12 +97,11 @@
 
 <p>主测试类：（<strong>省略getter和setter</strong>）</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.Annotation;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 自定义注解测试类</span></span><br><span class="line"><span class="comment"> * &lt;/p&gt;</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2019-05-14 21:49</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Table</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Digits</span>(maxLength = <span class="number">6</span>, fraction = <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">double</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotEmpty</span></span><br><span class="line">    <span class="keyword">private</span> String description;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Table</span><span class="params">(<span class="keyword">double</span> count, String description)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">        <span class="keyword">this</span>.description = description;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IllegalAccessException, ClassNotFoundException, NoSuchFieldException </span>&#123;</span><br><span class="line">        Table testTable1 = <span class="keyword">new</span> Table(<span class="number">1234567</span>, <span class="string">"description1"</span>);</span><br><span class="line">        Table testTable2 = <span class="keyword">new</span> Table(<span class="number">12.001</span>, <span class="string">"description2"</span>);</span><br><span class="line">        Table testTable3 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">"description3"</span>);</span><br><span class="line">        Table testTable4 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="keyword">null</span>);</span><br><span class="line">        Table testTable5 = <span class="keyword">new</span> Table(<span class="number">123.01</span>, <span class="string">"description5"</span>);</span><br><span class="line"></span><br><span class="line">        AnnotationProcesser processer = <span class="keyword">new</span> AnnotationProcesser();</span><br><span class="line">        processer.process(testTable1);</span><br><span class="line">        processer.process(testTable2);</span><br><span class="line">        processer.process(testTable3);</span><br><span class="line">        processer.process(testTable4);</span><br><span class="line">        processer.process(testTable5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/05/15/Java注解简单例子/" data-id="ckg45of5v000ejf7p8y1d15dd"
+      <a data-url="https://iced-cola.com/2019/05/15/Java注解简单例子/" data-id="ckg9cwari000m8o7pp2edcuxc"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>

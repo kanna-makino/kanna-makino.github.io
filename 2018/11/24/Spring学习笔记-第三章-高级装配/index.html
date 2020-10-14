@@ -75,24 +75,9 @@
 
       
       
-        <p>第三章：高级装配</p>
-<p>本章内容：</p>
-<ul>
-<li>Spring profile</li>
-<li>条件化的bean声明</li>
-<li>自动装配与歧义性</li>
-<li>bean的作用域</li>
-<li>Spring表达式语言</li>
-</ul>
-<hr>
-<h3 id="3-1-环境与profile"><a href="#3-1-环境与profile" class="headerlink" title="3.1 环境与profile"></a>3.1 环境与profile</h3><p>在软件开发的不同阶段需要不同的环境和配置。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span>(destroyMethod = <span class="string">"shutdown"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> EmbeddedDatabaseBuilder()</span><br><span class="line">        .addScript(<span class="string">"classpath:ch3.sql"</span>)</span><br><span class="line">        .addScript(<span class="string">"classpath:ch3.1.sql"</span>)</span><br><span class="line">        .build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
-
-
-
-<p>为了适应环境更换的需求，可以将所需要的所有的配置类配置到每个bean中，然后在构建阶段选择需要使用的bean，但是从开发环境切换到生产环境时可能会发生问题。</p>
+        
+        
+          <p>为了适应环境更换的需求，可以将所需要的所有的配置类配置到每个bean中，然后在构建阶段选择需要使用的bean，但是从开发环境切换到生产环境时可能会发生问题。</p>
 <h4 id="3-1-1-配置profile-bean"><a href="#3-1-1-配置profile-bean" class="headerlink" title="3.1.1 配置profile bean"></a>3.1.1 配置profile bean</h4><p>Spring为此种场景提供了profile功能。</p>
 <p>使用profile注解来声明在合适的阶段使用合适的bean。将所有的bean整理到一个profile中，确保在需要的时候active相应的bean。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ch3;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Profile;</span><br><span class="line"><span class="keyword">import</span> org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;</span><br><span class="line"><span class="keyword">import</span> org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;</span><br><span class="line"><span class="keyword">import</span> org.springframework.jndi.JndiObjectFactoryBean;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.sql.DataSource;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhulongkun20@163.com</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2018/11/24 下午1:00</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataSourceConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span>(destroyMethod = <span class="string">"shutdown"</span>)</span><br><span class="line">    <span class="meta">@Profile</span>(<span class="string">"dev"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">embeddedDataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> EmbeddedDatabaseBuilder()</span><br><span class="line">                .setType(EmbeddedDatabaseType.H2)</span><br><span class="line">                .addScript(<span class="string">"classpath:test.sql"</span>)</span><br><span class="line">                .addScript(<span class="string">"classpath:test1.sql"</span>)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@Profile</span>(<span class="string">"prod"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">jndiDataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        JndiObjectFactoryBean jndiObjectFactoryBean =</span><br><span class="line">                <span class="keyword">new</span> JndiObjectFactoryBean();</span><br><span class="line">        jndiObjectFactoryBean.setJndiName(<span class="string">"jndi/myDS"</span>);</span><br><span class="line">        jndiObjectFactoryBean.setResourceRef(<span class="keyword">true</span>);</span><br><span class="line">        jndiObjectFactoryBean.setProxyInterface(javax.sql.DataSource<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        <span class="keyword">return</span> (DataSource) jndiObjectFactoryBean.getObject();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -274,12 +259,11 @@
 
 <p>计算集合：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#&#123;jukebox.songs[4].title&#125;</span><br><span class="line">#&#123;jukebox.songs[T(java.lang.Math).random()*jukebox.songs.size()].title&#125;</span><br><span class="line">#&#123;jukebox.songs.?[artist eq 'Aerosmith']&#125;  //.?[]得到集合的一个子集</span><br><span class="line">#&#123;jukebox.songs.^[artist eq 'Areosmith']&#125;  //.^[]查询集合中的第一个匹配项</span><br><span class="line">#&#123;jukebox.songs.$[artist eq 'Areosmith'].![title]&#125;  //.$[]查询集合中的最后一个匹配项，.![]从集合的每个成员中选择特定的属性放到另外一个集合中</span><br></pre></td></tr></table></figure>
-
-
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2018/11/24/Spring学习笔记-第三章-高级装配/" data-id="ckg45of6p001qjf7pxr95otdv"
+      <a data-url="https://iced-cola.com/2018/11/24/Spring学习笔记-第三章-高级装配/" data-id="ckg9cwasl002b8o7pdz60t1up"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
