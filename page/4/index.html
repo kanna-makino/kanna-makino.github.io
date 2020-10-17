@@ -61,6 +61,88 @@
       
         
 
+<article id="post-记一次Tomcat-8005端口Cannot-assign-requested-address的经历" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/">记一次Tomcat 8005端口Cannot assign requested address的经历</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/" class="article-date">
+  <time datetime="2019-04-24T14:53:39.000Z" itemprop="datePublished">04-24-2019</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Tomcat/">Tomcat</a>
+  </div>
+
+        &emsp;<i class="fe fe-bar-chart"></i> <span class="post-count">315</span>字
+&emsp;<i class="fe fe-clock"></i> <span class="post-count">1</span>分钟
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        
+        
+          <p>记一次Tomcat 8005端口Cannot assign requested address : Jvm Bind的经历</p>
+<p>一个正在做毕设的老乡遇到的问题：Tomcat启动的时候，报了[8005] Jvm Bind相关的异常，大概内容是端口已被占用的意思。</p>
+<p>一. 先从运行/bin/shutdown.bat，再次关闭Tomcat，重新启动问题依然存在；</p>
+<p>二. netstat -ano查看端口使用情况，未发现8080,8009,8005相关的端口被占用；</p>
+<p>三. 打开任务管理器，确认javaw.exe未在运行，问题依然存在；</p>
+<p>四. 重启机器，问题依然存在；</p>
+<p>五. 参照：[<a href="https://www.cnblogs.com/heshan664754022/p/3807672.html" target="_blank" rel="noopener">Tomcat启动报错:严重: StandardServer.await: create[8005] java.net.BindException: Cannot assign requested address</a>](<a href="https://www.cnblogs.com/heshan664754022/p/3807672.html" target="_blank" rel="noopener">https://www.cnblogs.com/heshan664754022/p/3807672.html</a>) ， ping了localhost，发现收到的响应来自ipp[47.89.54.215]，打开C:/windows/system32/drivers/etc/hosts，发现以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br/>
+          
+          <a class="article-more-link" href="/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/">阅读全文</a>
+          
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://iced-cola.com/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/" data-id="ckgdm2ztn004c2e7ptbfdk98w"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tomcat/">Tomcat</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-IDEA-Terminal闪退" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -121,7 +203,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/04/09/IDEA-Terminal闪退/" data-id="ckgdir94p0008o27p13b0yqfe"
+      <a data-url="https://iced-cola.com/2019/04/09/IDEA-Terminal闪退/" data-id="ckgdm2zrh000e2e7p4ofr2r4l"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDEA/">IDEA</a></li></ul>
@@ -194,7 +276,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/04/06/Git配置代理/" data-id="ckgdir94h0002o27pws0ujz54"
+      <a data-url="https://iced-cola.com/2019/04/06/Git配置代理/" data-id="ckgdm2zr500032e7pmg3kc0mj"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -266,7 +348,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/03/03/在新机器中恢复Hexo博客/" data-id="ckgdir963002mo27p4vnanm8z"
+      <a data-url="https://iced-cola.com/2019/03/03/在新机器中恢复Hexo博客/" data-id="ckgdm2zt1002y2e7pajqqnpjd"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客维护/">博客维护</a></li></ul>
@@ -346,7 +428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/02/01/Java编程思想——第十四章——类型信息/" data-id="ckgdir94v000fo27pmnj5yfl8"
+      <a data-url="https://iced-cola.com/2019/02/01/Java编程思想——第十四章——类型信息/" data-id="ckgdm2zrt000u2e7pic7jwqwa"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -419,7 +501,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/01/24/更改DNS为8-8-8-8访问cn-bing-com/" data-id="ckgdir96e003do27pa8fjzl23"
+      <a data-url="https://iced-cola.com/2019/01/24/更改DNS为8-8-8-8访问cn-bing-com/" data-id="ckgdm2zt9003h2e7pscmacsr6"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/其他/">其他</a></li></ul>
@@ -497,7 +579,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/01/03/LeetCode之3Sum/" data-id="ckgdir94x000jo27ptjvwk0lr"
+      <a data-url="https://iced-cola.com/2019/01/03/LeetCode之3Sum/" data-id="ckgdm2zrk000i2e7p3zqammrx"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>
@@ -587,7 +669,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/01/01/SpringBoot基础学习笔记/" data-id="ckgdir97h006ko27puuptogkh"
+      <a data-url="https://iced-cola.com/2019/01/01/SpringBoot基础学习笔记/" data-id="ckgdm2zun006n2e7pbfjwxfo3"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/">SpringBoot</a></li></ul>
@@ -665,7 +747,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2018/12/02/深田恭子的日剧跑/" data-id="ckgdir96k003ro27pvmsobg0c"
+      <a data-url="https://iced-cola.com/2018/12/02/深田恭子的日剧跑/" data-id="ckgdm2ztg003w2e7pqu9emgwh"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/其他/">其他</a></li></ul>
@@ -739,93 +821,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2018/12/02/dubbo学习笔记/" data-id="ckgdir95x002ao27pemhvees0"
+      <a data-url="https://iced-cola.com/2018/12/02/dubbo学习笔记/" data-id="ckgdm2zsp00292e7pgscb1dy7"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dubbo/">dubbo</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-Spring学习笔记-第三章-高级装配" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2018/11/24/Spring学习笔记-第三章-高级装配/">Spring学习笔记-第三章-高级装配</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2018/11/24/Spring学习笔记-第三章-高级装配/" class="article-date">
-  <time datetime="2018-11-24T04:09:31.000Z" itemprop="datePublished">11-24-2018</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Spring/">Spring</a>
-  </div>
-
-        &emsp;<i class="fe fe-bar-chart"></i> <span class="post-count">2.5k</span>字
-&emsp;<i class="fe fe-clock"></i> <span class="post-count">11</span>分钟
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <p>第三章：高级装配</p>
-<p>本章内容：</p>
-<ul>
-<li>Spring profile</li>
-<li>条件化的bean声明</li>
-<li>自动装配与歧义性</li>
-<li>bean的作用域</li>
-<li>Spring表达式语言</li>
-</ul>
-<hr>
-<h3 id="3-1-环境与profile"><a href="#3-1-环境与profile" class="headerlink" title="3.1 环境与profile"></a>3.1 环境与profile</h3><p>在软件开发的不同阶段需要不同的环境和配置。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span>(destroyMethod = <span class="string">"shutdown"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> EmbeddedDatabaseBuilder()</span><br><span class="line">        .addScript(<span class="string">"classpath:ch3.sql"</span>)</span><br><span class="line">        .addScript(<span class="string">"classpath:ch3.1.sql"</span>)</span><br><span class="line">        .build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <a class="article-more-link" href="/2018/11/24/Spring学习笔记-第三章-高级装配/">阅读全文</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2018/11/24/Spring学习笔记-第三章-高级装配/" data-id="ckgdir95q001wo27p7axditkt"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
 
     </footer>
 
@@ -857,7 +856,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2020 iced-cola</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">51.4k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">53.3k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 
