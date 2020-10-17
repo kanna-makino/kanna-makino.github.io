@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>一小时学会Swagger</title>
+    <url>/2020/10/18/%E4%B8%80%E5%B0%8F%E6%97%B6%E5%AD%A6%E4%BC%9ASwagger/</url>
+    <content><![CDATA[<p>网上无意间看到的Swagger教程，一口气全部看完了，讲得很不错。</p>
+<blockquote>
+<p>秦疆老师SpringBoot课程扩展之Swagger学习； 这可能是全网最详细的Swagger视频了 从生活到代码，从简单到深入。风趣幽默,通俗易懂。</p>
+</blockquote>
+<iframe src="//player.bilibili.com/player.html?aid=64841843&bvid=BV1Y441197Lw&cid=112543089&page=3" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="height:500px"> </iframe>
+
+<a id="more"></a>
+
+<p>讲 new Docket().enable(true|false) 和dev | prod | test等环境下的使用的时候因为环境变化所以配置的端口号改变却还用8080端口访问项目导致 swagger 报错导致进不去项目。</p>
+]]></content>
+      <categories>
+        <category>Swagger</category>
+      </categories>
+      <tags>
+        <tag>Swagger</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《宇宙よりも遠い場所》台词-第三话</title>
     <url>/2020/10/17/%E3%80%8A%E5%AE%87%E5%AE%99%E3%82%88%E3%82%8A%E3%82%82%E9%81%A0%E3%81%84%E5%A0%B4%E6%89%80%E3%80%8B%E5%8F%B0%E8%AF%8D-%E7%AC%AC%E4%B8%89%E8%AF%9D/</url>
     <content><![CDATA[<blockquote>
