@@ -1,6 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>OpenCV学习笔记（二）</title>
+    <url>/2020/10/17/OpenCV%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
+    <content><![CDATA[<ul>
+<li>移动</li>
+<li>旋转</li>
+<li>仿射变换</li>
+<li>用到的函数：cv2.getPerspectiveTransform()</li>
+</ul>
+<h2 id="扩展和缩放"><a href="#扩展和缩放" class="headerlink" title="扩展和缩放"></a>扩展和缩放</h2><h3 id="cv2-resize-函数用法"><a href="#cv2-resize-函数用法" class="headerlink" title="cv2.resize()函数用法"></a>cv2.resize()函数用法</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">void resize(InputArray src, OutputArray dst, Size dsize, double fx=<span class="number">0</span>, double fy=<span class="number">0</span>, int interpolation=INTER_LINEAR )</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">src：输入，原图像，即待改变大小的图像；</span><br><span class="line">dst：输出，改变大小之后的图像，这个图像和原图像具有相同的内容，只是大小和原图像不一样而已；</span><br><span class="line">dsize：输出图像的大小。如果这个参数不为0，那么就代表将原图像缩放到这个Size(width，height)指定的大小；如果这个参数为0，那么原图像缩放之后的大小就要通过下面的公式来计算：</span><br><span class="line">       dsize = Size(round(fx*src.cols), round(fy*src.rows))</span><br><span class="line"></span><br><span class="line">       其中，fx和fy就是下面要说的两个参数，是图像width方向和height方向的缩放比例。</span><br><span class="line"></span><br><span class="line">fx：width方向的缩放比例，如果它是0，那么它就会按照(double)dsize.width/src.cols来计算；</span><br><span class="line">fy：height方向的缩放比例，如果它是0，那么它就会按照(double)dsize.height/src.rows来计算；</span><br><span class="line">interpolation：这个是指定插值的方式，图像缩放之后，肯定像素要进行重新计算的，就靠这个参数来指定重新计算像素的方式，有以下几种：</span><br><span class="line">      INTER_NEAREST - 最邻近插值</span><br><span class="line">      INTER_LINEAR - 双线性插值，如果最后一个参数你不指定，默认使用这种方法</span><br><span class="line">      INTER_AREA -区域插值 resampling using pixel area relation. It may be a preferred method for image decimation, as it gives moire’-free results. But when the image is zoomed, it is similar to the INTER_NEAREST method.</span><br><span class="line">      INTER_CUBIC - 4x4像素邻域内的双立方插值</span><br><span class="line">      INTER_LANCZOS4 - 8x8像素邻域内的Lanczos插值</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>使用cv2.resize()可以实现对图片的大小调整。</p>
+<p>三种插值方法：</p>
+<ol>
+<li>cv2.INTER_AREA</li>
+<li>cv2.INTER_LINEER</li>
+<li>cv2.INTER_CUBIC</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">"../imgs/pi.png"</span>)</span><br><span class="line">result1 = cv2.resize(img, <span class="literal">None</span>, fx=<span class="number">0.5</span>, fy=<span class="number">0.5</span>, interpolation=cv2.INTER_CUBIC)</span><br><span class="line">result2 = cv2.resize(img, <span class="literal">None</span>, fx=<span class="number">0.5</span>, fy=<span class="number">0.5</span>, interpolation=cv2.INTER_AREA)</span><br><span class="line">result3 = cv2.resize(img, <span class="literal">None</span>, fx=<span class="number">0.5</span>, fy=<span class="number">0.5</span>, interpolation=cv2.INTER_LINEAR)</span><br><span class="line"><span class="comment"># height, width = img.shape[0:2]</span></span><br><span class="line"><span class="comment"># result = cv2.resize(img, (2 * width, 2 * height), interpolation=cv2.INTER_CUBIC)</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    cv2.imshow(<span class="string">'INTER_CUBIC'</span>, result1)</span><br><span class="line">    cv2.imshow(<span class="string">'INTER_AREA'</span>, result2)</span><br><span class="line">    cv2.imshow(<span class="string">'INTER_LINEAR'</span>, result3)</span><br><span class="line">    <span class="comment"># cv2.imshow('image', img)</span></span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">4</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="https://images2.imgbox.com/8c/39/GHMN9Lih_o.png" alt></p>
+<p>-&gt;&gt;<a href="https://blog.csdn.net/guyuealian/article/details/85097633" target="_blank" rel="noopener">OpenCV图像缩放resize各种插值方式的比较</a></p>
+<h2 id="图像的平移"><a href="#图像的平移" class="headerlink" title="图像的平移"></a>图像的平移</h2><p>使用cv2.wrapAffine()实现图像的平移。</p>
+<p>函数 cv2.warpAffine() 的第三个参数的是输出图像的大小，它的格式<br>应该是图像的（宽，高）。应该记住的是图像的宽对应的是列数，高对应的是行<br>数。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">"../imgs/pi.png"</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line">height, width = img.shape</span><br><span class="line"><span class="comment"># 平移矩阵 100x50</span></span><br><span class="line">M = np.float32([[<span class="number">1</span>, <span class="number">0</span>, <span class="number">100</span>], [<span class="number">0</span>, <span class="number">1</span>, <span class="number">50</span>]])</span><br><span class="line">result = cv2.warpAffine(img, M, (width, height), dst=<span class="literal">None</span>, borderMode=cv2.BORDER_REFLECT, borderValue=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    cv2.imshow(<span class="string">'result'</span>, result)</span><br><span class="line">    cv2.imshow(<span class="string">'image'</span>, img)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">0</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<p><img src="https://images2.imgbox.com/7e/4f/MjuCKjWa_o.png" alt></p>
+<h2 id="图像的旋转"><a href="#图像的旋转" class="headerlink" title="图像的旋转"></a>图像的旋转</h2><p>opencv中对图像的旋转主要是先通过getRotationMatrix2D函数得到图像的旋转矩阵，然后再通过仿射变换函数warpAffine得到旋转后的图像。</p>
+<p><strong>参数说明</strong>：</p>
+<p>getRotationMatrix2D:</p>
+<ul>
+<li>center–表示旋转的中心点</li>
+<li>angle–表示旋转的角度degrees</li>
+<li>scale–图像缩放因子</li>
+</ul>
+<p>warpAffine:</p>
+<ul>
+<li>src – 输入的图像</li>
+<li>M – 2 X 3 的变换矩阵.</li>
+<li>dsize – 输出的图像的size大小</li>
+<li>dst – 输出的图像</li>
+<li>flags – 输出图像的插值方法</li>
+<li>borderMode – 图像边界的处理方式</li>
+<li>borderValue – 当图像边界处理方式为<code>BORDER_CONSTANT</code> 时的填充值</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">'../imgs/pi.png'</span>, cv2.IMREAD_GRAYSCALE)</span><br><span class="line">height, width = img.shape</span><br><span class="line">M = cv2.getRotationMatrix2D((width / <span class="number">2</span>, height / <span class="number">2</span>), <span class="number">270</span>, <span class="number">0.8</span>)</span><br><span class="line">result = cv2.warpAffine(img, M, dsize=<span class="literal">None</span>, dst=<span class="literal">None</span>, flags=cv2.BORDER_CONSTANT, borderValue=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    cv2.imshow(<span class="string">'result'</span>, result)</span><br><span class="line">    cv2.imshow(<span class="string">'image'</span>, img)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">0</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<p><img src="https://images2.imgbox.com/05/48/8NwA8q5F_o.png" alt></p>
+<h2 id="仿射变换"><a href="#仿射变换" class="headerlink" title="仿射变换"></a>仿射变换</h2><p>在仿射变换中，原图中所有的平行线在结果图像中同样平行。为了创建这<br>个矩阵我们需要从原图像中找到三个点以及他们在输出图像中的位置。然后<br>cv2.getAffineTransform 会创建一个 2x3 的矩阵，最后这个矩阵会被传给<br>函数 cv2.warpAffine。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">"../imgs/pi.png"</span>)</span><br><span class="line">rows, cols, ch = img.shape</span><br><span class="line">pts1 = np.float32([[<span class="number">50</span>, <span class="number">50</span>], [<span class="number">200</span>, <span class="number">50</span>], [<span class="number">50</span>, <span class="number">200</span>]])</span><br><span class="line">pts2 = np.float32([[<span class="number">10</span>, <span class="number">100</span>], [<span class="number">200</span>, <span class="number">50</span>], [<span class="number">100</span>, <span class="number">250</span>]])</span><br><span class="line"></span><br><span class="line">M = cv2.getAffineTransform(pts1, pts2)</span><br><span class="line">dst = cv2.warpAffine(img, M, (cols, rows))</span><br><span class="line">plt.subplot(<span class="number">121</span>, plt.imshow(img), plt.title(<span class="string">'Input'</span>))</span><br><span class="line">plt.subplot(<span class="number">121</span>, plt.imshow(img), plt.title(<span class="string">'Output'</span>))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p>报错：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    cols = int(cols)</span><br><span class="line">TypeError: int() argument must be a string, a bytes-like object or a number, not &apos;AxesImage&apos;</span><br></pre></td></tr></table></figure>
+
+<h2 id="图像的翻转"><a href="#图像的翻转" class="headerlink" title="图像的翻转"></a>图像的翻转</h2><p><strong>参数说明</strong>：</p>
+<ul>
+<li>src – 输入的图像</li>
+<li>dst – 输出的图像</li>
+<li>flipCode – 翻转模式，flipCode==0垂直翻转（沿X轴翻转），flipCode&gt;0水平翻转（沿Y轴翻转），flipCode&lt;0水平垂直翻转（先沿X轴翻转，再沿Y轴翻转，等价于旋转180°）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">"../imgs/pi.png"</span>)</span><br><span class="line">flip_img = cv2.flip(img, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    cv2.imshow(<span class="string">'image'</span>, img)</span><br><span class="line">    cv2.imshow(<span class="string">'flip_img'</span>, flip_img)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">0</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="https://images2.imgbox.com/42/8f/vV1TXa67_o.png" alt></p>
+]]></content>
+      <categories>
+        <category>OpenCV</category>
+      </categories>
+      <tags>
+        <tag>OpenCV</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Markdown语法进阶</title>
     <url>/2020/10/16/Markdown%E8%AF%AD%E6%B3%95%E8%BF%9B%E9%98%B6/</url>
     <content><![CDATA[<p>[TOC]</p>
