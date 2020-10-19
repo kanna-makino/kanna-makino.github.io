@@ -61,6 +61,88 @@
       
         
 
+<article id="post-OpenCV中的Canny边缘检测" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+  
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h2 itemprop="name">
+      <a class="article-title" href="/2020/10/19/OpenCV中的Canny边缘检测/">OpenCV中的Canny边缘检测</a>
+    </h2>
+  
+  
+
+
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2020/10/19/OpenCV中的Canny边缘检测/" class="article-date">
+  <time datetime="2020-10-19T15:27:38.000Z" itemprop="datePublished">10-19-2020</time>
+</a>
+        
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/OpenCV/">OpenCV</a>
+  </div>
+
+        &emsp;<i class="fe fe-bar-chart"></i> <span class="post-count">702</span>字
+&emsp;<i class="fe fe-clock"></i> <span class="post-count">2</span>分钟
+      </div>
+    
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+	    
+
+	  
+      
+        <p>[TOC]</p>
+<h2 id="噪声去除"><a href="#噪声去除" class="headerlink" title="噪声去除"></a>噪声去除</h2><p>由于边缘检测很容易受到噪声影响，所以第一步是使用 5x5 的高斯滤波器去除噪声。</p>
+<p>用到的函数：cv2.GaussianBlur()</p>
+<p>参数：</p>
+<ul>
+<li>src: 源图像</li>
+<li>ksize: 卷积框</li>
+<li>sigmaX：表现在高斯曲线上就是曲线越高越尖，表现在滤波效果上就是模糊程度小</li>
+<li>sigmaY：表现在高斯曲线上就是曲线越矮越平缓，表现在滤波效果上就是模糊程度大</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv2.GaussianBlur(img, (<span class="number">5</span>, <span class="number">5</span>), <span class="number">70</span>, <span class="number">70</span>)</span><br></pre></td></tr></table></figure>
+        
+          <a class="article-more-link" href="/2020/10/19/OpenCV中的Canny边缘检测/">阅读全文</a>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://iced-cola.com/2020/10/19/OpenCV中的Canny边缘检测/" data-id="ckggp2qrz001cm17p3o8b6h63"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+
+  
+
+</article>
+
+
+
+      
+        
+
 <article id="post-一小时学会Swagger" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
   
   <div class="article-inner">
@@ -117,7 +199,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2020/10/18/一小时学会Swagger/" data-id="ckgdwzs2v002qow7posspms8k"
+      <a data-url="https://iced-cola.com/2020/10/18/一小时学会Swagger/" data-id="ckggp2qsq002mm17ppcncn6em"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swagger/">Swagger</a></li></ul>
@@ -194,7 +276,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2020/10/17/《宇宙よりも遠い場所》台词-第三话/" data-id="ckgdwzs2r002gow7pok6g0o8e"
+      <a data-url="https://iced-cola.com/2020/10/17/《宇宙よりも遠い場所》台词-第三话/" data-id="ckggp2qsl002cm17phzl2ovq6"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日语/">日语</a></li></ul>
@@ -271,7 +353,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2020/10/17/OpenCV学习笔记（二）/" data-id="ckgdwzs2b001low7psymzmlwu"
+      <a data-url="https://iced-cola.com/2020/10/17/OpenCV学习笔记（二）/" data-id="ckggp2qs5001om17pl7qe0n1v"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
@@ -343,7 +425,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2020/10/16/Markdown语法进阶/" data-id="ckgdwzs26001aow7pb4rn0ksf"
+      <a data-url="https://iced-cola.com/2020/10/16/Markdown语法进阶/" data-id="ckggp2qs9001um17pw8p1kovw"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markdown/">Markdown</a></li></ul>
@@ -415,7 +497,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2020/10/15/暂时安定下来/" data-id="ckgdwzs34003gow7pl4bldor7"
+      <a data-url="https://iced-cola.com/2020/10/15/暂时安定下来/" data-id="ckggp2qt4003gm17pioe3ic80"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/其他/">其他</a></li></ul>
@@ -489,7 +571,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2020/10/09/设置git初始化默认分支为main/" data-id="ckgdwzs3i004how7prwez33db"
+      <a data-url="https://iced-cola.com/2020/10/09/设置git初始化默认分支为main/" data-id="ckggp2qtl004lm17p8wv26wfg"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -565,7 +647,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2020/10/08/Java多线程/" data-id="ckgdwzs1i000eow7p9842e60z"
+      <a data-url="https://iced-cola.com/2020/10/08/Java多线程/" data-id="ckggp2qrf000em17pnijvvbld"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -631,7 +713,7 @@
     <div class="article-gallery-photos">
       
         
-          <a class="article-gallery-img" href="/2020/09/30/25岁的最后一天/" rel="gallery_ckgdwzs0x0000ow7pb85zawzh">
+          <a class="article-gallery-img" href="/2020/09/30/25岁的最后一天/" rel="gallery_ckggp2qqy0000m17pv0jx6m8x">
             <img src="https://images2.imgbox.com/b3/03/sKpqbwEq_o.jpg" itemprop="image">
           </a>
         
@@ -650,7 +732,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2020/09/30/25岁的最后一天/" data-id="ckgdwzs0x0000ow7pb85zawzh"
+      <a data-url="https://iced-cola.com/2020/09/30/25岁的最后一天/" data-id="ckggp2qqy0000m17pv0jx6m8x"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生活/">生活</a></li></ul>
@@ -716,7 +798,7 @@
     <div class="article-gallery-photos">
       
         
-          <a class="article-gallery-img" href="/2020/09/30/七牛云备案域名过期导致图片无法查看和下载/" rel="gallery_ckgdwzs2u002mow7p3zw0t8h4">
+          <a class="article-gallery-img" href="/2020/09/30/七牛云备案域名过期导致图片无法查看和下载/" rel="gallery_ckggp2qsu002um17p9iyoamed">
             <img src="https://images2.imgbox.com/a1/c4/r1H6dXoo_o.png" itemprop="image">
           </a>
         
@@ -734,83 +816,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2020/09/30/七牛云备案域名过期导致图片无法查看和下载/" data-id="ckgdwzs2u002mow7p3zw0t8h4"
+      <a data-url="https://iced-cola.com/2020/09/30/七牛云备案域名过期导致图片无法查看和下载/" data-id="ckggp2qsu002um17p9iyoamed"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客维护/">博客维护</a></li></ul>
-
-    </footer>
-
-  </div>
-
-  
-
-  
-
-</article>
-
-
-
-      
-        
-
-<article id="post-《宇宙よりも遠い場所》台词-第二话" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
-  
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h2 itemprop="name">
-      <a class="article-title" href="/2020/09/22/《宇宙よりも遠い場所》台词-第二话/">《宇宙よりも遠い場所》台词-第二话</a>
-    </h2>
-  
-  
-
-
-
-
-      </header>
-    
-
-    
-      <div class="article-meta">
-        <a href="/2020/09/22/《宇宙よりも遠い場所》台词-第二话/" class="article-date">
-  <time datetime="2020-09-22T14:10:31.000Z" itemprop="datePublished">09-22-2020</time>
-</a>
-        
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/日语/">日语</a>
-  </div>
-
-        &emsp;<i class="fe fe-bar-chart"></i> <span class="post-count">2.2k</span>字
-&emsp;<i class="fe fe-clock"></i> <span class="post-count">9</span>分钟
-      </div>
-    
-
-    
-
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-	    
-
-	  
-      
-        <p>第二話：歌舞伎町のフリマントル</p>
-<p>我终于踏出这一步了，去往没有你的世界。</p>
-        
-          <a class="article-more-link" href="/2020/09/22/《宇宙よりも遠い場所》台词-第二话/">阅读全文</a>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2020/09/22/《宇宙よりも遠い場所》台词-第二话/" data-id="ckgdwzs2t002kow7p9cu3vssf"
-         class="article-share-link">分享</a>
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日语/">日语</a></li></ul>
 
     </footer>
 
@@ -842,7 +851,7 @@
     <ul class="list-inline">
       <li>&copy; 2018-2020 iced-cola</li>
       <div class="float-right">
-      	全站共&nbsp;<span class="post-count">53.4k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
+      	全站共&nbsp;<span class="post-count">54.1k</span>&nbsp;字&nbsp;&nbsp;&nbsp;
       	<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
 <script>
     var now = new Date(); 

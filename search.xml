@@ -1,6 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>OpenCV中的Canny边缘检测</title>
+    <url>/2020/10/19/OpenCV%E4%B8%AD%E7%9A%84Canny%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h2 id="噪声去除"><a href="#噪声去除" class="headerlink" title="噪声去除"></a>噪声去除</h2><p>由于边缘检测很容易受到噪声影响，所以第一步是使用 5x5 的高斯滤波器去除噪声。</p>
+<p>用到的函数：cv2.GaussianBlur()</p>
+<p>参数：</p>
+<ul>
+<li>src: 源图像</li>
+<li>ksize: 卷积框</li>
+<li>sigmaX：表现在高斯曲线上就是曲线越高越尖，表现在滤波效果上就是模糊程度小</li>
+<li>sigmaY：表现在高斯曲线上就是曲线越矮越平缓，表现在滤波效果上就是模糊程度大</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">cv2.GaussianBlur(img, (<span class="number">5</span>, <span class="number">5</span>), <span class="number">70</span>, <span class="number">70</span>)</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<h2 id="计算图像梯度"><a href="#计算图像梯度" class="headerlink" title="计算图像梯度"></a>计算图像梯度</h2><p>对平滑后的图像使用 Sobel 算子计算水平方向和竖直方向的一阶导数（图 </p>
+<p>像梯度）（Gx 和 Gy）。根据得到的这两幅梯度图（Gx 和 Gy）找到边界的梯 </p>
+<p>度和方向，公式如下： </p>
+<p>$$ Edge Gradient(G) = \sqrt(G_x^2 + G_y^2) $$</p>
+<p>$$ Angle(\theta) = tan^{-1} (\frac{G_x}{G_y} ) $$</p>
+<p>($G_x, G_y$) 梯度的方向一般总是与边界垂直。梯度方向被归为四类：垂直，水平，和 两个对角线。</p>
+<h2 id="非极大值抑制"><a href="#非极大值抑制" class="headerlink" title="非极大值抑制"></a>非极大值抑制</h2><p>在获得梯度的方向和大小之后，应该对整幅图像做一个扫描，去除那些非边界上的点。对每一个像素进行检查，看这个的梯度是不是周围具有相同梯度方向的点中最大的。</p>
+<p><img src="https://images2.imgbox.com/75/ee/RxuqU0tS_o.png" alt></p>
+<h2 id="滞后阈值"><a href="#滞后阈值" class="headerlink" title="滞后阈值"></a>滞后阈值</h2><p>现在要确定那些边界才是真正的边界。这时我们需要设置两个阈值：minVal 和 maxVal。当图像的灰度梯度高于 maxVal时被认为是真的边界，那些低于 minVal 的边界会被抛弃。如果介于两者之间的话，就要看这个点是否与某个被确定为真正的边界点相连，如果是就认为它也是边界点，如果不是就抛弃。</p>
+<p><img src="https://images2.imgbox.com/a3/09/Pt2LMJDg_o.png" alt></p>
+<h2 id="OpenCV中的Canny算法"><a href="#OpenCV中的Canny算法" class="headerlink" title="OpenCV中的Canny算法"></a>OpenCV中的Canny算法</h2><p>在 OpenCV 中只需要一个函数：cv2.Canny()，就可以完成以上几步。让我们看如何使用这个函数。这个函数的第一个参数是输入图像。第二和第三个分别是 minVal 和 maxVal。第三个参数设置用来计算图像梯度的 Sobel卷积核的大小，默认值为 3。最后一个参数是 L2gradient，它可以用来设定求梯度大小的方程。如果设为 True，就会使用我们上面提到过的方程，否则使用方程：</p>
+<p>$$ Edege Gradient(G) = |G_x^2| + |G_y^2| $$</p>
+<p>代替，默认值为 False。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">"../imgs/test.jpeg"</span>)</span><br><span class="line"></span><br><span class="line">cv2.namedWindow(<span class="string">'image'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">do_nothing</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.createTrackbar(<span class="string">'minVal'</span>, <span class="string">'image'</span>, <span class="number">0</span>, <span class="number">500</span>, do_nothing)</span><br><span class="line">cv2.createTrackbar(<span class="string">'maxVal'</span>, <span class="string">'image'</span>, <span class="number">0</span>, <span class="number">500</span>, do_nothing)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    minVal = cv2.getTrackbarPos(<span class="string">'minVal'</span>, <span class="string">'image'</span>)</span><br><span class="line">    maxVal = cv2.getTrackbarPos(<span class="string">'maxVal'</span>, <span class="string">'image'</span>)</span><br><span class="line">    <span class="keyword">if</span> minVal &gt; maxVal:</span><br><span class="line">        cv2.setTrackbarPos(<span class="string">'minVal'</span>, <span class="string">'image'</span>, maxVal)</span><br><span class="line">    dst = cv2.Canny(img, minVal, maxVal)</span><br><span class="line">    cv2.imshow(<span class="string">'image'</span>, dst)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">5</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+<p>原图：</p>
+<p><img src="https://images2.imgbox.com/53/f9/B6zaHYEb_o.jpeg" alt></p>
+<p>结果：（可以通过调节滑动条来设置阈值 minVal 和 maxVal 进而来进行 Canny 边界检测。）</p>
+<p><img src="https://images2.imgbox.com/0d/cb/jUxo9bif_o.png" alt></p>
+]]></content>
+      <categories>
+        <category>OpenCV</category>
+      </categories>
+      <tags>
+        <tag>OpenCV</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>一小时学会Swagger</title>
     <url>/2020/10/18/%E4%B8%80%E5%B0%8F%E6%97%B6%E5%AD%A6%E4%BC%9ASwagger/</url>
     <content><![CDATA[<p>网上无意间看到的Swagger教程，一口气全部看完了，讲得很不错。</p>
