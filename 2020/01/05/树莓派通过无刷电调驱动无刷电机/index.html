@@ -77,11 +77,24 @@
 
       
       
+       <p>今天尝试了使用无刷电调来驱动无刷电机，但是刚开始遇到点问题，没理解网上的博文，还好板子没被烧掉💦</p>
+<p><a href="https://blog.csdn.net/qf0129/article/details/70769054" target="_blank" rel="noopener">树莓派pwm控制无刷电机</a></p>
+<a id="more"></a>
+
+<h2 id="连线"><a href="#连线" class="headerlink" title="连线"></a>连线</h2><p>刚开始了卡在了连线这里，电调有两根电源线，连接12V电源，其中三根线连接树莓派，<strong>如果树莓派独立供电的话，电调只需要将信号控制线和地线连接到树莓派的GPIO口和GND口</strong>。</p>
+<p>我刚开始连错了，树莓派独立供电的同时，将电调的5V输出端和GND线都连接到了树莓派上，板子突然自己开机了，才意识到接错了。后来想着不需要电调输出的电压，所以只接了信号控制线，5V输出和GND都没接，程序跑了但是电机没转动，也没信号声音。看了 <a href="https://www.cnblogs.com/raffeale/p/5585757.html" target="_blank" rel="noopener">折腾了2个晚上无刷电调(ESC)，电机终于转起来了，特此记录一下</a> 才意识到电调的GND线是一定要接到树莓派的GND口的，然后电机就动了。</p>
+<p>连接图：</p>
+<p><img src="https://images2.imgbox.com/ae/6d/bJjjdFRf_o.png" alt="连接图"></p>
+<p><em>上面的图中电调的输入电压应该是12V，可以用4节5号电池串联。</em></p>
+<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><p>连接好之后，给树莓派通电，接通电调连接的电源，然后用RPi.GPIO.PWM()控制电机的转速。</p>
+<p>测试代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># _*_ coding:utf-8 _*_</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> RPi.GPIO <span class="keyword">as</span> GPIO</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pin = <span class="number">18</span></span><br><span class="line"></span><br><span class="line">GPIO.setmode(GPIO.BCM)</span><br><span class="line">GPIO.setup(pin, GPIO.OUT)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 频率400Hz</span></span><br><span class="line">p = GPIO.PWM(pin, <span class="number">400</span>)</span><br><span class="line">p.start(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">dc = <span class="number">10</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">40</span>):</span><br><span class="line">        dc += <span class="number">2</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'dc:'</span>, dc</span><br><span class="line">        p.ChangeDutyCycle(dc)</span><br><span class="line">        time.sleep(<span class="number">0.3</span>)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    p.stop()</span><br><span class="line">    GPIO.cleanup()</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2020/01/05/树莓派通过无刷电调驱动无刷电机/" data-id="ckggpry8c003wxr7pvf2usy1u"
+      <a data-url="https://iced-cola.com/2020/01/05/树莓派通过无刷电调驱动无刷电机/" data-id="ckggq2305003w3e7p8cfau92f"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树莓派/">树莓派</a></li></ul>

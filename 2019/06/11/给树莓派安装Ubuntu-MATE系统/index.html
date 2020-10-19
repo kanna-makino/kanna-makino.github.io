@@ -77,11 +77,33 @@
 
       
       
+       <p>给树莓派安装Ubantu MATE操作系统</p>
+<p>由于平时用的是Ubuntu系统，对这个系统比较熟悉，也想给树莓派也装这个系统，Linux下做SD卡启动盘网上资料比较少，担心发生对笔记本磁盘的误操作，最后在官网上找到了教程。</p>
+<a id="more"></a>
+
+
+
+<h3 id="下载系统"><a href="#下载系统" class="headerlink" title="下载系统"></a>下载系统</h3><p><a href="https://ubuntu-mate.org/raspberry-pi" target="_blank" rel="noopener"><a href="https://ubuntu-mate.org/raspberry-pi/" target="_blank" rel="noopener">Ubuntu MATE for the Raspberry Pi Model B 2, 3 and 3+</a></a></p>
+<h3 id="安装工具并写入系统"><a href="#安装工具并写入系统" class="headerlink" title="安装工具并写入系统"></a>安装工具并写入系统</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gddrescue xz-utils</span><br><span class="line">unxz --verbose ubuntu-mate-18.04.2-beta1-desktop-armhf+raspi-ext4.img.xz</span><br><span class="line">sudo ddrescue -D --force ubuntu-mate-18.04.2-beta1-desktop-armhf+raspi-ext4.img /dev/sdx</span><br></pre></td></tr></table></figure>
+
+<p><code>/dev/sda</code>代表笔记本的磁盘，SD卡的盘符一般<code>/dev/sdb1</code>。</p>
+<p><img src="https://image.youyou-2608.com/blog/finished.png" alt="安装Ubuntu MATE"></p>
+<h3 id="显示屏无反应"><a href="#显示屏无反应" class="headerlink" title="显示屏无反应"></a>显示屏无反应</h3><p>网上说可能是 config.txt 设置问题，和显示器的分辨率之类的有关，但是写入了镜像之后再将SD卡插入到PC，已经无法挂载，报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mount /dev/sdb1 /mnt/sdb1</span><br><span class="line">mount: /mnt/sdb1: wrong fs type, bad option, bad superblock on /dev/sdb1, missing codepage or helper program, or other error.</span><br></pre></td></tr></table></figure>
+
+<h3 id="问题排查"><a href="#问题排查" class="headerlink" title="问题排查"></a>问题排查</h3><p>进不去SD卡，挂载错误，说是文件类型错误。</p>
+<p>安装工具：</p>
+<p><code>sudo apt-get install nfs-common</code></p>
+<p>仍然是无法读取。</p>
+<p>先安装 <code>gnome-disk-utility</code> ，在终端执行 <code>./gnome-disk-utility</code> ，选择 <code>Restore Image...</code> ，写入镜像。</p>
+<p><img src="https://image.youyou-2608.com/blog/finished.png" alt="Ubuntu MATE"></p>
+<p>写完之后，退出SD卡。</p>
+<p>将写入镜像的SD卡插入树莓派，连接显示器，接通电源，成功进入系统引导界面，清新的绿色界面。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/06/11/给树莓派安装Ubuntu-MATE系统/" data-id="ckggpry8j004cxr7pr7javx5m"
+      <a data-url="https://iced-cola.com/2019/06/11/给树莓派安装Ubuntu-MATE系统/" data-id="ckggq230f004c3e7pk6rvq11w"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树莓派/">树莓派</a></li></ul>

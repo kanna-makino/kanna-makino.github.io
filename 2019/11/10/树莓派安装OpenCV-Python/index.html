@@ -77,11 +77,28 @@
 
       
       
+       <p>之前在MacOS上安装OpenCV还比较顺利，直接在PyCharm里用pip安装就成功了。但是在树莓派上安装OpenCV一直依赖关系的错。最终在重新安装完Raspberry OS之后，用清华的源安装成功了。</p>
+<a id="more"></a>
+
+
+
+<h2 id="更换清华源"><a href="#更换清华源" class="headerlink" title="更换清华源"></a>更换清华源</h2><p>官方资料：<a href="https://mirror.tuna.tsinghua.edu.cn/help/raspbian/" target="_blank" rel="noopener">Raspbian 镜像使用帮助</a></p>
+<p>设置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编辑 `/etc/apt/sources.list` 文件，删除原文件所有内容，用以下内容取代：</span></span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑 `/etc/apt/sources.list.d/raspi.list` 文件，删除原文件所有内容，用以下内容取代：</span></span><br><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装OpenCV-Python"><a href="#安装OpenCV-Python" class="headerlink" title="安装OpenCV-Python"></a>安装OpenCV-Python</h2><p>执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装必要软件</span></span><br><span class="line">sudo apt-get install -y libjasper-dev libqtgui4 libqt4-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装OpenCV</span></span><br><span class="line">sudo apt install python-opencv</span><br></pre></td></tr></table></figure>
+
+<p>3b+更换为国内源的话大概一两分钟，就安装完成了。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>利用OpenCV打开摄像头，并读取视频数据显示出来：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !/usr/bin/env python</span></span><br><span class="line"><span class="comment"># _*_ coding:utf-8 _*_</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> cap.isOpened():</span><br><span class="line">    print(<span class="string">"camera is still closed."</span>)</span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="keyword">if</span> ret == <span class="literal">True</span>:</span><br><span class="line">        cv2.imshow(<span class="string">'Frame'</span>, frame)</span><br><span class="line">        <span class="keyword">if</span> cv2.waitKey(<span class="number">25</span>) &amp; <span class="number">0xFF</span> == ord(<span class="string">'q'</span>):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+<p>如果是利用终端命令通过ssh远程执行的话，会出错：cannot open display，因为ssh无法打开窗口，在树莓派终端执行不会报错。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/11/10/树莓派安装OpenCV-Python/" data-id="ckggpry8a003txr7ppz8tvuvi"
+      <a data-url="https://iced-cola.com/2019/11/10/树莓派安装OpenCV-Python/" data-id="ckggq2304003t3e7pyuqvf7lz"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>

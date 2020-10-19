@@ -77,11 +77,33 @@
 
       
       
+       <h2 id="题目内容"><a href="#题目内容" class="headerlink" title="题目内容"></a>题目内容</h2><p>输入一个数组，例如{-1 0 1 2 -1 -4}，从数组中找三个数（a,b,c），使得其和0，输出所有的（a,b,c）组合。</p>
+<p>要求abc不能重复，并且a&lt;=b&lt;=c。</p>
+<p>例：</p>
+<p>S = {-1, 0, 1, 2, -1, -4}；</p>
+<p>输出：</p>
+<p>(-1, 0 ,1)</p>
+<p>(-1, -1, 2)</p>
+<a id="more"></a>
+
+
+
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>一看到题目，不问代码行数，不问时间复杂度，便排出三个循环。。但是循环非常耗时，显然不是题目的本意。想了好长时间没有什么进展。</p>
+<p>先将给定数组排序，然后指定一个数，在数组中找出两个数并且这两个数的和是目标数值的相反数：<a href="http://www.cnblogs.com/xcr1234/p/5285727.html" target="_blank" rel="noopener">【LeetCode】3Sum 解题报告</a></p>
+<p>在网上找到了篇比较有新意的文章：[<a href="https://www.cnblogs.com/xcr1234/p/5285727.html" target="_blank" rel="noopener">3Sum algorithm - 非常容易理解的实现 （java)</a>] 。</p>
+<hr>
+<p>最后发现维基百科中就有收录：<a href="https://zh.wikipedia.org/zh-hans/3SUM" target="_blank" rel="noopener">维基百科—3SUM</a> ，还有更一般的情形 N SUM。</p>
+<figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sort(S);</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">0</span> <span class="keyword">to</span> n-<span class="number">3</span> <span class="keyword">do</span></span><br><span class="line">   a = S[i];</span><br><span class="line">   start = i+<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">end</span> = n-<span class="number">1</span>;</span><br><span class="line">   <span class="keyword">while</span> (start &lt; <span class="keyword">end</span>) <span class="keyword">do</span></span><br><span class="line">      b = S[start]</span><br><span class="line">      c = S[<span class="keyword">end</span>];</span><br><span class="line">      <span class="keyword">if</span> (a+b+c == <span class="number">0</span>) <span class="keyword">then</span></span><br><span class="line">         output a, b, c;</span><br><span class="line">         <span class="comment">// Continue search for all triplet combinations summing to zero.</span></span><br><span class="line">          <span class="keyword">end</span> = <span class="keyword">end</span> - <span class="number">1</span></span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (a+b+c &gt; <span class="number">0</span>) <span class="keyword">then</span></span><br><span class="line">         <span class="keyword">end</span> = <span class="keyword">end</span> - <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">         start = start + <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>伪代码还挺容易理解的。</p>
+<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><p>因为知乎上有人宣称证明了哥德巴赫猜想的原因，这两天还特意了解了下猜想证明的历史，“1+2”、“1+3”之类的证明，虽然一点也没看懂。感觉数学真的很有魅力，严谨清晰的逻辑，精妙完美的结论，自然界中的一切每时每刻都在遵循着其中的规律运行，更加感慨于人类的智慧，都找不到合适的赞美的词了。</p>
+<p>“超越数”、“黄金分割”、“哥德巴赫猜想”、“黎曼猜想”…</p>
+<p>停下思绪，回到现实：<strong>当你理解它的时候你觉得进入了天堂，当你不理解它的时候你仿佛进入了地狱</strong>，看哭了…</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/01/03/LeetCode之3Sum/" data-id="ckggpry6k000jxr7pvu49u9ve"
+      <a data-url="https://iced-cola.com/2019/01/03/LeetCode之3Sum/" data-id="ckggq22ym000l3e7pfa4byzsc"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/">LeetCode</a></li></ul>

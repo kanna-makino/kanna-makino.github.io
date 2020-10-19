@@ -75,11 +75,51 @@
 
       
       
+       <p>将YouTube直播转播到bilibili的想法及尝试</p>
+<p>周末的时候本来在学习Swift的，不经意间打开Youtube直播，看到 大阪伊丹国际机场的 live camera 直播，出于对民航的兴趣，觉得直播里的陆空对话可以很好的打发时间，于是产生了能否24小时将Youtube的直播转播到墙内的疑问，带着这个疑问折腾了两天。</p>
+<a id="more"></a>
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pV2RaaoxyF8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<大阪国际机场live camera含陆空对话>(需要梯子)
+
+
+
+<p>在往上搜了一些资料，发现已经有很多人实现了我的想法，而且做法也超级简单：</p>
+<ul>
+<li>YouTube 直播地址</li>
+<li>一个海外vps</li>
+<li>youtube-dl</li>
+<li>ffmpeg</li>
+<li>bilibili直播地址</li>
+</ul>
+<p>用youtube-dl获取直播m3u8文件，然后用ffmpeg不断读取流数据，然后推流到bilibili直播：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -re -i <span class="string">"<span class="variable">$(youtube-dl -f 95 -g "https://www.youtube.com/watch?v=pV2RaaoxyF8")</span>"</span> -c:v copy -c:a aac -b:v 5000k -ar 44100 -ab 320k -ac 2 -strict -2 -flags +global_header -bsf:a aac_adtstoasc -bufsize 3000k -f flv <span class="string">"rtmp://txy.live-send.acg.tv/live-txy/?streamname=xxxx&amp;key=yyyy"</span></span><br></pre></td></tr></table></figure>
+
+<p>用这个命令就可以实现上面的功能。</p>
+<p>但是在实际使用操作过程中，总是在发送了100帧数据左右开始报错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[tls @ 0x5566d890ffe0] The TLS connection was non-properly terminated.</span><br><span class="line">[tls @ 0x5566d8fd25a0] The TLS connection was non-properly terminated.</span><br><span class="line">[tls @ 0x5566d8fd25a0] The specified session has been invalidated <span class="keyword">for</span> some reason.</span><br><span class="line"></span><br><span class="line">av_interleaved_write_frame(): Broken pipe</span><br><span class="line">Error writing trailer of rtmp://txy.live-send.acg.tv/live-txy/?streamname=xxxx</span><br><span class="line">[aac @ 0x5566d8cf45e0] Qavg: 65536.000</span><br><span class="line">Conversion failed!</span><br></pre></td></tr></table></figure>
+
+<p>TLS连接被关闭，在搜了一大堆资料后我依然怀疑是youtube没有正确的关闭连接，导致报错。还做了很多其他的验证：</p>
+<ul>
+<li>尝试在树莓派上安装ffmpeg往bilibili推流，直播了一个网上将近十来个小时，没有任何问题。</li>
+<li>在香港vps上将一段已经下载好的视频推流到bilibili，有问题。</li>
+<li>在美国vps上将一段已经下载好的视频推到bilibili，有问题。</li>
+<li>在香港vps上将一段已经下载好的视频推流到YouTube，没有问题。</li>
+<li>在美国vps上将一段已经下载好的视频推流到YouTube，没有问题。</li>
+<li>在香港和美国vps上换了和树莓派相同版本的v4.1.1 ffmpeg重复上述操作，结果不变。</li>
+</ul>
+<p>将google搜索到的结果几乎都看了一遍，也没找到多少有价值的信息。</p>
+<p>今天晚上在思考其他解决方案的时候，看到bilibili专栏的文章，尝试了作者用java写的jar包，也报相同的错误，于是联系了作者，才得知，原来这个方法已经失效了。</p>
+<blockquote>
+<p> <strong>这个脚本早就报废了的，现在B站只有官方py或者报备了的才可以从海外推。目前转播man已经失业，有更好转播的方案。爱丽丝</strong></p>
+</blockquote>
+<p>原来上面的报错是因为bilibili掐断了连接导致的。不过这也打消了我最初的疑虑：侵权问题。</p>
+<p>这个想法可能要先放一段时间了，目前的想法是想尝试一下用 OpenCV 和 ffmpeg 能不能实现，不知道什么时候才能重新捡起来（逃）。</p>
+</大阪国际机场live>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/12/17/将YouTube直播转播到bilibili的想法及尝试/" data-id="ckggpry81003bxr7pbfywpj4y"
+      <a data-url="https://iced-cola.com/2019/12/17/将YouTube直播转播到bilibili的想法及尝试/" data-id="ckggq22zw003c3e7pnn0fjnvw"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/折腾/">折腾</a></li></ul>

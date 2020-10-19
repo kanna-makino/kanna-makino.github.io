@@ -75,11 +75,30 @@
 
       
       
+       <p>报错信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Process finished with exit code 134 (interrupted by signal 6: SIGABRT)</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<br>
+
+<p>一个在树莓派上完全没有问题的打开摄像头的脚本，在笔记本上跑时报错，摄像头无法打开：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># _*_ coding:utf-8 _*_</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"></span><br><span class="line">camera = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    ret, frame = camera.read()</span><br><span class="line">    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</span><br><span class="line">    cv2.imshow(<span class="string">'frame'</span>, frame)</span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) == ord(<span class="string">'q'</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>这个问题困扰了很久，外网上查了很久也没有找到解决方案。因为树莓派上挂了摄像头，插拔不是很方便，并且公司的显示器是VGA接口，所以今天出门没带树莓派。下午打开PyCharm想继续学习一下OpenCV，但是又被这个错给拦住了。</p>
+<p><img src="https://images2.imgbox.com/cc/da/H0fN8Zqp_o.png" alt="报错信息"></p>
+<p>无意间想到会不会是Python没有权限调用系统摄像头导致的，然后在终端用管理员权限跑一下这个脚本，然后系统弹出一个弹窗，大概意思是询问<strong>“是否允许Python调用摄像头”</strong>，我还想思考一会儿，然后终端就报错了：</p>
+<p><img src="https://images2.imgbox.com/7b/ae/F5xewqqb_o.png" alt="报错信息"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Process finished with exit code 134 (interrupted by signal 6: SIGABRT)</span><br></pre></td></tr></table></figure>
+
+<p>原来之前一直都是因为权限的原因，然后点了允许，之后就不报错了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/12/29/OpenCV打不开摄像头-Process-finished-with-exit-code-134/" data-id="ckggpry7a001qxr7pbwggqjgj"
+      <a data-url="https://iced-cola.com/2019/12/29/OpenCV打不开摄像头-Process-finished-with-exit-code-134/" data-id="ckggq22z5001l3e7p2vayzblf"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>

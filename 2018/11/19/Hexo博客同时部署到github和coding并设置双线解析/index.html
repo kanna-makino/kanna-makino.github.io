@@ -77,11 +77,38 @@
 
       
       
+       <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>因为github服务器禁止了百度爬虫，所以不能百度收录不了站点，导致访问量很低，本来不想折腾的，想了一下还是将博客也部署到了coding上，方便百度的收录。</p>
+<a id="more"></a>
+
+
+
+<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><ol>
+<li><p>在coding上创建一个名为 <strong>用户名</strong> (不是昵称)的项目，并开启pages服务；</p>
+</li>
+<li><p>将本地ssh公钥文件添加到coding的SSH公钥中并测试是否能访问：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T -p 443 git@git-ssh.coding.net</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在站点配置文件中添加上coding仓库地址：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span></span><br><span class="line">    <span class="attr">github:</span> <span class="string">git@github.com:Kotobuki-Tsumugi/Kotobuki-Tsumugi.github.io.git</span></span><br><span class="line">    <span class="attr">coding:</span> <span class="string">git@git.dev.tencent.com:Kobobuki-Tsumugi/Kobobuki-Tsumugi.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在站点目录/source下创建一个名为Staticfile的空文件；</p>
+</li>
+<li><p>生成并上传静态文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在域名解析中新增两条CNAME记录，指向username.coding.me，注意区分境外线路和默认线路，指向coding的必须为默认线路，如果不能正常访问，可以先暂停github的解析，待coding的解析成功后再开启github的解析，解析反应不及时。</p>
+</li>
+<li><p>向百度提交站点sitemap文件地址。</p>
+</li>
+</ol>
+<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>其中也遇到一些玄学的问题：</p>
+<p><img src="https://images2.imgbox.com/0e/48/c6Y1zWYh_o.png" alt="coding提示域名绑定异常"></p>
+<p>比如上图，我如果绑定youyou-2608.com 则一直提示“域名未联通”，即便我已经添加了指向username.coding.me的CNAME记录，添加<a href="http://www.youyou-2608.com" target="_blank" rel="noopener">www.youyou-2608.com</a> 能绑定上，但是绑定状态一直是异常，访问username.coding.me也能正常跳转到<a href="https://youyou-2608.com" target="_blank" rel="noopener">https://youyou-2608.com</a> ，没太搞明白，既然已经能正常访问，也就作罢了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2018/11/19/Hexo博客同时部署到github和coding并设置双线解析/" data-id="ckggpry6a0008xr7p2zb7pfqo"
+      <a data-url="https://iced-cola.com/2018/11/19/Hexo博客同时部署到github和coding并设置双线解析/" data-id="ckggq22yb00073e7pg1h5u4ue"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客维护/">博客维护</a></li></ul>

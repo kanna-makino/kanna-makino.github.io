@@ -77,11 +77,24 @@
 
       
       
+       <p>更换七牛云过期SSL证书</p>
+<p>转眼博客已经跑了一年了，最近又是域名到期、又是SSL证书到期。</p>
+<p>刚给域名续了5年的费，存储在七牛云的图片因为SSL证书到期加载不出来了。提示“存在隐私安全隐患”，通过图片外链访问也无法加载图片，Chrome直接拒绝连接。</p>
+<p>一年前配置的，流程有些忘了，今天晚上又摸索了一遍。</p>
+<a id="more"></a>
+
+
+
+<h2 id="七牛云申请证书"><a href="#七牛云申请证书" class="headerlink" title="七牛云申请证书"></a>七牛云申请证书</h2><p>据说七牛云不支持阿里云申请的证书，所以没在阿里云申请，直接在七牛云申请了TrustAisa的一年免费证书。</p>
+<p>具体流程：</p>
+<p>登录七牛云 &gt; SSL证书服务 &gt; 购买证书 &gt; 填写必要信息购买指向目标域名的证书（选择TrustAsia免费证书，验证方式选择DNS验证，个人信息可以随便填，貌似不需要验证）</p>
+<h2 id="添加域名验证"><a href="#添加域名验证" class="headerlink" title="添加域名验证"></a>添加域名验证</h2><p>到域名解析里添加对应的TEXT类型的记录，记录值为申请证书时指定的值。我直接将以前的值变更成了新的值。</p>
+<h2 id="应用SSL证书"><a href="#应用SSL证书" class="headerlink" title="应用SSL证书"></a>应用SSL证书</h2><p>大概十分钟左右证书签发成功后，到 对象存储 &gt; 域名管理 &gt; 配置 &gt; HTTPS 配置 &gt; 强制 HTTPS &gt; 可更换证书列表里选择刚才申请的证书，然后应用。等待几分钟之后，便能通过HTTPS访问存储内容了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/11/10/更换七牛云过期SSL证书/" data-id="ckggpry86003mxr7pfeuheqon"
+      <a data-url="https://iced-cola.com/2019/11/10/更换七牛云过期SSL证书/" data-id="ckggq2301003m3e7pu89nake3"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客维护/">博客维护</a></li></ul>

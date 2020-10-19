@@ -77,11 +77,40 @@
 
       
       
+       <p>scp — Linux文件复制命令</p>
+<blockquote>
+<p>用于在Linux下进行远程拷贝文件的命令，和它类似的命令有cp，不过cp只是在本机进行拷贝不能跨服务器，而且scp传输是加密的。当你服务器硬盘变为只读 read only system时，用scp可以帮你把文件移出来。</p>
+</blockquote>
+<a id="more"></a>
+
+<br>
+
+<h2 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h2><ul>
+<li>-P: 端口号</li>
+<li>-r: 递归复制   </li>
+</ul>
+<br>
+
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 上传文件</span></span><br><span class="line">scp -r -P xxxx /home/local_user/file_path remote_user@remote_host_addr:/home/remote_user/file_path</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载文件时将 source 和 target 调换一下</span></span><br><span class="line">scp -r -P xxxx remote_user@remote_host_addr:/home/remote_user/file_path /home/local_user/file_path</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="Permission-denied-问题"><a href="#Permission-denied-问题" class="headerlink" title="Permission denied 问题"></a>Permission denied 问题</h2><p>今天下午上传文件到服务器的时候一直报这个错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">scp -P xxxx file.torrent <span class="built_in">test</span>@<span class="built_in">test</span>:/home</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出</span></span><br><span class="line"><span class="built_in">test</span>@test.com<span class="string">'s password: </span></span><br><span class="line"><span class="string">scp: /home/25316538e6498c7645e3da963253977d.torrent: Permission deniedv</span></span><br></pre></td></tr></table></figure>
+
+<p>保证密码输入正确并且重试了好几次都报同样的错，才想起来以前遇到这个问题，是因为当前用户对目标目录没有操作权限导致的，只要把目标路径改到当前用户目录下就好了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -P xxxx file.torrent <span class="built_in">test</span>@<span class="built_in">test</span>:/home/<span class="built_in">test</span>/Downloads</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<blockquote>
+<p><a href="https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/scp.html" target="_blank" rel="noopener">18. scp 跨机远程拷贝</a></p>
+</blockquote>
+</blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/11/03/scp-Linux文件复制命令/" data-id="ckggpry7m002exr7pop16spnw"
+      <a data-url="https://iced-cola.com/2019/11/03/scp-Linux文件复制命令/" data-id="ckggq22zh002a3e7piwjbfw4o"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>

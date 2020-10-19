@@ -75,11 +75,21 @@
 
       
       
+       <p>记一次Tomcat 8005端口Cannot assign requested address : Jvm Bind的经历</p>
+<p>一个正在做毕设的老乡遇到的问题：Tomcat启动的时候，报了[8005] Jvm Bind相关的异常，大概内容是端口已被占用的意思。</p>
+<p>一. 先从运行/bin/shutdown.bat，再次关闭Tomcat，重新启动问题依然存在；</p>
+<p>二. netstat -ano查看端口使用情况，未发现8080,8009,8005相关的端口被占用；</p>
+<p>三. 打开任务管理器，确认javaw.exe未在运行，问题依然存在；</p>
+<p>四. 重启机器，问题依然存在；</p>
+<p>五. 参照：[<a href="https://www.cnblogs.com/heshan664754022/p/3807672.html" target="_blank" rel="noopener">Tomcat启动报错:严重: StandardServer.await: create[8005] java.net.BindException: Cannot assign requested address</a>](<a href="https://www.cnblogs.com/heshan664754022/p/3807672.html" target="_blank" rel="noopener">https://www.cnblogs.com/heshan664754022/p/3807672.html</a>) ， ping了localhost，发现收到的响应来自ipp[47.89.54.215]，打开C:/windows/system32/drivers/etc/hosts，发现以下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">47.89.54.215       localhost</span><br><span class="line">47.89.54.215	hao.360.cn</span><br><span class="line">47.89.54.215	www.hao123.com</span><br><span class="line">47.89.54.215	www.3600.com</span><br><span class="line">47.89.54.215	www.114la.com</span><br><span class="line">47.89.54.215	www.duba.com</span><br><span class="line">47.89.54.215	www.hao360.cn</span><br><span class="line">47.89.54.215	123.sogou.com</span><br><span class="line">47.89.54.215	web.sogou.com</span><br><span class="line">47.89.54.215	www.hao123.cn</span><br><span class="line">47.89.54.215	hao.qq.com</span><br><span class="line">47.89.54.215	www.1616.net</span><br><span class="line">47.89.54.215	hao.rising.cn</span><br><span class="line">47.89.54.215	daohang.qq.com</span><br></pre></td></tr></table></figure>
+
+<p>看到daohang.qq，hao123，duba，hao360，123.sougou之类的字眼，国内流氓软件那么多？”的问题又浮现在脑海。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://iced-cola.com/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/" data-id="ckggpry8k004hxr7pex91r3ev"
+      <a data-url="https://iced-cola.com/2019/04/24/记一次Tomcat-8005端口Cannot-assign-requested-address的经历/" data-id="ckggq230h004h3e7p9qrhfzq7"
          class="article-share-link">分享</a>
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tomcat/">Tomcat</a></li></ul>
