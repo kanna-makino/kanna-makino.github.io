@@ -1,3 +1,4 @@
+https://iced-cola.com/2020/10/20/Java设计模式/
 https://iced-cola.com/2020/10/19/OpenCV中的Canny边缘检测/
 https://iced-cola.com/2020/10/18/一小时学会Swagger/
 https://iced-cola.com/2020/10/17/《宇宙よりも遠い場所》台词-第三话/
@@ -27,4 +28,3 @@ https://iced-cola.com/2019/08/05/基于-mjpg-streamer-的树莓派视频监控/
 https://iced-cola.com/2019/06/11/给树莓派安装Ubuntu-MATE系统/
 https://iced-cola.com/2019/06/09/再记Hexo博客恢复/
 https://iced-cola.com/2019/05/19/我在JavaScript中踩过的坑/
-https://iced-cola.com/2019/05/15/Java注解简单例子/
