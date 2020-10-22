@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iced-cola.com/about/index.html</loc>
+    
+    <lastmod>2020-10-22T10:58:15.577Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://iced-cola.com/2020/10/22/Ubuntu-18-04%E5%AE%89%E8%A3%85Mariadb%E4%BF%AE%E6%94%B9%E5%88%9D%E5%A7%8B%E5%AF%86%E7%A0%81/</loc>
     
     <lastmod>2020-10-22T05:49:58.083Z</lastmod>
@@ -96,13 +103,6 @@
     <loc>https://iced-cola.com/2019/11/10/%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%89%E8%A3%85OpenCV-Python/</loc>
     
     <lastmod>2020-09-30T07:49:30.260Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://iced-cola.com/about/index.html</loc>
-    
-    <lastmod>2020-09-30T07:41:08.240Z</lastmod>
     
   </url>
   
