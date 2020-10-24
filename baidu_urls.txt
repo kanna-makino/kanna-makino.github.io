@@ -1,3 +1,4 @@
+https://iced-cola.com/2020/10/24/《宇宙よりも遠い場所》台词-第四话/
 https://iced-cola.com/2020/10/24/thymeleaf传值给bootstrap的modal/
 https://iced-cola.com/2020/10/22/Ubuntu-18-04安装Mariadb修改初始密码/
 https://iced-cola.com/2020/10/20/PreAuthrize-and-PostAuthrize/
@@ -27,4 +28,3 @@ https://iced-cola.com/2019/11/03/scp-Linux文件复制命令/
 https://iced-cola.com/2019/10/27/硝酸甘油炸药的制作/
 https://iced-cola.com/2019/10/14/OpenCV——cv2-inRange-函数/
 https://iced-cola.com/2019/10/12/OpenCV-学习笔记（一）/
-https://iced-cola.com/2019/08/05/基于-mjpg-streamer-的树莓派视频监控/

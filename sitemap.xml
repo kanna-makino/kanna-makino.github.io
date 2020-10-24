@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://iced-cola.com/2020/10/24/%E3%80%8A%E5%AE%87%E5%AE%99%E3%82%88%E3%82%8A%E3%82%82%E9%81%A0%E3%81%84%E5%A0%B4%E6%89%80%E3%80%8B%E5%8F%B0%E8%AF%8D-%E7%AC%AC%E5%9B%9B%E8%AF%9D/</loc>
+    
+    <lastmod>2020-10-24T08:48:03.020Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://iced-cola.com/about/index.html</loc>
+    
+    <lastmod>2020-10-23T17:12:34.641Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://iced-cola.com/2020/10/24/thymeleaf%E4%BC%A0%E5%80%BC%E7%BB%99bootstrap%E7%9A%84modal/</loc>
     
-    <lastmod>2020-10-23T17:02:37.007Z</lastmod>
+    <lastmod>2020-10-23T17:08:02.321Z</lastmod>
     
   </url>
   
@@ -12,13 +26,6 @@
     <loc>https://iced-cola.com/2020/10/20/PreAuthrize-and-PostAuthrize/</loc>
     
     <lastmod>2020-10-23T11:15:25.667Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://iced-cola.com/about/index.html</loc>
-    
-    <lastmod>2020-10-22T10:58:15.577Z</lastmod>
     
   </url>
   
