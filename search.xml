@@ -1,6 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Java面试题</title>
+    <url>/2020/10/29/Java%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
+    <content><![CDATA[<p>最近在面试中遇到的一些问题，虽然很多都是最最基础的问题，但是很多问题要么是没回答出来要么是说的丢三落四。作为工作两年的我来说，感觉很丢人啊。顺便记下来，给后来人做个参考，最近自己也多花点时间打打基础。题目顺序不分类型和先后。</p>
+<a id="more"></a>
+
+<ol>
+<li>byte,char,short,int各占几个字节？</li>
+<li>char能存下一个汉字吗？</li>
+<li>数据库常加哪些索引？不常用哪些索引？</li>
+<li>SpringBoot启动类注解都有哪些？</li>
+<li>SpringBoot怎么加载配置文件？</li>
+<li>实现多线程的方式？</li>
+<li>start() 方法和run() 的方法的区别？</li>
+<li>jdk有几种线程池？newSingleThreadPool有什么作用？</li>
+<li>ThreadPoolExecuror类的几个构造参数及其含义？拒绝策略有哪些？</li>
+<li>String，StringBuffer，StringBuilder的异同？</li>
+<li>String类为什么要设计成不可变的？</li>
+<li>MySQL有哪些类型的索引？</li>
+<li>大概说一下你对SpringMVC的理解？</li>
+</ol>
+<hr>
+<ol>
+<li>Integer a = 123;<br>Integer b = Integer.valueOf(123);</li>
+</ol>
+<p>Integer a = 300;<br>Integer b = Integer.valueOf(300);<br>（-128到127 IntegerCache）</p>
+<p>说一说以上代码执行的细节？说说拆装箱的细节？</p>
+<ol start="2">
+<li><p>什么时候需要重写hashCode()方法和equals()方法？两个对象相等hashcode一定相等吗？</p>
+</li>
+<li><p>说一说HashMap的实现原理？当我put一个已经存在的键值对时怎么更新值的？</p>
+</li>
+<li><p>Spring中@Autowired和@Resource的区别？</p>
+</li>
+<li><p>ThreadPoolExecuror类的几个构造参数及其含义？</p>
+</li>
+<li><p>MySQL分页最后的页特别慢，说一说优化策略？</p>
+</li>
+<li><p>Java中的锁有了解吗？synchronized和Lock的区别？说一说synchronized的实现？</p>
+</li>
+</ol>
+<hr>
+<ol>
+<li>String类是可变的吗？底层数据结构是什么？为什么要设计成不可变的？</li>
+<li>ArrayList和LinkedList的区别？</li>
+<li>HashMap的实现原理？构造方法及参数的含义？初始容量是多大？扩容策略？</li>
+<li>有了解过B+树吗？</li>
+<li>说一说你对IOC和AOP的理解？</li>
+<li>说一说你对反射以及动态代理的理解？</li>
+<li>如何实现进程间通信？</li>
+<li>线程的生命周期？</li>
+<li>一次Http请求的过程（osi七层模型以及三次握手）？两台主机断开连接的过程？</li>
+<li>MySQL有哪些存储引擎，都在什么场景使用？</li>
+</ol>
+<hr>
+<ol>
+<li>有用过dubbo、RabbitMQ之类的中间件吗？</li>
+<li>Java中的锁有了解过吗？</li>
+<li>HashSet如何保证数据不重复？</li>
+<li>说一说你对ConcurrentHashMap的理解？</li>
+<li>concurrent包下面有哪些常用的类？</li>
+<li>什么叫值传递？什么叫引用传递？Java属于哪种？为什么？</li>
+<li>SpringCloud微服务有了解吗？</li>
+<li>有做过Linux服务器上的应用部署吗？</li>
+<li>Apache poi如何读取百万规模的数据？</li>
+<li>你觉得Java和其他语言最显著的特征是什么？</li>
+<li>在你的项目经历中有没有印象特别深刻的经历、有没有让你觉得成长很迅速的经历、有没有让你感觉很有成就感的经历、有没有曾经为项目突破瓶颈的经历？</li>
+<li>有用过redis缓存吗？</li>
+</ol>
+<hr>
+<ol>
+<li>你有比较长远的职业生涯规划吗？</li>
+<li>如果工作需要学习比如小程序开发之类的，你的态度是什么样？</li>
+<li>你对待的加班的态度是什么样的？</li>
+</ol>
+<hr>
+<p>暂时就能想起这么多了…</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>对象排序并去重——一道笔试题</title>
     <url>/2020/10/27/%E5%AF%B9%E8%B1%A1%E6%8E%92%E5%BA%8F%E5%B9%B6%E5%8E%BB%E9%87%8D%E2%80%94%E2%80%94%E4%B8%80%E9%81%93%E7%AC%94%E8%AF%95%E9%A2%98/</url>
     <content><![CDATA[<h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><p>输入一行数据，格式如下：</p>
