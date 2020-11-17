@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Java字节码解析"><meta name="keywords" content="Java"><meta name="author" content="iced-cola"><meta name="copyright" content="iced-cola"><title>Java字节码解析 | iced-cola</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.0"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://v1.hitokoto.cn/?encode=js&amp;charset=utf-8&amp;select=.footer_custom_text" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  hexoVersion: '3.9.0'
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#示例代码"><span class="toc-number">1.</span> <span class="toc-text">示例代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内容解读"><span class="toc-number">2.</span> <span class="toc-text">内容解读</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#魔数"><span class="toc-number">2.1.</span> <span class="toc-text">魔数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#版本号"><span class="toc-number">2.2.</span> <span class="toc-text">版本号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常量池"><span class="toc-number">2.3.</span> <span class="toc-text">常量池</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Access-Flag-访问标志部分"><span class="toc-number">3.</span> <span class="toc-text">Access_Flag 访问标志部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类索引"><span class="toc-number">4.</span> <span class="toc-text">类索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#父类索引"><span class="toc-number">5.</span> <span class="toc-text">父类索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#接口索引"><span class="toc-number">6.</span> <span class="toc-text">接口索引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字段表集合"><span class="toc-number">7.</span> <span class="toc-text">字段表集合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法"><span class="toc-number">8.</span> <span class="toc-text">方法</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/avatar.png"></div><div class="author-info__name text-center">iced-cola</div><div class="author-info__description text-center">一爱代码，爱生活。</div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">文章</span><span class="pull-right">63</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">标签</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">分类</span><span class="pull-right">25</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">友链</div><a class="author-info-links__name text-center" href="https://molunerfinn.com">Molunerfinn</a><a class="author-info-links__name text-center" href="https://www.imitker.com">IT客-经验分享,技术总结</a><a class="author-info-links__name text-center" href="https://www.hack-gov.com.cn">海客GO - 爱牟 听着海客的瀛谈</a><a class="author-info-links__name text-center" href="https://mz-zone.cn">木子の博客</a><a class="author-info-links__name text-center" href="https://www.it7a.com">小爱网址导航</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/blog-bg.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">iced-cola</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/about">Message</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">Java字节码解析</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 11-18-2020</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Java/">Java</a><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">810</span><span class="post-meta__separator">|</span><span>阅读时长: 3 分钟</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>最近在学Jvm相关的知识，看完视频，找了点字节码的资料看，理解字节码的含义。推荐 <a href="https://www.jianshu.com/p/252f381a6bc4" target="_blank" rel="noopener">一文让你明白Java字节码</a></p>
+<a id="more"></a>
+
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>从一个简单类 Math.java 开始：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Math</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> m;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">inc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用 <code>javac Math.java</code> 得到字节码文件 Math.class，文件内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">cafe babe 0000 0034 0013 0a00 0400 0f09</span><br><span class="line">0003 0010 0700 1107 0012 0100 016d 0100</span><br><span class="line">0149 0100 063c 696e 6974 3e01 0003 2829</span><br><span class="line">5601 0004 436f 6465 0100 0f4c 696e 654e</span><br><span class="line">756d 6265 7254 6162 6c65 0100 0369 6e63</span><br><span class="line">0100 0328 2949 0100 0a53 6f75 7263 6546</span><br><span class="line">696c 6501 0009 4d61 7468 2e6a 6176 610c</span><br><span class="line">0007 0008 0c00 0500 0601 0004 4d61 7468</span><br><span class="line">0100 106a 6176 612f 6c61 6e67 2f4f 626a</span><br><span class="line">6563 7400 2100 0300 0400 0000 0100 0200</span><br><span class="line">0500 0600 0000 0200 0100 0700 0800 0100</span><br><span class="line">0900 0000 1d00 0100 0100 0000 052a b700</span><br><span class="line">01b1 0000 0001 000a 0000 0006 0001 0000</span><br><span class="line">0001 0001 000b 000c 0001 0009 0000 001f</span><br><span class="line">0002 0001 0000 0007 2ab4 0002 0460 ac00</span><br><span class="line">0000 0100 0a00 0000 0600 0100 0000 0600</span><br><span class="line">0100 0d00 0000 0200 0e</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="内容解读"><a href="#内容解读" class="headerlink" title="内容解读"></a>内容解读</h2><p>参照图例：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1986868-5b44e95ff7e30847.jpeg" alt></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1986868-831993b2dc19dd90.png" alt></p>
+<h3 id="魔数"><a href="#魔数" class="headerlink" title="魔数"></a>魔数</h3><p>cafe babe：魔数，文件后缀标识，被java虚拟机接受。</p>
+<br>
+
+<h3 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h3><p>0000：次版本号</p>
+<p>0034：主版本号=52，java 1.8</p>
+<br>
+
+<h3 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h3><p>0013：常量池入口，2+n，十进制=19，表明有18个常量，从1开始</p>
+<p>0a：十进制=10，对应CONSTANT_Methodref_info，指向声明方法</p>
+<p>0004：常量索引#4</p>
+<p>000f：常量索引#15</p>
+<p>09：十进制=9，对应CONSTANT_Fieldref_info，指向字段的类或接口描述</p>
+<p>0003：常量索引#3</p>
+<p>0010：常量索引#16</p>
+<p>07：十进制=7，对应CONSTANT_Class_info，指向全限定名常量项的索引</p>
+<p>0011：常量索引#17</p>
+<p>07：同上</p>
+<p>0012：常量索引#18</p>
+<p>01：十进制=1，对应表中的CONSTANT_Utf8_info，utf8编码的字符串长度</p>
+<p>0001：字符串长度为1</p>
+<p>6d：109=”m”</p>
+<p>01：同上</p>
+<p>0001：同上</p>
+<p>49：49=”1”</p>
+<p>01：同上</p>
+<p>0006：同上</p>
+<p>3c 696e 6974 3e：字符串=<init></init></p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>2829 56：()V</p>
+<p>01：同上</p>
+<p>0004：同上</p>
+<p>436f 6465：C_de</p>
+<p>01：同上</p>
+<p>000f：同上</p>
+<p>4c 696e 654e 756d 6265 7254 6162 6c65：LineNumberTable</p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>69 6e63：inc</p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>28 2949：()I</p>
+<p>01：同上</p>
+<p>000a：长度为10的字符串</p>
+<p>53 6f75 7263 6546 696c 65：SourceFile</p>
+<p>01：同上</p>
+<p>0009：同上</p>
+<p>4d61 7468 2e6a 6176 61：Math.java</p>
+<p>0c：十进制=12，CONSTANT_NameAndType_info，指向该字段或方法名称常量项的索引</p>
+<p>0007：字段或者名字名称常量项索引#7</p>
+<p>0008：字段或者名字名称常量项索引#8</p>
+<p>0c：同上</p>
+<p>0005：字段或者名字名称常量项索引#5</p>
+<p>0006：字段或者名字名称常量项索引#6</p>
+<p>01：同上</p>
+<p>0004：同上</p>
+<p>4d61 7468：Math</p>
+<p>01：同上</p>
+<p>0010：同上</p>
+<p>6a 6176 612f 6c61 6e67 2f4f 626a 6563 74：java/lang/Object</p>
+<p>==== 常量解析完毕，共18个常量</p>
+<br>
+
+<h2 id="Access-Flag-访问标志部分"><a href="#Access-Flag-访问标志部分" class="headerlink" title="Access_Flag 访问标志部分"></a>Access_Flag 访问标志部分</h2><blockquote>
+<p>0x0021：是 0x0020 和 0x0001 的并集。</p>
+</blockquote>
+<p>0021：ACC_PUBLIC，访问修饰符为Public。</p>
+<br>
+
+<h2 id="类索引"><a href="#类索引" class="headerlink" title="类索引"></a>类索引</h2><p>类索引用于确定类的全限定名。</p>
+<p>0003：引用第3个常量，第3个常量引用第17个常量，为 Math。</p>
+<br>
+
+<h2 id="父类索引"><a href="#父类索引" class="headerlink" title="父类索引"></a>父类索引</h2><p>0004：引用第18个常量，为 java/lang/Object。</p>
+<br>
+
+<h2 id="接口索引"><a href="#接口索引" class="headerlink" title="接口索引"></a>接口索引</h2><p>0000：没有接口。</p>
+<br>
+
+<h2 id="字段表集合"><a href="#字段表集合" class="headerlink" title="字段表集合"></a>字段表集合</h2><p>字段表用于描述类和接口中声明的变量。这里的字段包含了类级别变量以及实例变量，但是不包括方法内部声明的局部变量。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1986868-7c0ed3c898858129.png" alt></p>
+<p>0001：字段属性。</p>
+<p>0002：Private访问。</p>
+<p>0005：常量索引#5，为”m”。</p>
+<p>0006：常量索引#6，为”1”。</p>
+<p>0000：属性表数量为0。</p>
+<br>
+
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="https://upload-images.jianshu.io/upload_images/1986868-44b812e1036aaef0.png" alt></p>
+<p>to be continued…</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">iced-cola</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://iced-cola.com/2020/11/18/Java字节码解析/">https://iced-cola.com/2020/11/18/Java字节码解析/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://iced-cola.com">iced-cola</a>！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a></div><nav id="pagination"><div class="next-post pull-right"><a href="/2020/11/07/使用Let’s-Encrypt给网站加密/"><span>使用Let’s Encrypt给网站加密</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '8e8a138390989192a887',
+  clientSecret: '6894567ca0f0089f3b048a1793d1dc474cd6fb51',
+  repo: 'iced-cola.github.io',
+  owner: 'iced-cola',
+  admin: 'iced-cola',
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN'
+})
+gitalk.render('gitalk-container')</script></div></div><footer class="footer-bg"><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2020 By iced-cola</div><div class="framework-info"><span>驱动 - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="footer_custom_text">hitokoto</div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.0"></script><script src="/js/fancybox.js?version=1.9.0"></script><script src="/js/sidebar.js?version=1.9.0"></script><script src="/js/copy.js?version=1.9.0"></script><script src="/js/fireworks.js?version=1.9.0"></script><script src="/js/transition.js?version=1.9.0"></script><script src="/js/scroll.js?version=1.9.0"></script><script src="/js/head.js?version=1.9.0"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script src="/js/katex.js"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>

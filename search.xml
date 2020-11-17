@@ -1,6 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Java字节码解析</title>
+    <url>/2020/11/18/Java%E5%AD%97%E8%8A%82%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
+    <content><![CDATA[<p>最近在学Jvm相关的知识，看完视频，找了点字节码的资料看，理解字节码的含义。推荐 <a href="https://www.jianshu.com/p/252f381a6bc4" target="_blank" rel="noopener">一文让你明白Java字节码</a></p>
+<a id="more"></a>
+
+<h2 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h2><p>从一个简单类 Math.java 开始：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Math</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> m;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">inc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> m + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用 <code>javac Math.java</code> 得到字节码文件 Math.class，文件内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cafe babe 0000 0034 0013 0a00 0400 0f09</span><br><span class="line">0003 0010 0700 1107 0012 0100 016d 0100</span><br><span class="line">0149 0100 063c 696e 6974 3e01 0003 2829</span><br><span class="line">5601 0004 436f 6465 0100 0f4c 696e 654e</span><br><span class="line">756d 6265 7254 6162 6c65 0100 0369 6e63</span><br><span class="line">0100 0328 2949 0100 0a53 6f75 7263 6546</span><br><span class="line">696c 6501 0009 4d61 7468 2e6a 6176 610c</span><br><span class="line">0007 0008 0c00 0500 0601 0004 4d61 7468</span><br><span class="line">0100 106a 6176 612f 6c61 6e67 2f4f 626a</span><br><span class="line">6563 7400 2100 0300 0400 0000 0100 0200</span><br><span class="line">0500 0600 0000 0200 0100 0700 0800 0100</span><br><span class="line">0900 0000 1d00 0100 0100 0000 052a b700</span><br><span class="line">01b1 0000 0001 000a 0000 0006 0001 0000</span><br><span class="line">0001 0001 000b 000c 0001 0009 0000 001f</span><br><span class="line">0002 0001 0000 0007 2ab4 0002 0460 ac00</span><br><span class="line">0000 0100 0a00 0000 0600 0100 0000 0600</span><br><span class="line">0100 0d00 0000 0200 0e</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="内容解读"><a href="#内容解读" class="headerlink" title="内容解读"></a>内容解读</h2><p>参照图例：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1986868-5b44e95ff7e30847.jpeg" alt></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1986868-831993b2dc19dd90.png" alt></p>
+<h3 id="魔数"><a href="#魔数" class="headerlink" title="魔数"></a>魔数</h3><p>cafe babe：魔数，文件后缀标识，被java虚拟机接受。</p>
+<br>
+
+<h3 id="版本号"><a href="#版本号" class="headerlink" title="版本号"></a>版本号</h3><p>0000：次版本号</p>
+<p>0034：主版本号=52，java 1.8</p>
+<br>
+
+<h3 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h3><p>0013：常量池入口，2+n，十进制=19，表明有18个常量，从1开始</p>
+<p>0a：十进制=10，对应CONSTANT_Methodref_info，指向声明方法</p>
+<p>0004：常量索引#4</p>
+<p>000f：常量索引#15</p>
+<p>09：十进制=9，对应CONSTANT_Fieldref_info，指向字段的类或接口描述</p>
+<p>0003：常量索引#3</p>
+<p>0010：常量索引#16</p>
+<p>07：十进制=7，对应CONSTANT_Class_info，指向全限定名常量项的索引</p>
+<p>0011：常量索引#17</p>
+<p>07：同上</p>
+<p>0012：常量索引#18</p>
+<p>01：十进制=1，对应表中的CONSTANT_Utf8_info，utf8编码的字符串长度</p>
+<p>0001：字符串长度为1</p>
+<p>6d：109=”m”</p>
+<p>01：同上</p>
+<p>0001：同上</p>
+<p>49：49=”1”</p>
+<p>01：同上</p>
+<p>0006：同上</p>
+<p>3c 696e 6974 3e：字符串=<init></init></p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>2829 56：()V</p>
+<p>01：同上</p>
+<p>0004：同上</p>
+<p>436f 6465：C_de</p>
+<p>01：同上</p>
+<p>000f：同上</p>
+<p>4c 696e 654e 756d 6265 7254 6162 6c65：LineNumberTable</p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>69 6e63：inc</p>
+<p>01：同上</p>
+<p>0003：同上</p>
+<p>28 2949：()I</p>
+<p>01：同上</p>
+<p>000a：长度为10的字符串</p>
+<p>53 6f75 7263 6546 696c 65：SourceFile</p>
+<p>01：同上</p>
+<p>0009：同上</p>
+<p>4d61 7468 2e6a 6176 61：Math.java</p>
+<p>0c：十进制=12，CONSTANT_NameAndType_info，指向该字段或方法名称常量项的索引</p>
+<p>0007：字段或者名字名称常量项索引#7</p>
+<p>0008：字段或者名字名称常量项索引#8</p>
+<p>0c：同上</p>
+<p>0005：字段或者名字名称常量项索引#5</p>
+<p>0006：字段或者名字名称常量项索引#6</p>
+<p>01：同上</p>
+<p>0004：同上</p>
+<p>4d61 7468：Math</p>
+<p>01：同上</p>
+<p>0010：同上</p>
+<p>6a 6176 612f 6c61 6e67 2f4f 626a 6563 74：java/lang/Object</p>
+<p>==== 常量解析完毕，共18个常量</p>
+<br>
+
+<h2 id="Access-Flag-访问标志部分"><a href="#Access-Flag-访问标志部分" class="headerlink" title="Access_Flag 访问标志部分"></a>Access_Flag 访问标志部分</h2><blockquote>
+<p>0x0021：是 0x0020 和 0x0001 的并集。</p>
+</blockquote>
+<p>0021：ACC_PUBLIC，访问修饰符为Public。</p>
+<br>
+
+<h2 id="类索引"><a href="#类索引" class="headerlink" title="类索引"></a>类索引</h2><p>类索引用于确定类的全限定名。</p>
+<p>0003：引用第3个常量，第3个常量引用第17个常量，为 Math。</p>
+<br>
+
+<h2 id="父类索引"><a href="#父类索引" class="headerlink" title="父类索引"></a>父类索引</h2><p>0004：引用第18个常量，为 java/lang/Object。</p>
+<br>
+
+<h2 id="接口索引"><a href="#接口索引" class="headerlink" title="接口索引"></a>接口索引</h2><p>0000：没有接口。</p>
+<br>
+
+<h2 id="字段表集合"><a href="#字段表集合" class="headerlink" title="字段表集合"></a>字段表集合</h2><p>字段表用于描述类和接口中声明的变量。这里的字段包含了类级别变量以及实例变量，但是不包括方法内部声明的局部变量。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1986868-7c0ed3c898858129.png" alt></p>
+<p>0001：字段属性。</p>
+<p>0002：Private访问。</p>
+<p>0005：常量索引#5，为”m”。</p>
+<p>0006：常量索引#6，为”1”。</p>
+<p>0000：属性表数量为0。</p>
+<br>
+
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="https://upload-images.jianshu.io/upload_images/1986868-44b812e1036aaef0.png" alt></p>
+<p>to be continued…</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用Let’s Encrypt给网站加密</title>
     <url>/2020/11/07/%E4%BD%BF%E7%94%A8Let%E2%80%99s-Encrypt%E7%BB%99%E7%BD%91%E7%AB%99%E5%8A%A0%E5%AF%86/</url>
     <content><![CDATA[<p>使用 <strong>Let’s Encrypt</strong> 给网站加密</p>
