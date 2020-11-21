@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Required request body is missing</title>
+    <url>/2020/11/21/Required-request-body-is-missing/</url>
+    <content><![CDATA[<p>用postman测试接口一直报错，提示：Required request body is missing。</p>
+<p>用浏览器请求和用postman post + param方式请求都说body missing，后台接口加了@RequestBody注解。</p>
+<p>网上查了一会儿资料才发现原来是请求方式不对，参数应该放在body中并且以json方式传递。</p>
+<p><img src="https://images2.imgbox.com/5a/72/iqBc5Okx_o.png" alt="image-20201121165917262"></p>
+]]></content>
+      <categories>
+        <category>SpringMVC</category>
+      </categories>
+      <tags>
+        <tag>SpringMVC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java字节码解析</title>
     <url>/2020/11/18/Java%E5%AD%97%E8%8A%82%E7%A0%81%E8%A7%A3%E6%9E%90/</url>
     <content><![CDATA[<p>最近在学Jvm相关的知识，看完视频，找了点字节码的资料看，理解字节码的含义。推荐 <a href="https://www.jianshu.com/p/252f381a6bc4" target="_blank" rel="noopener">一文让你明白Java字节码</a></p>
@@ -15,8 +30,8 @@
 <br>
 
 <h2 id="内容解读"><a href="#内容解读" class="headerlink" title="内容解读"></a>内容解读</h2><p>参照图例：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1986868-5b44e95ff7e30847.jpeg" alt></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1986868-831993b2dc19dd90.png" alt></p>
+<p><img src="https://images2.imgbox.com/08/79/8kGgoJqq_o.jpeg" alt></p>
+<p><img src="https://images2.imgbox.com/61/17/vm6prCvK_o.png" alt></p>
 <h3 id="魔数"><a href="#魔数" class="headerlink" title="魔数"></a>魔数</h3><p>cafe babe：魔数，文件后缀标识，被java虚拟机接受。</p>
 <br>
 
@@ -97,7 +112,7 @@
 <br>
 
 <h2 id="字段表集合"><a href="#字段表集合" class="headerlink" title="字段表集合"></a>字段表集合</h2><p>字段表用于描述类和接口中声明的变量。这里的字段包含了类级别变量以及实例变量，但是不包括方法内部声明的局部变量。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1986868-7c0ed3c898858129.png" alt></p>
+<p><img src="https://images2.imgbox.com/46/18/b007hXKr_o.png" alt></p>
 <p>0001：字段属性。</p>
 <p>0002：Private访问。</p>
 <p>0005：常量索引#5，为”m”。</p>
@@ -105,7 +120,7 @@
 <p>0000：属性表数量为0。</p>
 <br>
 
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="https://upload-images.jianshu.io/upload_images/1986868-44b812e1036aaef0.png" alt></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p><img src="https://images2.imgbox.com/b5/62/ZKPXcYOv_o.png" alt></p>
 <p>to be continued…</p>
 ]]></content>
       <categories>
