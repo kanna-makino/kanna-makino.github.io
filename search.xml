@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>服务无法注册到Eureka注册中心</title>
+    <url>/2020/11/22/%E6%9C%8D%E5%8A%A1%E6%97%A0%E6%B3%95%E6%B3%A8%E5%86%8C%E5%88%B0Eureka/</url>
+    <content><![CDATA[<p>今天遇到一个问题：eureka客户端和服务端都正常启动，控制台也没有任何错误，并且客户端都可以正常访问，没有什么报错信息，但是无法注册到注册中心，再三检查也没发现配置有什么问题。</p>
+<a id="more"></a>
+
+<br>
+
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># eureka server的配置</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8000</span></span><br><span class="line"></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="attr">hostname:</span> <span class="string">localhost</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">fetchRegistry:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">registerWithEureka:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">serviceUrl:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://$&#123;eureka.instance.hostname&#125;:$&#123;server.port&#125;/eureka/</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">eureka-service</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 客户端的配置</span></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8001</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">cloud-payment-service</span></span><br><span class="line"></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">client:</span></span><br><span class="line">    <span class="attr">registerWithEureka:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">fetchRegistry:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">serviceUrl:</span></span><br><span class="line">      <span class="attr">defaultZone:</span> <span class="string">http://localhost:8000/eureka</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>注册中心显示：No instances available。</p>
+<p><img src="https://images2.imgbox.com/58/86/iqhoWfeW_o.png" alt></p>
+<br>
+
+<p>仔细看启动日志，服务端有注册日志，但是客户端启动日志没有。</p>
+<p><img src="https://images2.imgbox.com/79/53/TWHAQpgc_o.png" alt></p>
+<br>
+
+<h2 id="错误的Maven依赖"><a href="#错误的Maven依赖" class="headerlink" title="错误的Maven依赖"></a>错误的Maven依赖</h2><p>查了一些资料，发现一般都是启动阶段直接报错的，可以根据报错信息排查。</p>
+<p>看到一篇文章：<a href="https://ask.csdn.net/questions/752782" target="_blank" rel="noopener">spring-cloud，eureka客户端注册没有任何响应</a> ，点进去瞄一眼，在结尾看到描述跟我的问题一样：<em>我的提供者无法完成注册，日志没有任何注册相关的消息，也没有任何异常打印。</em>  </p>
+<p><img src="https://images2.imgbox.com/52/21/fqco8f2G_o.png" alt></p>
+<p>第一时间查看Maven依赖，发现问题所在。</p>
+<p>正确的依赖是：<code>spring-cloud-starter-netflix-eureka-client</code> ，而不是 <code>spring-cloud-netflix-eureka-client</code> 。</p>
+<p><img src="https://images2.imgbox.com/9f/a7/Mn5cqj4b_o.png" alt></p>
+<br>
+
+<h2 id="正确启动"><a href="#正确启动" class="headerlink" title="正确启动"></a>正确启动</h2><p>改完pom文件，reimport相关依赖，重新启动客户端，一切正常了。</p>
+<p><img src="https://images2.imgbox.com/e8/e5/9bGjR7aG_o.png" alt></p>
+<p><img src="https://images2.imgbox.com/9f/85/9ZTtdwRa_o.png" alt></p>
+]]></content>
+      <categories>
+        <category>SpringCloud</category>
+        <category>分布式</category>
+        <category>微服务</category>
+      </categories>
+      <tags>
+        <tag>SpringCloud</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Required request body is missing</title>
     <url>/2020/11/21/Required-request-body-is-missing/</url>
     <content><![CDATA[<p>用postman测试接口一直报错，提示：Required request body is missing。</p>
