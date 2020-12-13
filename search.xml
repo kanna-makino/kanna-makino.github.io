@@ -9,13 +9,13 @@
 <p>Echarts默认的tooltip中是带有图例的，默认的代码：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">tooltip: &#123;</span><br><span class="line">	trigger: &apos;axis&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>![<a href="https://images2.imgbox.com/d7/8a/FBGnKIgB_o.png" target="_blank" rel="noopener">https://images2.imgbox.com/d7/8a/FBGnKIgB_o.png</a>)</p>
+<p><img src="https://images2.imgbox.com/d7/8a/FBGnKIgB_o.png" alt></p>
 <br>
 
 <p>但是自定义tooltip的显示之后图例丢失，官方的文档里没有在自定义中保留图例相关的配置。</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">tooltip: &#123;</span><br><span class="line">    trigger: <span class="string">'axis'</span>,</span><br><span class="line">    formatter: <span class="string">'&#123;b0&#125;&lt;br /&gt;&#123;a0&#125;: &#123;c0&#125;&lt;br /&gt;&#123;a1&#125;: &#123;c1&#125;'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>![<a href="https://images2.imgbox.com/00/f9/qKKTIt2o_o.png" target="_blank" rel="noopener">https://images2.imgbox.com/00/f9/qKKTIt2o_o.png</a>)</p>
+<p><img src="https://images2.imgbox.com/00/f9/qKKTIt2o_o.png" alt></p>
 <br>
 
 <p>找到一个解决方案：<a href="https://blog.csdn.net/qq_36051044/article/details/110237830" target="_blank" rel="noopener">Echarts自定义tooltip提示框及图例</a> </p>
@@ -24,7 +24,7 @@
 <br>
 
 <p>显示效果：</p>
-<p>![<a href="https://images2.imgbox.com/f9/9f/eFMspjlZ_o.png" target="_blank" rel="noopener">https://images2.imgbox.com/f9/9f/eFMspjlZ_o.png</a>)</p>
+<p><img src="https://images2.imgbox.com/f9/9f/eFMspjlZ_o.png" alt></p>
 <br>
 
 <p>显示效果没什么问题，但是数据集多了能感觉到弹窗跟随鼠标时有明显的卡顿。</p>
