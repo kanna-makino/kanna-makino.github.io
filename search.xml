@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>最近学到的IDEA使用技巧</title>
+    <url>/2021/02/05/%E6%9C%80%E8%BF%91%E5%AD%A6%E5%88%B0%E7%9A%84IDEA%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<p>昨天晚上加班到凌晨3点，和前辈一起改一段代码，代码提交完，在等测试的时候，和前辈交流了一下IDEA的使用技巧，学到了很多东西。上次有这种感觉还是实习的时候，那时候学会了很多Sublime的小技巧。</p>
+<ul>
+<li>MyBatisX插件，直接查看MyBatis对应的SQL，自带MapperGenerator插件</li>
+<li>Ctrl+Shift+F 查找所有</li>
+<li>Ctrl+Shfit+R 替换所有</li>
+<li>RestfulTool插件直接向接口发送请求。</li>
+<li>Ctrl+Q查看Java文档注释，查看表信息并查看前十条数据</li>
+<li>Ctrl+Shfit+上/下：上下移动一行代码</li>
+<li>多使用IDEA自带的Database插件，可以多个SQL脚本一键执行，SQL字段提示。</li>
+<li>多使用IDEA集成的git和SVN插件，方便查看代码变更。</li>
+</ul>
+<p>才一个不到10万人使用的系统，就出现了很多性能问题，第一次在工作中接触到性能问题。每个SQL，每个循环，每个文件导入导出，一不小心就会超时出现数据提交失败的情况。大量优化代码逻辑，优化SQL执行效率，同步改异步，多线程，前端尽可能少提交数据，一晚上忙得晕头转向。虽然这两个星期每天晚上搞到很晚，身心疲惫，但是还是有所收获，真切的体会到了写高质量代码的必要性。</p>
+<p>昨天上午因为一条SQL里加了递归，大量数据导致查询效率低下，流量高峰的时候系统直接挂了，然后又发紧急版本修复。之前从未使用过Oracle数据库，很多语法不懂，借此机会，正好可以学习一下Oracle。</p>
+]]></content>
+      <categories>
+        <category>IDEA</category>
+      </categories>
+      <tags>
+        <tag>IDEA</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Vue前后端分离项目中的跨域问题</title>
     <url>/2020/12/20/Vue%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p>前后端分离项目的跨域问题</p>
