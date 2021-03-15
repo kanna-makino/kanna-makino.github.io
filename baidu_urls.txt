@@ -1,3 +1,4 @@
+https://iced-cola.com/2021/03/16/MongoDB入门/
 https://iced-cola.com/2021/03/11/最近减重心得/
 https://iced-cola.com/2021/03/07/SpringBoot整合redis报错/
 https://iced-cola.com/2021/02/05/最近学到的IDEA使用技巧/
@@ -27,4 +28,3 @@ https://iced-cola.com/2020/09/30/七牛云备案域名过期导致图片无法�
 https://iced-cola.com/2020/09/22/《宇宙よりも遠い場所》台词-第二话/
 https://iced-cola.com/2020/01/05/《宇宙よりも遠い場所》台词-第一话/
 https://iced-cola.com/2020/01/05/树莓派通过无刷电调驱动无刷电机/
-https://iced-cola.com/2020/01/04/树莓派驱动4位数码管/

@@ -1,6 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>MongoDB入门</title>
+    <url>/2021/03/16/MongoDB%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h2 id="MongoDB的安装"><a href="#MongoDB的安装" class="headerlink" title="MongoDB的安装"></a>MongoDB的安装</h2><ul>
+<li><p><a href="https://www.mongodb.com/try/download/community" target="_blank" rel="noopener">MongoDB官网下载地址</a> 下载安装包并解压到mongo/</p>
+</li>
+<li><p>创建mongo/db目录和/mongo/log/mongodb.log文件</p>
+</li>
+<li><p>创建配置文件mongo/mongodb.conf</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 数据文件存放目录</span><br><span class="line">dbpath=/Users/youyou-2608/Downloads/mongodb/db</span><br><span class="line"># 日志文件存放目录</span><br><span class="line">logpath=/Users/youyou-2608/Downloads/mongodb/log/mongodb.log</span><br><span class="line"># 以追加的方式记录日志</span><br><span class="line">logappend=true</span><br><span class="line"># 默认端口27017</span><br><span class="line">port=27017</span><br><span class="line"># 对访问ip地址不做限制，默认为本地地址</span><br><span class="line">bind_ip=0.0.0.0</span><br><span class="line"># 以守护进程的方式启用，即在后台运行</span><br><span class="line">fork=true</span><br><span class="line"># 默认开启身份认证</span><br><span class="line">auth=true</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<br>
+
+<a id="more"></a>
+
+<h2 id="配置环境变量及服务的启动和停止"><a href="#配置环境变量及服务的启动和停止" class="headerlink" title="配置环境变量及服务的启动和停止"></a>配置环境变量及服务的启动和停止</h2><p>~/.bash_profile文件中：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH = mongo/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+
+<p>执行 sourcce ~/.bash_profile</p>
+<p>启动及停止：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 启动</span><br><span class="line">mongod -f mongo/mongodb.conf</span><br><span class="line"></span><br><span class="line"># 停止</span><br><span class="line">kill 9 -pid</span><br><span class="line"></span><br><span class="line">use amdin;</span><br><span class="line">db.shutdownServer();</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>关闭MongoDB报错：</p>
+<blockquote>
+<p>Error: shutdownServer failed: {</p>
+<p>​    “ok” : 0,</p>
+<p>​    “errmsg” : “not authorized on admin to execute command { shutdown: 1.0, lsid: { id: UUID(&quot;4d11f7c3-3b79-458d-b857-2aac4816cd17&quot;) }, $db: &quot;admin&quot; }”,</p>
+<p>​    “code” : 13,</p>
+<p>​    “codeName” : “Unauthorized”</p>
+<p>}</p>
+</blockquote>
+<p>因为没有 hostManager 权限所以报错：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use admin;</span><br><span class="line">db.grantRolesToUser(&quot;uadd&quot;, [&#123;role: &quot;hostManager&quot;, db: &quot;admin&quot;&#125;]);</span><br><span class="line"></span><br><span class="line"># 授权后再执行</span><br><span class="line">db.shutdownServer()</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="登录认证"><a href="#登录认证" class="headerlink" title="登录认证"></a>登录认证</h2><p>登录及创建用户：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&gt; use admin;</span><br><span class="line">&gt; db.auth(&quot;uadd&quot;, &quot;uadd&quot;)</span><br><span class="line"></span><br><span class="line">use admin;</span><br><span class="line"># 创建管理员用户</span><br><span class="line">db.createUser(</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;user&quot;: &quot;testuser&quot;,</span><br><span class="line">        &quot;pwd&quot;: &quot;123456&quot;,</span><br><span class="line">        &quot;roles&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;role&quot;: &quot;userAdminAnyDatabase&quot;,</span><br><span class="line">                &quot;db&quot;: &quot;admin&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># 创建普通用户</span><br><span class="line">use test;</span><br><span class="line">db.createUser(</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;user&quot;: &quot;testuser&quot;,</span><br><span class="line">        &quot;pwd&quot;: &quot;123456&quot;,</span><br><span class="line">        &quot;roles&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;role&quot;: &quot;readWrite&quot;,</span><br><span class="line">                &quot;db&quot;: &quot;test&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="增删改查及常用命令"><a href="#增删改查及常用命令" class="headerlink" title="增删改查及常用命令"></a>增删改查及常用命令</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">use database;</span><br><span class="line">show dbs;</span><br><span class="line">show users;</span><br><span class="line"></span><br><span class="line">db.user.insert(&#123;&quot;name&quot;: &quot;zhangsan&quot;&#125;);</span><br><span class="line">db.user.insertMany([]);</span><br><span class="line">db.user.deleteOne(&#123;&quot;name&quot;: &quot;zhangsan&quot;&#125;)</span><br><span class="line">db.user.deleteMany(&quot;_id&quot;: &#123;&quot;$gte&quot;: 3&#125;)</span><br><span class="line">db.user.find(&quot;age&quot;: &#123;&quot;$gte&quot;: 3, &quot;$lte&quot;: 20&#125;)</span><br><span class="line"></span><br><span class="line">db.user.drop();</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>最近减重心得</title>
     <url>/2021/03/11/%E6%9C%80%E8%BF%91%E5%87%8F%E9%87%8D%E5%BF%83%E5%BE%97/</url>
     <content><![CDATA[<h2 id="体重暴增"><a href="#体重暴增" class="headerlink" title="体重暴增"></a>体重暴增</h2><p>鉴于去年年底的两三个月在饮食方面有点不规律，导致从十一月份到今年一月份体重从55kg一下涨到了接近59kg，创下了体重记录的新高。前两天回去翻了19年的体重记录，因为那时候其实也买了一个体重称，每天关注体重的，发现那时候我的体重竟然才53kg，这几个月长了5kg左右，因为吃得多还没有运动，那段时间加班也是每天很晚才吃饭。<a id="more"></a></p>
